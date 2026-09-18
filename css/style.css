@@ -978,26 +978,50 @@ svg.marca{fill:currentColor; stroke:none}
    ========================================================= */
 .hero__video{
   position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; object-position:center;
+  object-fit:cover; object-position:center 42%;
   opacity:0; transition:opacity 1.2s var(--ease);
-  /* el video se integra a la paleta: menos saturado y con contraste alto */
-  filter:saturate(.88) contrast(1.10) brightness(.86);
+  /* Solo el ajuste minimo para integrarlo a la paleta. El material ya viene
+     graduado desde tools/generar-video.py: aqui no se vuelve a oscurecer. */
+  filter:saturate(1.02) contrast(1.04);
 }
-.hero__video.is-on{opacity:.80}
+.hero__video.is-on{opacity:.96}
 
-/* Velo: mantiene legible el titular sobre cualquier fotograma */
+/* Velo: abre el centro para que se vea el video y oscurece solo las bandas
+   donde hay interfaz — el header arriba y el paso al marquee abajo. */
 .hero__veil{
   position:absolute; inset:0;
   background:
-    radial-gradient(65% 55% at 50% 45%, rgba(4,6,12,.14) 0%, rgba(4,6,12,.66) 100%),
-    linear-gradient(180deg, rgba(4,6,12,.80) 0%, rgba(4,6,12,.24) 35%,
-                            rgba(4,6,12,.40) 70%, rgba(4,6,12,.92) 100%),
-    linear-gradient(90deg, rgba(10,92,255,.16), transparent 45%, rgba(0,200,255,.10));
+    linear-gradient(180deg, rgba(4,6,12,.74) 0%, rgba(4,6,12,.30) 18%,
+                            rgba(4,6,12,.20) 52%, rgba(4,6,12,.55) 84%,
+                            rgba(4,6,12,.92) 100%),
+    radial-gradient(85% 60% at 50% 46%, rgba(4,6,12,0) 0%, rgba(4,6,12,.34) 100%),
+    linear-gradient(90deg, rgba(10,92,255,.12), transparent 45%, rgba(0,200,255,.08));
+}
+
+/* Colchon local detras del texto: sostiene la lectura sin apagar el encuadre */
+.hero:has(.hero__video.is-on) .hero__in::before{
+  content:""; position:absolute; z-index:-1;
+  inset:-6% -8% 18%;
+  background:radial-gradient(58% 52% at 50% 44%, rgba(4,6,12,.62) 0%,
+                             rgba(4,6,12,.34) 52%, transparent 100%);
+  pointer-events:none;
 }
 
 /* Con el video encendido, la rejilla y los glows bajan para no competir */
-.hero:has(.hero__video.is-on) .grid{opacity:.45}
-.hero:has(.hero__video.is-on) .glow{opacity:.32}
+.hero:has(.hero__video.is-on) .grid{opacity:.20}
+.hero:has(.hero__video.is-on) .glow{opacity:.18}
+
+/* En movil el encuadre es mas estrecho: el video manda y el velo se aligera */
+@media (max-width:860px){
+  .hero__video.is-on{opacity:1}
+  .hero__veil{
+    background:
+      linear-gradient(180deg, rgba(4,6,12,.78) 0%, rgba(4,6,12,.34) 16%,
+                              rgba(4,6,12,.26) 50%, rgba(4,6,12,.60) 82%,
+                              rgba(4,6,12,.94) 100%),
+      radial-gradient(95% 55% at 50% 44%, rgba(4,6,12,0) 0%, rgba(4,6,12,.30) 100%);
+  }
+}
 
 /* =========================================================
    GALERÍA DE VIDEO (reels)
