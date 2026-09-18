@@ -7,7 +7,14 @@
 railway.json
 .htaccess
 tools/
-statics/hero video/
-statics/video/_tmp/
 **/*.py
 **/*.md
+
+# Credenciales: nunca entran a la imagen.
+.env
+.env.example
+
+# Los assets los sirve Cloudinary (ver tools/usar-cloudinary.py): ningun HTML
+# apunta ya a statics/. Siguen en git como fuente para volver a subirlos.
+# Esto es lo que baja la imagen de ~29 MB a menos de 1 MB.
+statics/

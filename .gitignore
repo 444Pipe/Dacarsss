@@ -5,3 +5,7 @@ statics/hero video/
 
 # Temporales del procesamiento de video
 statics/video/_tmp/
+
+# Credenciales de Cloudinary. NUNCA se commitean.
+# Plantilla sin secretos en .env.example
+.env

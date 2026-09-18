@@ -1,0 +1,165 @@
+{
+  "_cloud_name": "a0e9tgif",
+  "statics/logo-dacars-sm.png": {
+    "bytes": 95179,
+    "format": "png",
+    "height": 306,
+    "public_id": "dacars/logo-dacars-sm",
+    "resource_type": "image",
+    "version": 1789710033,
+    "width": 420
+  },
+  "statics/logo-dacars.png": {
+    "bytes": 476559,
+    "format": "png",
+    "height": 729,
+    "public_id": "dacars/logo-dacars",
+    "resource_type": "image",
+    "version": 1789710035,
+    "width": 1000
+  },
+  "statics/logo-wordmark.png": {
+    "bytes": 85336,
+    "format": "png",
+    "height": 117,
+    "public_id": "dacars/logo-wordmark",
+    "resource_type": "image",
+    "version": 1789710035,
+    "width": 600
+  },
+  "statics/og-image.jpg": {
+    "bytes": 36747,
+    "format": "jpg",
+    "height": 630,
+    "public_id": "dacars/og-image",
+    "resource_type": "image",
+    "version": 1789710036,
+    "width": 1200
+  },
+  "statics/video/hero-16x9.mp4": {
+    "bytes": 3712179,
+    "format": "mp4",
+    "height": 720,
+    "public_id": "dacars/video/hero-16x9",
+    "resource_type": "video",
+    "version": 1789711358,
+    "width": 1280
+  },
+  "statics/video/hero-3x4.mp4": {
+    "bytes": 2628260,
+    "format": "mp4",
+    "height": 960,
+    "public_id": "dacars/video/hero-3x4",
+    "resource_type": "video",
+    "version": 1789711360,
+    "width": 720
+  },
+  "statics/video/hero-poster-16x9.jpg": {
+    "bytes": 66258,
+    "format": "jpg",
+    "height": 720,
+    "public_id": "dacars/video/hero-poster-16x9",
+    "resource_type": "image",
+    "version": 1789711361,
+    "width": 1280
+  },
+  "statics/video/hero-poster-3x4.jpg": {
+    "bytes": 60671,
+    "format": "jpg",
+    "height": 960,
+    "public_id": "dacars/video/hero-poster-3x4",
+    "resource_type": "image",
+    "version": 1789711362,
+    "width": 720
+  },
+  "statics/video/reel-hummer-ev.jpg": {
+    "bytes": 55050,
+    "format": "jpg",
+    "height": 1080,
+    "public_id": "dacars/video/reel-hummer-ev",
+    "resource_type": "image",
+    "version": 1789710042,
+    "width": 608
+  },
+  "statics/video/reel-hummer-ev.mp4": {
+    "bytes": 3681114,
+    "format": "mp4",
+    "height": 1080,
+    "public_id": "dacars/video/reel-hummer-ev",
+    "resource_type": "video",
+    "version": 1789710043,
+    "width": 608
+  },
+  "statics/video/reel-led-4x4.jpg": {
+    "bytes": 50474,
+    "format": "jpg",
+    "height": 1080,
+    "public_id": "dacars/video/reel-led-4x4",
+    "resource_type": "image",
+    "version": 1789710044,
+    "width": 608
+  },
+  "statics/video/reel-led-4x4.mp4": {
+    "bytes": 2663505,
+    "format": "mp4",
+    "height": 1080,
+    "public_id": "dacars/video/reel-led-4x4",
+    "resource_type": "video",
+    "version": 1789710044,
+    "width": 608
+  },
+  "statics/video/reel-ppf-sportage.jpg": {
+    "bytes": 68373,
+    "format": "jpg",
+    "height": 1080,
+    "public_id": "dacars/video/reel-ppf-sportage",
+    "resource_type": "image",
+    "version": 1789710049,
+    "width": 608
+  },
+  "statics/video/reel-ppf-sportage.mp4": {
+    "bytes": 6068392,
+    "format": "mp4",
+    "height": 1080,
+    "public_id": "dacars/video/reel-ppf-sportage",
+    "resource_type": "video",
+    "version": 1789710049,
+    "width": 608
+  },
+  "statics/video/reel-testimonio-cubierta.jpg": {
+    "bytes": 58992,
+    "format": "jpg",
+    "height": 1080,
+    "public_id": "dacars/video/reel-testimonio-cubierta",
+    "resource_type": "image",
+    "version": 1789710051,
+    "width": 608
+  },
+  "statics/video/reel-testimonio-cubierta.mp4": {
+    "bytes": 7163148,
+    "format": "mp4",
+    "height": 1080,
+    "public_id": "dacars/video/reel-testimonio-cubierta",
+    "resource_type": "video",
+    "version": 1789710052,
+    "width": 608
+  },
+  "statics/video/reel-volante-gr.jpg": {
+    "bytes": 43060,
+    "format": "jpg",
+    "height": 1080,
+    "public_id": "dacars/video/reel-volante-gr",
+    "resource_type": "image",
+    "version": 1789710054,
+    "width": 608
+  },
+  "statics/video/reel-volante-gr.mp4": {
+    "bytes": 4320387,
+    "format": "mp4",
+    "height": 1080,
+    "public_id": "dacars/video/reel-volante-gr",
+    "resource_type": "video",
+    "version": 1789710054,
+    "width": 608
+  }
+}

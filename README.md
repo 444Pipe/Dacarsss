@@ -36,7 +36,22 @@ statics/
     hero-poster-*.jpg   Poster de cada uno
     reel-*.mp4          Los 5 reels listos para web + su poster
 
-tools/              Scripts que generan las páginas y procesan el video
+tools/
+  build.py              Corre todo el pipeline en orden. EMPIEZA POR ACÁ.
+  generar-servicios.py  Las 9 landings
+  patch-index.py        SEO local en la portada
+  patch-video.py        Hero, reels y testimonio
+  patch-carga.py        Pantalla de carga
+  fix-iconos.py         Glifos de marca
+  usar-cloudinary.py    Reescribe las URLs del sitio a Cloudinary
+  versionar-assets.py   Huella de contenido en css/js
+  subir-cloudinary.py   Sube statics/ a Cloudinary (necesita .env, fuera del pipeline)
+  cloudinary-map.json   Inventario de assets subidos (sin secretos, se commitea)
+  generar-video.py      Procesa los reels con ffmpeg (fuera del pipeline)
+  set-dominio.py        Cambia el dominio en todo el sitio
+
+.env                Credenciales de Cloudinary. NO se commitea.
+.env.example        Plantilla sin secretos.
 
 Dockerfile  Caddyfile  .dockerignore  railway.json   Despliegue en Railway
 sitemap.xml  robots.txt  manifest.webmanifest  .htaccess
@@ -49,8 +64,13 @@ python -m http.server 5173
 # http://localhost:5173
 ```
 
-> El mapa de Google y las fuentes necesitan internet. Si cambias el CSS y no ves
-> los cambios, refresca con Ctrl+F5 (el navegador cachea la hoja de estilos).
+> El mapa de Google, las fuentes y **todos los assets (imágenes y video, que ahora
+> vienen de Cloudinary)** necesitan internet. Si cambias el CSS y no ves los cambios,
+> refresca con Ctrl+F5 (el navegador cachea la hoja de estilos).
+>
+> Para trabajar sin conexión: `python tools/usar-cloudinary.py --revertir` vuelve a
+> las rutas locales de `statics/`, y `python tools/build.py` las devuelve a Cloudinary.
+> El ida y vuelta es exacto: deja los archivos byte a byte como estaban.
 
 ---
 
@@ -83,7 +103,7 @@ el contenido se copia tal cual y Caddy lo entrega.
 |---|---|
 | `Dockerfile` | Imagen basada en `caddy:2-alpine`. Valida el Caddyfile durante el build, así un error de sintaxis falla ahí y no en producción. |
 | `Caddyfile` | Puerto (`$PORT` de Railway), compresión, caché, cabeceras de seguridad y la 404 con la marca. |
-| `.dockerignore` | Deja fuera de la imagen los originales de video, `tools/`, `.htaccess` y el `README`. |
+| `.dockerignore` | Deja fuera de la imagen `tools/`, `.htaccess`, el `README`, el `.env` y **todo `statics/`** (los assets los sirve Cloudinary). La imagen queda en ~0,4 MB. |
 | `railway.json` | Le dice a Railway que use el Dockerfile, con healthcheck en `/`. |
 
 ### Desplegar
@@ -254,6 +274,80 @@ fecha real de cada reel en Instagram, agrégala en la lista `VIDEOS` de
 
 ---
 
+## Cloudinary
+
+Todos los assets (logos, `og-image`, posters y los 7 `.mp4`) se sirven desde
+Cloudinary. Ningún HTML apunta ya a `statics/`, y `statics/` está excluido de la
+imagen Docker vía [.dockerignore](.dockerignore).
+
+**Cloud name:** `a0e9tgif` — es público, va en las URLs y no es un secreto.
+
+### Credenciales
+
+El API key y el API secret **solo** los usan los scripts de `tools/`. El sitio
+publicado nunca los necesita: las URLs de entrega solo llevan el cloud name.
+
+```bash
+cp .env.example .env
+# y pone el valor real de CLOUDINARY_URL
+```
+
+`.env` está en [.gitignore](.gitignore) y en `.dockerignore`. **Nunca se commitea
+ni entra a la imagen.** Si el secreto se filtra (una captura, un chat, un pegado),
+rotalo en <https://console.cloudinary.com> → Settings → API Keys y actualizá el `.env`.
+
+### Flujo
+
+```bash
+python tools/subir-cloudinary.py     # sube statics/ y deja el inventario
+python tools/build.py                # el paso 6 reescribe las URLs
+python tools/usar-cloudinary.py --revertir   # vuelve a rutas locales
+```
+
+`subir-cloudinary.py` **no** está en `build.py`: necesita red y credenciales, y
+solo hace falta cuando cambian los archivos de `statics/`. Deja
+[tools/cloudinary-map.json](tools/cloudinary-map.json) con el `public_id` y la
+versión de cada asset. **Ese archivo sí se commitea**: no tiene secretos y es lo
+que `usar-cloudinary.py` necesita para construir las URLs.
+
+Los `public_id` son fijos y derivan de la ruta, así que resubir sobrescribe en el
+mismo sitio en vez de duplicar. **Después de resubir hay que correr `build.py`**,
+o las URLs del sitio siguen apuntando a la versión anterior.
+
+### Política de entrega (medida, no supuesta)
+
+| Tipo | Transformación | Por qué |
+|---|---|---|
+| Imágenes | `f_auto,q_auto,c_limit,w_<ancho natural>` | WebP/AVIF automático |
+| Iconos (favicon, manifest) | `f_png` | Declaran `type="image/png"` |
+| `og-image` | `q_auto`, sin `f_auto` | Crawlers sociales |
+| Video | **ninguna** | Ya viene optimizado de ffmpeg |
+
+Las tres excepciones no son caprichos, son cosas que se midieron y salieron mal:
+
+- **`c_limit` es obligatorio.** Sin él, Cloudinary *amplía*. Los posters de reel
+  (608 px de ancho) servidos a `w_1080` pesaban **62% más** que el original.
+- **Video sin transformar.** `q_auto` reencoda lo que `generar-video.py` ya había
+  comprimido con ffmpeg: el testimonio pasaba de 6,9 a **9,3 MB**. Acá la ganancia
+  es el CDN y sacar los MB del contenedor, no recomprimir.
+- **`f_png` en los iconos.** Con `f_auto`, el favicon se entregaba como WebP
+  mientras el `<link>` declaraba `type="image/png"`.
+
+### Resultado medido
+
+| | Antes | Después |
+|---|---|---|
+| Imágenes (las 11) | 1.047 KB | 536 KB (**−49%**) |
+| `logo-dacars.png` | 465 KB | 149 KB (**−68%**) |
+| Contexto Docker | 28,5 MB | 0,4 MB (**−98%**) |
+
+> Refinamiento posible: `logo-dacars` se sirve a su ancho natural (1000 px) para
+> que coincida con el `width`/`height` del JSON-LD, pero nunca se muestra a más de
+> 380 px. Capándolo a `w_760` bajaría de 149 a 91 KB; habría que ajustar las
+> dimensiones del JSON-LD a 760×554.
+
+---
+
 ## SEO local implementado
 
 ### En cada página
@@ -380,13 +474,36 @@ preguntas frecuentes). Para cambiar algo:
 
 ```bash
 # 1. edita el contenido en tools/generar-servicios.py
-# 2. regenera:
-python tools/generar-servicios.py
+# 2. regenera TODO el sitio, en orden:
+python tools/build.py
 ```
 
-[tools/patch-index.py](tools/patch-index.py) hace lo mismo con la capa de SEO de la
-portada y [tools/patch-video.py](tools/patch-video.py) con el video. Los dos son
-idempotentes: se pueden correr las veces que quieras sin duplicar nada.
+**Usa `tools/build.py`, no los scripts sueltos.** El orden importa y antes no
+estaba escrito en ningún lado: `generar-servicios.py` sobrescribe las 9 landings
+desde cero, así que todo lo que las retoca tiene que correr después.
+
+| # | Script | Qué hace |
+|---|---|---|
+| 1 | `generar-servicios.py` | Crea las 9 landings |
+| 2 | `patch-index.py` | Capa de SEO local en la portada |
+| 3 | `patch-video.py` | Hero, reels y testimonio |
+| 4 | `patch-carga.py` | Pantalla de carga |
+| 5 | `fix-iconos.py` | Glifos de marca (WhatsApp, IG, FB) |
+| 6 | `usar-cloudinary.py` | Manda los assets a Cloudinary |
+| 7 | `versionar-assets.py` | Huella de contenido en css/js — **siempre último** |
+
+Dos dependencias de orden que no se pueden invertir:
+
+- Los pasos 1–5 emiten rutas locales (`statics/…`) y el **6** las convierte. Si
+  corres solo `generar-servicios.py`, las landings quedan apuntando a archivos que
+  **no están en la imagen de producción**.
+- El **7** va después del 6 porque `versionar-assets.py` calcula el md5 de
+  `js/app.js`, y `usar-cloudinary.py` **modifica** ese archivo (le mete las URLs
+  de los posters del hero). Al revés, el `?v=` del HTML llevaría el hash del
+  `app.js` viejo y los navegadores se quedarían con la copia cacheada.
+
+Todos son idempotentes: se pueden correr las veces que quieras sin duplicar nada.
+`build.py` no toca `css/style.css`.
 
 > Si prefieres editar los `.html` a mano, hazlo — pero entonces **no vuelvas a correr
 > los scripts**, porque sobrescriben esos archivos.
