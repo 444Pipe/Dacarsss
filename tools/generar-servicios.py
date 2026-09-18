@@ -778,45 +778,84 @@ def build(s):
 
 <!-- Pantalla de carga: en línea a propósito, para que pinte antes que nada -->
 <style>
-#carga{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+#carga{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;
   background:radial-gradient(75% 60% at 50% 45%,#0a1327 0%,#04060c 72%);
-  transition:opacity .5s ease,visibility .5s ease;
-  animation:cargaSeguro 0s linear 5s forwards}
+  transition:opacity .55s ease,visibility .55s ease}
 #carga.se-va{opacity:0;visibility:hidden;pointer-events:none}
+#carga.se-va .carga__in{transform:scale(1.07);transition:transform .55s cubic-bezier(.4,0,1,1)}
 #carga[hidden]{display:none}
 html.sin-carga #carga{display:none}
-/* Red de seguridad: si el JS no llega, la pantalla se va igual */
-@keyframes cargaSeguro{to{opacity:0;visibility:hidden;pointer-events:none}}
 
-.carga__in{display:grid;justify-items:center;gap:28px;width:min(82vw,360px)}
-.carga__marca{position:relative;display:grid;place-items:center;height:52px;width:100%}
-.carga__marca img{height:42px;width:auto;opacity:0;
-  animation:cargaMarca .8s cubic-bezier(.22,.61,.36,1) .08s forwards;
-  filter:drop-shadow(0 0 20px rgba(10,92,255,.5))}
-@keyframes cargaMarca{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+/* Ancho fijo a propósito: la posición de los rayos está calculada en píxeles
+   para que sus extremos se junten justo en el destello. Con un ancho elástico
+   la geometría se desarma, así que en pantallas chicas se escala entera. */
+.carga__in{position:relative;display:grid;place-items:center}
+.carga__marca{position:relative;display:grid;place-items:center;width:400px;height:78px}
+@media (max-width:480px){.carga__in{transform:scale(.74)}}
 
-/* Los rayos del logotipo, convergiendo sobre el wordmark */
-.carga__rayo{position:absolute;width:2px;height:54px;border-radius:2px;
-  background:linear-gradient(180deg,transparent,#00c8ff 35%,#0a5cff 72%,transparent);
-  box-shadow:0 0 9px rgba(10,92,255,.9),0 0 26px rgba(10,92,255,.45);
-  animation:cargaRayo 1.8s cubic-bezier(.4,0,.2,1) infinite}
-.carga__rayo--a{left:4%;top:-14px;transform:rotate(-26deg)}
-.carga__rayo--b{left:0;top:22px;transform:rotate(26deg);animation-delay:.12s}
-.carga__rayo--c{right:4%;top:-14px;transform:rotate(26deg);animation-delay:.24s}
-.carga__rayo--d{right:0;top:22px;transform:rotate(-26deg);animation-delay:.36s}
-@keyframes cargaRayo{0%,100%{opacity:.14}50%{opacity:1}}
+/* El wordmark aparece una vez y se queda */
+.carga__marca img{height:44px;width:auto;opacity:0;
+  animation:cargaEntra .6s cubic-bezier(.22,.61,.36,1) .05s forwards;
+  filter:drop-shadow(0 0 24px rgba(10,92,255,.45))}
+@keyframes cargaEntra{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
 
-.carga__barra{width:100%;height:2px;border-radius:2px;
-  background:rgba(122,163,255,.14);overflow:hidden}
-.carga__barra i{display:block;height:100%;width:0;border-radius:2px;
-  background:linear-gradient(90deg,#0a5cff,#00c8ff);
-  box-shadow:0 0 10px rgba(0,200,255,.8)}
-.carga__pct{margin:0;font:600 11px/1 'Saira',system-ui,-apple-system,sans-serif;
-  letter-spacing:.26em;text-transform:uppercase;color:#6c7a93}
+/* Los cuatro rayos entran desde fuera y convergen, como en el logotipo */
+.carga__rayo{position:absolute;width:2px;height:50px;border-radius:2px;opacity:0;
+  background:linear-gradient(180deg,transparent,#00c8ff 30%,#0a5cff 72%,transparent);
+  box-shadow:0 0 10px rgba(10,92,255,.95),0 0 30px rgba(10,92,255,.5);
+  animation:cargaRayo 2.4s cubic-bezier(.16,1,.3,1) infinite}
+/* Cada par converge en un vértice a 74 px del borde, justo antes del wordmark */
+.carga__rayo--a{left:15%;top:-8px;--rot:-27deg;--dx:-58px;--dy:-30px}
+.carga__rayo--b{left:15%;top:36px;--rot:27deg;--dx:-58px;--dy:30px;animation-delay:.06s}
+.carga__rayo--c{right:15%;top:-8px;--rot:27deg;--dx:58px;--dy:-30px;animation-delay:.12s}
+.carga__rayo--d{right:15%;top:36px;--rot:-27deg;--dx:58px;--dy:30px;animation-delay:.18s}
+@keyframes cargaRayo{
+  0%  {opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scaleY(.3)}
+  18% {opacity:1;transform:translate(0,0) rotate(var(--rot)) scaleY(1)}
+  62% {opacity:1;transform:translate(0,0) rotate(var(--rot)) scaleY(1)}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scaleY(.3)}
+}
+
+/* Destello en los puntos donde los rayos se juntan */
+.carga__chispa{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;
+  margin-top:-6.5px;opacity:0;
+  background:radial-gradient(circle,#fff 0%,#7fe3ff 32%,rgba(0,200,255,0) 70%);
+  box-shadow:0 0 22px 6px rgba(0,200,255,.6);
+  animation:cargaChispa 2.4s ease-out infinite}
+.carga__chispa--i{left:16.8%}
+.carga__chispa--d{right:16.8%;animation-delay:.12s}
+@keyframes cargaChispa{
+  0%,10%{opacity:0;transform:scale(.2)}
+  20%{opacity:1;transform:scale(1)}
+  38%{opacity:.3;transform:scale(.75)}
+  70%,100%{opacity:0;transform:scale(.2)}
+}
+
+/* Brillo cromado que barre las letras. Se recorta con la silueta del propio
+   logotipo, por eso barre el texto y no un rectángulo. */
+.carga__brillo{position:absolute;inset:0;pointer-events:none;opacity:0;
+  /* Banda angosta a propósito: con el fondo a 250% (1000 px), un 8% son ~80 px.
+     Más ancha que eso no barre, solo ilumina el wordmark entero. */
+  background:linear-gradient(100deg,transparent 46%,rgba(255,255,255,.95) 48.5%,
+    rgba(180,230,255,.98) 50%,rgba(0,200,255,.75) 51.5%,transparent 54%);
+  background-size:250% 100%;background-repeat:no-repeat;
+  -webkit-mask-image:url(statics/logo-wordmark.png);mask-image:url(statics/logo-wordmark.png);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:auto 44px;mask-size:auto 44px;
+  animation:cargaBrillo 2.4s cubic-bezier(.45,0,.25,1) .45s infinite}
+@keyframes cargaBrillo{
+  0%{opacity:0;background-position:175% 0}
+  9%{opacity:1}
+  44%{opacity:1;background-position:-75% 0}
+  52%,100%{opacity:0;background-position:-75% 0}
+}
 
 @media (prefers-reduced-motion:reduce){
-  #carga{transition:none}
-  .carga__rayo{animation:none;opacity:.65}
+  #carga,#carga.se-va .carga__in{transition:none}
+  .carga__rayo{animation:none;opacity:.7;transform:rotate(var(--rot))}
+  .carga__chispa{animation:none;opacity:.5}
+  .carga__brillo{animation:none;opacity:0}
   .carga__marca img{animation:none;opacity:1}
 }
 </style>
@@ -839,10 +878,10 @@ try{if(sessionStorage.getItem('dacars-visto'))document.documentElement.className
     <div class="carga__marca">
       <i class="carga__rayo carga__rayo--a"></i><i class="carga__rayo carga__rayo--b"></i>
       <i class="carga__rayo carga__rayo--c"></i><i class="carga__rayo carga__rayo--d"></i>
+      <span class="carga__chispa carga__chispa--i"></span><span class="carga__chispa carga__chispa--d"></span>
       <img src="statics/logo-wordmark.png" alt="" width="600" height="117" fetchpriority="high">
+      <span class="carga__brillo"></span>
     </div>
-    <div class="carga__barra"><i id="cargaBarra"></i></div>
-    <p class="carga__pct"><span id="cargaPct">0</span>%</p>
   </div>
 </div>
 <noscript><style>#carga{display:none}</style></noscript>

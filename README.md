@@ -139,19 +139,34 @@ lugar, perfecto — pero vale saber que hay alternativas sin costo para este cas
 
 ## Pantalla de carga
 
-Los rayos del logotipo convergiendo sobre el wordmark cromado, con una barra de
-progreso real. Tres decisiones que conviene conocer antes de tocarla:
+El logotipo armándose: los cuatro rayos de neón entran desde fuera de cuadro y
+convergen sobre el wordmark, destellan al llegar, y un brillo cromado barre las
+letras de derecha a izquierda. Luego los rayos se retraen y el ciclo se repite
+cada 2,4 s. **Sin barra ni porcentaje**: la animación sola indica que algo pasa.
 
-**1. El CSS va en línea en el `<head>`, antes de las fuentes.** Si estuviera en
+### Lo que hay que saber antes de tocarla
+
+**El CSS va en línea en el `<head>`, antes de las fuentes.** Si estuviera en
 `style.css` aparecería tarde, justo cuando ya no hace falta.
 
-**2. Solo se ve una vez por sesión.** El sitio tiene 11 páginas; una pantalla de
-carga en cada clic interno sería insoportable. Un script diminuto en el `<head>`
-marca el `<html>` y la oculta antes de que pinte.
+**Solo se ve una vez por sesión.** El sitio tiene 11 páginas; una pantalla de
+carga en cada clic interno sería insoportable. Un script diminuto marca el
+`<html>` y la oculta antes de que pinte.
 
-**3. El progreso es real**, no una barra decorativa que cuenta sola: mira el
-estado del DOM y las imágenes que no son `lazy` (las lazy no cuentan, porque no
-cargan hasta que el visitante baje y esperarlas sería esperar para siempre).
+**El ancho es fijo (400 px) a propósito.** La posición de los rayos está
+calculada en píxeles para que sus extremos se junten justo en el destello. Con
+un ancho elástico la geometría se desarma, así que en pantallas chicas se escala
+entera con `transform`.
+
+**El brillo se recorta con la silueta del logotipo** (`mask-image`), por eso
+barre las letras y no un rectángulo. La banda es angosta a propósito: con el
+fondo a 250 % un 8 % son ~80 px. Más ancha que eso no barre, solo ilumina el
+wordmark entero. Si cambias la altura del `<img>`, cambia también `ALTO` en
+`tools/patch-carga.py` o el brillo se desalinea.
+
+**La 404 no la lleva.** No carga `js/app.js`, así que la pantalla se quedaría los
+4 s del respaldo en línea. En una página de error lo que se quiere es que
+aparezca de una.
 
 ### Las redes de seguridad
 
@@ -160,22 +175,25 @@ caminos independientes para retirarla:
 
 | Cuándo | Qué la retira | Verificado |
 |---|---|---|
-| ~0,5–2,2 s | `js/app.js`, camino normal | sí, DOM a 1 s |
-| 4 s | `setTimeout` **en línea**, si `app.js` nunca llegó | sí, DOM a 4,8 s |
+| 0,85–2,2 s | `js/app.js` — camino normal | sí, DOM |
+| 4 s | `setTimeout` **en línea**, si `app.js` nunca llegó | sí, DOM |
 | siempre | `<noscript>`, si no hay JavaScript | sí, render sin JS |
 
 El `setTimeout` va en línea justamente porque no puede depender del archivo que
-podría estar fallando. Queda además una animación CSS a los 5 s como cuarto
-respaldo, pero no se confía en ella: no se pudo verificar, porque el reloj
-virtual de Chrome headless no avanza animaciones CSS.
+podría estar fallando.
 
 ### Ajustes
 
-Los tiempos están en `js/app.js` (`MINIMO`, `TOPE`) y el respaldo en línea en el
-bloque `cargaRespaldo` de cada página. Para quitarla de todo el sitio, borra el
-`<div id="carga">` y su `<style>`; nada más depende de ella.
+Los tiempos de salida están en `js/app.js` (`MINIMO`, `TOPE`); la animación y la
+geometría, en `tools/patch-carga.py`. Se aplica con:
 
-Se aplica con `python tools/patch-carga.py` (idempotente).
+```bash
+python tools/patch-carga.py     # idempotente; si ya hay una, la reemplaza
+python tools/versionar-assets.py  # después de tocar css o js
+```
+
+Para quitarla de todo el sitio, borra el `<div id="carga">` y su `<style>`;
+nada más depende de ella.
 
 ---
 
