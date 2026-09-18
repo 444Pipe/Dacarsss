@@ -31,8 +31,8 @@ statics/
   og-image.jpg        Imagen para redes
   hero video/         Los 5 reels originales (material fuente, NO se publica)
   video/              Lo que sí se publica:
-    hero-16x9.mp4       Fondo del hero, escritorio (2,2 MB)
-    hero-3x4.mp4        Fondo del hero, móvil (1,9 MB)
+    hero-16x9.mp4       Fondo del hero, escritorio (3,5 MB)
+    hero-3x4.mp4        Fondo del hero, móvil (2,5 MB)
     hero-poster-*.jpg   Poster de cada uno
     reel-*.mp4          Los 5 reels listos para web + su poster
 
@@ -185,14 +185,20 @@ Se aplica con `python tools/patch-carga.py` (idempotente).
 
 Es un montaje de **12 tomas** sacadas de 4 de los reels, intercaladas en rotación
 pareja (PPF → LED → Hummer → volante, tres vueltas), con disolvencias de 0,35 s.
-Dura 22,6 s y arranca y termina en negro, así el loop no se nota.
+Dura 21,9 s y arranca y termina en negro, así el loop no se nota.
+
+El material se gradúa en el encode (`curves` levanta sombras y medios, con techo
+en 0,96 para que ningún fotograma se vaya a blanco puro). El CSS **no vuelve a
+oscurecerlo**: `.hero__video` solo ajusta saturación y contraste, y el trabajo de
+legibilidad lo hace `.hero__veil`, que abre el centro y oscurece únicamente las
+bandas con interfaz — el header arriba y el paso al marquee abajo.
 
 Se generan dos versiones y `js/app.js` elige según la pantalla:
 
 | Archivo | Uso | Peso |
 |---|---|---|
-| `hero-16x9.mp4` | pantallas ≥ 861 px | 2,2 MB |
-| `hero-3x4.mp4` | pantallas < 861 px | 1,9 MB |
+| `hero-16x9.mp4` | pantallas ≥ 861 px | 3,5 MB |
+| `hero-3x4.mp4` | pantallas < 861 px | 2,5 MB |
 
 **No se descarga el video** si el visitante tiene activado *reducir movimiento* o
 *ahorro de datos*, ni si su conexión es 2G: en esos casos queda el poster, que
@@ -396,7 +402,7 @@ El despliegue principal es Railway (ver arriba). Al ser estático también sirve
 para regenerar los montajes. Ya están en el `.gitignore`. La carpeta `tools/` tampoco
 hace falta en producción (`robots.txt` ya la excluye).
 
-Peso de lo que sí se publica: ~28 MB, de los cuales solo **2,2 MB se descargan al
+Peso de lo que sí se publica: ~30 MB, de los cuales solo **3,5 MB se descargan al
 abrir la página** (el fondo del hero). El resto son los reels, que esperan al play.
 
 ## Accesibilidad y rendimiento

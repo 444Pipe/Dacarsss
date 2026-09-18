@@ -230,22 +230,47 @@
       ? 'statics/video/hero-poster-3x4.jpg'
       : 'statics/video/hero-poster-16x9.jpg';
 
+    // Enciende el fondo pase lo que pase: si el video no llega, el poster
+    // tiene que quedar visible igual. Nunca dejar el hero en negro.
+    var encender = function () { hero.classList.add('is-on'); };
+
     if (sinMovimiento || ahorroDatos) {
       // Queda el poster: ni se descarga el video.
-      hero.classList.add('is-on');
+      encender();
     } else {
       hero.src = vertical ? hero.dataset.srcAlto : hero.dataset.srcAncho;
       hero.load();
 
-      hero.addEventListener('loadeddata', function () {
-        hero.classList.add('is-on');
-      });
+      hero.addEventListener('loadeddata', encender);
+      hero.addEventListener('error', encender);
+      // Red lenta: a los 2,5 s se muestra el poster sin esperar más
+      setTimeout(encender, 2500);
 
-      var arranque = hero.play();
-      if (arranque && arranque.catch) {
+      var reproducir = function () {
+        var intento = hero.play();
+        return (intento && intento.catch) ? intento : null;
+      };
+
+      var silencioso = function () { var p = reproducir(); if (p) p.catch(function () {}); };
+
+      hero.addEventListener('canplay', silencioso);
+
+      var arranque = reproducir();
+      if (arranque) {
         arranque.catch(function () {
-          // Autoplay bloqueado por el navegador: se queda el poster, sin romper nada.
-          hero.classList.add('is-on');
+          // Autoplay bloqueado (p. ej. modo de bajo consumo en iOS): se queda el
+          // poster y se reintenta en cuanto el visitante toque la página.
+          encender();
+
+          var reintento = function () {
+            silencioso();
+            ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
+              window.removeEventListener(ev, reintento);
+            });
+          };
+          ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
+            window.addEventListener(ev, reintento, { once: true, passive: true });
+          });
         });
       }
 
@@ -253,7 +278,7 @@
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) { hero.play().catch(function () {}); }
+            if (e.isIntersecting) { silencioso(); }
             else { hero.pause(); }
           });
         }, { threshold: 0.05 }).observe(hero);

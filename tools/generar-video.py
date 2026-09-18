@@ -85,7 +85,9 @@ SECUENCIA = [
     (3, 27.0),   # pods LED ambar encendidos
     (5, 22.2),   # rin de la Hummer
     (1, 11.0),   # textura de la fibra de carbono
-    (2, 5.4),    # manos aplicando el PPF
+    (2, 8.9, 1.5),  # manos aplicando el PPF con la espatula. Ventana corta
+                    # a proposito: antes de 8.9 entra un primer plano de la
+                    # cara del operario y despues de 10.4 cruza su uniforme.
     (5, 25.0),   # barra LED + techo hexagonal
     (3, 7.0),    # glow ambar sobre el logo SC
     (1, 4.9),    # volante GR, luz calida

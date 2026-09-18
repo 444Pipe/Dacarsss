@@ -1011,6 +1011,21 @@ svg.marca{fill:currentColor; stroke:none}
 .hero:has(.hero__video.is-on) .grid{opacity:.20}
 .hero:has(.hero__video.is-on) .glow{opacity:.18}
 
+/* Legibilidad sobre un fondo ya no apagado: los elementos translucidos del
+   hero se apoyan en su propio fondo oscuro en vez de en el velo. */
+.hero:has(.hero__video.is-on) .eyebrow{
+  background:rgba(6,10,20,.62); backdrop-filter:blur(8px);
+  border-color:rgba(122,163,255,.30); color:var(--text);
+}
+.hero:has(.hero__video.is-on) .btn--ghost{
+  background:rgba(6,10,20,.55); border-color:rgba(122,163,255,.34);
+}
+.hero:has(.hero__video.is-on) .hero__stats li{background:rgba(6,10,20,.84)}
+.hero:has(.hero__video.is-on) .hero__lead{
+  color:#c6d3ea;
+  text-shadow:0 1px 14px rgba(4,6,12,1), 0 0 30px rgba(4,6,12,.95);
+}
+
 /* En movil el encuadre es mas estrecho: el video manda y el velo se aligera */
 @media (max-width:860px){
   .hero__video.is-on{opacity:1}
