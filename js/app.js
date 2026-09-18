@@ -6,6 +6,62 @@
 
   var WHATSAPP = '573112629406';
 
+  /* ---------- Pantalla de carga ---------- */
+  (function () {
+    var carga = document.getElementById('carga');
+    if (!carga || document.documentElement.className.indexOf('sin-carga') > -1) return;
+
+    var barra = document.getElementById('cargaBarra');
+    var texto = document.getElementById('cargaPct');
+    var inicio = Date.now();
+    var MINIMO = 500;   // para que no parpadee en conexiones rápidas
+    var TOPE = 2200;    // nunca retiene el sitio más que esto, pase lo que pase
+    var valor = 0, meta = 0, domListo = false;
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { domListo = true; });
+    } else {
+      domListo = true;
+    }
+
+    // Solo cuentan las imágenes que bloquean la primera vista. Las lazy no:
+    // no cargan hasta que el visitante baje, y esperarlas sería esperar para siempre.
+    var criticas = Array.prototype.filter.call(document.images, function (img) {
+      return img.loading !== 'lazy';
+    });
+
+    function medir() {
+      var listas = 0;
+      for (var i = 0; i < criticas.length; i++) if (criticas[i].complete) listas++;
+      var prop = criticas.length ? listas / criticas.length : 1;
+      meta = Math.round((domListo ? 45 : 12) + prop * 55);
+    }
+
+    function pintar() {
+      medir();
+      valor += (meta - valor) * 0.16;
+      if (meta - valor < 0.6) valor = meta;
+      if (barra) barra.style.width = valor.toFixed(1) + '%';
+      if (texto) texto.textContent = Math.round(valor);
+
+      var t = Date.now() - inicio;
+      if ((valor >= 99.4 && t >= MINIMO) || t >= TOPE) { salir(); return; }
+      requestAnimationFrame(pintar);
+    }
+
+    function salir() {
+      if (barra) barra.style.width = '100%';
+      if (texto) texto.textContent = '100';
+      try { sessionStorage.setItem('dacars-visto', '1'); } catch (e) {}
+      requestAnimationFrame(function () {
+        carga.classList.add('se-va');
+        setTimeout(function () { carga.hidden = true; }, 550);
+      });
+    }
+
+    requestAnimationFrame(pintar);
+  })();
+
   /* ---------- Año del footer ---------- */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();

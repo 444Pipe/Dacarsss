@@ -109,7 +109,12 @@ RECORTES = {
              5: "crop=720:700:0:0,scale=987:960,crop=720:960:133:0"},
 }
 
-DESTINO = {"16x9": "scale=1280:720", "3x4": "scale=720:960"}
+DESTINO = {
+    # lanczos + microenfoque: el 16:9 nace de una franja de 405 px y se
+    # amplia 1,78x, sin esto llega blando a las pantallas grandes
+    "16x9": "scale=1280:720:flags=lanczos,unsharp=5:5:0.45:5:5:0",
+    "3x4": "scale=720:960:flags=lanczos",
+}
 
 
 def montaje(formato):
@@ -126,10 +131,12 @@ def montaje(formato):
         sh(["ffmpeg", "-y", "-v", "error",
             "-ss", str(inicio), "-t", str(d), "-i", vs[reel - 1],
             "-vf", RECORTES[formato][reel] + "," + DESTINO[formato] +
-                   ",setsar=1,fps=30,eq=contrast=1.06:saturation=1.05,"
-                   # techo en las altas luces: ningun fotograma se va a blanco,
-                   # asi el titular conserva contraste sobre cualquier toma
-                   "curves=all='0/0 0.45/0.40 1/0.70'",
+                   ",setsar=1,fps=30,"
+                   "eq=contrast=1.05:saturation=1.12:brightness=0.02,"
+                   # Levanta sombras y medios para que el video se lea debajo
+                   # del velo del hero. El techo queda en 0.96 (no en blanco
+                   # puro) para que el titular conserve contraste.
+                   "curves=all='0/0.02 0.20/0.27 0.45/0.57 0.72/0.82 1/0.96'",
             "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
             "-pix_fmt", "yuv420p", pieza])
         piezas.append(pieza)
@@ -156,7 +163,8 @@ def montaje(formato):
     destino = os.path.join(SALIDA, "hero-%s.mp4" % formato)
     sh(["ffmpeg", "-y", "-v", "error"] + entradas +
        ["-filter_complex", ";".join(filtro), "-map", "[v]", "-an",
-        "-c:v", "libx264", "-preset", "slow", "-crf", "28",
+        "-c:v", "libx264", "-preset", "slow",
+        "-crf", "26" if formato == "16x9" else "27",
         "-profile:v", "main", "-level", "4.0", "-pix_fmt", "yuv420p",
         "-g", "60", "-movflags", "+faststart", destino])
 

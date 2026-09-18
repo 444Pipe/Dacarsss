@@ -1,13 +1,41 @@
-<!DOCTYPE html>
-<html lang="es-CO">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Página no encontrada | DACARS Villavicencio</title>
-<meta name="description" content="La página que buscas no existe. Vuelve al inicio de DACARS, taller de personalización de vehículos en Villavicencio, Meta.">
-<meta name="robots" content="noindex, follow">
-<link rel="icon" type="image/png" href="statics/logo-dacars-sm.png">
-<!-- Pantalla de carga: en línea a propósito, para que pinte antes que nada -->
+# -*- coding: utf-8 -*-
+"""
+Agrega la pantalla de carga a todas las paginas.
+
+Decisiones que vale la pena conocer antes de tocar esto:
+
+1. El CSS va EN LINEA en el <head>, antes de las fuentes. Si estuviera en
+   style.css la pantalla aparecería tarde, justo cuando ya no hace falta.
+
+2. Solo se ve una vez por sesion. El sitio tiene 11 paginas: una pantalla de
+   carga en cada clic interno seria insoportable. Un script diminuto en el
+   <head> marca el <html> y la oculta antes de que pinte.
+
+3. Tiene tres redes de seguridad, porque una pantalla de carga que no se va
+   deja el sitio inservible:
+     - js/app.js la retira a los 2,2 s como maximo. Camino normal.
+     - Un setTimeout EN LINEA la retira a los 4 s si app.js nunca llego
+       (404, red caida, bloqueador). Va en linea justamente porque no puede
+       depender del archivo que podria estar fallando.
+     - <noscript> la oculta si no hay JavaScript del todo.
+   Queda ademas una animacion CSS a los 5 s como cuarto respaldo, pero no se
+   confia en ella: no se pudo verificar (el reloj virtual de Chrome headless
+   no avanza animaciones CSS, asi que la prueba no concluye).
+
+4. El progreso es real: mira el estado del DOM y las imagenes que no son
+   lazy. No es una barra decorativa que cuenta sola.
+
+    python tools/patch-carga.py
+
+Idempotente. Toca las .html y la plantilla de tools/generar-servicios.py.
+"""
+
+import io
+import os
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+ESTILO = """<!-- Pantalla de carga: en línea a propósito, para que pinte antes que nada -->
 <style>
 #carga{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
   background:radial-gradient(75% 60% at 50% 45%,#0a1327 0%,#04060c 72%);
@@ -53,14 +81,9 @@ html.sin-carga #carga{display:none}
 </style>
 <script>/* Ya la vio en esta sesión: no repetirla en cada página */
 try{if(sessionStorage.getItem('dacars-visto'))document.documentElement.className+=' sin-carga'}catch(e){}</script>
+"""
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Saira:ital,wght@0,500;0,600;0,700;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<div id="carga" role="status" aria-live="polite" aria-label="Cargando DACARS">
+MARCA = """<div id="carga" role="status" aria-live="polite" aria-label="Cargando DACARS">
   <div class="carga__in">
     <div class="carga__marca">
       <i class="carga__rayo carga__rayo--a"></i><i class="carga__rayo carga__rayo--b"></i>
@@ -77,33 +100,41 @@ la pantalla se retira igual. Va en línea porque no puede depender de un archivo
 setTimeout(function(){var c=document.getElementById('carga');
 if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},600);}},4000);</script>
 
+"""
 
-<section class="shero" style="min-height:100vh;display:flex;align-items:center">
-  <div class="shero__bg" aria-hidden="true"><span class="grid"></span><span class="glow glow--a"></span></div>
-  <div class="wrap" style="text-align:center">
-    <img src="statics/logo-dacars.png" alt="DACARS Villavicencio" width="1000" height="729"
-         style="width:100%;max-width:320px;margin:0 auto 26px;filter:drop-shadow(0 0 40px rgba(10,92,255,.45))">
-    <p class="tag">Error 404</p>
-    <h1 class="shero__title chrome" style="margin-inline:auto;max-width:14ch">Esta página no existe</h1>
-    <p class="shero__lead" style="margin-inline:auto">
-      Puede que el enlace esté viejo o mal escrito. Te dejamos por dónde seguir.
-    </p>
+ANCLA_HEAD = '<link rel="preconnect" href="https://fonts.googleapis.com">'
+ANCLA_BODY = "<body>\n"
 
-    <div class="hero__cta" style="justify-content:center">
-      <a class="btn btn--primary" href="index.html">Ir al inicio</a>
-      <a class="btn btn--ghost" href="https://wa.me/573112629406" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-    </div>
 
-    <div class="otros" style="margin-top:46px;text-align:left">
-      <a class="otro" href="ppf-villavicencio.html"><b>PPF</b><span>en Villavicencio</span></a>
-      <a class="otro" href="polarizados-villavicencio.html"><b>Polarizados</b><span>en Villavicencio</span></a>
-      <a class="otro" href="detailing-villavicencio.html"><b>Detailing</b><span>en Villavicencio</span></a>
-      <a class="otro" href="accesorios-4x4-villavicencio.html"><b>Accesorios 4x4</b><span>en Villavicencio</span></a>
-      <a class="otro" href="lujos-y-accesorios-villavicencio.html"><b>Lujos</b><span>en Villavicencio</span></a>
-      <a class="otro" href="index.html#contacto"><b>Contacto</b><span>Cra. 33 #24-60</span></a>
-    </div>
-  </div>
-</section>
+def parchar(ruta, etiqueta):
+    txt = io.open(ruta, encoding="utf-8").read()
+    if "id=\"carga\"" in txt:
+        return False
 
-</body>
-</html>
+    if ANCLA_HEAD not in txt or ANCLA_BODY not in txt:
+        print("  !! %s: no encontré dónde insertar" % etiqueta)
+        return False
+
+    txt = txt.replace(ANCLA_HEAD, ESTILO + "\n" + ANCLA_HEAD, 1)
+    txt = txt.replace(ANCLA_BODY, ANCLA_BODY + MARCA, 1)
+    io.open(ruta, "w", encoding="utf-8", newline="\n").write(txt)
+    print("  %s" % etiqueta)
+    return True
+
+
+def main():
+    n = 0
+    for f in sorted(os.listdir(ROOT)):
+        if f.endswith(".html"):
+            n += parchar(os.path.join(ROOT, f), f)
+
+    # la plantilla, para que lo regenerado siga teniéndola
+    gen = os.path.join(ROOT, "tools", "generar-servicios.py")
+    if os.path.exists(gen):
+        n += parchar(gen, "tools/generar-servicios.py")
+
+    print("\n%d archivos con pantalla de carga" % n if n else "\n(ya estaban todos)")
+
+
+if __name__ == "__main__":
+    main()

@@ -404,7 +404,11 @@ svg.marca{fill:currentColor; stroke:none}
 /* =========================================================
    CARDS — SERVICIOS
    ========================================================= */
-.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(288px,1fr)); gap:18px}
+.cards{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+/* Si queda una tarjeta suelta al final, se centra sin ocupar el ancho completo */
+.cards:not(.cards--3) > .card:last-child:nth-child(odd){
+  grid-column:1 / -1; width:calc(50% - 9px); justify-self:center;
+}
 
 .card{
   position:relative; isolation:isolate; overflow:hidden;
@@ -452,6 +456,27 @@ svg.marca{fill:currentColor; stroke:none}
   letter-spacing:.005em; color:var(--text);
 }
 .card p{margin:0; font-size:14.6px; color:var(--muted); line-height:1.66}
+
+/* La portada mantiene SIEMPRE 2 columnas: se compacta la tarjeta en móvil */
+@media (max-width:640px){
+  .cards:not(.cards--3){gap:12px}
+  .cards:not(.cards--3) > .card:last-child:nth-child(odd){width:calc(50% - 6px)}
+  .cards:not(.cards--3) > .card{padding:22px 16px 20px}
+  .cards:not(.cards--3) > .card .card__n{top:14px; right:14px; font-size:30px}
+  .cards:not(.cards--3) > .card .card__ico{width:42px; height:42px; margin-bottom:14px; border-radius:10px}
+  .cards:not(.cards--3) > .card .card__ico svg{width:21px; height:21px}
+  .cards:not(.cards--3) > .card h3{font-size:16.5px; margin-bottom:8px}
+  .cards:not(.cards--3) > .card p{font-size:13.2px; line-height:1.58}
+  .cards:not(.cards--3) > .card .card__mas{margin-top:12px; font-size:11px; letter-spacing:.06em}
+}
+@media (max-width:400px){
+  .cards:not(.cards--3){gap:10px}
+  .cards:not(.cards--3) > .card:last-child:nth-child(odd){width:calc(50% - 5px)}
+  .cards:not(.cards--3) > .card{padding:18px 13px 16px}
+  .cards:not(.cards--3) > .card .card__n{font-size:24px; top:11px; right:11px}
+  .cards:not(.cards--3) > .card h3{font-size:15px}
+  .cards:not(.cards--3) > .card p{font-size:12.4px}
+}
 
 /* =========================================================
    PPF
