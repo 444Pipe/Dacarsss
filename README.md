@@ -31,8 +31,8 @@ statics/
   og-image.jpg        Imagen para redes
   hero video/         Los 5 reels originales (material fuente, NO se publica)
   video/              Lo que sí se publica:
-    hero-16x9.mp4       Fondo del hero, escritorio (3,5 MB)
-    hero-3x4.mp4        Fondo del hero, móvil (2,5 MB)
+    hero-16x9.mp4       Fondo del hero, escritorio (3,0 MB)
+    hero-9x16.mp4       Fondo del hero, móvil (2,8 MB)
     hero-poster-*.jpg   Poster de cada uno
     reel-*.mp4          Los 5 reels listos para web + su poster
 
@@ -231,12 +231,24 @@ oscurecerlo**: `.hero__video` solo ajusta saturación y contraste, y el trabajo 
 legibilidad lo hace `.hero__veil`, que abre el centro y oscurece únicamente las
 bandas con interfaz — el header arriba y el paso al marquee abajo.
 
+**Encuadre.** El material es vertical (720x1280) y el hero es ancho. Recortar una
+franja 16:9 a ancho completo solo deja 405 px de alto — el 32% de la escena, que en
+pantalla se lee como un zoom enorme. En su lugar, de cada reel se toma una ventana
+alta, se centra en el lienzo a su tamaño y el sobrante se rellena con una copia
+ampliada y desenfocada del mismo fotograma, fundida con un degradado de 56 px para
+que la unión no se lea como un borde. El campo de visión pasa del 32% al 52% en
+escritorio, y en móvil el recorte lateral de `object-fit:cover` baja del 41% al 21%.
+
+El tope de cada ventana lo marcan los subtítulos y la marca de agua quemados en los
+reels: reel 1 hasta el 79%, reels 2 y 3 hasta el 80%, y el reel 5 solo hasta el 55%
+(sus subtítulos van a media altura). Si cambias los tiempos, revisa el encuadre.
+
 Se generan dos versiones y `js/app.js` elige según la pantalla:
 
 | Archivo | Uso | Peso |
 |---|---|---|
-| `hero-16x9.mp4` | pantallas ≥ 861 px | 3,5 MB |
-| `hero-3x4.mp4` | pantallas < 861 px | 2,5 MB |
+| `hero-16x9.mp4` | pantallas ≥ 861 px | 3,0 MB |
+| `hero-9x16.mp4` | pantallas < 861 px | 2,8 MB |
 
 **No se descarga el video** si el visitante tiene activado *reducir movimiento* o
 *ahorro de datos*, ni si su conexión es 2G: en esos casos queda el poster, que
@@ -537,7 +549,7 @@ El despliegue principal es Railway (ver arriba). Al ser estático también sirve
 para regenerar los montajes. Ya están en el `.gitignore`. La carpeta `tools/` tampoco
 hace falta en producción (`robots.txt` ya la excluye).
 
-Peso de lo que sí se publica: ~30 MB, de los cuales solo **3,5 MB se descargan al
+Peso de lo que sí se publica: ~30 MB, de los cuales solo **3,0 MB se descargan al
 abrir la página** (el fondo del hero). El resto son los reels, que esperan al play.
 
 ## Accesibilidad y rendimiento

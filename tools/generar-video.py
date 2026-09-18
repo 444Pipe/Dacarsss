@@ -101,22 +101,79 @@ SECUENCIA = [
 # antes de fundir a negro. Va destacado como testimonio en la pagina, que es
 # donde ese material rinde.
 
-# Recorte por reel y formato. El origen siempre es 720x1280.
-RECORTES = {
-    "16x9": {1: "crop=720:405:0:340", 2: "crop=720:405:0:320",
-             3: "crop=720:405:0:300", 4: "crop=720:405:0:300",
-             5: "crop=720:405:0:285"},
-    "3x4":  {1: "crop=720:960:0:50", 2: "crop=720:960:0:60",
-             3: "crop=720:960:0:60", 4: "crop=720:960:0:60",
-             5: "crop=720:700:0:0,scale=987:960,crop=720:960:133:0"},
+# ---------------------------------------------------------------
+#  ENCUADRE
+#
+#  El material es vertical (720x1280) y el hero es ancho. Recortar una
+#  franja 16:9 a ancho completo solo deja 405 px de alto: el 32% de la
+#  escena, que en pantalla se lee como un zoom enorme.
+#
+#  En vez de eso, de cada reel se toma una VENTANA alta, se centra en el
+#  lienzo a su tamano y el sobrante se rellena con una copia ampliada y
+#  desenfocada del mismo fotograma. Se ve mas del doble de escena y el
+#  sujeto queda casi a tamano natural. Bajo el velo del hero los bordes
+#  difuminados no se leen como bordes.
+# ---------------------------------------------------------------
+
+LIENZO = {"16x9": (1280, 720), "9x16": (720, 1280)}
+
+# Alto que ocupa la zona nitida dentro del lienzo. En 16:9 llena el alto
+# completo; en 9:16 se deja una banda difuminada arriba y abajo, que cae
+# justo donde el velo ya es mas oscuro (header y paso al marquee).
+ALTO_NITIDO = {"16x9": 720, "9x16": 880}
+
+# Ventana tomada del original, por reel y formato: (alto, desplazamiento).
+# El tope de cada reel lo marcan los subtitulos y la marca de agua quemados
+# (ver NOTA SOBRE LOS RECORTES): reel 1 hasta 79%, reel 2 y 3 hasta 80%,
+# reel 5 solo hasta 55%.
+VENTANAS = {
+    "16x9": {1: (660, 212), 2: (660, 192), 3: (660, 172),
+             4: (660, 180), 5: (660, 20)},
+    "9x16": {1: (880, 90), 2: (880, 100), 3: (880, 100),
+             4: (880, 100), 5: (700, 0)},
 }
 
-DESTINO = {
-    # lanczos + microenfoque: el 16:9 nace de una franja de 405 px y se
-    # amplia 1,78x, sin esto llega blando a las pantallas grandes
-    "16x9": "scale=1280:720:flags=lanczos,unsharp=5:5:0.45:5:5:0",
-    "3x4": "scale=720:960:flags=lanczos",
-}
+BLUR = {"16x9": 26, "9x16": 22}   # sigma del relleno
+BORDE = 56                        # px de degradado entre la zona nitida y el relleno
+
+# Eje sobre el que se funde la zona nitida con el relleno: en 16:9 el relleno
+# esta a los lados, en 9:16 arriba y abajo.
+EJE = {"16x9": r"X\,W-1-X", "9x16": r"Y\,H-1-Y"}
+
+
+def par(n):
+    """libx264 necesita dimensiones pares."""
+    n = int(round(n))
+    return n if n % 2 == 0 else n + 1
+
+
+def encuadre(formato, reel):
+    """Ventana centrada sobre un relleno desenfocado del mismo fotograma."""
+    lw, lh = LIENZO[formato]
+    alto, desp = VENTANAS[formato][reel]
+    nitido = ALTO_NITIDO[formato]
+
+    # La zona nitida se escala por alto; si se pasa de ancho, se recorta al centro.
+    k = nitido / float(alto)
+    cw = par(720 * k)
+    recorte = ",crop=%d:%d" % (lw, nitido) if cw > lw else ""
+
+    # El relleno cubre el lienzo entero: se escala por el lado que falte.
+    kf = max(lw / 720.0, lh / float(alto))
+
+    return (
+        "[0:v]crop=720:%d:0:%d,setsar=1,fps=30,split=2[n][f];"
+        "[f]scale=%d:%d:flags=bilinear,crop=%d:%d,gblur=sigma=%d,"
+        "eq=brightness=-0.05:saturation=0.82[relleno];"
+        # El borde se funde con un degradado de alfa: sin esto la union entre
+        # la zona nitida y el relleno se lee como una linea recta.
+        "[n]scale=%d:%d:flags=lanczos,unsharp=5:5:0.35:5:5:0%s,format=yuva420p,"
+        r"geq=lum='p(X\,Y)':cb='cb(X\,Y)':cr='cr(X\,Y)':"
+        r"a='255*min(1\,min(%s)/%d)'[zona];"
+        "[relleno][zona]overlay=(W-w)/2:(H-h)/2"
+    ) % (alto, desp,
+         par(720 * kf), par(alto * kf), lw, lh, BLUR[formato],
+         cw, nitido, recorte, EJE[formato], BORDE)
 
 
 def montaje(formato):
@@ -130,15 +187,18 @@ def montaje(formato):
         d = toma[2] if len(toma) > 2 else DUR
         duraciones.append(d)
         pieza = os.path.join(TMP, "%s_%02d.mp4" % (formato, i))
+        # El grading va al final, sobre la composicion ya armada, para que la
+        # zona nitida y el relleno queden con el mismo tono. Levanta sombras y
+        # medios para que el video se lea debajo del velo del hero; el techo
+        # queda en 0.96 (no en blanco puro) para que el titular no pierda
+        # contraste sobre las tomas mas claras.
+        grado = ("eq=contrast=1.05:saturation=1.12:brightness=0.02,"
+                 "curves=all='0/0.02 0.20/0.27 0.45/0.57 0.72/0.82 1/0.96'")
+
         sh(["ffmpeg", "-y", "-v", "error",
             "-ss", str(inicio), "-t", str(d), "-i", vs[reel - 1],
-            "-vf", RECORTES[formato][reel] + "," + DESTINO[formato] +
-                   ",setsar=1,fps=30,"
-                   "eq=contrast=1.05:saturation=1.12:brightness=0.02,"
-                   # Levanta sombras y medios para que el video se lea debajo
-                   # del velo del hero. El techo queda en 0.96 (no en blanco
-                   # puro) para que el titular conserve contraste.
-                   "curves=all='0/0.02 0.20/0.27 0.45/0.57 0.72/0.82 1/0.96'",
+            "-filter_complex", encuadre(formato, reel) + "," + grado + "[v]",
+            "-map", "[v]",
             "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
             "-pix_fmt", "yuv420p", pieza])
         piezas.append(pieza)
@@ -213,7 +273,7 @@ def main():
     if que in ("todo", "hero"):
         print("Fondo de video del hero (12 tomas, %s s cada una):" % DUR)
         montaje("16x9")
-        montaje("3x4")
+        montaje("9x16")
         if os.path.isdir(TMP) and not os.listdir(TMP):
             os.rmdir(TMP)
 

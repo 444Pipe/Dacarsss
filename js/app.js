@@ -205,7 +205,7 @@
     var vertical = window.matchMedia('(max-width: 860px)').matches;
 
     hero.poster = vertical
-      ? 'https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/v1789711362/dacars/video/hero-poster-3x4'
+      ? 'https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/dacars/video/hero-poster-9x16'
       : 'https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9';
 
     // Enciende el fondo pase lo que pase: si el video no llega, el poster

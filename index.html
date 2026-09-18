@@ -134,7 +134,7 @@ try{if(sessionStorage.getItem('dacars-visto'))document.documentElement.className
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Saira:ital,wght@0,500;0,600;0,700;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9" media="(min-width: 861px)">
-<link rel="preload" as="image" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/v1789711362/dacars/video/hero-poster-3x4" media="(max-width: 860px)">
+<link rel="preload" as="image" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/dacars/video/hero-poster-9x16" media="(max-width: 860px)">
 <link rel="stylesheet" href="css/style.css?v=448bd809">
 
 <script type="application/ld+json">
@@ -816,12 +816,12 @@ if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},6
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero__bg" aria-hidden="true">
-    <!-- El video lo enciende js/app.js: elige 16:9 o 3:4 según la pantalla y
+    <!-- El video lo enciende js/app.js: elige 16:9 o 9:16 según la pantalla y
          no lo descarga si el visitante pidió menos movimiento o ahorro de datos. -->
     <video class="hero__video" id="heroVideo"
            poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9"
            data-src-ancho="https://res.cloudinary.com/a0e9tgif/video/upload/v1789711358/dacars/video/hero-16x9.mp4"
-           data-src-alto="https://res.cloudinary.com/a0e9tgif/video/upload/v1789711360/dacars/video/hero-3x4.mp4"
+           data-src-alto="https://res.cloudinary.com/a0e9tgif/video/upload/dacars/video/hero-9x16.mp4"
            autoplay muted loop playsinline preload="none" disablepictureinpicture></video>
     <span class="hero__veil"></span>
     <span class="grid"></span>

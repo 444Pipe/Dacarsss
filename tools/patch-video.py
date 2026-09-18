@@ -104,13 +104,13 @@ def main():
     <span class="glow glow--b"></span>
   </div>"""
         nuevo = """  <div class="hero__bg" aria-hidden="true">
-    <!-- El video lo enciende js/app.js: elige 16:9 o 3:4 según la pantalla y
+    <!-- El video lo enciende js/app.js: elige 16:9 o 9:16 según la pantalla y
          no lo descarga si el visitante pidió menos movimiento o ahorro de datos. -->
     <video class="hero__video" id="heroVideo"
            poster="statics/video/hero-poster-16x9.jpg"
            data-src-ancho="statics/video/hero-16x9.mp4"
-           data-src-alto="statics/video/hero-3x4.mp4"
-           muted loop playsinline preload="none" disablepictureinpicture></video>
+           data-src-alto="statics/video/hero-9x16.mp4"
+           autoplay muted loop playsinline preload="none" disablepictureinpicture></video>
     <span class="hero__veil"></span>
     <span class="grid"></span>
     <span class="glow glow--a"></span>
@@ -155,7 +155,7 @@ def main():
             '<link rel="stylesheet" href="css/style.css">',
             '<link rel="preload" as="image" href="statics/video/hero-poster-16x9.jpg" '
             'media="(min-width: 861px)">\n'
-            '<link rel="preload" as="image" href="statics/video/hero-poster-3x4.jpg" '
+            '<link rel="preload" as="image" href="statics/video/hero-poster-9x16.jpg" '
             'media="(max-width: 860px)">\n'
             '<link rel="stylesheet" href="css/style.css">', 1)
 
