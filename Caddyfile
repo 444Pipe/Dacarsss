@@ -1,0 +1,48 @@
+# DACARS — servidor estático para Railway.
+# Railway termina el TLS en su borde y nos pasa el tráfico por HTTP
+# en el puerto que inyecta con la variable PORT.
+{
+	admin off
+	auto_https off
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+:{$PORT:8080} {
+	root * /srv
+	encode zstd gzip
+
+	# --- Caché ---
+	# El HTML siempre se revalida (con ETag, así que casi siempre responde 304).
+	@html path *.html /
+	header @html Cache-Control "public, max-age=0, must-revalidate"
+
+	# CSS y JS cambian cuando se edita el sitio: una hora.
+	@codigo path *.css *.js *.webmanifest
+	header @codigo Cache-Control "public, max-age=3600"
+
+	# Imágenes, video y fuentes: una semana.
+	@media path *.jpg *.jpeg *.png *.webp *.svg *.ico *.mp4 *.webm *.woff2
+	header @media Cache-Control "public, max-age=604800"
+
+	# --- Cabeceras de seguridad ---
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		Permissions-Policy "geolocation=(), microphone=(), camera=()"
+		-Server
+	}
+
+	# --- Página de error con la marca ---
+	handle_errors {
+		@404 expression {err.status_code} == 404
+		handle @404 {
+			rewrite * /404.html
+			file_server
+		}
+	}
+
+	file_server
+}

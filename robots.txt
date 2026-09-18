@@ -1,0 +1,16 @@
+# DACARS VILLAVICENCIO S.A.S — Villavicencio, Meta, Colombia
+User-agent: *
+Allow: /
+Disallow: /tools/
+
+# Rastreadores de IA y buscadores alternativos: permitidos
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.dacars.com.co/sitemap.xml

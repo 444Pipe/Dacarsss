@@ -1,0 +1,3 @@
+Coloca aquí las fotos de trabajos: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg
+Cuadradas, mínimo 900x900 px. Mientras no existan, la galería muestra
+un panel de marca en su lugar (no se ve rota).

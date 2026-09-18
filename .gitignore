@@ -1,0 +1,7 @@
+# Videos originales descargados de Instagram (~47 MB).
+# Son el material fuente de tools/generar-video.py, no se publican.
+# Consérvalos en tu disco: si se pierden no se pueden regenerar los montajes.
+statics/hero video/
+
+# Temporales del procesamiento de video
+statics/video/_tmp/

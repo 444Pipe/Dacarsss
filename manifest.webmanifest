@@ -1,0 +1,15 @@
+{
+  "name": "DACARS — Personalización de vehículos en Villavicencio",
+  "short_name": "DACARS",
+  "description": "Lujos, accesorios 4x4, PPF, detailing y polarizados en Villavicencio, Meta.",
+  "lang": "es-CO",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#04060c",
+  "theme_color": "#04060c",
+  "icons": [
+    { "src": "statics/logo-dacars-sm.png", "sizes": "420x306", "type": "image/png", "purpose": "any" },
+    { "src": "statics/logo-dacars.png", "sizes": "1000x729", "type": "image/png", "purpose": "any" }
+  ]
+}

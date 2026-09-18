@@ -1,0 +1,13 @@
+# Lo que no entra a la imagen.
+# OJO: Caddyfile y Dockerfile SÍ deben estar en el contexto (el build los copia);
+# se borran de /srv en el propio Dockerfile para que no queden publicados.
+.git
+.gitignore
+.dockerignore
+railway.json
+.htaccess
+tools/
+statics/hero video/
+statics/video/_tmp/
+**/*.py
+**/*.md
