@@ -57,7 +57,7 @@ SECCION_CLIPS = """
     </div>
 
     <p class="clips__nota" data-reveal>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10.2 8.4 15.8 12l-5.6 3.6Z" fill="currentColor" stroke="none"/></svg>
       Los videos tienen audio. Toca el botón de play para escucharlos.
     </p>
 """

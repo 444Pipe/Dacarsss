@@ -58,6 +58,16 @@ button,input,select,textarea{font:inherit; color:inherit}
 svg{width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:1.6;
     stroke-linecap:round; stroke-linejoin:round}
 
+/* Logos de marca: son siluetas sólidas, no trazos. Sin esto el CSS de arriba
+   los dibuja huecos y la «f» de Facebook sale como un contorno raro. */
+svg.marca{fill:currentColor; stroke:none}
+/* Los glifos oficiales llenan todo el viewBox, así que pesan más que los
+   iconos de trazo que van al lado. Se compensa bajándolos un punto. */
+.btn svg.marca{width:16px; height:16px}
+.topbar__item svg.marca{width:13px; height:13px}
+.info__ico svg.marca{width:19px; height:19px}
+.wa svg.marca{width:20px; height:20px}
+
 .wrap{width:100%; max-width:var(--wrap); margin-inline:auto; padding-inline:var(--pad)}
 
 .skip{position:absolute; left:-9999px; top:0; z-index:200; background:var(--blue);
@@ -137,6 +147,10 @@ svg{width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:1.6;
 .nav > a.is-active:not(.btn)::after{transform:scaleX(1)}
 .nav > a.is-active:not(.btn){color:var(--text)}
 .nav__cta{margin-left:10px}
+/* «.nav > a» (0,1,1) le gana por especificidad a «.btn--wa» (0,1,0) y le robaba
+   el color al botón: quedaba texto gris sobre verde. Se lo devolvemos. */
+.nav > a.btn--wa{color:#04160c}
+.nav > a.btn--wa:hover{color:#04160c}
 
 /* Burger */
 .burger{display:none; width:42px; height:42px; background:transparent;
@@ -690,6 +704,13 @@ svg{width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:1.6;
 }
 .info__ico svg{width:21px; height:21px}
 .info__row:hover .info__ico{color:var(--cyan); box-shadow:0 0 20px -5px rgba(0,200,255,.7)}
+/* Cada red con su color al pasar el mouse: se leen como lo que son */
+.info__row[href*="wa.me"]:hover .info__ico{
+  color:#25d366; border-color:rgba(37,211,102,.55); box-shadow:0 0 22px -5px rgba(37,211,102,.75)}
+.info__row[href*="instagram.com"]:hover .info__ico{
+  color:#e1306c; border-color:rgba(225,48,108,.55); box-shadow:0 0 22px -5px rgba(225,48,108,.75)}
+.info__row[href*="facebook.com"]:hover .info__ico{
+  color:#1877f2; border-color:rgba(24,119,242,.55); box-shadow:0 0 22px -5px rgba(24,119,242,.75)}
 .info__row > span:last-child{font-size:14.5px; color:var(--muted); line-height:1.5}
 .info__row b{display:block; font-family:var(--f-display); font-size:12px; font-weight:700;
              letter-spacing:.14em; text-transform:uppercase; color:var(--text); margin-bottom:3px}
