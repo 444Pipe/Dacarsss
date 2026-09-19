@@ -12,9 +12,12 @@ Decisiones que vale la pena conocer antes de tocar esto:
 1. El CSS va EN LINEA en el <head>, antes de las fuentes. Si estuviera en
    style.css la pantalla apareceria tarde, justo cuando ya no hace falta.
 
-2. Solo se ve una vez por sesion. El sitio tiene 11 paginas: una pantalla de
-   carga en cada clic interno seria insoportable. Un script diminuto en el
-   <head> marca el <html> y la oculta antes de que pinte.
+2. Se ve en CADA carga de pagina, a proposito. Antes se mostraba una sola vez
+   por sesion (un flag en sessionStorage marcaba el <html> y la ocultaba), pero
+   la marca la quiere siempre: es parte de la entrada al sitio, no un detalle
+   de la primera visita. El costo es el MINIMO de js/app.js (0,85 s) en cada
+   clic interno; si algun dia molesta, se baja ese numero antes que volver al
+   flag.
 
 3. Tiene tres redes de seguridad, porque una pantalla de carga que no se va
    deja el sitio inservible:
@@ -50,7 +53,6 @@ ESTILO = """<!-- Pantalla de carga: en línea a propósito, para que pinte antes
 #carga.se-va{opacity:0;visibility:hidden;pointer-events:none}
 #carga.se-va .carga__in{transform:scale(1.07);transition:transform .55s cubic-bezier(.4,0,1,1)}
 #carga[hidden]{display:none}
-html.sin-carga #carga{display:none}
 
 /* Ancho fijo a propósito: la posición de los rayos está calculada en píxeles
    para que sus extremos se junten justo en el destello. Con un ancho elástico
@@ -125,8 +127,6 @@ html.sin-carga #carga{display:none}
   .carga__marca img{animation:none;opacity:1}
 }
 </style>
-<script>/* Ya la vio en esta sesión: no repetirla en cada página */
-try{if(sessionStorage.getItem('dacars-visto'))document.documentElement.className+=' sin-carga'}catch(e){}</script>
 """.replace("@@ALTO@@", ALTO)
 
 MARCA = """<div id="carga" role="status" aria-live="polite" aria-label="Cargando DACARS">
@@ -152,7 +152,8 @@ ANCLA_HEAD = '<link rel="preconnect" href="https://fonts.googleapis.com">'
 ANCLA_BODY = "<body>\n"
 
 # Para poder reemplazar una pantalla de carga anterior por la de este archivo
-RE_HEAD = re.compile(r'<!-- Pantalla de carga:.*?</script>\n\n(?=<link rel="preconnect")', re.S)
+RE_HEAD = re.compile(
+    r'<!-- Pantalla de carga:.*?</(?:style|script)>\n\n(?=<link rel="preconnect")', re.S)
 RE_BODY = re.compile(r'<div id="carga".*?cargaRespaldo.*?</script>\n\n', re.S)
 
 

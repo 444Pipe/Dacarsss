@@ -784,7 +784,6 @@ def build(s):
 #carga.se-va{opacity:0;visibility:hidden;pointer-events:none}
 #carga.se-va .carga__in{transform:scale(1.07);transition:transform .55s cubic-bezier(.4,0,1,1)}
 #carga[hidden]{display:none}
-html.sin-carga #carga{display:none}
 
 /* Ancho fijo a propósito: la posición de los rayos está calculada en píxeles
    para que sus extremos se junten justo en el destello. Con un ancho elástico
@@ -859,8 +858,6 @@ html.sin-carga #carga{display:none}
   .carga__marca img{animation:none;opacity:1}
 }
 </style>
-<script>/* Ya la vio en esta sesión: no repetirla en cada página */
-try{if(sessionStorage.getItem('dacars-visto'))document.documentElement.className+=' sin-carga'}catch(e){}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -9,14 +9,13 @@
   /* ---------- Pantalla de carga ---------- */
   (function () {
     var carga = document.getElementById('carga');
-    if (!carga || document.documentElement.className.indexOf('sin-carga') > -1) return;
+    if (!carga) return;
 
     var inicio = Date.now();
     var MINIMO = 850;   // deja que la animación alcance a entrar y barrer una vez
     var TOPE = 2200;    // nunca retiene el sitio más que esto, pase lo que pase
 
     function salir() {
-      try { sessionStorage.setItem('dacars-visto', '1'); } catch (e) {}
       carga.classList.add('se-va');
       setTimeout(function () { carga.hidden = true; }, 600);
     }
