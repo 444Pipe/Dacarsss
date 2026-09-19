@@ -112,11 +112,19 @@ def patron_cloudinary(cloud, info):
     El resource_type va fijo, no como (?:image|video): el poster reel-x.jpg y
     el video reel-x.mp4 comparten public_id y solo se distinguen por ahi. Si
     se deja abierto, el patron del poster pisa la URL del video.
+
+    La version es OPCIONAL a proposito. Cloudinary entrega igual sin ella, asi
+    que una URL escrita a mano suele venir sin version; si el patron la exigiera
+    (como hacia antes), este script no la reconoceria como suya y la dejaria
+    intacta para siempre. Fue exactamente lo que paso con el hero vertical: se
+    cambio 3x4 por 9x16 a mano, sin version, y quedo apuntando a un asset que
+    no existia. Aceptandola opcional, cualquier URL a mano se normaliza sola en
+    la siguiente corrida.
     """
     return re.compile(
         r"https://res\.cloudinary\.com/" + re.escape(cloud) +
         r"/" + info["resource_type"] +
-        r"/upload/(?:[^/\"'\s]+/)*v\d+/" + re.escape(info["public_id"]) +
+        r"/upload/(?:[^/\"'\s]+/)*(?:v\d+/)?" + re.escape(info["public_id"]) +
         r"(?:\.[a-z0-9]{2,5})?(?=[\"'\s)<,])"
     )
 
@@ -167,7 +175,7 @@ def revertir(texto, cloud, mapa, archivo):
     pids = sorted({p for _, p in por_pid}, key=len, reverse=True)
     combinado = re.compile(
         r"https://res\.cloudinary\.com/" + re.escape(cloud) +
-        r"/(image|video)/upload/(?:[^/\"'\s]+/)*v\d+/(" +
+        r"/(image|video)/upload/(?:[^/\"'\s]+/)*(?:v\d+/)?(" +
         "|".join(re.escape(p) for p in pids) +
         r")(?:\.[a-z0-9]{2,5})?(?=[\"'\s)<,])"
     )

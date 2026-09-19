@@ -5,6 +5,13 @@ Sube los assets de statics/ a Cloudinary.
     python tools/subir-cloudinary.py            # todo
     python tools/subir-cloudinary.py imagenes   # solo png/jpg
     python tools/subir-cloudinary.py video      # solo mp4
+    python tools/subir-cloudinary.py --forzar   # sube tambien lo que no cambio
+
+Por defecto SALTA lo que ya esta en el mapa con el mismo peso en bytes. No es
+por ahorrar tiempo: cada subida sube la version del asset y usar-cloudinary.py
+la reescribe en las 11 paginas, asi que subir un reel que nadie toco ensucia el
+diff y, con invalidate=True, tira la copia caliente del CDN sin motivo. Con
+--forzar se sube todo igual, util si Cloudinary quedo desincronizado.
 
 Idempotente: cada archivo tiene un public_id fijo derivado de su ruta
 (statics/video/hero-16x9.mp4 -> dacars/video/hero-16x9), asi que volver a
@@ -110,19 +117,33 @@ def cargar_mapa():
 
 
 def main():
-    filtro = sys.argv[1] if len(sys.argv) > 1 else "todo"
+    args = sys.argv[1:]
+    forzar = "--forzar" in args
+    args = [a for a in args if a != "--forzar"]
+    filtro = args[0] if args else "todo"
     if filtro not in ("todo", "imagenes", "video"):
-        sys.exit("Uso: python tools/subir-cloudinary.py [todo|imagenes|video]")
+        sys.exit("Uso: python tools/subir-cloudinary.py [todo|imagenes|video] [--forzar]")
 
     cloud_name = configurar()
     items = recolectar(filtro)
     if not items:
         sys.exit("No se encontro nada que subir en statics/.")
 
+    mapa = cargar_mapa()
+    if not forzar:
+        antes = len(items)
+        items = [i for i in items
+                 if mapa.get(i[0], {}).get("bytes") != os.path.getsize(i[1])]
+        saltados = antes - len(items)
+        if saltados:
+            print("Sin cambios: %d (--forzar los sube igual)" % saltados)
+        if not items:
+            print("Todo al dia: Cloudinary ya tiene lo que hay en statics/.")
+            return
+
     print("Cloud: %s" % cloud_name)
     print("Subiendo %d archivos...\n" % len(items))
 
-    mapa = cargar_mapa()
     mapa["_cloud_name"] = cloud_name
     total_local = 0
     fallos = []
