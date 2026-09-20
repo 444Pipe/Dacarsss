@@ -11,6 +11,7 @@ Es idempotente: correrlo de nuevo no duplica nada ni pisa lo que hayan editado.
 """
 
 from django.core.management.base import BaseCommand
+from django.db import DatabaseError
 
 from catalogo.models import Categoria
 
@@ -77,7 +78,26 @@ CATEGORIAS = [
 class Command(BaseCommand):
     help = "Crea las categorías iniciales del catálogo, enlazadas a los servicios."
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--si-vacio",
+            action="store_true",
+            help="No hace nada si ya hay categorías. Es el modo con el que "
+            "corre en el arranque del contenedor: siembra la primera vez y "
+            "después se calla, así una categoría borrada a propósito no "
+            "reaparece en el siguiente despliegue.",
+        )
+
     def handle(self, *args, **opciones):
+        if opciones["si_vacio"]:
+            try:
+                if Categoria.objects.exists():
+                    return
+            except DatabaseError:
+                # Las migraciones todavía no corrieron. No es motivo para que
+                # el contenedor no arranque.
+                return
+
         creadas = 0
         for nombre, servicio, descripcion, orden in CATEGORIAS:
             categoria, nueva = Categoria.objects.get_or_create(

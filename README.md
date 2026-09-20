@@ -231,18 +231,40 @@ Cada push a `main` redespliega, y `migrate` corre al arrancar el contenedor.
 | `DOMINIO` | El dominio, sin `https://` |
 | `DEBUG` | No definirla, o `0` |
 | `WHATSAPP` | Opcional. Por defecto `573112629406` |
+| `ADMIN_USUARIO` / `ADMIN_CLAVE` | Solo para crear el primer usuario del panel. **Se borra `ADMIN_CLAVE` después** (ver abajo) |
 
 ### Agregar el Postgres
 
 En el panel de Railway: **New → Database → PostgreSQL**. Queda en el mismo
 proyecto y `DATABASE_URL` aparece sola en las variables del servicio web.
 
-### El primer superusuario
+### El primer usuario del panel
 
-```bash
-railway run python manage.py createsuperuser
-railway run python manage.py categorias_iniciales
-```
+La base vive **solo en la nube**. El Postgres de Railway no es alcanzable
+desde afuera si el servicio no tiene proxy TCP publico, asi que
+`createsuperuser` no se puede correr contra el desde una maquina de trabajo, y
+`railway run` tampoco sirve: inyecta las variables pero el hostname interno
+sigue sin resolver desde tu red.
+
+Por eso el usuario se crea **desde adentro del contenedor**, en el arranque:
+
+1. En el servicio web -> Variables, definir `ADMIN_USUARIO` y `ADMIN_CLAVE`
+   (y opcionalmente `ADMIN_EMAIL`).
+2. Railway redespliega solo. En el log aparece `Usuario «...» creado`.
+3. Entrar al panel con esas credenciales.
+4. **Borrar `ADMIN_CLAVE`.**
+
+El punto 4 no es opcional. Mientras esa variable siga definida, cada
+despliegue vuelve a escribir esa contrasena: si la cambias desde el panel, el
+siguiente deploy la pisa. Y una contrasena no tiene por que quedar guardada en
+las variables del servicio.
+
+Sirve igual para recuperar el acceso: se vuelve a poner `ADMIN_CLAVE`, se
+espera el redespliegue, se entra, y se borra otra vez.
+
+Las 8 categorias del catalogo se siembran solas en el primer arranque, pero
+solo si no hay ninguna. Una categoria borrada a proposito no reaparece en el
+siguiente despliegue.
 
 ### Después del primer despliegue: el dominio
 

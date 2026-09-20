@@ -29,6 +29,20 @@ RUN SECRET_KEY=solo-para-el-build \
 
 EXPOSE 8080
 
-# `migrate` en el arranque: Railway despliega un contenedor nuevo por push, y
-# así la base queda al día sin un paso manual que alguien pueda olvidar.
-CMD ["sh", "-c", "python manage.py migrate --noinput && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
+# El arranque hace tres cosas antes de servir:
+#
+#   migrate                      deja la base al día. Railway despliega un
+#                                contenedor nuevo por push, así que hacerlo
+#                                acá evita un paso manual que alguien olvide.
+#   categorias_iniciales         siembra las 8 categorías, pero solo si no hay
+#     --si-vacio                 ninguna. Después se calla: una categoría
+#                                borrada a propósito no tiene que reaparecer.
+#   crear_admin                  crea el usuario del panel desde ADMIN_USUARIO
+#                                y ADMIN_CLAVE. Sin esas variables no hace
+#                                nada. Es la única forma de crear el primer
+#                                usuario cuando la base vive solo en la nube y
+#                                no es alcanzable desde afuera.
+#
+# Los dos últimos nunca terminan con error: una variable mal puesta no puede
+# impedir que el sitio levante.
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
