@@ -92,8 +92,21 @@ class UrlsDelSitio(TestCase):
         self.assertNotIn('href="/catalogo/"', html)
 
 
+# Lo que se le agregó al sitio después de la migración, y por eso no está en
+# los HTML originales.
+#
+# Se quita el bloque entero, no las líneas sueltas: un `</svg>` o un `</a>`
+# aparecen en muchos lados, y filtrar por esas líneas taparía cambios que no
+# tienen nada que ver. La lista es corta a propósito — cada entrada afloja un
+# poco la comparación, así que se suma solo con el motivo escrito al lado.
+AGREGADOS = [
+    # El acceso al panel, en la barra final del pie.
+    re.compile(r'[ \t]*<a class="foot__acceso".*?</a>\n', re.DOTALL),
+]
+
+
 def _normalizar(html):
-    """Deja fuera las diferencias que la migración introdujo a propósito."""
+    """Deja fuera las diferencias que se introdujeron a propósito."""
     html = html.replace('href="index.html#', 'href="/#')
     html = html.replace('href="index.html"', 'href="/"')
     for slug in SLUGS:
@@ -102,6 +115,8 @@ def _normalizar(html):
     # El `?v=hash` que ponía versionar-assets.py ahora lo hace {% static %}.
     html = re.sub(r'href="(/static/)?css/style\.css(\?v=[0-9a-f]+)?"', "CSS", html)
     html = re.sub(r'src="(/static/)?js/app\.js(\?v=[0-9a-f]+)?"', "JS", html)
+    for agregado in AGREGADOS:
+        html = agregado.sub("", html)
     return [l.rstrip() for l in html.splitlines() if l.strip()]
 
 
@@ -134,3 +149,29 @@ class IgualAlSitioViejo(TestCase):
                     "%s cambió respecto del sitio original:\n%s"
                     % (archivo, "\n".join(diferencias[:20])),
                 )
+
+
+class AccesoAlPanel(TestCase):
+    """El enlace discreto del pie.
+
+    Es lo único que el comercio tiene para llegar al panel sin acordarse de
+    escribir /admin/ a mano, así que conviene que no se pierda en una edición.
+    """
+
+    def test_esta_en_la_portada_y_en_las_landings(self):
+        for ruta in ["/"] + ["/" + s + ".html" for s in SLUGS]:
+            with self.subTest(ruta=ruta):
+                html = self.client.get(ruta).content.decode()
+                self.assertIn("foot__acceso", html)
+                self.assertIn("Acceso a la página", html)
+                self.assertIn('href="/admin/"', html)
+
+    def test_lleva_al_panel(self):
+        html = self.client.get("/").content.decode()
+        self.assertIn('rel="nofollow"', html.split("foot__acceso")[1][:200])
+        # Y el destino existe de verdad.
+        self.assertEqual(self.client.get("/admin/").status_code, 302)
+
+    def test_los_buscadores_no_rastrean_el_panel(self):
+        robots = self.client.get("/robots.txt").content.decode()
+        self.assertIn("Disallow: /admin/", robots)

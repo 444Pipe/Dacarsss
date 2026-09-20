@@ -778,6 +778,23 @@ svg.marca{fill:currentColor; stroke:none}
 .foot__bar p{margin:0; font-size:12.5px; color:var(--muted-2)}
 .foot__made{color:var(--muted-2)}
 
+/* Acceso al panel. Discreto a propósito: quien lo necesita sabe que está ahí,
+   y para el visitante es casi invisible. Al enfocarlo con el teclado se
+   ilumina entero — un enlace apagado no puede volverse inalcanzable para
+   quien navega sin mouse. */
+.foot__acceso{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted-2); opacity:.32;
+  transition:opacity .25s var(--ease), color .25s;
+}
+.foot__acceso svg{width:12px; height:12px}
+.foot__acceso:hover{opacity:1; color:var(--blue-hi)}
+.foot__acceso:focus-visible{
+  opacity:1; color:var(--cyan);
+  outline:2px solid var(--cyan); outline-offset:4px; border-radius:4px;
+}
+
 /* =========================================================
    BOTÓN FLOTANTE WHATSAPP
    ========================================================= */
