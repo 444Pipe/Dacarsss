@@ -10,6 +10,7 @@ pedido.
 """
 
 from django import forms
+from dacars import colores
 from django.contrib import admin, messages
 from django.utils.html import format_html
 
@@ -67,7 +68,7 @@ class MovimientoAdmin(admin.ModelAdmin):
     @admin.display(description="cambio")
     def cambio(self, obj):
         delta = obj.delta
-        color = "#15803d" if delta > 0 else "#b91c1c" if delta < 0 else "#6b7280"
+        color = colores.OK if delta > 0 else colores.MAL if delta < 0 else colores.APAGADO
         return format_html(
             '<b style="color:{}">{}{}</b>', color, "+" if delta > 0 else "", delta
         )

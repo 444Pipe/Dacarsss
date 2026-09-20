@@ -7,6 +7,7 @@ desincronizaría el stock sin dejar rastro. Si un pedido cambia, se cancela
 (la mercancía vuelve sola) y se arma de nuevo.
 """
 
+from dacars import colores
 from django.contrib import admin, messages
 from django.utils.html import format_html
 
@@ -94,13 +95,13 @@ class PedidoAdmin(admin.ModelAdmin):
 
     @admin.display(description="estado", ordering="estado")
     def senal(self, obj):
-        colores = {
-            Pedido.NUEVO: ("#b45309", "NUEVO"),
-            Pedido.CONFIRMADO: ("#1d4ed8", "confirmado"),
-            Pedido.ENTREGADO: ("#15803d", "entregado"),
-            Pedido.CANCELADO: ("#6b7280", "cancelado"),
+        estilos = {
+            Pedido.NUEVO: (colores.OJO, "NUEVO"),
+            Pedido.CONFIRMADO: (colores.AZUL, "confirmado"),
+            Pedido.ENTREGADO: (colores.OK, "entregado"),
+            Pedido.CANCELADO: (colores.APAGADO, "cancelado"),
         }
-        color, texto = colores.get(obj.estado, ("#6b7280", obj.estado))
+        color, texto = estilos.get(obj.estado, (colores.APAGADO, obj.estado))
         return format_html('<b style="color:{}">{}</b>', color, texto)
 
     @admin.display(description="Escribirle al cliente")

@@ -8,6 +8,7 @@ inventario es un ajuste auditado. Si se permitiera el atajo, el historial
 tendría huecos justo donde más se lo necesita.
 """
 
+from dacars import colores
 from django.contrib import admin
 from django.db.models import Count, F
 from django.utils.html import format_html
@@ -46,20 +47,21 @@ def _guardar_variante(request, obj, change, campos_cambiados):
 
 def _pinta_stock(variante):
     if variante.agotada:
-        color, texto = "#b91c1c", "AGOTADO"
+        color, texto = colores.MAL, "AGOTADO"
     elif variante.bajo_stock:
-        color, texto = "#b45309", "quedan " + str(variante.disponible)
+        color, texto = colores.OJO, "quedan " + str(variante.disponible)
     else:
-        color, texto = "#15803d", str(variante.disponible) + " disponibles"
+        color, texto = colores.OK, str(variante.disponible) + " disponibles"
     extra = ""
     if variante.reservado:
         extra = " ({} reservada{})".format(
             variante.reservado, "s" if variante.reservado != 1 else ""
         )
     return format_html(
-        '<b style="color:{}">{}</b><span style="color:#6b7280">{}</span>',
+        '<b style="color:{}">{}</b><span style="color:{}">{}</span>',
         color,
         texto,
+        colores.APAGADO,
         extra,
     )
 
@@ -241,7 +243,9 @@ class ProductoAdmin(admin.ModelAdmin):
     def precios(self, obj):
         desde = obj.precio_desde
         if desde is None:
-            return format_html('<span style="color:#b91c1c">falta cargarlo</span>')
+            return format_html(
+                '<span style="color:{}">falta cargarlo</span>', colores.MAL
+            )
         if obj.rango_de_precios:
             return "${:,.0f} a ${:,.0f}".format(desde, obj.precio_hasta).replace(",", ".")
         return "${:,.0f}".format(desde).replace(",", ".")
@@ -250,16 +254,21 @@ class ProductoAdmin(admin.ModelAdmin):
     def existencias(self, obj):
         variantes = obj.variantes_activas
         if not variantes:
-            return format_html('<span style="color:#b91c1c">sin variantes</span>')
+            return format_html(
+                '<span style="color:{}">sin variantes</span>', colores.MAL
+            )
         total = sum(v.disponible for v in variantes)
         bajas = [v for v in variantes if v.bajo_stock]
         if total <= 0:
-            return format_html('<b style="color:#b91c1c">AGOTADO</b>')
+            return format_html('<b style="color:{}">AGOTADO</b>', colores.MAL)
         if bajas:
             return format_html(
-                '<b style="color:#b45309">{} — {} bajo mínimo</b>', total, len(bajas)
+                '<b style="color:{}">{} — {} bajo mínimo</b>',
+                colores.OJO,
+                total,
+                len(bajas),
             )
-        return format_html('<b style="color:#15803d">{}</b>', total)
+        return format_html('<b style="color:{}">{}</b>', colores.OK, total)
 
     @admin.display(description="en el sitio", boolean=True)
     def publicado(self, obj):

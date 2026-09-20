@@ -52,10 +52,11 @@ templates/
   tienda/base.html  Base de las páginas nuevas (hereda de sitio/base.html)
   catalogo/         Listado, ficha, tarjeta y la franja para las landings
   pedidos/          Carrito, checkout y confirmación
-  admin/            El tablero de entrada del panel
+  admin/            base_site (marca), login (entrada) y el tablero
 
 static/css/style.css      El sistema de diseño (sin cambios desde el sitio viejo)
 static/css/catalogo.css   Solo lo nuevo. Las landings no lo descargan
+static/css/panel.css      La marca aplicada al admin de Django
 static/js/app.js          Menú, reveals, video, formulario → WhatsApp
 
 tools/            Lo que sigue sirviendo
@@ -155,6 +156,25 @@ Es el admin de Django con la marca de DACARS y un tablero de entrada que muestra
 lo que hay que atender hoy: pedidos sin responder, agotados, existencias bajo el
 mínimo, productos sin foto y productos sin precio. Cada ficha es un enlace a la
 lista ya filtrada.
+
+### Cómo está hecha la apariencia
+
+El admin de Django se tematiza por variables CSS, así que
+[static/css/panel.css](static/css/panel.css) es sobre todo redefinirlas con la
+paleta de la marca. Se declaran en los cuatro selectores de tema (`:root` más
+los tres `data-theme`) a propósito: Django define la versión clara y la oscura
+con la misma especificidad y, como esta hoja carga después, gana la nuestra en
+los tres modos. El panel se ve igual siempre, que es lo que se quiere de una
+herramienta de trabajo — por eso el selector claro/oscuro está escondido. Para
+devolverlo, borrá la regla `.theme-toggle` de esa hoja.
+
+Los colores que el panel pinta desde Python (las columnas de existencias, el
+estado de cada pedido) están en [dacars/colores.py](dacars/colores.py), y son
+las versiones claras de la paleta: sobre el fondo oscuro del panel, un rojo
+`#b91c1c` no se lee.
+
+`templates/admin/login.html` es la pantalla de entrada, sin la barra de
+encabezado del admin: ahí todavía no hay dónde navegar.
 
 ### Cargar un producto
 
@@ -369,6 +389,8 @@ Lo que cubren, por si hay que decidir qué no romper:
 - Subir un precio no cambia un pedido viejo.
 - El carrito suelta lo que se dio de baja o se agotó.
 - Un pedido ajeno no se puede espiar por el número.
+- El proyecto arranca aunque `CLOUDINARY_URL` venga mal escrita.
+- Todas las pantallas del panel abren, con datos en todos sus estados.
 
 ---
 

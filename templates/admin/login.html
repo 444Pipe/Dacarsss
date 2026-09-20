@@ -1,0 +1,93 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+{% comment %} La entrada al panel.
+
+   Se queda con la estructura del admin (body.login, #container, el formulario
+   y sus errores) pero le saca toda la cromada de arriba: acá no hay dónde
+   navegar todavía, así que una barra de encabezado es ruido. {% endcomment %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block header %}{% endblock %}
+{% block usertools %}{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block messages %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<a class="dc-volver" href="/">
+  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M19 12H5M12 19l-7-7 7-7"/>
+  </svg>
+  Volver al sitio
+</a>
+
+<img class="dc-entrar__logo"
+     src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark"
+     alt="DACARS" width="600" height="117">
+
+<h1 class="dc-entrar__titulo">Panel administrativo</h1>
+<p class="dc-entrar__bajada">Ingresá tus credenciales para continuar.</p>
+
+{% if form.errors or form.non_field_errors %}
+<p class="dc-entrar__error">
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+  {% else %}
+    El usuario o la contraseña no coinciden. Revisá que no tengas activado el
+    bloqueo de mayúsculas.
+  {% endif %}
+</p>
+{% endif %}
+
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+  <div class="dc-campo">
+    <label for="{{ form.username.id_for_label }}">Usuario</label>
+    {{ form.username }}
+  </div>
+
+  <div class="dc-campo dc-clave">
+    <label for="{{ form.password.id_for_label }}">Contraseña</label>
+    {{ form.password }}
+    <button type="button" class="dc-ojo" id="dc-ver" aria-label="Mostrar la contraseña" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+        <circle cx="12" cy="12" r="3"/>
+        <line class="dc-tacha" x1="3" y1="21" x2="21" y2="3" style="display:none"/>
+      </svg>
+    </button>
+  </div>
+
+  {% url 'admin_password_reset' as password_reset_url %}
+  <input type="hidden" name="next" value="{{ next }}">
+  <button class="dc-entrar__boton" type="submit">Iniciar sesión</button>
+</form>
+
+<p class="dc-entrar__pie">
+  ¿No podés entrar?
+  <a href="https://wa.me/{{ negocio.whatsapp }}?text=Hola%2C%20no%20puedo%20entrar%20al%20panel%20de%20DACARS." target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+</p>
+
+<script>
+/* Mostrar y ocultar la contraseña. Si el script no corre, el campo sigue
+   siendo un password normal y se puede entrar igual. */
+(function () {
+  var boton = document.getElementById('dc-ver');
+  var campo = document.getElementById('{{ form.password.id_for_label }}');
+  if (!boton || !campo) return;
+
+  var tacha = boton.querySelector('.dc-tacha');
+  boton.addEventListener('click', function () {
+    var visible = campo.type === 'text';
+    campo.type = visible ? 'password' : 'text';
+    boton.setAttribute('aria-pressed', String(!visible));
+    boton.setAttribute('aria-label', visible ? 'Mostrar la contraseña' : 'Ocultar la contraseña');
+    if (tacha) tacha.style.display = visible ? 'none' : '';
+    campo.focus();
+  });
+})();
+</script>
+{% endblock %}
