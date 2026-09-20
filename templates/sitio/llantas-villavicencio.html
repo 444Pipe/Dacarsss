@@ -1,0 +1,493 @@
+{% extends "sitio/base.html" %}{% load static dacars %}
+
+{% block meta %}<title>Llantas en Villavicencio | Carros y camionetas — DACARS</title>
+<meta name="description" content="Llantas en Villavicencio con asesoría según tu uso: ciudad, carretera o trocha. Medidas correctas para carros y camionetas del Meta y montaje. Cotiza por WhatsApp.">
+<meta name="keywords" content="llantas villavicencio, venta de llantas villavicencio, llantas para camioneta villavicencio, llantas todoterreno villavicencio, llantas at villavicencio, montaje de llantas meta">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#04060c">
+<meta name="author" content="DACARS VILLAVICENCIO S.A.S">
+<link rel="canonical" href="https://www.dacars.com.co/llantas-villavicencio.html">
+<link rel="alternate" hreflang="es-co" href="https://www.dacars.com.co/llantas-villavicencio.html">
+<link rel="alternate" hreflang="x-default" href="https://www.dacars.com.co/llantas-villavicencio.html">
+
+<!-- Geolocalización para búsqueda local -->
+<meta name="geo.region" content="CO-MET">
+<meta name="geo.placename" content="Villavicencio, Meta, Colombia">
+<meta name="geo.position" content="4.142;-73.634">
+<meta name="ICBM" content="4.142, -73.634">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="DACARS">
+<meta property="og:title" content="Llantas en Villavicencio | Carros y camionetas — DACARS">
+<meta property="og:description" content="Llantas en Villavicencio con asesoría según tu uso: ciudad, carretera o trocha. Medidas correctas para carros y camionetas del Meta y montaje. Cotiza por WhatsApp.">
+<meta property="og:url" content="https://www.dacars.com.co/llantas-villavicencio.html">
+<meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Llantas en Villavicencio | Carros y camionetas — DACARS">
+<meta name="twitter:description" content="Llantas en Villavicencio con asesoría según tu uso: ciudad, carretera o trocha. Medidas correctas para carros y camionetas del Meta y montaje. Cotiza por WhatsApp.">
+<meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="manifest" href="/manifest.webmanifest">
+
+{% endblock %}
+{% block css_extra %}{% if productos_del_servicio or destacados %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">{% endif %}{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.dacars.com.co/llantas-villavicencio.html#servicio",
+      "name": "Llantas en Villavicencio",
+      "alternateName": "Llantas en Villavicencio",
+      "description": "Llantas en Villavicencio con asesoría según tu uso: ciudad, carretera o trocha. Medidas correctas para carros y camionetas del Meta y montaje. Cotiza por WhatsApp.",
+      "url": "https://www.dacars.com.co/llantas-villavicencio.html",
+      "serviceType": "Llantas",
+      "category": "Automotriz",
+      "provider": {
+        "@type": "AutoPartsStore",
+        "@id": "https://www.dacars.com.co/#dacars",
+        "name": "DACARS",
+        "telephone": "+573112629406",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+          "addressLocality": "Villavicencio",
+          "addressRegion": "Meta",
+          "addressCountry": "CO"
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Villavicencio"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Meta"
+        },
+        {
+          "@type": "City",
+          "name": "Acacías"
+        },
+        {
+          "@type": "City",
+          "name": "Restrepo"
+        },
+        {
+          "@type": "City",
+          "name": "Cumaral"
+        },
+        {
+          "@type": "City",
+          "name": "Granada"
+        },
+        {
+          "@type": "City",
+          "name": "Puerto López"
+        },
+        {
+          "@type": "City",
+          "name": "San Martín"
+        }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20llantas%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio.",
+        "servicePhone": "+573112629406",
+        "serviceLocation": {
+          "@type": "Place",
+          "name": "DACARS Villavicencio",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+            "addressLocality": "Villavicencio",
+            "addressRegion": "Meta",
+            "addressCountry": "CO"
+          }
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Llantas",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Uso real del vehículo"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Medida e índices"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Tipo de labrado"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Comparación de opciones"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Montaje"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Recomendaciones de cuidado"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.dacars.com.co/llantas-villavicencio.html#migas",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.dacars.com.co/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://www.dacars.com.co/#servicios"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Llantas en Villavicencio",
+          "item": "https://www.dacars.com.co/llantas-villavicencio.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.dacars.com.co/llantas-villavicencio.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué llanta me sirve si uso el carro en ciudad y finca?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Normalmente una mixta (A/T), que da agarre en destapado sin volverse ruidosa en carretera. El punto exacto depende del porcentaje de cada uso: cuéntanos y te orientamos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo cambiar la medida original?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se puede en ciertos rangos, pero afecta velocímetro, consumo y a veces la suspensión. Te decimos hasta dónde es razonable en tu vehículo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Debo cambiar las cuatro al tiempo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es lo ideal para un desgaste parejo y un comportamiento predecible. Si no es posible, al menos por ejes completos y nunca mezclando labrados distintos en el mismo eje."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cada cuánto debo revisar la presión?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con el calor de acá, mínimo una vez al mes y siempre antes de un viaje largo. La presión baja es la causa más común de desgaste irregular y de daños por calor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tienen la medida de mi camioneta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escríbenos con la medida que aparece en el flanco de tu llanta actual y te confirmamos disponibilidad antes de que vayas."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.dacars.com.co/llantas-villavicencio.html#pagina",
+      "url": "https://www.dacars.com.co/llantas-villavicencio.html",
+      "name": "Llantas en Villavicencio | Carros y camionetas — DACARS",
+      "description": "Llantas en Villavicencio con asesoría según tu uso: ciudad, carretera o trocha. Medidas correctas para carros y camionetas del Meta y montaje. Cotiza por WhatsApp.",
+      "inLanguage": "es-CO",
+      "isPartOf": {
+        "@id": "https://www.dacars.com.co/#sitio"
+      },
+      "about": {
+        "@id": "https://www.dacars.com.co/llantas-villavicencio.html#servicio"
+      },
+      "breadcrumb": {
+        "@id": "https://www.dacars.com.co/llantas-villavicencio.html#migas"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image"
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block contenido %}<main id="contenido">
+
+<nav class="migas" aria-label="Ruta de navegación">
+  <div class="wrap">
+    <ol>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/#servicios">Servicios</a></li>
+      <li aria-current="page">Llantas en Villavicencio</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="shero">
+  <div class="shero__bg" aria-hidden="true"><span class="grid"></span><span class="glow glow--a"></span></div>
+  <div class="wrap">
+    <p class="tag" data-reveal>Llantas &middot; Villavicencio, Meta</p>
+    <h1 class="shero__title" data-reveal><span class="chrome">Llantas en Villavicencio</span></h1>
+    <p class="shero__sub" data-reveal>Asesoría según el uso real de tu vehículo y montaje</p>
+    <p class="shero__lead" data-reveal>La llanta correcta cambia el carro más que casi cualquier accesorio. La incorrecta te cuesta consumo, ruido y seguridad.</p>
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20llantas%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Cotizar por WhatsApp
+      </a>
+      <a class="btn btn--ghost" href="#faq">Preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+      <p class="sec__lead" data-reveal>Un carro que solo se mueve entre Villavicencio y Bogotá no necesita la misma llanta que uno que sale a finca tres veces por semana. Y sin embargo mucha gente compra por precio o por estética, y termina con una llanta ruidosa, dura o que se gasta en un año.</p>
+      <p class="sec__lead" data-reveal>Acá primero preguntamos para qué usas el carro de verdad. De ahí sale la recomendación: medida, índice de carga y velocidad, y tipo de labrado. Después viene el montaje.</p>
+  </div>
+</section>
+
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Alcance</p>
+      <h2 class="sec__title chrome" data-reveal>Cómo te asesoramos</h2>
+    </header>
+    <ul class="checks checks--2" data-reveal>
+        <li><span></span><div><b>Uso real del vehículo</b> Ciudad, carretera, mixto o trocha. Es la variable que más pesa y la que menos se pregunta.</div></li>
+        <li><span></span><div><b>Medida e índices</b> Respetar carga y velocidad no es opcional: es seguridad y es lo que exige el fabricante.</div></li>
+        <li><span></span><div><b>Tipo de labrado</b> Carretera, mixto (A/T) o todoterreno, según el porcentaje real de destapado que manejes.</div></li>
+        <li><span></span><div><b>Comparación de opciones</b> Te mostramos alternativas por precio y duración, no una sola.</div></li>
+        <li><span></span><div><b>Montaje</b> Instalación de las llantas en el vehículo.</div></li>
+        <li><span></span><div><b>Recomendaciones de cuidado</b> Presiones, rotación y qué revisar para que duren lo que deben.</div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Contexto local</p>
+      <h2 class="sec__title chrome" data-reveal>Lo que castiga una llanta en el Meta</h2>
+    </header>
+    <div class="cards cards--3">
+        <article class="card" data-reveal>
+          <h3>Calor del asfalto</h3>
+          <p>Las altas temperaturas aceleran el desgaste, sobre todo con presiones mal manejadas.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Destapado y piedra</h3>
+          <p>El labrado de carretera se corta y se pica rápido si le metes trocha seguido.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Carga</h3>
+          <p>Camionetas de trabajo cargadas exigen un índice de carga que no todas las llantas del mercado cumplen.</p>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cómo trabajamos</p>
+      <h2 class="sec__title chrome" data-reveal>El paso a paso</h2>
+    </header>
+    <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step__n">01</span>
+          <h3>Nos dices tu vehículo y tu uso</h3>
+          <p>Marca, modelo, año y a dónde sale el carro realmente.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">02</span>
+          <h3>Te damos opciones</h3>
+          <p>Con medidas correctas y alternativas de precio y durabilidad.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">03</span>
+          <h3>Montaje</h3>
+          <p>Instalación en taller.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">04</span>
+          <h3>Recomendaciones</h3>
+          <p>Presiones y cuidados para que el juego rinda lo que debe.</p>
+        </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cotización</p>
+      <h2 class="sec__title chrome" data-reveal>Qué define el precio</h2>
+      <p class="sec__lead" data-reveal>No publicamos listas de precios porque cada vehículo es distinto y preferimos no prometer cifras que después cambien. Estos son los factores que definen tu cotización:</p>
+    </header>
+    <ul class="factores" data-reveal>
+        <li>La <strong>medida</strong> y el rin de tu vehículo.</li>
+        <li>El <strong>tipo de llanta</strong>: carretera, mixta o todoterreno.</li>
+        <li>La <strong>marca y gama</strong> que elijas.</li>
+        <li>La <strong>cantidad</strong>: el juego completo siempre sale mejor que unidad por unidad.</li>
+    </ul>
+    <p class="sec__foot" data-reveal>
+      <a class="link" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20llantas%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." target="_blank" rel="noopener">Pide tu cotización por WhatsApp &rarr;</a>
+    </p>
+  </div>
+</section>
+
+{% include "catalogo/_seccion.html" with productos=productos_del_servicio etiqueta="En el local" titulo="Productos para este servicio" ver_mas=categoria_del_servicio.get_absolute_url %}
+
+<section class="sec sec--alt" id="faq">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Preguntas frecuentes</p>
+      <h2 class="sec__title chrome" data-reveal>Llantas en Villavicencio: lo que más nos preguntan</h2>
+    </header>
+    <div class="faq">
+      <details data-reveal>
+        <summary>¿Qué llanta me sirve si uso el carro en ciudad y finca?</summary>
+        <div><p>Normalmente una mixta (A/T), que da agarre en destapado sin volverse ruidosa en carretera. El punto exacto depende del porcentaje de cada uso: cuéntanos y te orientamos.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Puedo cambiar la medida original?</summary>
+        <div><p>Se puede en ciertos rangos, pero afecta velocímetro, consumo y a veces la suspensión. Te decimos hasta dónde es razonable en tu vehículo.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Debo cambiar las cuatro al tiempo?</summary>
+        <div><p>Es lo ideal para un desgaste parejo y un comportamiento predecible. Si no es posible, al menos por ejes completos y nunca mezclando labrados distintos en el mismo eje.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Cada cuánto debo revisar la presión?</summary>
+        <div><p>Con el calor de acá, mínimo una vez al mes y siempre antes de un viaje largo. La presión baja es la causa más común de desgaste irregular y de daños por calor.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Tienen la medida de mi camioneta?</summary>
+        <div><p>Escríbenos con la medida que aparece en el flanco de tu llanta actual y te confirmamos disponibilidad antes de que vayas.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cobertura">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cobertura</p>
+      <h2 class="sec__title chrome" data-reveal>Dónde estamos y a quién atendemos</h2>
+      <p class="sec__lead" data-reveal>
+        El taller queda en la <strong>Carrera 33 #24-60, Barrio San Francisco</strong>, en Villavicencio. Estamos a pocos minutos
+        de buena parte de la ciudad, así que si vives o trabajas en cualquiera de estas zonas, llegar es fácil.
+      </p>
+    </header>
+    <p class="zonas" data-reveal><b>Barrios y zonas de Villavicencio:</b> San Francisco &middot; Barzal &middot; Centro &middot; Siete de Agosto &middot; La Esperanza &middot; Ciudad Porfía &middot; Catumare &middot; El Buque &middot; Villa Bolívar &middot; La Rosita &middot; Los Centauros &middot; Balcones de Toledo &middot; Maizaro &middot; San Fernando &middot; Las Colinas &middot; Nueva Andalucía &middot; Camoa &middot; Montecarlo &middot; Las Américas &middot; Playa Rica &middot; El Refugio &middot; La Vega y el resto de la ciudad.</p>
+    <p class="zonas" data-reveal><b>¿Vienes de otro municipio del Meta?</b> Recibimos vehículos de Acacías &middot; Restrepo &middot; Cumaral &middot; Granada &middot; Puerto López &middot; San Martín &middot; Guamal &middot; Castilla la Nueva &middot; San Carlos de Guaroa &middot; Barranca de Upía &middot; Puerto Gaitán &middot; Fuente de Oro y demás municipios de la región. Escríbenos antes de viajar y coordinamos la cita para que aproveches el desplazamiento.</p>
+    <div class="mapa-mini" data-reveal>
+      <iframe title="Ubicación de DACARS en Villavicencio"
+        src="https://www.google.com/maps?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;z=16&amp;output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Más servicios</p>
+      <h2 class="sec__title chrome" data-reveal>Todo en el mismo taller</h2>
+      <p class="sec__lead" data-reveal>Aprovecha la visita y resuelve varias cosas de una. Combinar servicios sale mejor que entrar al taller tres veces.</p>
+    </header>
+    <div class="otros">
+        <a class="otro" href="/ppf-villavicencio.html">
+          <b>PPF</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/polarizados-villavicencio.html">
+          <b>Polarizados</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/detailing-villavicencio.html">
+          <b>Detailing</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/accesorios-4x4-villavicencio.html">
+          <b>Accesorios 4x4</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/lujos-y-accesorios-villavicencio.html">
+          <b>Lujos y accesorios</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/iluminacion-para-carros-villavicencio.html">
+          <b>Iluminación</b>
+          <span>en Villavicencio</span>
+        </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="wrap cierre__in">
+    <h2 class="chrome" data-reveal>Llantas en Villavicencio</h2>
+    <p data-reveal>Cuéntanos tu vehículo y qué necesitas. Te cotizamos y te damos tiempos reales.</p>
+    <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20llantas%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." target="_blank" rel="noopener" data-reveal>
+      <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+</main>
+{% endblock %}
+{% block pie %}{% include "sitio/_pie.html" with wa_flotante="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20llantas%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." %}{% endblock %}

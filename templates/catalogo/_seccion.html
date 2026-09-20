@@ -1,0 +1,28 @@
+{% load static dacars %}{% comment %} Una franja de productos, para meter en la portada o en una landing.
+
+   Se incluye con:
+     {% include "catalogo/_seccion.html" with productos=... titulo="..." %}
+
+   Si no hay productos cargados no dibuja nada: mientras el comercio no suba
+   el primero, las páginas se ven exactamente como antes de la migración. {% endcomment %}
+{% if productos %}
+<section class="sec sec--alt" id="productos">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>{{ etiqueta|default:"En el local" }}</p>
+      <h2 class="sec__title chrome" data-reveal>{{ titulo|default:"Productos disponibles" }}</h2>
+      <p class="sec__lead" data-reveal>
+        {{ bajada|default:"Lo que tenemos en existencia ahora mismo, con precio. Lo apartás desde acá y lo terminamos por WhatsApp." }}
+      </p>
+    </header>
+
+    <div class="prods" data-reveal>
+      {% for producto in productos %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
+    </div>
+
+    <p class="sec__foot">
+      <a class="link" href="{{ ver_mas|default:'/catalogo/' }}">Ver todo el catálogo</a>
+    </p>
+  </div>
+</section>
+{% endif %}

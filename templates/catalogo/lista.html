@@ -1,0 +1,104 @@
+{% extends "tienda/base.html" %}{% load dacars %}
+
+{% block tienda %}
+<ol class="migas">
+  <li><a href="/">Inicio</a></li>
+  {% if categoria %}<li><a href="{% url 'catalogo:lista' %}">Catálogo</a></li>
+  <li>{{ categoria.nombre }}</li>
+  {% else %}<li>Catálogo</li>{% endif %}
+</ol>
+
+<header class="cat__head">
+  <div>
+    <p class="tag">{% if categoria %}{{ categoria.nombre }}{% else %}Catálogo{% endif %}</p>
+    <h1 class="cat__title chrome">{% if categoria %}{{ categoria.nombre }} en Villavicencio{% else %}Lujos y accesorios para tu carro{% endif %}</h1>
+    <p class="cat__lead">
+      {% if categoria and categoria.descripcion %}{{ categoria.descripcion }}
+      {% else %}Todo lo que tenemos en el local, con precio y existencias al día.
+      Lo que veas disponible, está. Cualquier duda se resuelve por WhatsApp antes de comprar.{% endif %}
+    </p>
+    {% if categoria.servicio %}
+    <p class="cat__lead" style="margin-top:12px">
+      ¿Buscabas el servicio? Mirá <a class="link" href="{{ categoria.url_servicio }}">{{ categoria.get_servicio_display }} en Villavicencio</a>.
+    </p>
+    {% endif %}
+  </div>
+  <p class="cat__cuenta">{{ total }} producto{{ total|pluralize }}</p>
+</header>
+
+{# --- Filtros ---------------------------------------------------------- #}
+<form class="filtros" method="get" action="{% if categoria %}{{ categoria.get_absolute_url }}{% else %}{% url 'catalogo:lista' %}{% endif %}">
+  <div class="filtros__fila">
+    <div class="filtros__buscar">
+      <label class="skip" for="f-q">Buscar en el catálogo</label>
+      <input id="f-q" type="search" name="q" value="{{ busqueda }}" placeholder="Buscar: llanta, barra LED, 265/65R17…">
+    </div>
+
+    <label class="skip" for="f-marca">Marca</label>
+    <select id="f-marca" name="marca" style="flex:0 1 180px">
+      <option value="">Todas las marcas</option>
+      {% for m in marcas %}<option value="{{ m.slug }}"{% if m.slug == marca_activa %} selected{% endif %}>{{ m.nombre }}</option>{% endfor %}
+    </select>
+
+    <label class="skip" for="f-orden">Ordenar</label>
+    <select id="f-orden" name="orden" style="flex:0 1 170px">
+      <option value="relevancia"{% if orden == "relevancia" %} selected{% endif %}>Recomendados</option>
+      <option value="nuevos"{% if orden == "nuevos" %} selected{% endif %}>Más nuevos</option>
+      <option value="nombre"{% if orden == "nombre" %} selected{% endif %}>Por nombre</option>
+    </select>
+
+    <label class="filtros__check">
+      <input type="checkbox" name="hay" value="1"{% if solo_disponibles %} checked{% endif %}>
+      Solo lo que hay
+    </label>
+
+    <button class="btn btn--primary" type="submit">Filtrar</button>
+    {% if busqueda or marca_activa or solo_disponibles %}
+    <a class="btn btn--ghost" href="{% if categoria %}{{ categoria.get_absolute_url }}{% else %}{% url 'catalogo:lista' %}{% endif %}">Limpiar</a>
+    {% endif %}
+  </div>
+
+  <ul class="cats">
+    <li><a class="{% if not categoria %}is-active{% endif %}" href="{% url 'catalogo:lista' %}">Todo</a></li>
+    {% for c in categorias %}
+    <li><a class="{% if categoria.pk == c.pk %}is-active{% endif %}" href="{{ c.get_absolute_url }}">{{ c.nombre }}</a></li>
+    {% endfor %}
+  </ul>
+</form>
+
+{# --- Productos --------------------------------------------------------- #}
+{% if pagina.object_list %}
+<div class="prods">
+  {% for producto in pagina %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
+</div>
+
+{% if pagina.paginator.num_pages > 1 %}
+<nav class="pag" aria-label="Páginas del catálogo">
+  {% if pagina.has_previous %}
+    <a href="?{% if filtros %}{{ filtros }}&amp;{% endif %}pagina={{ pagina.previous_page_number }}" rel="prev">Anterior</a>
+  {% else %}<span class="off">Anterior</span>{% endif %}
+
+  {% for n in pagina.paginator.page_range %}
+    {% if n == pagina.number %}<span class="is-active" aria-current="page">{{ n }}</span>
+    {% elif n == 1 or n == pagina.paginator.num_pages or n > pagina.number|add:-3 and n < pagina.number|add:3 %}
+      <a href="?{% if filtros %}{{ filtros }}&amp;{% endif %}pagina={{ n }}">{{ n }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if pagina.has_next %}
+    <a href="?{% if filtros %}{{ filtros }}&amp;{% endif %}pagina={{ pagina.next_page_number }}" rel="next">Siguiente</a>
+  {% else %}<span class="off">Siguiente</span>{% endif %}
+</nav>
+{% endif %}
+
+{% else %}
+<div class="vacio">
+  <h2>No encontramos nada así</h2>
+  <p>
+    {% if busqueda %}Nada con «{{ busqueda }}».{% else %}Todavía no hay productos en esta categoría.{% endif %}
+    Escribinos y te decimos si lo conseguimos.
+  </p>
+  <a class="btn btn--wa" href="{% whatsapp 'Hola DACARS, estoy buscando un producto que no vi en el catálogo.' %}" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+</div>
+{% endif %}
+{% endblock %}

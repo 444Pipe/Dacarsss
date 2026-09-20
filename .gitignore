@@ -6,6 +6,16 @@ statics/hero video/
 # Temporales del procesamiento de video
 statics/video/_tmp/
 
-# Credenciales de Cloudinary. NUNCA se commitean.
+# Credenciales. NUNCA se commitean.
 # Plantilla sin secretos en .env.example
 .env
+
+# --- Django ---
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
+media/
+__pycache__/
+*.py[cod]
+.venv/
+venv/

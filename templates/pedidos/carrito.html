@@ -1,0 +1,88 @@
+{% extends "tienda/base.html" %}{% load dacars %}
+
+{% block tienda %}
+<ol class="migas">
+  <li><a href="/">Inicio</a></li>
+  <li><a href="{% url 'catalogo:lista' %}">Catálogo</a></li>
+  <li>Carrito</li>
+</ol>
+
+<header class="cat__head">
+  <div>
+    <p class="tag">Tu pedido</p>
+    <h1 class="cat__title chrome">Carrito</h1>
+  </div>
+  {% if lineas %}<p class="cat__cuenta">{{ unidades }} unidad{{ unidades|pluralize:"es" }}</p>{% endif %}
+</header>
+
+{% if lineas %}
+<div class="bolsa">
+  <ul class="lineas">
+    {% for l in lineas %}
+    <li class="linea">
+      <div class="linea__foto">
+        {% with principal=l.producto.imagen_principal %}
+          {% if principal %}<img src="{{ principal.imagen|foto:200 }}" alt="{{ principal.texto_alt }}" width="200" height="150" loading="lazy">
+          {% else %}<span style="font-size:10px;letter-spacing:.12em;color:var(--muted-2)">DACARS</span>{% endif %}
+        {% endwith %}
+      </div>
+
+      <div>
+        <p class="linea__nom"><a href="{{ l.producto.get_absolute_url }}">{{ l.producto.nombre }}</a></p>
+        <p class="linea__meta">
+          {% if l.variante.nombre %}{{ l.variante.nombre }} · {% endif %}{{ l.precio|pesos }} c/u
+          {% if l.variante.bajo_stock %} · <span style="color:#ffb74d">quedan {{ l.variante.disponible }}</span>{% endif %}
+        </p>
+      </div>
+
+      <div class="linea__acc">
+        <form method="post" action="{% url 'pedidos:actualizar' %}">
+          {% csrf_token %}
+          <input type="hidden" name="sku" value="{{ l.variante.sku }}">
+          {% comment %} Los botones mandan `delta` y la casilla manda `cantidad`. Si los
+             tres usaran el mismo nombre, el navegador enviaría dos valores y
+             cuál gana depende del orden en el HTML. {% endcomment %}
+          <div class="cant">
+            <button type="submit" name="delta" value="-1" aria-label="Quitar una unidad">&minus;</button>
+            <label class="skip" for="c-{{ l.variante.sku }}">Cantidad de {{ l.producto.nombre }}</label>
+            <input id="c-{{ l.variante.sku }}" name="cantidad" type="number" value="{{ l.cantidad }}" min="1" max="{{ l.variante.disponible }}" inputmode="numeric" onchange="this.form.submit()">
+            <button type="submit" name="delta" value="1" aria-label="Agregar una unidad"{% if l.cantidad >= l.variante.disponible %} disabled{% endif %}>+</button>
+          </div>
+        </form>
+
+        <span class="linea__sub">{{ l.subtotal|pesos }}</span>
+
+        <form method="post" action="{% url 'pedidos:quitar' %}">
+          {% csrf_token %}
+          <input type="hidden" name="sku" value="{{ l.variante.sku }}">
+          <button class="quitar" type="submit">Quitar</button>
+        </form>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <aside class="resumen">
+    <h2 class="ficha__h3">Resumen</h2>
+    <div class="resumen__fila"><span>Productos ({{ unidades }})</span><span>{{ total|pesos }}</span></div>
+    <div class="resumen__fila"><span>Envío</span><span>Se acuerda por WhatsApp</span></div>
+    <div class="resumen__total"><span>Total</span><b>{{ total|pesos }}</b></div>
+
+    <a class="btn btn--primary btn--block" href="{% url 'pedidos:checkout' %}" style="margin-top:18px">Continuar con el pedido</a>
+    <a class="btn btn--ghost btn--block" href="{% url 'catalogo:lista' %}" style="margin-top:9px">Seguir viendo</a>
+
+    <p class="resumen__nota">
+      No se paga nada en línea. Dejás tus datos, el pedido queda apartado y
+      terminamos por WhatsApp: forma de pago, envío o retiro en el taller.
+    </p>
+  </aside>
+</div>
+
+{% else %}
+<div class="vacio">
+  <h2>Todavía no hay nada acá</h2>
+  <p>Mirá el catálogo y agregá lo que necesites para tu carro.</p>
+  <a class="btn btn--primary" href="{% url 'catalogo:lista' %}">Ver el catálogo</a>
+</div>
+{% endif %}
+{% endblock %}

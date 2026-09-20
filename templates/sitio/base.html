@@ -1,0 +1,122 @@
+{% load static dacars %}<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{% block meta %}{% endblock %}
+<!-- Pantalla de carga: en línea a propósito, para que pinte antes que nada -->
+<style>
+#carga{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(75% 60% at 50% 45%,#0a1327 0%,#04060c 72%);
+  transition:opacity .55s ease,visibility .55s ease}
+#carga.se-va{opacity:0;visibility:hidden;pointer-events:none}
+#carga.se-va .carga__in{transform:scale(1.07);transition:transform .55s cubic-bezier(.4,0,1,1)}
+#carga[hidden]{display:none}
+
+/* Ancho fijo a propósito: la posición de los rayos está calculada en píxeles
+   para que sus extremos se junten justo en el destello. Con un ancho elástico
+   la geometría se desarma, así que en pantallas chicas se escala entera. */
+.carga__in{position:relative;display:grid;place-items:center}
+.carga__marca{position:relative;display:grid;place-items:center;width:400px;height:78px}
+@media (max-width:480px){.carga__in{transform:scale(.74)}}
+
+/* El wordmark aparece una vez y se queda */
+.carga__marca img{height:44px;width:auto;opacity:0;
+  animation:cargaEntra .6s cubic-bezier(.22,.61,.36,1) .05s forwards;
+  filter:drop-shadow(0 0 24px rgba(10,92,255,.45))}
+@keyframes cargaEntra{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+
+/* Los cuatro rayos entran desde fuera y convergen, como en el logotipo */
+.carga__rayo{position:absolute;width:2px;height:50px;border-radius:2px;opacity:0;
+  background:linear-gradient(180deg,transparent,#00c8ff 30%,#0a5cff 72%,transparent);
+  box-shadow:0 0 10px rgba(10,92,255,.95),0 0 30px rgba(10,92,255,.5);
+  animation:cargaRayo 2.4s cubic-bezier(.16,1,.3,1) infinite}
+/* Cada par converge en un vértice a 74 px del borde, justo antes del wordmark */
+.carga__rayo--a{left:15%;top:-8px;--rot:-27deg;--dx:-58px;--dy:-30px}
+.carga__rayo--b{left:15%;top:36px;--rot:27deg;--dx:-58px;--dy:30px;animation-delay:.06s}
+.carga__rayo--c{right:15%;top:-8px;--rot:27deg;--dx:58px;--dy:-30px;animation-delay:.12s}
+.carga__rayo--d{right:15%;top:36px;--rot:-27deg;--dx:58px;--dy:30px;animation-delay:.18s}
+@keyframes cargaRayo{
+  0%  {opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scaleY(.3)}
+  18% {opacity:1;transform:translate(0,0) rotate(var(--rot)) scaleY(1)}
+  62% {opacity:1;transform:translate(0,0) rotate(var(--rot)) scaleY(1)}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scaleY(.3)}
+}
+
+/* Destello en los puntos donde los rayos se juntan */
+.carga__chispa{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;
+  margin-top:-6.5px;opacity:0;
+  background:radial-gradient(circle,#fff 0%,#7fe3ff 32%,rgba(0,200,255,0) 70%);
+  box-shadow:0 0 22px 6px rgba(0,200,255,.6);
+  animation:cargaChispa 2.4s ease-out infinite}
+.carga__chispa--i{left:16.8%}
+.carga__chispa--d{right:16.8%;animation-delay:.12s}
+@keyframes cargaChispa{
+  0%,10%{opacity:0;transform:scale(.2)}
+  20%{opacity:1;transform:scale(1)}
+  38%{opacity:.3;transform:scale(.75)}
+  70%,100%{opacity:0;transform:scale(.2)}
+}
+
+/* Brillo cromado que barre las letras. Se recorta con la silueta del propio
+   logotipo, por eso barre el texto y no un rectángulo. */
+.carga__brillo{position:absolute;inset:0;pointer-events:none;opacity:0;
+  /* Banda angosta a propósito: con el fondo a 250% (1000 px), un 8% son ~80 px.
+     Más ancha que eso no barre, solo ilumina el wordmark entero. */
+  background:linear-gradient(100deg,transparent 46%,rgba(255,255,255,.95) 48.5%,
+    rgba(180,230,255,.98) 50%,rgba(0,200,255,.75) 51.5%,transparent 54%);
+  background-size:250% 100%;background-repeat:no-repeat;
+  -webkit-mask-image:url(https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark);mask-image:url(https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:auto 44px;mask-size:auto 44px;
+  animation:cargaBrillo 2.4s cubic-bezier(.45,0,.25,1) .45s infinite}
+@keyframes cargaBrillo{
+  0%{opacity:0;background-position:175% 0}
+  9%{opacity:1}
+  44%{opacity:1;background-position:-75% 0}
+  52%,100%{opacity:0;background-position:-75% 0}
+}
+
+@media (prefers-reduced-motion:reduce){
+  #carga,#carga.se-va .carga__in{transition:none}
+  .carga__rayo{animation:none;opacity:.7;transform:rotate(var(--rot))}
+  .carga__chispa{animation:none;opacity:.5}
+  .carga__brillo{animation:none;opacity:0}
+  .carga__marca img{animation:none;opacity:1}
+}
+</style>
+
+
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Saira:ital,wght@0,500;0,600;0,700;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{% block preload %}{% endblock %}<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block css_extra %}{% endblock %}
+{% block jsonld %}{% endblock %}
+</head>
+
+<body>
+<div id="carga" role="status" aria-live="polite" aria-label="Cargando DACARS">
+  <div class="carga__in">
+    <div class="carga__marca">
+      <i class="carga__rayo carga__rayo--a"></i><i class="carga__rayo carga__rayo--b"></i>
+      <i class="carga__rayo carga__rayo--c"></i><i class="carga__rayo carga__rayo--d"></i>
+      <span class="carga__chispa carga__chispa--i"></span><span class="carga__chispa carga__chispa--d"></span>
+      <img src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="" width="600" height="117" fetchpriority="high">
+      <span class="carga__brillo"></span>
+    </div>
+  </div>
+</div>
+<noscript><style>#carga{display:none}</style></noscript>
+<script>/* cargaRespaldo: si js/app.js no llega (404, red caída, bloqueador de scripts),
+la pantalla se retira igual. Va en línea porque no puede depender de un archivo externo. */
+setTimeout(function(){var c=document.getElementById('carga');
+if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},600);}},4000);</script>
+
+{% block encabezado %}{% include "sitio/_encabezado.html" %}{% endblock %}
+{% block contenido %}{% endblock %}
+{% block pie %}{% include "sitio/_pie.html" %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,88 @@
+{% extends "tienda/base.html" %}{% load dacars %}
+
+{% block tienda %}
+<ol class="migas">
+  <li><a href="/">Inicio</a></li>
+  <li><a href="{% url 'pedidos:carrito' %}">Carrito</a></li>
+  <li>Tus datos</li>
+</ol>
+
+<header class="cat__head">
+  <div>
+    <p class="tag">Último paso</p>
+    <h1 class="cat__title chrome">¿A quién le entregamos?</h1>
+    <p class="cat__lead">
+      No se paga nada acá. Dejás tus datos, apartamos la mercancía y te
+      escribimos por WhatsApp para cerrar forma de pago y entrega.
+    </p>
+  </div>
+</header>
+
+<div class="bolsa">
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+    <ul class="avisos">{% for e in form.non_field_errors %}<li class="aviso aviso--mal">{{ e }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    <div class="form" style="display:grid; gap:16px; grid-template-columns:repeat(2,1fr)">
+      {% for campo in form %}
+        {% if campo.name == "entrega" %}
+        <fieldset class="entrega field--full" style="grid-column:1/-1">
+          <legend style="font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; padding:0">{{ campo.label }}</legend>
+          {% for opcion in campo %}<label>{{ opcion.tag }} <span>{{ opcion.choice_label }}</span></label>{% endfor %}
+        </fieldset>
+        {% else %}
+        <div class="field{% if campo.errors %} is-bad{% endif %}{% if campo.name == 'notas' or campo.name == 'direccion' %} field--full{% endif %}"
+             {% if campo.name == "notas" or campo.name == "direccion" %}style="grid-column:1/-1"{% endif %}
+             {% if campo.name == "direccion" %}data-direccion{% endif %}>
+          <label for="{{ campo.id_for_label }}">
+            {{ campo.label }}{% if not campo.field.required %} <span class="opt">opcional</span>{% endif %}
+          </label>
+          {{ campo }}
+          {% if campo.errors %}<ul class="errores">{% for e in campo.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <button class="btn btn--primary btn--block" type="submit" style="margin-top:22px">
+      Confirmar el pedido
+    </button>
+    <p class="resumen__nota" style="text-align:center">
+      Al confirmar apartamos la mercancía a tu nombre. Si no llegamos a un
+      acuerdo, se cancela y vuelve al inventario.
+    </p>
+  </form>
+
+  <aside class="resumen">
+    <h2 class="ficha__h3">Lo que llevás</h2>
+    {% for l in lineas %}
+    <div class="resumen__fila">
+      <span>{{ l.cantidad }} × {{ l.producto.nombre }}{% if l.variante.nombre %} <small style="color:var(--muted-2)">({{ l.variante.nombre }})</small>{% endif %}</span>
+      <span style="white-space:nowrap">{{ l.subtotal|pesos }}</span>
+    </div>
+    {% endfor %}
+    <div class="resumen__total"><span>Total</span><b>{{ total|pesos }}</b></div>
+    <a class="btn btn--ghost btn--block" href="{% url 'pedidos:carrito' %}" style="margin-top:16px">Volver al carrito</a>
+  </aside>
+</div>
+
+<script>
+/* La dirección solo hace falta si piden envío. Sin JS se muestra siempre y
+   el servidor decide igual: la validación real está en el formulario. */
+(function(){
+  var campo = document.querySelector('[data-direccion]');
+  var radios = document.querySelectorAll('input[name=entrega]');
+  if (!campo || !radios.length) return;
+
+  function revisar(){
+    var enviar = document.querySelector('input[name=entrega]:checked');
+    campo.hidden = !(enviar && enviar.value === 'enviar');
+  }
+  radios.forEach(function(r){ r.addEventListener('change', revisar); });
+  revisar();
+})();
+</script>
+{% endblock %}

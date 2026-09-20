@@ -1,0 +1,284 @@
+/* ==========================================================================
+   DACARS — Catálogo, carrito y pedido
+
+   Archivo aparte a propósito: solo lo cargan las páginas del catálogo, así
+   las 11 landings siguen descargando exactamente lo que descargaban antes.
+   Usa las variables de :root de style.css; no redefine ninguna.
+   ========================================================================== */
+
+/* --- Encabezado de sección ------------------------------------------- */
+.cat{padding:calc(var(--head-h) + 46px) 0 90px}
+.cat__head{display:flex; align-items:flex-end; justify-content:space-between;
+  gap:24px; flex-wrap:wrap; margin-bottom:26px}
+.cat__title{font-family:var(--f-display); font-style:italic; font-weight:900;
+  text-transform:uppercase; letter-spacing:.01em; line-height:1.02;
+  font-size:clamp(30px,4.6vw,50px); margin:8px 0 10px}
+.cat__lead{margin:0; max-width:64ch; color:var(--muted); font-size:15.5px; line-height:1.7}
+.cat__cuenta{font-size:13px; color:var(--muted-2); white-space:nowrap}
+
+.migas{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 6px;
+  padding:0; list-style:none; font-size:12.5px; color:var(--muted-2)}
+.migas a{color:var(--muted); transition:color .2s}
+.migas a:hover{color:var(--cyan)}
+.migas li+li::before{content:"/"; margin-right:8px; color:var(--muted-2); opacity:.6}
+
+/* --- Filtros ---------------------------------------------------------- */
+.filtros{display:grid; gap:14px; margin-bottom:30px; padding:18px;
+  border:1px solid var(--line); border-radius:var(--r);
+  background:linear-gradient(180deg,rgba(13,21,38,.72),rgba(10,16,32,.5))}
+.filtros__fila{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.filtros__buscar{flex:1 1 260px; display:flex; gap:8px}
+.filtros input[type=search],
+.filtros select{
+  width:100%; padding:11px 13px; font:inherit; font-size:14.5px; color:var(--text);
+  background:rgba(4,6,12,.6); border:1px solid var(--line-hi); border-radius:10px;
+  transition:border-color .2s, box-shadow .2s}
+.filtros select{appearance:none; cursor:pointer; padding-right:34px;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),
+    linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 17px) 50%, calc(100% - 12px) 50%;
+  background-size:5px 5px, 5px 5px; background-repeat:no-repeat}
+.filtros select option{background:#0a1020; color:var(--text)}
+.filtros input:focus,.filtros select:focus{outline:none; border-color:var(--blue-hi);
+  box-shadow:0 0 0 3px rgba(61,139,255,.16)}
+.filtros__check{display:inline-flex; align-items:center; gap:8px; font-size:13.5px;
+  color:var(--muted); cursor:pointer; user-select:none}
+.filtros__check input{width:16px; height:16px; accent-color:var(--blue)}
+
+.cats{display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none}
+.cats a{display:inline-block; padding:7px 13px; border-radius:999px; font-size:13px;
+  font-weight:600; color:var(--muted); border:1px solid var(--line);
+  background:rgba(10,16,32,.6); transition:all .2s var(--ease)}
+.cats a:hover{color:var(--text); border-color:rgba(61,139,255,.45)}
+.cats a.is-active{color:#04160c; background:var(--blue-hi); border-color:var(--blue-hi)}
+
+/* --- Grilla de productos ---------------------------------------------- */
+.prods{display:grid; grid-template-columns:repeat(auto-fill,minmax(248px,1fr)); gap:18px}
+
+.prod{position:relative; display:flex; flex-direction:column; overflow:hidden;
+  border:1px solid var(--line); border-radius:var(--r);
+  background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  transition:transform .3s var(--ease), border-color .3s, box-shadow .3s}
+.prod:hover{transform:translateY(-5px); border-color:rgba(61,139,255,.4);
+  box-shadow:0 18px 40px -22px rgba(10,92,255,.6)}
+
+.prod__foto{position:relative; aspect-ratio:4/3; overflow:hidden;
+  background:radial-gradient(70% 70% at 50% 40%,#0d1526,#070b14)}
+.prod__foto img{width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s var(--ease)}
+.prod:hover .prod__foto img{transform:scale(1.05)}
+.prod__sinfoto{position:absolute; inset:0; display:grid; place-items:center;
+  color:var(--muted-2); font-size:12px; letter-spacing:.14em; text-transform:uppercase}
+
+.prod__in{display:flex; flex-direction:column; gap:9px; padding:15px 16px 16px; flex:1}
+.prod__cat{font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--blue-hi); font-weight:700}
+.prod__nom{margin:0; font-size:15.5px; font-weight:600; line-height:1.38; color:var(--text)}
+.prod__nom a::after{content:""; position:absolute; inset:0}
+.prod__res{margin:0; font-size:13.4px; color:var(--muted); line-height:1.55}
+.prod__pie{display:flex; align-items:flex-end; justify-content:space-between;
+  gap:10px; margin-top:auto; padding-top:10px}
+
+/* --- Precio ----------------------------------------------------------- */
+.precio{font-family:var(--f-display); font-style:italic; font-weight:800;
+  font-size:19px; color:var(--text); line-height:1}
+.precio small{display:block; font-family:var(--f-body); font-style:normal;
+  font-weight:500; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted-2); margin-bottom:3px}
+.precio__antes{font-size:12.5px; color:var(--muted-2); text-decoration:line-through;
+  font-family:var(--f-body); font-style:normal; font-weight:400; margin-left:7px}
+.precio__off{display:inline-block; margin-left:7px; padding:2px 7px; border-radius:999px;
+  font-family:var(--f-body); font-style:normal; font-size:11px; font-weight:700;
+  color:#04160c; background:var(--cyan)}
+.precio--grande{font-size:clamp(28px,4vw,38px)}
+
+/* --- Señal de existencias --------------------------------------------- */
+.stockb{display:inline-flex; align-items:center; gap:6px; font-size:12px;
+  font-weight:600; letter-spacing:.02em}
+.stockb::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor;
+  box-shadow:0 0 8px currentColor}
+.stockb--hay{color:#3ddc84}
+.stockb--poco{color:#ffb74d}
+.stockb--no{color:#ff7a8f}
+
+/* --- Ficha del producto ------------------------------------------------ */
+.ficha{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(24px,4vw,52px);
+  align-items:start}
+
+.fotos__grande{position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:var(--r);
+  border:1px solid var(--line); background:radial-gradient(70% 70% at 50% 40%,#0d1526,#070b14)}
+.fotos__grande img{width:100%; height:100%; object-fit:cover; display:block}
+.fotos__tiras{display:flex; gap:9px; margin-top:11px; flex-wrap:wrap}
+.fotos__tiras button{width:72px; height:56px; padding:0; overflow:hidden; cursor:pointer;
+  border:1px solid var(--line); border-radius:9px; background:#070b14;
+  transition:border-color .2s, opacity .2s; opacity:.65}
+.fotos__tiras button:hover{opacity:1}
+.fotos__tiras button[aria-current=true]{border-color:var(--blue-hi); opacity:1}
+.fotos__tiras img{width:100%; height:100%; object-fit:cover; display:block}
+
+.ficha__titulo{font-family:var(--f-display); font-style:italic; font-weight:900;
+  text-transform:uppercase; line-height:1.04; font-size:clamp(26px,3.6vw,40px); margin:10px 0 12px}
+.ficha__res{margin:0 0 18px; font-size:16px; color:var(--muted); line-height:1.65}
+.ficha__precio{display:flex; align-items:baseline; flex-wrap:wrap; gap:8px; margin:0 0 6px}
+.ficha__sep{height:1px; background:var(--line); margin:22px 0}
+.ficha__texto p{margin:0 0 13px; font-size:15px; color:var(--muted); line-height:1.75}
+.ficha__lista{margin:0; padding:0; list-style:none; display:grid; gap:9px}
+.ficha__lista li{position:relative; padding-left:24px; font-size:14.6px; color:var(--muted);
+  line-height:1.6}
+.ficha__lista li::before{content:""; position:absolute; left:2px; top:8px; width:9px; height:9px;
+  border-radius:2px; background:linear-gradient(135deg,var(--blue-hi),var(--cyan))}
+.ficha__dato{display:flex; gap:10px; font-size:14px; color:var(--muted); margin:0 0 8px}
+.ficha__dato b{color:var(--text); font-weight:600; min-width:120px}
+.ficha__h3{font-family:var(--f-display); font-style:italic; font-weight:800;
+  text-transform:uppercase; font-size:17px; letter-spacing:.02em; margin:0 0 14px; color:var(--text)}
+
+/* --- Elegir variante --------------------------------------------------- */
+.vars{display:flex; flex-wrap:wrap; gap:9px; margin:0 0 18px; padding:0; border:0}
+.vars legend{font-size:12px; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted-2); margin-bottom:10px; padding:0}
+.var{position:relative}
+.var input{position:absolute; opacity:0; width:0; height:0}
+.var span{display:flex; flex-direction:column; gap:2px; padding:10px 15px; cursor:pointer;
+  border:1px solid var(--line-hi); border-radius:11px; background:rgba(4,6,12,.5);
+  font-size:14px; font-weight:600; color:var(--muted); transition:all .2s var(--ease)}
+.var span b{font-weight:400; font-size:11.5px; color:var(--muted-2)}
+.var:hover span{border-color:rgba(61,139,255,.5); color:var(--text)}
+.var input:checked + span{border-color:var(--blue-hi); color:var(--text);
+  background:rgba(61,139,255,.12); box-shadow:0 0 0 3px rgba(61,139,255,.12)}
+.var input:focus-visible + span{outline:2px solid var(--cyan); outline-offset:2px}
+.var input:disabled + span{opacity:.4; cursor:not-allowed; text-decoration:line-through}
+
+/* --- Cantidad ---------------------------------------------------------- */
+.cant{display:inline-flex; align-items:center; border:1px solid var(--line-hi);
+  border-radius:11px; overflow:hidden; background:rgba(4,6,12,.5)}
+.cant button{width:40px; height:44px; border:0; background:transparent; cursor:pointer;
+  color:var(--muted); font-size:19px; line-height:1; transition:color .2s, background .2s}
+.cant button:hover{color:var(--text); background:rgba(61,139,255,.12)}
+.cant input{width:52px; height:44px; text-align:center; border:0; background:transparent;
+  color:var(--text); font:inherit; font-weight:600; font-size:15px;
+  -moz-appearance:textfield}
+.cant input::-webkit-outer-spin-button,
+.cant input::-webkit-inner-spin-button{-webkit-appearance:none; margin:0}
+.cant input:focus{outline:none}
+
+.comprar{display:flex; gap:11px; flex-wrap:wrap; align-items:center; margin:20px 0 0}
+
+/* --- Carrito ----------------------------------------------------------- */
+.bolsa{display:grid; grid-template-columns:minmax(0,1.6fr) minmax(280px,.9fr);
+  gap:clamp(22px,3.4vw,40px); align-items:start}
+
+.lineas{display:grid; gap:12px; margin:0; padding:0; list-style:none}
+.linea{display:grid; grid-template-columns:92px minmax(0,1fr) auto; gap:15px;
+  align-items:center; padding:13px; border:1px solid var(--line); border-radius:var(--r);
+  background:linear-gradient(180deg,var(--panel),var(--panel-2))}
+.linea__foto{width:92px; height:72px; border-radius:9px; overflow:hidden;
+  background:#070b14; display:grid; place-items:center}
+.linea__foto img{width:100%; height:100%; object-fit:cover}
+.linea__nom{margin:0 0 3px; font-size:14.8px; font-weight:600; line-height:1.4}
+.linea__nom a{color:var(--text)}
+.linea__nom a:hover{color:var(--cyan)}
+.linea__meta{margin:0; font-size:12.5px; color:var(--muted-2)}
+.linea__acc{display:flex; align-items:center; gap:13px; flex-wrap:wrap; justify-content:flex-end}
+.linea__sub{font-family:var(--f-display); font-style:italic; font-weight:800; font-size:17px;
+  min-width:96px; text-align:right}
+.quitar{background:none; border:0; cursor:pointer; color:var(--muted-2); font-size:12.5px;
+  text-decoration:underline; padding:4px; transition:color .2s}
+.quitar:hover{color:#ff7a8f}
+
+.resumen{position:sticky; top:calc(var(--head-h) + 18px); padding:22px;
+  border:1px solid var(--line-hi); border-radius:var(--r);
+  background:linear-gradient(180deg,rgba(13,21,38,.9),rgba(7,11,20,.9))}
+.resumen__fila{display:flex; justify-content:space-between; gap:14px; font-size:14.4px;
+  color:var(--muted); margin-bottom:11px}
+.resumen__total{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  padding-top:14px; margin-top:6px; border-top:1px solid var(--line)}
+.resumen__total b{font-family:var(--f-display); font-style:italic; font-weight:900;
+  font-size:25px; color:var(--text)}
+.resumen__nota{margin:14px 0 0; font-size:12.4px; color:var(--muted-2); line-height:1.6}
+
+/* --- Formulario del pedido --------------------------------------------- */
+.entrega{display:grid; gap:9px; margin:0; padding:0; border:0}
+.entrega label{display:flex; align-items:center; gap:10px; padding:12px 14px; cursor:pointer;
+  border:1px solid var(--line-hi); border-radius:11px; background:rgba(4,6,12,.5);
+  font-size:14.4px; color:var(--muted); transition:all .2s var(--ease)}
+.entrega label:hover{border-color:rgba(61,139,255,.5); color:var(--text)}
+.entrega input{width:17px; height:17px; accent-color:var(--blue)}
+.entrega input:checked ~ *{color:var(--text)}
+.errores{margin:6px 0 0; padding:0; list-style:none; font-size:12.8px; color:#ff7a8f}
+
+/* --- Estados ----------------------------------------------------------- */
+.vacio{text-align:center; padding:60px 20px; border:1px dashed var(--line-hi);
+  border-radius:var(--r); background:rgba(10,16,32,.4)}
+.vacio h2{font-family:var(--f-display); font-style:italic; font-weight:800;
+  text-transform:uppercase; font-size:22px; margin:0 0 10px}
+.vacio p{margin:0 0 20px; color:var(--muted); font-size:15px}
+
+.avisos{display:grid; gap:9px; margin:0 0 22px; padding:0; list-style:none}
+.aviso{padding:12px 15px; border-radius:11px; font-size:14px; line-height:1.55;
+  border:1px solid var(--line-hi); background:rgba(10,16,32,.7); color:var(--muted)}
+.aviso--ok{border-color:rgba(61,220,132,.4); color:#a8f0c6; background:rgba(20,60,40,.35)}
+.aviso--mal{border-color:rgba(255,122,143,.4); color:#ffc2cc; background:rgba(70,20,30,.3)}
+.aviso--ojo{border-color:rgba(255,183,77,.4); color:#ffdfae; background:rgba(70,50,15,.3)}
+
+/* --- Paginación --------------------------------------------------------- */
+.pag{display:flex; gap:7px; justify-content:center; align-items:center; margin-top:42px;
+  flex-wrap:wrap}
+.pag a,.pag span{display:inline-grid; place-items:center; min-width:40px; height:40px;
+  padding:0 12px; border-radius:10px; font-size:14px; font-weight:600;
+  border:1px solid var(--line); color:var(--muted); transition:all .2s}
+.pag a:hover{border-color:rgba(61,139,255,.5); color:var(--text)}
+.pag .is-active{background:var(--blue-hi); border-color:var(--blue-hi); color:#04160c}
+.pag .off{opacity:.35}
+
+/* --- Carrito en el menú -------------------------------------------------- */
+.nav__bolsa{display:inline-flex; align-items:center; gap:7px; margin-left:6px}
+.nav__bolsa b{display:inline-grid; place-items:center; min-width:20px; height:20px;
+  padding:0 6px; border-radius:999px; background:var(--cyan); color:#04160c;
+  font-size:11.5px; font-weight:800; line-height:1}
+
+/* --- Confirmación -------------------------------------------------------- */
+.gracias{max-width:680px; margin-inline:auto; text-align:center}
+.gracias__num{display:inline-block; padding:8px 18px; border-radius:999px; margin-bottom:18px;
+  border:1px solid var(--line-hi); background:rgba(61,139,255,.1);
+  font-family:var(--f-display); font-style:italic; font-weight:800; font-size:19px;
+  letter-spacing:.06em; color:var(--text)}
+.gracias__pasos{counter-reset:paso; display:grid; gap:14px; margin:30px 0 0; padding:0;
+  list-style:none; text-align:left}
+.gracias__pasos li{counter-increment:paso; position:relative; padding:15px 18px 15px 56px;
+  border:1px solid var(--line); border-radius:var(--r); background:rgba(10,16,32,.55);
+  font-size:14.5px; color:var(--muted); line-height:1.6}
+.gracias__pasos li::before{content:counter(paso); position:absolute; left:17px; top:15px;
+  width:26px; height:26px; display:grid; place-items:center; border-radius:50%;
+  background:rgba(61,139,255,.18); border:1px solid rgba(61,139,255,.4);
+  font-family:var(--f-display); font-style:italic; font-weight:800; font-size:13px;
+  color:var(--blue-hi)}
+
+.detalle{width:100%; border-collapse:collapse; margin:26px 0 0; text-align:left}
+.detalle th,.detalle td{padding:11px 12px; border-bottom:1px solid var(--line); font-size:14px}
+.detalle th{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted-2); font-weight:600}
+.detalle td{color:var(--muted)}
+.detalle tfoot td{border-bottom:0; padding-top:16px; font-size:16px; color:var(--text);
+  font-weight:600}
+.detalle .num{text-align:right; white-space:nowrap}
+
+/* --- Productos dentro de una landing -------------------------------------- */
+.enlanding{margin-top:38px}
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width:900px){
+  .ficha{grid-template-columns:1fr; gap:28px}
+  .bolsa{grid-template-columns:1fr}
+  .resumen{position:static}
+}
+@media (max-width:620px){
+  .prods{grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:13px}
+  .prod__in{padding:12px 13px 14px; gap:7px}
+  .prod__res{display:none}
+  .prod__pie{flex-direction:column; align-items:stretch; gap:8px}
+  .precio{font-size:17px}
+  .linea{grid-template-columns:64px minmax(0,1fr); gap:11px}
+  .linea__foto{width:64px; height:56px}
+  .linea__acc{grid-column:1 / -1; justify-content:space-between}
+  .cat__head{flex-direction:column; align-items:flex-start; gap:10px}
+}

@@ -5,13 +5,28 @@ Cambia el dominio del sitio en todos lados de una sola pasada.
     python tools/set-dominio.py https://dacars-production.up.railway.app
     python tools/set-dominio.py https://www.dacars.com.co
 
-Toca: el <head> de las 11 paginas (canonical, hreflang, Open Graph, Twitter),
-el JSON-LD completo, sitemap.xml, robots.txt, .htaccess y los scripts de tools/
-para que lo regenerado siga apuntando al dominio correcto.
-
 Por que importa: si el canonical apunta a un dominio que no existe, Google no
 indexa nada. Mientras el dominio definitivo no este montado, el canonical debe
 apuntar al que de verdad esta sirviendo el sitio.
+
+Que toca:
+
+  templates/sitio/*.html   el <head> de las 10 paginas migradas: canonical,
+                           hreflang, Open Graph, Twitter y el JSON-LD entero.
+                           Ahi el dominio esta escrito a mano, heredado del
+                           sitio estatico.
+  README.md                la documentacion.
+
+Que NO toca, porque no hace falta:
+
+  El catalogo, el carrito y las fichas de producto arman sus URLs con la
+  variable DOMINIO del entorno (ver dacars/settings.py -> NEGOCIO). Cambiar
+  esa variable en Railway alcanza para todo lo nuevo.
+  El sitemap y el robots.txt los genera Django con el mismo dato.
+
+O sea: despues de correr esto hay que **cambiar tambien DOMINIO** en las
+variables del servicio, o el sitio viejo y el nuevo apuntaran a dominios
+distintos. El script lo recuerda al final.
 """
 
 import io
@@ -21,14 +36,14 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Cualquier dominio que hayamos usado antes
-PATRON = re.compile(r'https?://(?:www\.)?'
-                    r'(?:dacars\.com\.co|[a-z0-9-]+\.up\.railway\.app|[a-z0-9.-]+\.railway\.app)')
+# Cualquier dominio que hayamos usado antes.
+PATRON = re.compile(
+    r"https?://(?:www\.)?"
+    r"(?:dacars\.com\.co|[a-z0-9-]+\.up\.railway\.app|[a-z0-9.-]+\.railway\.app)"
+)
 
-ARCHIVOS = ["sitemap.xml", "robots.txt", ".htaccess", "README.md",
-            os.path.join("tools", "patch-index.py"),
-            os.path.join("tools", "generar-servicios.py"),
-            os.path.join("tools", "set-dominio.py")]
+PLANTILLAS = os.path.join(ROOT, "templates", "sitio")
+SUELTOS = ["README.md", os.path.join("tools", "set-dominio.py")]
 
 
 def normalizar(d):
@@ -46,29 +61,33 @@ def main():
     nuevo = normalizar(sys.argv[1])
     host = nuevo.split("//", 1)[1]
 
-    objetivos = [f for f in os.listdir(ROOT) if f.endswith(".html")]
-    objetivos += [f for f in ARCHIVOS if os.path.exists(os.path.join(ROOT, f))]
+    objetivos = []
+    if os.path.isdir(PLANTILLAS):
+        objetivos += [
+            os.path.join("templates", "sitio", f)
+            for f in sorted(os.listdir(PLANTILLAS))
+            if f.endswith(".html")
+        ]
+    objetivos += [f for f in SUELTOS if os.path.exists(os.path.join(ROOT, f))]
 
     total = 0
-    for rel in sorted(objetivos):
+    for rel in objetivos:
         ruta = os.path.join(ROOT, rel)
         txt = io.open(ruta, encoding="utf-8").read()
         nuevo_txt, n = PATRON.subn(nuevo, txt)
         if n:
             io.open(ruta, "w", encoding="utf-8", newline="\n").write(nuevo_txt)
             total += n
-            print("  %-50s %3d" % (rel, n))
-
-    # El .htaccess fuerza www: solo tiene sentido con dominio propio
-    ht = os.path.join(ROOT, ".htaccess")
-    if os.path.exists(ht) and ".railway.app" in host:
-        txt = io.open(ht, encoding="utf-8").read()
-        txt = re.sub(r"\n  # Forzar www.*?\[R=301,L\]\n", "\n", txt, flags=re.S)
-        io.open(ht, "w", encoding="utf-8", newline="\n").write(txt)
-        print("  .htaccess: quitada la redirección a www (no aplica en railway.app)")
+            print("  %-52s %3d" % (rel, n))
 
     print("\n%d referencias actualizadas a %s" % (total, nuevo))
-    print("Revisa que el canonical quedo bien:  grep -m2 canonical index.html")
+    print("")
+    print("FALTA UN PASO. En Railway -> Variables, pone:")
+    print("    DOMINIO=%s" % host)
+    print("Sin eso, el catalogo y el sitemap siguen apuntando al dominio viejo.")
+    print("")
+    print("Y verifica que quedo bien:")
+    print("    python manage.py test sitio")
 
 
 if __name__ == "__main__":

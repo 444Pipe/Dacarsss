@@ -1,0 +1,543 @@
+{% extends "sitio/base.html" %}{% load static dacars %}
+
+{% block meta %}<title>Lujos para carros en Villavicencio | Accesorios — DACARS</title>
+<meta name="description" content="Lujos y accesorios para carros en Villavicencio: estribos, molduras, spoilers, tapetes, barras, emblemas, cámaras de reversa y más. Instalación profesional. Cotiza por WhatsApp.">
+<meta name="keywords" content="lujos para carros villavicencio, accesorios para carros villavicencio, autolujos villavicencio, estribos villavicencio, tapetes para carro villavicencio, personalizacion de vehiculos villavicencio, lujos automotrices meta">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#04060c">
+<meta name="author" content="DACARS VILLAVICENCIO S.A.S">
+<link rel="canonical" href="https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html">
+<link rel="alternate" hreflang="es-co" href="https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html">
+<link rel="alternate" hreflang="x-default" href="https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html">
+
+<!-- Geolocalización para búsqueda local -->
+<meta name="geo.region" content="CO-MET">
+<meta name="geo.placename" content="Villavicencio, Meta, Colombia">
+<meta name="geo.position" content="4.142;-73.634">
+<meta name="ICBM" content="4.142, -73.634">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="DACARS">
+<meta property="og:title" content="Lujos para carros en Villavicencio | Accesorios — DACARS">
+<meta property="og:description" content="Lujos y accesorios para carros en Villavicencio: estribos, molduras, spoilers, tapetes, barras, emblemas, cámaras de reversa y más. Instalación profesional. Cotiza por WhatsApp.">
+<meta property="og:url" content="https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html">
+<meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lujos para carros en Villavicencio | Accesorios — DACARS">
+<meta name="twitter:description" content="Lujos y accesorios para carros en Villavicencio: estribos, molduras, spoilers, tapetes, barras, emblemas, cámaras de reversa y más. Instalación profesional. Cotiza por WhatsApp.">
+<meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="manifest" href="/manifest.webmanifest">
+
+{% endblock %}
+{% block css_extra %}{% if productos_del_servicio or destacados %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">{% endif %}{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html#servicio",
+      "name": "Lujos y accesorios en Villavicencio",
+      "alternateName": "Lujos y accesorios para carros en Villavicencio",
+      "description": "Lujos y accesorios para carros en Villavicencio: estribos, molduras, spoilers, tapetes, barras, emblemas, cámaras de reversa y más. Instalación profesional. Cotiza por WhatsApp.",
+      "url": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html",
+      "serviceType": "Lujos y accesorios",
+      "category": "Automotriz",
+      "provider": {
+        "@type": "AutoPartsStore",
+        "@id": "https://www.dacars.com.co/#dacars",
+        "name": "DACARS",
+        "telephone": "+573112629406",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+          "addressLocality": "Villavicencio",
+          "addressRegion": "Meta",
+          "addressCountry": "CO"
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Villavicencio"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Meta"
+        },
+        {
+          "@type": "City",
+          "name": "Acacías"
+        },
+        {
+          "@type": "City",
+          "name": "Restrepo"
+        },
+        {
+          "@type": "City",
+          "name": "Cumaral"
+        },
+        {
+          "@type": "City",
+          "name": "Granada"
+        },
+        {
+          "@type": "City",
+          "name": "Puerto López"
+        },
+        {
+          "@type": "City",
+          "name": "San Martín"
+        }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20lujos%20y%20accesorios%20para%20mi%20carro%20en%20Villavicencio.",
+        "servicePhone": "+573112629406",
+        "serviceLocation": {
+          "@type": "Place",
+          "name": "DACARS Villavicencio",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+            "addressLocality": "Villavicencio",
+            "addressRegion": "Meta",
+            "addressCountry": "CO"
+          }
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Lujos y accesorios",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Estribos y pisaderas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Molduras y apliques"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Spoilers y deflectores"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Tapetes y protección de baúl"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Barras de techo y portaequipajes"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cámaras, sensores y emblemas"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html#migas",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.dacars.com.co/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://www.dacars.com.co/#servicios"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Lujos y accesorios para carros en Villavicencio",
+          "item": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Tienen accesorios para mi marca y modelo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Manejamos catálogo amplio para los vehículos más comunes en la región. Mándanos marca, modelo y año por WhatsApp y te confirmamos disponibilidad antes de que te muevas al taller."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Instalan accesorios comprados en otro lado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, siempre que la pieza sea compatible y esté en buen estado. Si vemos un riesgo para el vehículo te lo decimos antes de montarla."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los tapetes son universales o a medida?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recomendamos siempre a medida del modelo. Los universales se corren, se enrollan y terminan estorbando en los pedales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto se demora la instalación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mayoría de accesorios estéticos se montan el mismo día. Los que implican cableado o anclajes al chasis toman más. Te confirmamos al cotizar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo hacer varios servicios en la misma visita?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y es lo que más recomendamos: combinar lujos con polarizado o detailing en una sola entrada al taller para no quedarte sin carro dos veces."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html#pagina",
+      "url": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html",
+      "name": "Lujos para carros en Villavicencio | Accesorios — DACARS",
+      "description": "Lujos y accesorios para carros en Villavicencio: estribos, molduras, spoilers, tapetes, barras, emblemas, cámaras de reversa y más. Instalación profesional. Cotiza por WhatsApp.",
+      "inLanguage": "es-CO",
+      "isPartOf": {
+        "@id": "https://www.dacars.com.co/#sitio"
+      },
+      "about": {
+        "@id": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html#servicio"
+      },
+      "breadcrumb": {
+        "@id": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html#migas"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image"
+      }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html#video",
+      "name": "Hummer EV: barra LED, faros y rines",
+      "description": "Personalizacion de una Hummer EV en Villavicencio: barra LED, faros y rines.",
+      "duration": "PT55S",
+      "thumbnailUrl": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710042/dacars/video/reel-hummer-ev",
+      "contentUrl": "https://res.cloudinary.com/a0e9tgif/video/upload/v1789710043/dacars/video/reel-hummer-ev.mp4",
+      "inLanguage": "es-CO",
+      "isFamilyFriendly": true,
+      "publisher": {
+        "@id": "https://www.dacars.com.co/#organizacion"
+      },
+      "locationCreated": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+          "addressLocality": "Villavicencio",
+          "addressRegion": "Meta",
+          "addressCountry": "CO"
+        }
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block contenido %}<main id="contenido">
+
+<nav class="migas" aria-label="Ruta de navegación">
+  <div class="wrap">
+    <ol>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/#servicios">Servicios</a></li>
+      <li aria-current="page">Lujos y accesorios para carros en Villavicencio</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="shero">
+  <div class="shero__bg" aria-hidden="true"><span class="grid"></span><span class="glow glow--a"></span></div>
+  <div class="wrap">
+    <p class="tag" data-reveal>Lujos y accesorios &middot; Villavicencio, Meta</p>
+    <h1 class="shero__title" data-reveal><span class="chrome">Lujos y accesorios para carros en Villavicencio</span></h1>
+    <p class="shero__sub" data-reveal>El detalle que le da personalidad a tu vehículo</p>
+    <p class="shero__lead" data-reveal>Estribos, molduras, spoilers, emblemas, tapetes y barras. Catálogo amplio y montaje que no deja huecos ni holguras.</p>
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20lujos%20y%20accesorios%20para%20mi%20carro%20en%20Villavicencio." target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Cotizar por WhatsApp
+      </a>
+      <a class="btn btn--ghost" href="#faq">Preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+      <p class="sec__lead" data-reveal>Personalizar un carro en Villavicencio suele significar recorrer tres o cuatro locales: uno tiene el estribo, otro el tapete, otro instala. Y cada uno responde solo por su parte. DACARS existe en buena medida para evitar eso.</p>
+      <p class="sec__lead" data-reveal>Acá el catálogo de lujos y accesorios va desde lo estético —molduras, spoilers, emblemas, deflectores— hasta lo funcional: tapetes a medida, barras de techo, cámaras de reversa, sensores. Todo montado por el mismo equipo, con una sola garantía de trabajo y sin improvisar perforaciones.</p>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap vserv">
+    <div class="vserv__media" data-reveal>
+      <div class="clip">
+        <div class="clip__media">
+          <video class="clip__v" src="https://res.cloudinary.com/a0e9tgif/video/upload/v1789710043/dacars/video/reel-hummer-ev.mp4"
+                 poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710042/dacars/video/reel-hummer-ev"
+                 preload="none" playsinline loop
+                 aria-label="Hummer EV: barra LED, faros y rines — DACARS Villavicencio"></video>
+          <span class="clip__tag">En video</span>
+          <button class="clip__btn" type="button" aria-label="Reproducir: Hummer EV: barra LED, faros y rines"></button>
+        </div>
+      </div>
+    </div>
+    <div class="vserv__copy">
+      <p class="tag" data-reveal>En video</p>
+      <h2 class="sec__title chrome" data-reveal>Hummer EV: barra LED, faros y rines</h2>
+      <p class="sec__lead" data-reveal>Una Hummer EV que pasó por el taller: barra LED, faros, iluminación delantera y rines.</p>
+      <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20lujos%20y%20accesorios%20para%20mi%20carro%20en%20Villavicencio." target="_blank" rel="noopener" data-reveal>
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Quiero algo así
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Alcance</p>
+      <h2 class="sec__title chrome" data-reveal>Qué manejamos</h2>
+    </header>
+    <ul class="checks checks--2" data-reveal>
+        <li><span></span><div><b>Estribos y pisaderas</b> Acceso más cómodo y una línea lateral más marcada, con anclajes al chasis.</div></li>
+        <li><span></span><div><b>Molduras y apliques</b> Cromados, negros o al color del vehículo, según el estilo que busques.</div></li>
+        <li><span></span><div><b>Spoilers y deflectores</b> Para el acabado trasero y para las ventanas, que en época de lluvia se agradecen.</div></li>
+        <li><span></span><div><b>Tapetes y protección de baúl</b> A medida del modelo, que es lo que evita que se corran y se enrollen.</div></li>
+        <li><span></span><div><b>Barras de techo y portaequipajes</b> Capacidad de carga sin sacrificar el interior.</div></li>
+        <li><span></span><div><b>Cámaras, sensores y emblemas</b> Los detalles que suman comodidad diaria y presencia.</div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Contexto local</p>
+      <h2 class="sec__title chrome" data-reveal>Por qué importa quién lo instala</h2>
+    </header>
+    <div class="cards cards--3">
+        <article class="card" data-reveal>
+          <h3>Perforaciones</h3>
+          <p>Un accesorio mal montado deja huecos donde entra agua y empieza la corrosión. Se monta con criterio o no se monta.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Ajuste al modelo</h3>
+          <p>Una pieza genérica forzada al carro siempre se nota. Verificamos compatibilidad antes de comprometer la compra.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Clima del Llano</h3>
+          <p>Sol y aguaceros degradan materiales baratos rápido. Lo que recomendamos es lo que aguanta acá.</p>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cómo trabajamos</p>
+      <h2 class="sec__title chrome" data-reveal>El paso a paso</h2>
+    </header>
+    <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step__n">01</span>
+          <h3>Nos dices qué buscas</h3>
+          <p>Con la marca, el modelo y el año revisamos qué aplica a tu vehículo y qué no.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">02</span>
+          <h3>Cotización con opciones</h3>
+          <p>Te damos alternativas por calidad y precio, no una sola opción a tomar o dejar.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">03</span>
+          <h3>Instalación</h3>
+          <p>Montaje en taller, con el vehículo protegido y sin perforar donde no se debe.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">04</span>
+          <h3>Revisión contigo</h3>
+          <p>Verificamos ajuste y acabado antes de entregarte el carro.</p>
+        </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cotización</p>
+      <h2 class="sec__title chrome" data-reveal>Qué define el precio</h2>
+      <p class="sec__lead" data-reveal>No publicamos listas de precios porque cada vehículo es distinto y preferimos no prometer cifras que después cambien. Estos son los factores que definen tu cotización:</p>
+    </header>
+    <ul class="factores" data-reveal>
+        <li>El <strong>accesorio</strong> y su calidad de material y acabado.</li>
+        <li>La <strong>marca, modelo y año</strong> del vehículo.</li>
+        <li>Si el montaje requiere <strong>adaptación</strong> o solo anclaje directo.</li>
+        <li>La <strong>cantidad de piezas</strong>: varios accesorios juntos se cotizan mejor que uno por uno.</li>
+    </ul>
+    <p class="sec__foot" data-reveal>
+      <a class="link" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20lujos%20y%20accesorios%20para%20mi%20carro%20en%20Villavicencio." target="_blank" rel="noopener">Pide tu cotización por WhatsApp &rarr;</a>
+    </p>
+  </div>
+</section>
+
+{% include "catalogo/_seccion.html" with productos=productos_del_servicio etiqueta="En el local" titulo="Productos para este servicio" ver_mas=categoria_del_servicio.get_absolute_url %}
+
+<section class="sec sec--alt" id="faq">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Preguntas frecuentes</p>
+      <h2 class="sec__title chrome" data-reveal>Lujos y accesorios en Villavicencio: lo que más nos preguntan</h2>
+    </header>
+    <div class="faq">
+      <details data-reveal>
+        <summary>¿Tienen accesorios para mi marca y modelo?</summary>
+        <div><p>Manejamos catálogo amplio para los vehículos más comunes en la región. Mándanos marca, modelo y año por WhatsApp y te confirmamos disponibilidad antes de que te muevas al taller.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Instalan accesorios comprados en otro lado?</summary>
+        <div><p>Sí, siempre que la pieza sea compatible y esté en buen estado. Si vemos un riesgo para el vehículo te lo decimos antes de montarla.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Los tapetes son universales o a medida?</summary>
+        <div><p>Recomendamos siempre a medida del modelo. Los universales se corren, se enrollan y terminan estorbando en los pedales.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Cuánto se demora la instalación?</summary>
+        <div><p>La mayoría de accesorios estéticos se montan el mismo día. Los que implican cableado o anclajes al chasis toman más. Te confirmamos al cotizar.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Puedo hacer varios servicios en la misma visita?</summary>
+        <div><p>Sí, y es lo que más recomendamos: combinar lujos con polarizado o detailing en una sola entrada al taller para no quedarte sin carro dos veces.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cobertura">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cobertura</p>
+      <h2 class="sec__title chrome" data-reveal>Dónde estamos y a quién atendemos</h2>
+      <p class="sec__lead" data-reveal>
+        El taller queda en la <strong>Carrera 33 #24-60, Barrio San Francisco</strong>, en Villavicencio. Estamos a pocos minutos
+        de buena parte de la ciudad, así que si vives o trabajas en cualquiera de estas zonas, llegar es fácil.
+      </p>
+    </header>
+    <p class="zonas" data-reveal><b>Barrios y zonas de Villavicencio:</b> San Francisco &middot; Barzal &middot; Centro &middot; Siete de Agosto &middot; La Esperanza &middot; Ciudad Porfía &middot; Catumare &middot; El Buque &middot; Villa Bolívar &middot; La Rosita &middot; Los Centauros &middot; Balcones de Toledo &middot; Maizaro &middot; San Fernando &middot; Las Colinas &middot; Nueva Andalucía &middot; Camoa &middot; Montecarlo &middot; Las Américas &middot; Playa Rica &middot; El Refugio &middot; La Vega y el resto de la ciudad.</p>
+    <p class="zonas" data-reveal><b>¿Vienes de otro municipio del Meta?</b> Recibimos vehículos de Acacías &middot; Restrepo &middot; Cumaral &middot; Granada &middot; Puerto López &middot; San Martín &middot; Guamal &middot; Castilla la Nueva &middot; San Carlos de Guaroa &middot; Barranca de Upía &middot; Puerto Gaitán &middot; Fuente de Oro y demás municipios de la región. Escríbenos antes de viajar y coordinamos la cita para que aproveches el desplazamiento.</p>
+    <div class="mapa-mini" data-reveal>
+      <iframe title="Ubicación de DACARS en Villavicencio"
+        src="https://www.google.com/maps?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;z=16&amp;output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Más servicios</p>
+      <h2 class="sec__title chrome" data-reveal>Todo en el mismo taller</h2>
+      <p class="sec__lead" data-reveal>Aprovecha la visita y resuelve varias cosas de una. Combinar servicios sale mejor que entrar al taller tres veces.</p>
+    </header>
+    <div class="otros">
+        <a class="otro" href="/ppf-villavicencio.html">
+          <b>PPF</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/polarizados-villavicencio.html">
+          <b>Polarizados</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/detailing-villavicencio.html">
+          <b>Detailing</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/accesorios-4x4-villavicencio.html">
+          <b>Accesorios 4x4</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/iluminacion-para-carros-villavicencio.html">
+          <b>Iluminación</b>
+          <span>en Villavicencio</span>
+        </a>
+        <a class="otro" href="/sonido-para-carros-villavicencio.html">
+          <b>Sonido</b>
+          <span>en Villavicencio</span>
+        </a>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="wrap cierre__in">
+    <h2 class="chrome" data-reveal>Lujos y accesorios para carros en Villavicencio</h2>
+    <p data-reveal>Cuéntanos tu vehículo y qué necesitas. Te cotizamos y te damos tiempos reales.</p>
+    <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20lujos%20y%20accesorios%20para%20mi%20carro%20en%20Villavicencio." target="_blank" rel="noopener" data-reveal>
+      <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+</main>
+{% endblock %}
+{% block pie %}{% include "sitio/_pie.html" with wa_flotante="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20lujos%20y%20accesorios%20para%20mi%20carro%20en%20Villavicencio." %}{% endblock %}

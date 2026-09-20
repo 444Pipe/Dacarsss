@@ -1,0 +1,99 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+{% comment %} El tablero de entrada del panel.
+
+   La idea es que quien abra esto sepa en tres segundos si hay algo que
+   atender, sin tener que entrar a cada lista a revisar. Los números salen de
+   `dacars.admin.PanelDacars.each_context`. {% endcomment %}
+
+{% block extrastyle %}{{ block.super }}
+<style>
+  .dc-tablero{margin:0 0 26px}
+  .dc-titulo{margin:0 0 12px; font-size:15px; font-weight:700; color:#334155}
+  .dc-fichas{display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr)); gap:12px}
+  .dc-ficha{display:block; padding:15px 16px; border-radius:10px; text-decoration:none;
+    border:1px solid #e2e8f0; background:#fff; transition:box-shadow .15s, transform .15s}
+  .dc-ficha:hover{box-shadow:0 6px 18px -8px rgba(15,23,42,.35); transform:translateY(-2px)}
+  .dc-ficha b{display:block; font-size:27px; line-height:1.1; margin-bottom:3px; color:#0f172a}
+  .dc-ficha span{display:block; font-size:12.5px; color:#64748b; line-height:1.45}
+  .dc-ficha--mal{border-color:#fca5a5; background:#fef2f2}
+  .dc-ficha--mal b{color:#b91c1c}
+  .dc-ficha--ojo{border-color:#fcd34d; background:#fffbeb}
+  .dc-ficha--ojo b{color:#b45309}
+  .dc-ficha--bien{border-color:#86efac; background:#f0fdf4}
+  .dc-ficha--bien b{color:#15803d}
+  .dc-ficha--azul{border-color:#93c5fd; background:#eff6ff}
+  .dc-ficha--azul b{color:#1d4ed8}
+  .dc-calma{padding:16px 18px; border-radius:10px; border:1px solid #86efac;
+    background:#f0fdf4; color:#166534; font-size:14px}
+  .dc-atajos{margin:16px 0 0; display:flex; gap:9px; flex-wrap:wrap}
+  .dc-atajos a{padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600;
+    text-decoration:none; color:#1e293b; border:1px solid #cbd5e1; background:#fff}
+  .dc-atajos a:hover{border-color:#2563eb; color:#1d4ed8}
+  .dc-ayuda{margin:8px 0 0; font-size:12.5px; color:#64748b}
+</style>
+{% endblock %}
+
+{% block content %}
+{% if alertas %}
+<div class="dc-tablero">
+  <h2 class="dc-titulo">Qué hay para hoy</h2>
+
+  {% if alertas.hay_algo %}
+  <div class="dc-fichas">
+    {% if alertas.pedidos_nuevos %}
+    <a class="dc-ficha dc-ficha--azul" href="{{ alertas.url_pedidos }}">
+      <b>{{ alertas.pedidos_nuevos }}</b>
+      <span>pedido{{ alertas.pedidos_nuevos|pluralize }} sin responder</span>
+    </a>
+    {% endif %}
+
+    {% if alertas.agotadas %}
+    <a class="dc-ficha dc-ficha--mal" href="{{ alertas.url_agotadas }}">
+      <b>{{ alertas.agotadas }}</b>
+      <span>agotado{{ alertas.agotadas|pluralize }} — se ven en la web sin poder venderse</span>
+    </a>
+    {% endif %}
+
+    {% if alertas.stock_bajo %}
+    <a class="dc-ficha dc-ficha--ojo" href="{{ alertas.url_stock_bajo }}">
+      <b>{{ alertas.stock_bajo }}</b>
+      <span>bajo el mínimo — conviene reponer</span>
+    </a>
+    {% endif %}
+
+    {% if alertas.sin_variante %}
+    <a class="dc-ficha dc-ficha--ojo" href="{{ alertas.url_sin_variante }}">
+      <b>{{ alertas.sin_variante }}</b>
+      <span>sin precio ni existencias — no salen en el catálogo</span>
+    </a>
+    {% endif %}
+
+    {% if alertas.sin_foto %}
+    <a class="dc-ficha" href="{{ alertas.url_sin_foto }}">
+      <b>{{ alertas.sin_foto }}</b>
+      <span>sin fotos — se ven pobres en el catálogo</span>
+    </a>
+    {% endif %}
+  </div>
+  {% else %}
+  <p class="dc-calma">Todo en orden: no hay pedidos pendientes ni existencias por debajo del mínimo.</p>
+  {% endif %}
+
+  <div class="dc-atajos">
+    <a href="{% url 'admin:catalogo_producto_add' %}">+ Producto nuevo</a>
+    <a href="{% url 'admin:inventario_movimiento_add' %}">+ Llegó mercancía</a>
+    <a href="{% url 'admin:catalogo_variante_changelist' %}">Ver existencias</a>
+    <a href="{% url 'admin:pedidos_pedido_changelist' %}">Ver pedidos</a>
+    <a href="/catalogo/" target="_blank" rel="noopener">Ver el catálogo en la web</a>
+  </div>
+  <p class="dc-ayuda">
+    Recordá: confirmar un pedido descuenta la mercancía del inventario, y
+    cancelarlo la devuelve. Las existencias se pueden editar a mano en
+    «Variantes y existencias»; cada cambio queda anotado en el historial.
+  </p>
+</div>
+{% endif %}
+
+{{ block.super }}
+{% endblock %}

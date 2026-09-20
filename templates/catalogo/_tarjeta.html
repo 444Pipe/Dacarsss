@@ -1,0 +1,38 @@
+{% load dacars %}{# Una tarjeta de producto. La usan el catálogo, la portada y las landings. #}
+<article class="prod">
+  <div class="prod__foto">
+    {% with principal=producto.imagen_principal %}
+      {% if principal %}
+        <img src="{{ principal.imagen|foto:520 }}" alt="{{ principal.texto_alt }}" width="520" height="390" loading="lazy" decoding="async">
+      {% else %}
+        <span class="prod__sinfoto">DACARS</span>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <div class="prod__in">
+    <span class="prod__cat">{{ producto.categoria.nombre }}</span>
+    <h3 class="prod__nom"><a href="{{ producto.get_absolute_url }}">{{ producto.nombre }}</a></h3>
+    {% if producto.resumen %}<p class="prod__res">{{ producto.resumen }}</p>{% endif %}
+
+    <div class="prod__pie">
+      <span class="precio">
+        {% if producto.rango_de_precios %}<small>Desde</small>{% endif %}
+        {{ producto.precio_desde|pesos }}
+      </span>
+
+      {% comment %} La cuenta solo se muestra cuando el producto tiene una sola
+         medida. Con varias, el total no dice nada útil: "Últimas 8" cuando hay
+         8 en una medida y 0 en otra es engañoso en los dos sentidos. {% endcomment %}
+      {% if producto.agotado %}
+        <span class="stockb stockb--no">Agotado</span>
+      {% elif producto.variante_unica and producto.bajo_stock %}
+        <span class="stockb stockb--poco">Últimas {{ producto.disponible_total }}</span>
+      {% elif producto.bajo_stock %}
+        <span class="stockb stockb--poco">Quedan pocas</span>
+      {% else %}
+        <span class="stockb stockb--hay">Disponible</span>
+      {% endif %}
+    </div>
+  </div>
+</article>

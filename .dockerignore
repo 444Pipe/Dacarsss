@@ -1,20 +1,24 @@
-# Lo que no entra a la imagen.
-# OJO: Caddyfile y Dockerfile SÍ deben estar en el contexto (el build los copia);
-# se borran de /srv en el propio Dockerfile para que no queden publicados.
+# Lo que no tiene que entrar a la imagen.
+
 .git
 .gitignore
-.dockerignore
-railway.json
-.htaccess
-tools/
-**/*.py
-**/*.md
-
-# Credenciales: nunca entran a la imagen.
+.gitattributes
+README.md
 .env
-.env.example
 
-# Los assets los sirve Cloudinary (ver tools/usar-cloudinary.py): ningun HTML
-# apunta ya a statics/. Siguen en git como fuente para volver a subirlos.
-# Esto es lo que baja la imagen de ~29 MB a menos de 1 MB.
+# Material fuente y herramientas: no se publican.
 statics/
+tools/
+legacy/
+.htaccess
+
+# Base de datos local y estáticos ya recolectados (se regeneran en el build).
+db.sqlite3
+staticfiles/
+media/
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/

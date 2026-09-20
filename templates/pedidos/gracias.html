@@ -1,0 +1,49 @@
+{% extends "tienda/base.html" %}{% load dacars %}
+
+{% block tienda %}
+<div class="gracias">
+  <p class="tag">Pedido recibido</p>
+  <span class="gracias__num">{{ pedido.numero }}</span>
+  <h1 class="cat__title chrome" style="margin-top:4px">Ya lo apartamos, {{ pedido.nombre|truncatewords:1 }}</h1>
+  <p class="cat__lead" style="margin-inline:auto">
+    La mercancía queda reservada a tu nombre. El último paso lo hacemos por
+    WhatsApp: forma de pago y {% if pedido.direccion %}envío a {{ pedido.direccion }}{% else %}cuándo pasás a recogerlo{% endif %}.
+  </p>
+
+  <div class="comprar" style="justify-content:center; margin-top:26px">
+    <a class="btn btn--wa" href="{{ pedido.url_whatsapp }}" target="_blank" rel="noopener">
+      Mandar el pedido por WhatsApp
+    </a>
+    <a class="btn btn--ghost" href="{% url 'catalogo:lista' %}">Seguir viendo</a>
+  </div>
+
+  <ol class="gracias__pasos">
+    <li>Tocá el botón verde: se abre WhatsApp con el pedido {{ pedido.numero }} ya escrito.</li>
+    <li>Te confirmamos disponibilidad, el total final y cómo se paga.</li>
+    <li>{% if pedido.direccion %}Coordinamos el envío a {{ pedido.ciudad }}.{% else %}Pasás por Cra. 33 #24-60, Barrio San Francisco.{% endif %}</li>
+  </ol>
+
+  <table class="detalle">
+    <caption class="skip">Detalle del pedido {{ pedido.numero }}</caption>
+    <thead>
+      <tr><th scope="col">Producto</th><th scope="col" class="num">Cant.</th><th scope="col" class="num">Subtotal</th></tr>
+    </thead>
+    <tbody>
+      {% for item in pedido.items.all %}
+      <tr>
+        <td>{{ item.descripcion }}<br><small style="color:var(--muted-2)">{{ item.sku }} · {{ item.precio|pesos }} c/u</small></td>
+        <td class="num">{{ item.cantidad }}</td>
+        <td class="num">{{ item.subtotal|pesos }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr><td colspan="2">Total</td><td class="num">{{ pedido.total|pesos }}</td></tr>
+    </tfoot>
+  </table>
+
+  <p class="resumen__nota" style="text-align:center; margin-top:22px">
+    Guardá el número <b>{{ pedido.numero }}</b>: con eso lo ubicamos en un segundo.
+  </p>
+</div>
+{% endblock %}

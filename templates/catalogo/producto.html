@@ -1,0 +1,261 @@
+{% extends "tienda/base.html" %}{% load dacars %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ producto.nombre|json_txt }},
+  "sku": "{{ producto.variantes_activas.0.sku }}",
+  "description": {{ producto.descripcion_seo|json_txt }},
+  "category": "{{ producto.categoria.nombre }}",
+  {% if producto.marca %}"brand": { "@type": "Brand", "name": "{{ producto.marca.nombre }}" },{% endif %}
+  {% if producto.imagen_principal %}"image": [{% for i in producto.imagenes.all %}"{{ i.imagen|foto:1200 }}"{% if not forloop.last %}, {% endif %}{% endfor %}],{% endif %}
+  "url": "{{ negocio.sitio }}{{ producto.get_absolute_url }}",
+  "offers": {
+    {% if variantes|length > 1 %}
+    "@type": "AggregateOffer",
+    "offerCount": {{ variantes|length }},
+    "lowPrice": "{{ producto.precio_desde|stringformat:'d' }}",
+    "highPrice": "{{ producto.precio_hasta|stringformat:'d' }}",
+    {% else %}
+    "@type": "Offer",
+    "price": "{{ producto.precio_desde|stringformat:'d' }}",
+    {% endif %}
+    "priceCurrency": "COP",
+    "availability": "https://schema.org/{% if producto.agotado %}OutOfStock{% else %}InStock{% endif %}",
+    "itemCondition": "https://schema.org/NewCondition",
+    "url": "{{ negocio.sitio }}{{ producto.get_absolute_url }}",
+    "seller": {
+      "@type": "AutoPartsStore",
+      "name": "DACARS",
+      "@id": "{{ negocio.sitio }}/#dacars"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ negocio.sitio }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Catálogo", "item": "{{ negocio.sitio }}{% url 'catalogo:lista' %}" },
+    { "@type": "ListItem", "position": 3, "name": "{{ producto.categoria.nombre }}", "item": "{{ negocio.sitio }}{{ producto.categoria.get_absolute_url }}" },
+    { "@type": "ListItem", "position": 4, "name": "{{ producto.nombre }}", "item": "{{ negocio.sitio }}{{ producto.get_absolute_url }}" }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block tienda %}
+<ol class="migas">
+  <li><a href="/">Inicio</a></li>
+  <li><a href="{% url 'catalogo:lista' %}">Catálogo</a></li>
+  <li><a href="{{ producto.categoria.get_absolute_url }}">{{ producto.categoria.nombre }}</a></li>
+  <li>{{ producto.nombre }}</li>
+</ol>
+
+<div class="ficha">
+  {# --- Fotos --- #}
+  <div class="ficha__fotos">
+    <div class="fotos__grande">
+      {% with principal=producto.imagen_principal %}
+        {% if principal %}
+          <img id="foto-grande" src="{{ principal.imagen|foto:1000 }}" alt="{{ principal.texto_alt }}" width="1000" height="750">
+        {% else %}
+          <span class="prod__sinfoto">Foto en camino</span>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    {% if producto.imagenes.all|length > 1 %}
+    <div class="fotos__tiras" role="group" aria-label="Más fotos">
+      {% for i in producto.imagenes.all %}
+      <button type="button" data-grande="{{ i.imagen|foto:1000 }}" data-alt="{{ i.texto_alt }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+        <img src="{{ i.imagen|foto:160 }}" alt="" width="160" height="120" loading="lazy">
+      </button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {# --- Datos y compra --- #}
+  <div class="ficha__info">
+    <p class="tag">{{ producto.categoria.nombre }}{% if producto.marca %} · {{ producto.marca.nombre }}{% endif %}</p>
+    <h1 class="ficha__titulo chrome">{{ producto.nombre }}</h1>
+    {% if producto.resumen %}<p class="ficha__res">{{ producto.resumen }}</p>{% endif %}
+
+    <p class="ficha__precio">
+      <span class="precio precio--grande" id="precio-vivo">{{ producto.precio_desde|pesos }}</span>
+      <span class="precio__antes" id="antes-vivo" hidden></span>
+      <span class="precio__off" id="off-vivo" hidden></span>
+    </p>
+    <p id="stock-vivo" class="stockb {% if producto.agotado %}stockb--no{% elif producto.bajo_stock %}stockb--poco{% else %}stockb--hay{% endif %}">
+      {% if producto.agotado %}Agotado por ahora{% elif producto.bajo_stock %}Quedan pocas unidades{% else %}Disponible en el local{% endif %}
+    </p>
+
+    <form method="post" action="{% url 'pedidos:agregar' %}" id="form-compra">
+      {% csrf_token %}
+      <input type="hidden" name="volver" value="{{ request.path }}">
+
+      {% if variantes|length > 1 %}
+      <fieldset class="vars" style="margin-top:22px">
+        <legend>Elegí la medida</legend>
+        {% for v in variantes %}
+        <label class="var">
+          <input type="radio" name="sku" value="{{ v.sku }}"
+                 data-precio="{{ v.precio|stringformat:'d' }}"
+                 data-antes="{{ v.precio_antes|default_if_none:0|stringformat:'d' }}"
+                 data-off="{{ v.descuento }}"
+                 data-disponible="{{ v.disponible }}"
+                 {% if v.agotada %}disabled{% endif %}
+                 {% if forloop.first and not v.agotada %}checked{% endif %}>
+          <span>{{ v.etiqueta }}<b>{% if v.agotada %}agotada{% else %}{{ v.disponible }} disponible{{ v.disponible|pluralize }}{% endif %}</b></span>
+        </label>
+        {% endfor %}
+      </fieldset>
+      {% else %}
+        {% with unica=variantes.0 %}
+        <input type="hidden" name="sku" value="{{ unica.sku }}"
+               data-precio="{{ unica.precio|stringformat:'d' }}"
+               data-antes="{{ unica.precio_antes|default_if_none:0|stringformat:'d' }}"
+               data-off="{{ unica.descuento }}"
+               data-disponible="{{ unica.disponible }}">
+        {% endwith %}
+      {% endif %}
+
+      {% if not producto.agotado %}
+      <div class="comprar">
+        <div class="cant">
+          <button type="button" data-paso="-1" aria-label="Quitar una unidad">&minus;</button>
+          <label class="skip" for="cantidad">Cantidad</label>
+          <input id="cantidad" name="cantidad" type="number" value="1" min="1" max="{{ producto.disponible_total }}" inputmode="numeric">
+          <button type="button" data-paso="1" aria-label="Agregar una unidad">+</button>
+        </div>
+        <button class="btn btn--primary" type="submit">Agregar al carrito</button>
+        <button class="btn btn--ghost" type="submit" name="ir" value="carrito">Comprar ya</button>
+      </div>
+      {% else %}
+      <div class="comprar">
+        <a class="btn btn--wa" href="{% whatsapp_producto producto %}" target="_blank" rel="noopener">Preguntar cuándo llega</a>
+      </div>
+      {% endif %}
+    </form>
+
+    <p style="margin:16px 0 0; font-size:13.4px; color:var(--muted-2); line-height:1.6">
+      Sin pago en línea: dejás el pedido y lo terminamos por WhatsApp.
+      {% if producto.instalacion %} La instalación se cotiza aparte según el vehículo.{% endif %}
+    </p>
+
+    {% if producto.compatibilidad %}
+    <div class="ficha__sep"></div>
+    <p class="ficha__dato"><b>Sirve para</b> <span>{{ producto.compatibilidad }}</span></p>
+    {% endif %}
+  </div>
+</div>
+
+{# --- Descripción larga --- #}
+{% if producto.parrafos or producto.lista_caracteristicas %}
+<div class="ficha" style="margin-top:56px">
+  {% if producto.parrafos %}
+  <div class="ficha__texto">
+    <h2 class="ficha__h3">Sobre este producto</h2>
+    {% for p in producto.parrafos %}<p>{{ p|linebreaksbr }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if producto.lista_caracteristicas %}
+  <div>
+    <h2 class="ficha__h3">Características</h2>
+    <ul class="ficha__lista">
+      {% for c in producto.lista_caracteristicas %}<li>{{ c }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+
+{# --- Relacionados --- #}
+{% if relacionados %}
+<div class="enlanding" style="margin-top:64px">
+  <h2 class="ficha__h3">También en {{ producto.categoria.nombre }}</h2>
+  <div class="prods">
+    {% for producto in relacionados %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<script>
+/* Ficha de producto: cambiar de medida actualiza precio, disponibilidad y el
+   tope del contador. Todo lo que toca es texto: si el script no corre, el
+   formulario igual manda el SKU elegido y el servidor vuelve a validar el
+   stock. */
+(function(){
+  var pesos = new Intl.NumberFormat('es-CO', {
+    style: 'currency', currency: 'COP', maximumFractionDigits: 0
+  });
+
+  var precio  = document.getElementById('precio-vivo');
+  var antes   = document.getElementById('antes-vivo');
+  var off     = document.getElementById('off-vivo');
+  var senal   = document.getElementById('stock-vivo');
+  var cuantos = document.getElementById('cantidad');
+  var forma   = document.getElementById('form-compra');
+  if (!forma) return;
+
+  function pintar(radio){
+    if (!radio) return;
+    var p = parseInt(radio.dataset.precio || '0', 10);
+    var a = parseInt(radio.dataset.antes || '0', 10);
+    var d = parseInt(radio.dataset.off || '0', 10);
+    var hay = parseInt(radio.dataset.disponible || '0', 10);
+
+    if (precio) precio.textContent = pesos.format(p);
+
+    if (antes) { antes.hidden = !(a > p); if (a > p) antes.textContent = pesos.format(a); }
+    if (off)   { off.hidden = !(d > 0);   if (d > 0)  off.textContent = '-' + d + '%'; }
+
+    if (senal) {
+      senal.className = 'stockb ' + (hay <= 0 ? 'stockb--no' : (hay <= 3 ? 'stockb--poco' : 'stockb--hay'));
+      senal.textContent = hay <= 0 ? 'Agotado por ahora'
+                        : (hay <= 3 ? 'Quedan ' + hay : 'Disponible en el local');
+    }
+
+    if (cuantos) {
+      cuantos.max = Math.max(hay, 1);
+      if (parseInt(cuantos.value, 10) > hay) cuantos.value = Math.max(hay, 1);
+    }
+  }
+
+  forma.addEventListener('change', function(e){
+    if (e.target.name === 'sku') pintar(e.target);
+  });
+  pintar(forma.querySelector('input[name=sku]:checked') || forma.querySelector('input[name=sku]'));
+
+  /* Contador de cantidad */
+  forma.addEventListener('click', function(e){
+    var boton = e.target.closest('[data-paso]');
+    if (!boton || !cuantos) return;
+    var tope = parseInt(cuantos.max || '99', 10);
+    var v = parseInt(cuantos.value, 10) || 1;
+    cuantos.value = Math.min(Math.max(v + parseInt(boton.dataset.paso, 10), 1), tope);
+  });
+
+  /* Galería */
+  var tiras = document.querySelector('.fotos__tiras');
+  var grande = document.getElementById('foto-grande');
+  if (tiras && grande) {
+    tiras.addEventListener('click', function(e){
+      var boton = e.target.closest('button[data-grande]');
+      if (!boton) return;
+      grande.src = boton.dataset.grande;
+      grande.alt = boton.dataset.alt || '';
+      tiras.querySelectorAll('button').forEach(function(b){
+        b.setAttribute('aria-current', b === boton ? 'true' : 'false');
+      });
+    });
+  }
+})();
+</script>
+{% endblock %}

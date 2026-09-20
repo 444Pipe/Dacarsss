@@ -1,0 +1,1238 @@
+{% extends "sitio/base.html" %}{% load static dacars %}
+
+{% block meta %}<title>Lujos, PPF, Polarizados y Detailing en Villavicencio | DACARS</title>
+<meta name="description" content="Taller de personalización de vehículos en Villavicencio, Meta. Lujos y accesorios 4x4, PPF, detailing, polarizados, iluminación, sonido, llantas y PDR. Cra. 33 #24-60, Barrio San Francisco. Cotiza por WhatsApp.">
+<meta name="theme-color" content="#04060c">
+<meta name="author" content="DACARS VILLAVICENCIO S.A.S">
+<link rel="canonical" href="https://www.dacars.com.co/">
+<meta name="keywords" content="lujos para carros villavicencio, accesorios para carros villavicencio, ppf villavicencio, polarizados villavicencio, detailing villavicencio, accesorios 4x4 villavicencio, autolujos villavicencio, llantas villavicencio, sonido para carros villavicencio, iluminacion para carros villavicencio, pdr villavicencio, personalizacion de vehiculos meta, taller de lujos villavicencio">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow">
+
+<!-- Geolocalización para búsqueda local -->
+<meta name="geo.region" content="CO-MET">
+<meta name="geo.placename" content="Villavicencio, Meta, Colombia">
+<meta name="geo.position" content="4.142;-73.634">
+<meta name="ICBM" content="4.142, -73.634">
+<meta name="DC.title" content="DACARS — Personalización de vehículos en Villavicencio">
+<meta name="DC.coverage" content="Villavicencio, Meta, Colombia">
+
+<link rel="alternate" hreflang="es-co" href="https://www.dacars.com.co/">
+<link rel="alternate" hreflang="x-default" href="https://www.dacars.com.co/">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="DACARS">
+<meta property="og:title" content="DACARS | Personalización de vehículos en Villavicencio">
+<meta property="og:description" content="Lujos, accesorios 4x4, PPF, detailing y polarizados. Un solo taller para todo tu carro.">
+<meta property="og:url" content="https://www.dacars.com.co/">
+<meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio, Meta">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DACARS | Personalización de vehículos en Villavicencio">
+<meta name="twitter:description" content="Lujos, accesorios 4x4, PPF, detailing y polarizados en Villavicencio, Meta.">
+<meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="manifest" href="/manifest.webmanifest">
+
+{% endblock %}
+{% block preload %}
+<link rel="preload" as="image" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9" media="(min-width: 861px)">
+<link rel="preload" as="image" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/dacars/video/hero-poster-9x16" media="(max-width: 860px)">
+{% endblock %}{% block css_extra %}{% if productos_del_servicio or destacados %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">{% endif %}{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "AutoPartsStore",
+        "AutoRepair"
+      ],
+      "@id": "https://www.dacars.com.co/#dacars",
+      "name": "DACARS",
+      "alternateName": [
+        "Dacars Lujos Villavicencio",
+        "DACARS VILLAVICENCIO S.A.S",
+        "Dacars Accesorios"
+      ],
+      "legalName": "DACARS VILLAVICENCIO S.A.S",
+      "taxID": "901798060",
+      "slogan": "Especialistas en personalización de vehículos",
+      "description": "Taller de personalización de vehículos en Villavicencio, Meta. Lujos y accesorios, equipamiento 4x4, PPF (Paint Protection Film), detailing, polarizados, iluminación, sonido, llantas y PDR.",
+      "url": "https://www.dacars.com.co/",
+      "telephone": "+573112629406",
+      "image": [
+        "https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image",
+        "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1000/v1789710035/dacars/logo-dacars"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1000/v1789710035/dacars/logo-dacars",
+        "width": 1000,
+        "height": 729
+      },
+      "priceRange": "$$",
+      "currenciesAccepted": "COP",
+      "paymentAccepted": "Efectivo, Transferencia, Tarjeta",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+        "addressLocality": "Villavicencio",
+        "addressRegion": "Meta",
+        "postalCode": "500001",
+        "addressCountry": "CO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 4.142,
+        "longitude": -73.634
+      },
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=Carrera+33+%2324-60+Barrio+San+Francisco+Villavicencio+Meta",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Villavicencio",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Meta, Colombia"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Acacías"
+        },
+        {
+          "@type": "City",
+          "name": "Restrepo"
+        },
+        {
+          "@type": "City",
+          "name": "Cumaral"
+        },
+        {
+          "@type": "City",
+          "name": "Granada"
+        },
+        {
+          "@type": "City",
+          "name": "Puerto López"
+        },
+        {
+          "@type": "City",
+          "name": "San Martín"
+        },
+        {
+          "@type": "City",
+          "name": "Guamal"
+        },
+        {
+          "@type": "City",
+          "name": "Castilla la Nueva"
+        },
+        {
+          "@type": "City",
+          "name": "San Carlos de Guaroa"
+        },
+        {
+          "@type": "City",
+          "name": "Barranca de Upía"
+        },
+        {
+          "@type": "City",
+          "name": "Puerto Gaitán"
+        },
+        {
+          "@type": "City",
+          "name": "Fuente de Oro"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Departamento del Meta"
+        }
+      ],
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 4.142,
+          "longitude": -73.634
+        },
+        "geoRadius": "80000"
+      },
+      "knowsLanguage": "es-CO",
+      "sameAs": [
+        "https://www.instagram.com/dacarslujosvillavicencio/",
+        "https://www.instagram.com/dacars.accesorios/",
+        "https://www.instagram.com/dacarslujos/",
+        "https://www.facebook.com/Dacars.accesorios/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+573112629406",
+        "availableLanguage": "Spanish",
+        "areaServed": "CO"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios DACARS en Villavicencio",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Lujos y accesorios para vehículos",
+              "url": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Accesorios y equipamiento 4x4",
+              "url": "https://www.dacars.com.co/accesorios-4x4-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "PPF - Paint Protection Film",
+              "url": "https://www.dacars.com.co/ppf-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Detailing automotriz",
+              "url": "https://www.dacars.com.co/detailing-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Polarizado de vidrios",
+              "url": "https://www.dacars.com.co/polarizados-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Iluminación automotriz",
+              "url": "https://www.dacars.com.co/iluminacion-para-carros-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Sonido e insonorización",
+              "url": "https://www.dacars.com.co/sonido-para-carros-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Llantas y montaje",
+              "url": "https://www.dacars.com.co/llantas-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "PDR - Desabolladura sin pintura",
+              "url": "https://www.dacars.com.co/pdr-desabolladura-sin-pintura-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "https://www.dacars.com.co/#dacars"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.dacars.com.co/#organizacion",
+      "name": "DACARS VILLAVICENCIO S.A.S",
+      "url": "https://www.dacars.com.co/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1000/v1789710035/dacars/logo-dacars"
+      },
+      "taxID": "901798060",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+        "addressLocality": "Villavicencio",
+        "addressRegion": "Meta",
+        "postalCode": "500001",
+        "addressCountry": "CO"
+      },
+      "sameAs": [
+        "https://www.instagram.com/dacarslujosvillavicencio/",
+        "https://www.instagram.com/dacars.accesorios/",
+        "https://www.instagram.com/dacarslujos/",
+        "https://www.facebook.com/Dacars.accesorios/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.dacars.com.co/#sitio",
+      "url": "https://www.dacars.com.co/",
+      "name": "DACARS Villavicencio",
+      "description": "Personalización de vehículos en Villavicencio, Meta.",
+      "inLanguage": "es-CO",
+      "publisher": {
+        "@id": "https://www.dacars.com.co/#organizacion"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.dacars.com.co/#pagina",
+      "url": "https://www.dacars.com.co/",
+      "name": "DACARS | Lujos, Accesorios 4x4, PPF, Detailing y Polarizados en Villavicencio",
+      "description": "Taller de personalización de vehículos en Villavicencio, Meta. Lujos, accesorios 4x4, PPF, detailing, polarizados, iluminación, sonido, llantas y PDR.",
+      "inLanguage": "es-CO",
+      "isPartOf": {
+        "@id": "https://www.dacars.com.co/#sitio"
+      },
+      "about": {
+        "@id": "https://www.dacars.com.co/#dacars"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.dacars.com.co/#migas",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.dacars.com.co/"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.dacars.com.co/#listaservicios",
+      "name": "Servicios de DACARS en Villavicencio",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Lujos y accesorios para vehículos",
+          "url": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Accesorios y equipamiento 4x4",
+          "url": "https://www.dacars.com.co/accesorios-4x4-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PPF - Paint Protection Film",
+          "url": "https://www.dacars.com.co/ppf-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Detailing automotriz",
+          "url": "https://www.dacars.com.co/detailing-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Polarizado de vidrios",
+          "url": "https://www.dacars.com.co/polarizados-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Iluminación automotriz",
+          "url": "https://www.dacars.com.co/iluminacion-para-carros-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Sonido e insonorización",
+          "url": "https://www.dacars.com.co/sonido-para-carros-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Llantas y montaje",
+          "url": "https://www.dacars.com.co/llantas-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "PDR - Desabolladura sin pintura",
+          "url": "https://www.dacars.com.co/pdr-desabolladura-sin-pintura-villavicencio.html"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.dacars.com.co/#listavideos",
+      "name": "Videos de trabajos de DACARS en Villavicencio",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "VideoObject",
+            "@id": "https://www.dacars.com.co/#video-reel-ppf-sportage",
+            "name": "Full PPF mate en un Kia Sportage 2025",
+            "description": "Instalacion de PPF mate completo sobre un Kia Sportage 2025 en el taller de DACARS en Villavicencio, Meta.",
+            "duration": "PT36S",
+            "thumbnailUrl": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710049/dacars/video/reel-ppf-sportage",
+            "contentUrl": "https://res.cloudinary.com/a0e9tgif/video/upload/v1789710049/dacars/video/reel-ppf-sportage.mp4",
+            "inLanguage": "es-CO",
+            "isFamilyFriendly": true,
+            "publisher": {
+              "@id": "https://www.dacars.com.co/#organizacion"
+            },
+            "locationCreated": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+                "addressLocality": "Villavicencio",
+                "addressRegion": "Meta",
+                "postalCode": "500001",
+                "addressCountry": "CO"
+              }
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "VideoObject",
+            "@id": "https://www.dacars.com.co/#video-reel-led-4x4",
+            "name": "Exploradoras LED para camioneta 4x4",
+            "description": "Montaje de exploradoras LED SC para camioneta 4x4 en DACARS Villavicencio.",
+            "duration": "PT34S",
+            "thumbnailUrl": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710044/dacars/video/reel-led-4x4",
+            "contentUrl": "https://res.cloudinary.com/a0e9tgif/video/upload/v1789710044/dacars/video/reel-led-4x4.mp4",
+            "inLanguage": "es-CO",
+            "isFamilyFriendly": true,
+            "publisher": {
+              "@id": "https://www.dacars.com.co/#organizacion"
+            },
+            "locationCreated": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+                "addressLocality": "Villavicencio",
+                "addressRegion": "Meta",
+                "postalCode": "500001",
+                "addressCountry": "CO"
+              }
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "VideoObject",
+            "@id": "https://www.dacars.com.co/#video-reel-hummer-ev",
+            "name": "Hummer EV: barra LED, faros y rines",
+            "description": "Personalizacion de una Hummer EV en Villavicencio: barra LED, faros e iluminacion delantera y rines.",
+            "duration": "PT55S",
+            "thumbnailUrl": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710042/dacars/video/reel-hummer-ev",
+            "contentUrl": "https://res.cloudinary.com/a0e9tgif/video/upload/v1789710043/dacars/video/reel-hummer-ev.mp4",
+            "inLanguage": "es-CO",
+            "isFamilyFriendly": true,
+            "publisher": {
+              "@id": "https://www.dacars.com.co/#organizacion"
+            },
+            "locationCreated": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+                "addressLocality": "Villavicencio",
+                "addressRegion": "Meta",
+                "postalCode": "500001",
+                "addressCountry": "CO"
+              }
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "VideoObject",
+            "@id": "https://www.dacars.com.co/#video-reel-volante-gr",
+            "name": "Volante deportivo en fibra de carbono",
+            "description": "Instalacion de un volante deportivo GR en fibra de carbono sobre Toyota, en DACARS Villavicencio.",
+            "duration": "PT44S",
+            "thumbnailUrl": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710054/dacars/video/reel-volante-gr",
+            "contentUrl": "https://res.cloudinary.com/a0e9tgif/video/upload/v1789710054/dacars/video/reel-volante-gr.mp4",
+            "inLanguage": "es-CO",
+            "isFamilyFriendly": true,
+            "publisher": {
+              "@id": "https://www.dacars.com.co/#organizacion"
+            },
+            "locationCreated": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+                "addressLocality": "Villavicencio",
+                "addressRegion": "Meta",
+                "postalCode": "500001",
+                "addressCountry": "CO"
+              }
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "VideoObject",
+            "@id": "https://www.dacars.com.co/#video-reel-testimonio-cubierta",
+            "name": "Testimonio de cliente: cubierta de platon",
+            "description": "Un cliente de DACARS Villavicencio cuenta como quedo la cubierta de platon instalada en su camioneta.",
+            "duration": "PT1M3S",
+            "thumbnailUrl": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710051/dacars/video/reel-testimonio-cubierta",
+            "contentUrl": "https://res.cloudinary.com/a0e9tgif/video/upload/v1789710052/dacars/video/reel-testimonio-cubierta.mp4",
+            "inLanguage": "es-CO",
+            "isFamilyFriendly": true,
+            "publisher": {
+              "@id": "https://www.dacars.com.co/#organizacion"
+            },
+            "locationCreated": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+                "addressLocality": "Villavicencio",
+                "addressRegion": "Meta",
+                "postalCode": "500001",
+                "addressCountry": "CO"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.dacars.com.co/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Necesito agendar cita?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es lo ideal, sobre todo para PPF, detailing y trabajos que ocupan el carro varias horas. Escríbenos por WhatsApp con la marca, el modelo y el servicio que buscas, y te damos disponibilidad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tarda un polarizado o un PPF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del vehículo, del número de paneles y del tipo de lámina. Al cotizar te confirmamos el tiempo exacto para que organices tu día sin quedarte sin carro a mitad de semana."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El PPF daña la pintura al retirarlo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Se instala sobre el barniz de fábrica y está diseñado para removerse sin arrancar pintura, siempre que la instalación y el retiro se hagan de forma profesional."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Trabajan camionetas y vehículos 4x4?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y es una parte grande de lo que hacemos: snorkel, bumpers, winches, canastillas, protectores, iluminación auxiliar y llantas para uso mixto entre ciudad y trocha."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde queda DACARS en Villavicencio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En la Carrera 33 #24-60, Barrio San Francisco, Villavicencio, Meta. Para confirmar el horario de atención del día, escríbenos por WhatsApp al 311 262 9406."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo llevar mis propios accesorios para que los instalen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cuéntanos qué tienes y lo revisamos. Si la pieza es compatible y está en buen estado, coordinamos la instalación; si vemos un riesgo para el vehículo, te lo decimos antes de montarla."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
+{% block encabezado %}{% include "sitio/_encabezado_home.html" %}{% endblock %}
+{% block contenido %}<main id="inicio">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <!-- El video lo enciende js/app.js: elige 16:9 o 9:16 según la pantalla y
+         no lo descarga si el visitante pidió menos movimiento o ahorro de datos. -->
+    <video class="hero__video" id="heroVideo"
+           poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9"
+           data-src-ancho="https://res.cloudinary.com/a0e9tgif/video/upload/v1789711358/dacars/video/hero-16x9.mp4"
+           data-src-alto="https://res.cloudinary.com/a0e9tgif/video/upload/dacars/video/hero-9x16.mp4"
+           autoplay muted loop playsinline preload="none" disablepictureinpicture></video>
+    <span class="hero__veil"></span>
+    <span class="grid"></span>
+    <span class="glow glow--a"></span>
+    <span class="glow glow--b"></span>
+  </div>
+
+  <div class="wrap hero__in">
+    <div class="beams" aria-hidden="true">
+      <i class="beam beam--tl"></i><i class="beam beam--bl"></i>
+      <i class="beam beam--tr"></i><i class="beam beam--br"></i>
+      <i class="spark spark--l"></i><i class="spark spark--r"></i>
+    </div>
+
+    <p class="eyebrow" data-reveal>Villavicencio &middot; Meta <span class="dot"></span> Tu carro con carácter propio</p>
+
+    <h1 class="hero__title" data-reveal>
+      <span class="chrome">Personalización</span><br>
+      <span class="chrome">de vehículos en</span>
+      <em class="hero__accent">Villavicencio</em>
+    </h1>
+
+    <p class="hero__lead" data-reveal>
+      Lujos, accesorios 4x4, <strong>PPF</strong>, detailing y polarizados.
+      Un solo taller para dejar tu vehículo protegido, equipado y con la estética que buscas.
+    </p>
+
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Cotiza por WhatsApp
+      </a>
+      <a class="btn btn--ghost" href="#servicios">Ver servicios</a>
+    </div>
+
+    <ul class="hero__stats" data-reveal>
+      <li><b>9</b><span>especialidades bajo un mismo techo</span></li>
+      <li><b>+3.400</b><span>seguidores en Instagram</span></li>
+      <li><b>4x4</b><span>equipamiento para trocha y carretera</span></li>
+      <li><b>PPF</b><span>protección real de la pintura original</span></li>
+    </ul>
+  </div>
+
+  <a class="hero__scroll" href="#servicios" aria-label="Bajar a servicios"><span></span></a>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Lujos<i>&#9670;</i>Accesorios 4x4<i>&#9670;</i>PPF<i>&#9670;</i>Detailing<i>&#9670;</i>Polarizados<i>&#9670;</i>Iluminación<i>&#9670;</i>Sonido<i>&#9670;</i>Llantas<i>&#9670;</i>PDR<i>&#9670;</i></span>
+    <span>Lujos<i>&#9670;</i>Accesorios 4x4<i>&#9670;</i>PPF<i>&#9670;</i>Detailing<i>&#9670;</i>Polarizados<i>&#9670;</i>Iluminación<i>&#9670;</i>Sonido<i>&#9670;</i>Llantas<i>&#9670;</i>PDR<i>&#9670;</i></span>
+  </div>
+</div>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="sec" id="servicios">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>01 &mdash; Servicios</p>
+      <h2 class="sec__title chrome" data-reveal>Todo lo que tu vehículo necesita</h2>
+      <p class="sec__lead" data-reveal>Nueve especialidades que normalmente te obligan a recorrer media ciudad. Acá las resolvemos en el mismo taller, con la misma gente y una sola garantía de trabajo.</p>
+    </header>
+
+    <div class="cards">
+
+      <article class="card" data-reveal>
+        <span class="card__n">01</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13.5 5 8a2.6 2.6 0 0 1 2.4-1.7h9.2A2.6 2.6 0 0 1 19 8l2 5.5"/><path d="M2.6 13.5h18.8v4.2H2.6z"/><circle cx="6.6" cy="17.7" r="1.6"/><circle cx="17.4" cy="17.7" r="1.6"/></svg>
+        </span>
+        <h3>Lujos y accesorios</h3>
+        <p>Estribos, molduras, spoilers, emblemas, tapetes, barras y detalles a medida. La estética que le da personalidad a tu carro, montada como debe ser.</p>
+        <a class="card__mas" href="/lujos-y-accesorios-villavicencio.html">Lujos y accesorios en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">02</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18"/><path d="M5 17V9.5l3-3h6l4 3.5V17"/><circle cx="8" cy="17.5" r="2.4"/><circle cx="17" cy="17.5" r="2.4"/><path d="M8.5 6.5V4M15 6.5V4"/></svg>
+        </span>
+        <h3>Accesorios 4x4</h3>
+        <p>Snorkel, bumpers, winches, canastillas, protectores y equipamiento para camionetas que de verdad salen del pavimento.</p>
+        <a class="card__mas" href="/accesorios-4x4-villavicencio.html">Accesorios 4x4 en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card card--hot" data-reveal>
+        <span class="card__n">03</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6 4.5 5.4v5.9c0 4.7 3.2 8.4 7.5 10.1 4.3-1.7 7.5-5.4 7.5-10.1V5.4Z"/><path d="M9 12.2l2.2 2.2L15.4 10"/></svg>
+        </span>
+        <h3>PPF &middot; Paint Protection Film</h3>
+        <p>Película de poliuretano transparente que recibe el impacto de piedras, arena e insectos en lugar de tu pintura de fábrica. Instalación a medida.</p>
+        <a class="card__mas" href="/ppf-villavicencio.html">PPF en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">04</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c0-3 2-5 4.5-5S13 17 13 20Z"/><path d="M11.5 14.5 19 7a2.1 2.1 0 0 0-3-3l-7.5 7.5"/><path d="M15.5 5.5 18.5 8.5"/></svg>
+        </span>
+        <h3>Detailing</h3>
+        <p>Lavado técnico, descontaminación, corrección de pintura, pulimento y sellado. Recuperamos brillo, profundidad y esa sensación de carro nuevo.</p>
+        <a class="card__mas" href="/detailing-villavicencio.html">Detailing en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">05</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.2 12S6.7 5.8 12 5.8 20.8 12 20.8 12 17.3 18.2 12 18.2 3.2 12 3.2 12Z"/><circle cx="12" cy="12" r="3.1"/></svg>
+        </span>
+        <h3>Polarizados</h3>
+        <p>Láminas instaladas con corte y curado profesional: menos calor dentro del carro, más privacidad y bloqueo UV. Sin burbujas, sin bordes a la vista.</p>
+        <a class="card__mas" href="/polarizados-villavicencio.html">Polarizados en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">06</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 17.5h5.6"/><path d="M10 20.6h4"/><path d="M12 3.4a5.6 5.6 0 0 1 3.4 10.1c-.6.5-.9 1.1-.9 1.8H9.5c0-.7-.3-1.3-.9-1.8A5.6 5.6 0 0 1 12 3.4Z"/></svg>
+        </span>
+        <h3>Iluminación</h3>
+        <p>LED, xenón, barras, exploradoras, luces auxiliares y de cortesía. Instalación con conexión segura, sin improvisar el cableado.</p>
+        <a class="card__mas" href="/iluminacion-para-carros-villavicencio.html">Iluminación en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">07</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.6h3.2L12 5.4v13.2L7.2 14.4H4Z"/><path d="M16 9.4a3.7 3.7 0 0 1 0 5.2"/><path d="M18.6 6.8a7.4 7.4 0 0 1 0 10.4"/></svg>
+        </span>
+        <h3>Sonido</h3>
+        <p>Equipos, parlantes, amplificadores, pantallas e insonorización. Montaje limpio para que suene fuerte sin que vibre el carro entero.</p>
+        <a class="card__mas" href="/sonido-para-carros-villavicencio.html">Sonido en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">08</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3.4v5.2M12 15.4v5.2M3.4 12h5.2M15.4 12h5.2"/></svg>
+        </span>
+        <h3>Llantas</h3>
+        <p>Asesoría según tu uso real &mdash;ciudad, carretera o trocha&mdash; y montaje. La llanta correcta cambia el carro más de lo que te imaginas.</p>
+        <a class="card__mas" href="/llantas-villavicencio.html">Llantas en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">09</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 15.4c3-5.4 7-8.2 11.8-8.9l4.9-.7-1 4.8c-1 4.7-4.1 8.3-9.8 10.4"/><path d="M6.8 12.4l4 4"/></svg>
+        </span>
+        <h3>PDR &middot; Sin pintura</h3>
+        <p>Desabolladura sin pintura: sacamos el golpe desde adentro y conservamos la pintura original de fábrica. Más rápido y sin repintes.</p>
+        <a class="card__mas" href="/pdr-desabolladura-sin-pintura-villavicencio.html">PDR en Villavicencio &rarr;</a>
+      </article>
+
+    </div>
+
+    <p class="sec__foot" data-reveal>¿No ves lo que buscas? Escríbenos y te decimos de una si lo manejamos.
+      <a class="link" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20preguntar%20por%20un%20servicio." target="_blank" rel="noopener">Preguntar por WhatsApp &rarr;</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ PPF ============ -->
+<section class="sec sec--alt" id="ppf">
+  <div class="wrap ppf">
+    <div class="ppf__copy">
+      <p class="tag" data-reveal>02 &mdash; Protección</p>
+      <h2 class="sec__title chrome" data-reveal>PPF: la capa que se lleva los golpes por ti</h2>
+      <p class="sec__lead" data-reveal>Entre Villavicencio y el resto del Meta hay grava, sol fuerte y vías en obra. El Paint Protection Film es una película transparente de poliuretano que se instala sobre el barniz de fábrica y absorbe lo que la carretera le tira a tu carro.</p>
+
+      <ul class="checks" data-reveal>
+        <li><span></span><div><b>Contra impactos</b> de piedra, grava, arena e insectos en frente, capó y estribos.</div></li>
+        <li><span></span><div><b>Sin tocar la pintura original</b>: protege el acabado de fábrica, que es el que sostiene el valor de reventa.</div></li>
+        <li><span></span><div><b>Acabado a elección</b>, brillante o mate, según el look que le quieras dar.</div></li>
+        <li><span></span><div><b>Corte a medida</b> panel por panel, con bordes escondidos y sin levantar.</div></li>
+      </ul>
+
+      <div class="ppf__cta" data-reveal>
+        <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20PPF%20para%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">Cotizar PPF</a>
+        <span class="ppf__note">Cotizamos por paneles o vehículo completo.</span>
+      </div>
+    </div>
+
+    <aside class="ppf__panel" data-reveal>
+      <div class="ppf__panel-in">
+        <p class="ppf__panel-tag">Protección por capas</p>
+        <ol class="layers">
+          <li><b>PPF</b><span>Capa sacrificable de poliuretano</span></li>
+          <li><b>Barniz</b><span>Clearcoat de fábrica</span></li>
+          <li><b>Color</b><span>Pintura original</span></li>
+          <li><b>Base</b><span>Primer sobre lámina</span></li>
+        </ol>
+        <p class="ppf__panel-foot">El daño se queda en la primera capa. La pintura que salió de agencia sigue intacta.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section class="sec" id="proceso">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>03 &mdash; Cómo trabajamos</p>
+      <h2 class="sec__title chrome" data-reveal>De la idea al carro listo</h2>
+      <p class="sec__lead" data-reveal>Nada de sorpresas en la factura ni de &laquo;vuelva mañana&raquo;. Así se mueve cada trabajo que entra al taller.</p>
+    </header>
+
+    <ol class="steps">
+      <li class="step" data-reveal>
+        <span class="step__n">01</span>
+        <h3>Diagnóstico y asesoría</h3>
+        <p>Nos cuentas qué quieres y para qué usas el carro. Te decimos qué conviene, qué no y por qué &mdash;aunque eso signifique venderte menos.</p>
+      </li>
+      <li class="step" data-reveal>
+        <span class="step__n">02</span>
+        <h3>Cotización clara</h3>
+        <p>Recibes el alcance, los materiales y el tiempo estimado antes de que el vehículo entre al taller. Sin letra menuda.</p>
+      </li>
+      <li class="step" data-reveal>
+        <span class="step__n">03</span>
+        <h3>Ejecución en taller</h3>
+        <p>Trabajo en área controlada y con el vehículo protegido. Te mantenemos al tanto del avance por WhatsApp.</p>
+      </li>
+      <li class="step" data-reveal>
+        <span class="step__n">04</span>
+        <h3>Entrega y revisión</h3>
+        <p>Revisamos el resultado contigo, te explicamos los cuidados de los primeros días y respondemos por lo instalado.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ TRABAJOS ============ -->
+<section class="sec sec--alt" id="trabajos">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>04 &mdash; Trabajos</p>
+      <h2 class="sec__title chrome" data-reveal>Lo que sale del taller</h2>
+      <p class="sec__lead" data-reveal>Estos son trabajos reales que salieron del taller. Dale play a cualquiera y míralo completo, con audio.</p>
+    </header>
+
+    <div class="clips">
+      <article class="clip" data-reveal>
+        <div class="clip__media">
+          <video class="clip__v" src="https://res.cloudinary.com/a0e9tgif/video/upload/v1789710049/dacars/video/reel-ppf-sportage.mp4"
+                 poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710049/dacars/video/reel-ppf-sportage"
+                 preload="none" playsinline loop
+                 aria-label="Full PPF mate en un Sportage 2025 — DACARS Villavicencio"></video>
+          <span class="clip__tag">PPF</span>
+          <button class="clip__btn" type="button" aria-label="Reproducir: Full PPF mate en un Sportage 2025"></button>
+        </div>
+        <div class="clip__meta">
+          <h3>Full PPF mate en un Sportage 2025</h3>
+          <a href="/ppf-villavicencio.html">PPF en Villavicencio &rarr;</a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip__media">
+          <video class="clip__v" src="https://res.cloudinary.com/a0e9tgif/video/upload/v1789710044/dacars/video/reel-led-4x4.mp4"
+                 poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710044/dacars/video/reel-led-4x4"
+                 preload="none" playsinline loop
+                 aria-label="Exploradoras LED para 4x4 — DACARS Villavicencio"></video>
+          <span class="clip__tag">Iluminación</span>
+          <button class="clip__btn" type="button" aria-label="Reproducir: Exploradoras LED para 4x4"></button>
+        </div>
+        <div class="clip__meta">
+          <h3>Exploradoras LED para 4x4</h3>
+          <a href="/iluminacion-para-carros-villavicencio.html">Iluminación en Villavicencio &rarr;</a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip__media">
+          <video class="clip__v" src="https://res.cloudinary.com/a0e9tgif/video/upload/v1789710043/dacars/video/reel-hummer-ev.mp4"
+                 poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710042/dacars/video/reel-hummer-ev"
+                 preload="none" playsinline loop
+                 aria-label="Hummer EV: barra LED, faros y rines — DACARS Villavicencio"></video>
+          <span class="clip__tag">Lujos</span>
+          <button class="clip__btn" type="button" aria-label="Reproducir: Hummer EV: barra LED, faros y rines"></button>
+        </div>
+        <div class="clip__meta">
+          <h3>Hummer EV: barra LED, faros y rines</h3>
+          <a href="/lujos-y-accesorios-villavicencio.html">Lujos en Villavicencio &rarr;</a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip__media">
+          <video class="clip__v" src="https://res.cloudinary.com/a0e9tgif/video/upload/v1789710054/dacars/video/reel-volante-gr.mp4"
+                 poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710054/dacars/video/reel-volante-gr"
+                 preload="none" playsinline loop
+                 aria-label="Volante deportivo en fibra de carbono — DACARS Villavicencio"></video>
+          <span class="clip__tag">Interior</span>
+          <button class="clip__btn" type="button" aria-label="Reproducir: Volante deportivo en fibra de carbono"></button>
+        </div>
+        <div class="clip__meta">
+          <h3>Volante deportivo en fibra de carbono</h3>
+          <a href="/lujos-y-accesorios-villavicencio.html">Accesorios en Villavicencio &rarr;</a>
+        </div>
+      </article>
+    </div>
+
+    <p class="clips__nota" data-reveal>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10.2 8.4 15.8 12l-5.6 3.6Z" fill="currentColor" stroke="none"/></svg>
+      Los videos tienen audio. Toca el botón de play para escucharlos.
+    </p>
+
+
+
+    <div class="gal__cta" data-reveal>
+      <a class="btn btn--ghost" href="https://www.instagram.com/dacarslujosvillavicencio/" target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0m0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324M12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8m6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881"/></svg>
+        @dacarslujosvillavicencio
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIO ============ -->
+<section class="sec" id="testimonio">
+  <div class="wrap testi">
+    <div class="testi__media" data-reveal>
+      <div class="clip">
+        <div class="clip__media">
+          <video class="clip__v" src="https://res.cloudinary.com/a0e9tgif/video/upload/v1789710052/dacars/video/reel-testimonio-cubierta.mp4"
+                 poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_608/v1789710051/dacars/video/reel-testimonio-cubierta"
+                 preload="none" playsinline loop
+                 aria-label="Testimonio de un cliente de DACARS Villavicencio"></video>
+          <span class="clip__tag">Testimonio</span>
+          <button class="clip__btn" type="button" aria-label="Reproducir el testimonio del cliente"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi__copy">
+      <p class="tag" data-reveal>05 &mdash; Testimonio</p>
+      <h2 class="sec__title chrome" data-reveal>Que lo cuente quien ya pasó por el taller</h2>
+      <p data-reveal>Un cliente nos dejó su testimonio en video, parado junto a su camioneta,
+        contando cómo le quedó la cubierta de platón que le instalamos.</p>
+      <p data-reveal>Dale play &mdash;tiene audio&mdash; y escúchalo de primera mano.
+        Es la mejor forma que tenemos de mostrarte cómo trabajamos.</p>
+      <span class="testi__pie" data-reveal>Accesorios 4x4 &middot; <b>Cubierta de platón</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="sec" id="nosotros">
+  <div class="wrap nos">
+    <div class="nos__copy">
+      <p class="tag" data-reveal>06 &mdash; Nosotros</p>
+      <h2 class="sec__title chrome" data-reveal>Un taller del Llano, hecho para el Llano</h2>
+      <p class="sec__lead" data-reveal>
+        DACARS nació en Villavicencio con una idea simple: que personalizar un carro no tenga que ser un peregrinaje de un local a otro.
+        Acá reunimos lujos, accesorios 4x4, protección de pintura, detailing, polarizados, iluminación, sonido, llantas y PDR
+        en un mismo lugar, con criterio técnico y materiales que aguantan el calor, el sol y las vías de esta región.
+      </p>
+      <p class="sec__lead" data-reveal>
+        Somos <strong>DACARS VILLAVICENCIO S.A.S.</strong>, empresa formalmente registrada, y atendemos desde el Barrio San Francisco
+        a conductores de toda la ciudad y del Meta.
+      </p>
+      <p class="sec__lead" data-reveal>
+        Si estás buscando <strong>lujos para carros en Villavicencio</strong>, un
+        <strong>polarizado</strong> que no se llene de burbujas, <strong>PPF</strong> que aguante
+        la vía al Llano o <strong>accesorios 4x4</strong> para salir a trocha, este es el taller.
+      </p>
+
+      <div class="values">
+        <div class="value" data-reveal><b>Un solo taller</b><span>Todo el proceso bajo el mismo techo y la misma responsabilidad.</span></div>
+        <div class="value" data-reveal><b>Instalación técnica</b><span>Cortes, cableados y sellados hechos como toca, no improvisados.</span></div>
+        <div class="value" data-reveal><b>Asesoría honesta</b><span>Te decimos qué necesita tu carro de verdad, no lo que más deja.</span></div>
+        <div class="value" data-reveal><b>Pensado para el Meta</b><span>Materiales elegidos para el sol, el calor y la trocha de la región.</span></div>
+      </div>
+    </div>
+
+    <figure class="nos__mark" data-reveal>
+      <img src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1000/v1789710035/dacars/logo-dacars" alt="Logotipo DACARS, taller de personalización de vehículos en Villavicencio" width="1000" height="729" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<!-- ============ COBERTURA ============ -->
+<section class="sec" id="cobertura">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>07 &mdash; Cobertura</p>
+      <h2 class="sec__title chrome" data-reveal>Dónde atendemos en Villavicencio y el Meta</h2>
+      <p class="sec__lead" data-reveal>El taller queda en la <strong>Carrera 33 #24-60, Barrio San Francisco</strong>,
+        a pocos minutos de buena parte de la ciudad. Si vienes de otro municipio, escríbenos antes de viajar
+        y coordinamos la cita para que aproveches el desplazamiento.</p>
+    </header>
+
+    <div class="cobertura">
+      <div class="cobertura__col" data-reveal>
+        <h3>Barrios y zonas de Villavicencio</h3>
+        <ul class="chips">
+            <li>San Francisco</li>
+            <li>Barzal</li>
+            <li>Centro</li>
+            <li>Siete de Agosto</li>
+            <li>La Esperanza</li>
+            <li>Ciudad Porfía</li>
+            <li>Catumare</li>
+            <li>El Buque</li>
+            <li>Villa Bolívar</li>
+            <li>La Rosita</li>
+            <li>Los Centauros</li>
+            <li>Balcones de Toledo</li>
+            <li>Maizaro</li>
+            <li>San Fernando</li>
+            <li>Las Colinas</li>
+            <li>Nueva Andalucía</li>
+            <li>Camoa</li>
+            <li>Montecarlo</li>
+            <li>Las Américas</li>
+            <li>Playa Rica</li>
+            <li>El Refugio</li>
+            <li>La Vega</li>
+        </ul>
+        <p class="cobertura__nota">Y el resto de la ciudad: si no ves tu barrio, igual te atendemos.</p>
+      </div>
+
+      <div class="cobertura__col" data-reveal>
+        <h3>Municipios del Meta</h3>
+        <ul class="chips">
+            <li>Acacías</li>
+            <li>Restrepo</li>
+            <li>Cumaral</li>
+            <li>Granada</li>
+            <li>Puerto López</li>
+            <li>San Martín</li>
+            <li>Guamal</li>
+            <li>Castilla la Nueva</li>
+            <li>San Carlos de Guaroa</li>
+            <li>Barranca de Upía</li>
+            <li>Puerto Gaitán</li>
+            <li>Fuente de Oro</li>
+        </ul>
+        <p class="cobertura__nota">Recibimos vehículos de toda la región. Agenda por WhatsApp
+          antes de venir para tener todo listo cuando llegues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec sec--alt" id="faq">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>08 &mdash; Preguntas</p>
+      <h2 class="sec__title chrome" data-reveal>Lo que más nos preguntan</h2>
+    </header>
+
+    <div class="faq">
+      <details data-reveal>
+        <summary>¿Necesito agendar cita?</summary>
+        <div><p>Es lo ideal, sobre todo para PPF, detailing y trabajos que ocupan el carro varias horas. Escríbenos por WhatsApp con la marca, el modelo y el servicio que buscas, y te damos disponibilidad.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Cuánto tarda un polarizado o un PPF?</summary>
+        <div><p>Depende del vehículo, del número de paneles y del tipo de lámina. Al cotizar te confirmamos el tiempo exacto para que organices tu día sin quedarte sin carro a mitad de semana.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿El PPF daña la pintura al retirarlo?</summary>
+        <div><p>No. Se instala sobre el barniz de fábrica y está diseñado para removerse sin arrancar pintura, siempre que la instalación y el retiro se hagan de forma profesional. Por eso el corte y el sellado de bordes importan tanto.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Trabajan camionetas y vehículos 4x4?</summary>
+        <div><p>Sí, y es una parte grande de lo que hacemos: snorkel, bumpers, winches, canastillas, protectores, iluminación auxiliar y llantas para uso mixto entre ciudad y trocha.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Qué horarios manejan y cómo llego?</summary>
+        <div><p>Estamos en la <strong>Carrera 33 #24-60, Barrio San Francisco, Villavicencio</strong>. Para confirmar el horario de atención del día, escríbenos por WhatsApp al <a class="link" href="https://wa.me/573112629406" target="_blank" rel="noopener">311 262 9406</a> y te respondemos de una.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Puedo llevar mis propios accesorios para que los instalen?</summary>
+        <div><p>Cuéntanos qué tienes y lo revisamos. Si la pieza es compatible y está en buen estado, coordinamos la instalación; si vemos un riesgo para el vehículo, te lo decimos antes de montarla.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+{% include "catalogo/_seccion.html" with productos=destacados etiqueta="Catálogo" titulo="Lo que tenemos en el local" bajada="Accesorios y repuestos con precio y disponibilidad al día. Lo apartás desde acá y cerramos por WhatsApp." %}
+
+<!-- ============ CONTACTO ============ -->
+<section class="sec" id="contacto">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>09 &mdash; Contacto</p>
+      <h2 class="sec__title chrome" data-reveal>Cotiza tu proyecto</h2>
+      <p class="sec__lead" data-reveal>Llena los datos y te abrimos el chat de WhatsApp con el mensaje listo. También puedes escribirnos directo o pasar por el taller.</p>
+    </header>
+
+    <div class="contact">
+      <form class="form" id="form" novalidate data-reveal>
+        <div class="field">
+          <label for="f-nombre">Tu nombre</label>
+          <input id="f-nombre" name="nombre" type="text" placeholder="Ej. Andrés Gómez" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-vehiculo">Vehículo</label>
+          <input id="f-vehiculo" name="vehiculo" type="text" placeholder="Ej. Toyota Hilux 2022" required>
+        </div>
+        <div class="field field--full">
+          <label for="f-servicio">Servicio de interés</label>
+          <select id="f-servicio" name="servicio" required>
+            <option value="">Selecciona un servicio</option>
+            <option>Lujos y accesorios</option>
+            <option>Accesorios 4x4</option>
+            <option>PPF · Paint Protection Film</option>
+            <option>Detailing</option>
+            <option>Polarizados</option>
+            <option>Iluminación</option>
+            <option>Sonido</option>
+            <option>Llantas</option>
+            <option>PDR · Desabolladura sin pintura</option>
+            <option>Otro / varios servicios</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label for="f-msg">Cuéntanos qué necesitas <span class="opt">(opcional)</span></label>
+          <textarea id="f-msg" name="mensaje" rows="4" placeholder="Ej. Quiero PPF en el frente y polarizado de todo el carro."></textarea>
+        </div>
+        <div class="field field--full">
+          <button class="btn btn--primary btn--block" type="submit">
+            <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Enviar por WhatsApp
+          </button>
+          <p class="form__note" id="form-note" role="status">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+        </div>
+      </form>
+
+      <aside class="info" data-reveal>
+        <a class="info__row" href="https://wa.me/573112629406" target="_blank" rel="noopener">
+          <span class="info__ico"><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></span>
+          <span><b>WhatsApp</b>+57 311 262 9406</span>
+        </a>
+        <a class="info__row" href="https://www.google.com/maps/search/?api=1&amp;query=Carrera+33+%2324-60+Barrio+San+Francisco+Villavicencio+Meta" target="_blank" rel="noopener">
+          <span class="info__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <span><b>Taller</b>Cra. 33 #24-60, Barrio San Francisco<br>Villavicencio, Meta</span>
+        </a>
+        <a class="info__row" href="https://www.instagram.com/dacarslujosvillavicencio/" target="_blank" rel="noopener">
+          <span class="info__ico"><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0m0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324M12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8m6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881"/></svg></span>
+          <span><b>Instagram</b>@dacarslujosvillavicencio</span>
+        </a>
+        <a class="info__row" href="https://www.facebook.com/Dacars.accesorios/" target="_blank" rel="noopener">
+          <span class="info__ico"><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073"/></svg></span>
+          <span><b>Facebook</b>Dacars Lujos Villavicencio</span>
+        </a>
+
+        <div class="map">
+          <iframe
+            title="Ubicación de DACARS en Villavicencio"
+            src="https://www.google.com/maps?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;z=16&amp;output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>
+{% endblock %}
+{% block pie %}{% include "sitio/_pie_home.html" with wa_flotante="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20servicio." %}{% endblock %}
