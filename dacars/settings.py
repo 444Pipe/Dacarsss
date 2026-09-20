@@ -218,7 +218,36 @@ MEDIA_ROOT = BASE_DIR / "media"
 # Las fotos de producto van a Cloudinary, la misma cuenta que ya sirve los
 # assets del sitio. Sin CLOUDINARY_URL definida se guardan en disco, así el
 # proyecto corre en local sin credenciales.
-CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL", "")
+#
+# La validación de acá no es paranoia. El paquete `cloudinary` lee esta
+# variable por su cuenta apenas se importa, y si el valor no arranca con
+# `cloudinary://` levanta un ValueError ahí mismo: el contenedor no llega ni a
+# arrancar y se cae el sitio entero, incluidas las 11 landings que no tienen
+# nada que ver con subir fotos. Una credencial mal pegada no puede costar eso.
+#
+# Si el valor está mal, se avisa fuerte en el log y se saca del entorno. El
+# sitio queda en pie y lo único que no anda es subir fotos nuevas.
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL", "").strip().strip('"').strip("'")
+
+if CLOUDINARY_URL and not CLOUDINARY_URL.startswith("cloudinary://"):
+    import logging
+
+    logging.getLogger(__name__).error(
+        "CLOUDINARY_URL está mal escrita (empieza con %r, tiene que empezar con "
+        "'cloudinary://'). Se ignora: las fotos nuevas van al disco del "
+        "contenedor y se pierden en el próximo despliegue. Revisá la variable "
+        "en el panel del servicio.",
+        CLOUDINARY_URL[:20],
+    )
+    CLOUDINARY_URL = ""
+
+if CLOUDINARY_URL:
+    # Normalizada: si venía con comillas o espacios, el paquete tiene que ver
+    # el valor limpio, no el original.
+    os.environ["CLOUDINARY_URL"] = CLOUDINARY_URL
+else:
+    os.environ.pop("CLOUDINARY_URL", None)
+
 USAR_CLOUDINARY = bool(CLOUDINARY_URL)
 
 STORAGES = {
