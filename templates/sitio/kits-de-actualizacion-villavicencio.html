@@ -1,0 +1,490 @@
+{% extends "sitio/base.html" %}{% load static dacars %}
+
+{% block meta %}<title>Kits de actualización en Villavicencio | Toyota y más — DACARS</title>
+<meta name="description" content="Kits de actualización para Toyota Hilux, Fortuner, Prado y otros carros en Villavicencio. La cara del modelo nuevo sin cambiar de carro.">
+<meta name="keywords" content="kit de actualizacion villavicencio, kit de actualizacion toyota, kit de actualizacion hilux, kit de actualizacion fortuner, kit de actualizacion prado, actualizar camioneta villavicencio, actualizar carro modelo villavicencio, kit de conversion camioneta meta, modernizar camioneta villavicencio">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#04060c">
+<meta name="author" content="DACARS VILLAVICENCIO S.A.S">
+<link rel="canonical" href="{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html">
+<link rel="alternate" hreflang="es-co" href="{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html">
+<link rel="alternate" hreflang="x-default" href="{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html">
+
+<!-- Geolocalización para búsqueda local -->
+<meta name="geo.region" content="CO-MET">
+<meta name="geo.placename" content="Villavicencio, Meta, Colombia">
+<meta name="geo.position" content="4.142;-73.634">
+<meta name="ICBM" content="4.142, -73.634">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="DACARS">
+<meta property="og:title" content="Kits de actualización en Villavicencio | Toyota y más — DACARS">
+<meta property="og:description" content="Kits de actualización para Toyota Hilux, Fortuner, Prado y otros carros en Villavicencio. La cara del modelo nuevo sin cambiar de carro.">
+<meta property="og:url" content="{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html">
+<meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kits de actualización en Villavicencio | Toyota y más — DACARS">
+<meta name="twitter:description" content="Kits de actualización para Toyota Hilux, Fortuner, Prado y otros carros en Villavicencio. La cara del modelo nuevo sin cambiar de carro.">
+<meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="manifest" href="/manifest.webmanifest">
+
+{% endblock %}
+{% block css_extra %}{% if productos_del_servicio or destacados %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">{% endif %}{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html#servicio",
+      "name": "Kits de actualización en Villavicencio",
+      "alternateName": "Kits de actualización en Villavicencio",
+      "description": "Kits de actualización para Toyota Hilux, Fortuner, Prado y otros carros en Villavicencio. La cara del modelo nuevo sin cambiar de carro.",
+      "url": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html",
+      "serviceType": "Kits de actualización",
+      "category": "Automotriz",
+      "provider": {
+        "@type": "AutoPartsStore",
+        "@id": "{{ negocio.sitio }}/#dacars",
+        "name": "DACARS",
+        "telephone": "+573112629406",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+          "addressLocality": "Villavicencio",
+          "addressRegion": "Meta",
+          "addressCountry": "CO"
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Villavicencio"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Meta"
+        },
+        {
+          "@type": "City",
+          "name": "Acacías"
+        },
+        {
+          "@type": "City",
+          "name": "Restrepo"
+        },
+        {
+          "@type": "City",
+          "name": "Cumaral"
+        },
+        {
+          "@type": "City",
+          "name": "Granada"
+        },
+        {
+          "@type": "City",
+          "name": "Puerto López"
+        },
+        {
+          "@type": "City",
+          "name": "San Martín"
+        }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20kit%20de%20actualizaci%C3%B3n%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio.",
+        "servicePhone": "+573112629406",
+        "serviceLocation": {
+          "@type": "Place",
+          "name": "DACARS Villavicencio",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+            "addressLocality": "Villavicencio",
+            "addressRegion": "Meta",
+            "addressCountry": "CO"
+          }
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Kits de actualización",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Frente completo"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Faros y stops"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Guardafangos y capó"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Parte trasera"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Interior"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pintura de las piezas"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html#migas",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "{{ negocio.sitio }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "{{ negocio.sitio }}/#servicios"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Kits de actualización en Villavicencio",
+          "item": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué modelos de Toyota actualizan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los que más entran son Hilux, Fortuner, Prado y Land Cruiser, que es el parque fuerte del Llano, y también Corolla y RAV4. Mándanos el año y la versión exacta de tu carro y te confirmamos si hay kit para el tuyo y hasta qué año lo podemos llevar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Solo hacen Toyota?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Toyota es lo que más se pide acá, pero trabajamos actualizaciones de otras marcas: Mazda, Chevrolet, Ford, Renault, Nissan. Lo que manda no es la marca sino que exista kit para tu modelo y versión, y eso es lo primero que miramos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay que hacer algún trámite después?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cambiarle la cara al carro no cambia la tarjeta de propiedad: la línea y el modelo registrados siguen siendo los mismos. Lo que sí hay que reportar ante el tránsito es un cambio de COLOR. Si tu actualización incluye cambiar el color, te avisamos al cotizar para que lo tengas en cuenta y lo confirmes con tu organismo de tránsito."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los faros nuevos van a funcionar bien?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Esa es la parte que separa un buen montaje de uno malo. Los faros del modelo nuevo muchas veces traen otro conector, otra lógica o piden un módulo. Se resuelve, pero hay que resolverlo: conectado a la fuerza, un farol deja testigos encendidos o se termina quemando. Al cotizar te decimos qué necesita el tuyo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se nota que es un kit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bien montado, no. Lo que delata un kit son tres cosas: las luces entre pieza y pieza desparejas, el color que no iguala y los bordes que no cierran. Por eso pintamos las piezas al color exacto de tu carro y revisamos el ajuste contigo antes de entregar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto se demora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El montaje se cuenta en días, no en semanas. Lo que manda el tiempo es conseguir el kit: si está disponible se agenda de una, y si hay que encargarlo te damos la fecha antes de que dejes el carro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo llevar yo el kit y que solo lo monten?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Cuéntanos qué compraste y para qué carro, y lo revisamos antes de recibirlo. Si vemos que la pieza no corresponde a tu versión o que viene con un defecto, te lo decimos antes de empezar y no a mitad del montaje."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html#pagina",
+      "url": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html",
+      "name": "Kits de actualización en Villavicencio | Toyota y más — DACARS",
+      "description": "Kits de actualización para Toyota Hilux, Fortuner, Prado y otros carros en Villavicencio. La cara del modelo nuevo sin cambiar de carro.",
+      "inLanguage": "es-CO",
+      "isPartOf": {
+        "@id": "{{ negocio.sitio }}/#sitio"
+      },
+      "about": {
+        "@id": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html#servicio"
+      },
+      "breadcrumb": {
+        "@id": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html#migas"
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block contenido %}<main id="contenido">
+
+<nav class="migas" aria-label="Ruta de navegación">
+  <div class="wrap">
+    <ol>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/#servicios">Servicios</a></li>
+      <li aria-current="page">Kits de actualización en Villavicencio</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="shero">
+  <div class="shero__bg" aria-hidden="true"><span class="grid"></span><span class="glow glow--a"></span></div>
+  <div class="wrap">
+    <p class="tag" data-reveal>Kits de actualización &middot; Villavicencio, Meta</p>
+    <h1 class="shero__title" data-reveal><span class="chrome">Kits de actualización en Villavicencio</span></h1>
+    <p class="shero__sub" data-reveal>Ponle a tu carro la cara del modelo nuevo</p>
+    <p class="shero__lead" data-reveal>Cambiamos el frente, la cola y el interior por los del modelo más reciente. El mismo carro que ya conoces, con otra cara.</p>
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20kit%20de%20actualizaci%C3%B3n%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Cotizar por WhatsApp
+      </a>
+      <a class="btn btn--ghost" href="#faq">Preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+      <p class="sec__lead" data-reveal>Tu camioneta anda perfecto. El motor está sano, la caja responde, los mantenimientos están al día. Lo único que la delata es el frente: los faros, la parrilla, el bómper. Un modelo de hace seis o siete años se reconoce a diez metros, y cuando llega el momento de venderla, esa cara vieja te cuesta plata.</p>
+      <p class="sec__lead" data-reveal>Un kit de actualización cambia eso sin cambiar el carro. Se reemplazan las piezas exteriores —parrilla, bómper, faros, stops y, según el kit, guardafangos y capó— por las del modelo más reciente, y el carro pasa a leerse como un año que no es el suyo. En el Llano es de lo que más nos piden en Toyota, porque acá la Hilux, la Fortuner y la Prado son carro de trabajo y de familia a la vez: se cuidan, duran, y llega el punto en que el único problema es que se ven viejas.</p>
+      <p class="sec__lead" data-reveal>No existe kit para todo modelo, y no todo kit calza igual. Antes de cotizarte miramos el año exacto y la versión, porque entre una y otra cambian los anclajes, el conector de los faros y hasta el ancho del bómper. Te decimos qué se puede, qué no, y qué quedaría a medias. Y como las piezas llegan sin el color de tu carro, la <a class="link" href="/pintura-automotriz-villavicencio.html">pintura</a> va dentro del trabajo: es lo que hace que no se note que el frente es de otro año.</p>
+  </div>
+</section>
+
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Alcance</p>
+      <h2 class="sec__title chrome" data-reveal>Qué se puede actualizar</h2>
+    </header>
+    <ul class="checks checks--2" data-reveal>
+        <li><span></span><div><b>Frente completo</b> Parrilla, bómper, faros y accesorios del frente. Es el cambio que más se nota y el que más se pide.</div></li>
+        <li><span></span><div><b>Faros y stops</b> Los del modelo nuevo, con la conexión resuelta. Un farol conectado a la fuerza deja testigos encendidos en el tablero.</div></li>
+        <li><span></span><div><b>Guardafangos y capó</b> Cuando el kit los exige para que las líneas del frente cierren como deben.</div></li>
+        <li><span></span><div><b>Parte trasera</b> Stops, bómper trasero y emblemas, para que la actualización no quede solo de frente.</div></li>
+        <li><span></span><div><b>Interior</b> Volante, consola, pantalla y detalles de tablero, según lo que traiga el modelo al que quieres llegar.</div></li>
+        <li><span></span><div><b>Pintura de las piezas</b> El kit llega en negro o en primer. Lo pintamos al color exacto de tu carro, que es la mitad de que el trabajo no se note.</div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Contexto local</p>
+      <h2 class="sec__title chrome" data-reveal>Por qué tiene sentido acá</h2>
+    </header>
+    <div class="cards cards--3">
+        <article class="card" data-reveal>
+          <h3>Toyota manda en el Llano</h3>
+          <p>Hilux, Fortuner, Prado y Land Cruiser son el parque real de la región. Son los kits que más hemos montado y donde mejor sabemos qué esperar de cada año.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Cuesta menos que cambiar de carro</h3>
+          <p>Un kit vale una fracción de la diferencia que pagarías por pasarte al modelo nuevo, y te quedas con el carro que ya sabes cómo anda.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Sostiene el precio de venta</h3>
+          <p>El comprador mira el frente antes que el kilometraje. Una camioneta actualizada se negocia distinto.</p>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cómo trabajamos</p>
+      <h2 class="sec__title chrome" data-reveal>El paso a paso</h2>
+    </header>
+    <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step__n">01</span>
+          <h3>Año, versión y placa</h3>
+          <p>Con eso identificamos qué kit aplica de verdad. Dos camionetas del mismo modelo y distinto año no siempre comparten anclajes ni conectores.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">02</span>
+          <h3>Te decimos qué se puede y qué no</h3>
+          <p>Si para tu versión no hay kit, o si exige cortar y adaptar, te lo decimos antes de que pagues nada. Preferimos perder el trabajo a entregarte un frente que se vea forzado.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">03</span>
+          <h3>Conseguimos las piezas</h3>
+          <p>Pedimos el kit y te confirmamos la fecha. Es la parte que manda el calendario, así que se cierra antes de que dejes el carro: nunca te pedimos que lo dejes esperando piezas.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">04</span>
+          <h3>Montaje, conexión y pintura</h3>
+          <p>Se desmonta el frente viejo, se monta el nuevo, se resuelve la parte eléctrica y se pintan las piezas al color de tu carro. Revisión contigo antes de entregar.</p>
+        </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cotización</p>
+      <h2 class="sec__title chrome" data-reveal>Qué define el precio de un kit</h2>
+      <p class="sec__lead" data-reveal>No publicamos listas de precios porque cada vehículo es distinto y preferimos no prometer cifras que después cambien. Estos son los factores que definen tu cotización:</p>
+    </header>
+    <ul class="factores" data-reveal>
+        <li>El <strong>modelo, el año y la versión</strong>: es lo que define qué kit aplica y cuánto vale la pieza.</li>
+        <li>El <strong>alcance</strong>: solo el frente, frente y cola, o también el interior.</li>
+        <li>La <strong>pintura</strong>: las piezas llegan sin el color de tu carro y hay que igualarlo panel por panel.</li>
+        <li>La <strong>parte eléctrica</strong>: si los faros del modelo nuevo piden otro conector o un módulo, eso va aparte.</li>
+        <li>La <strong>disponibilidad</strong>: hay kits que están y kits que hay que encargar, y eso mueve el tiempo más que el precio.</li>
+    </ul>
+    <p class="sec__foot" data-reveal>
+      <a class="link" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20kit%20de%20actualizaci%C3%B3n%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." target="_blank" rel="noopener">Pide tu cotización por WhatsApp &rarr;</a>
+    </p>
+  </div>
+</section>
+
+{% include "catalogo/_seccion.html" with productos=productos_del_servicio etiqueta="En el local" titulo="Productos para este servicio" ver_mas=categoria_del_servicio.get_absolute_url %}
+
+<section class="sec sec--alt" id="faq">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Preguntas frecuentes</p>
+      <h2 class="sec__title chrome" data-reveal>Kits de actualización en Villavicencio: lo que más nos preguntan</h2>
+    </header>
+    <div class="faq">
+      <details data-reveal>
+        <summary>¿Qué modelos de Toyota actualizan?</summary>
+        <div><p>Los que más entran son Hilux, Fortuner, Prado y Land Cruiser, que es el parque fuerte del Llano, y también Corolla y RAV4. Mándanos el año y la versión exacta de tu carro y te confirmamos si hay kit para el tuyo y hasta qué año lo podemos llevar.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Solo hacen Toyota?</summary>
+        <div><p>No. Toyota es lo que más se pide acá, pero trabajamos actualizaciones de otras marcas: Mazda, Chevrolet, Ford, Renault, Nissan. Lo que manda no es la marca sino que exista kit para tu modelo y versión, y eso es lo primero que miramos.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Hay que hacer algún trámite después?</summary>
+        <div><p>Cambiarle la cara al carro no cambia la tarjeta de propiedad: la línea y el modelo registrados siguen siendo los mismos. Lo que sí hay que reportar ante el tránsito es un cambio de COLOR. Si tu actualización incluye cambiar el color, te avisamos al cotizar para que lo tengas en cuenta y lo confirmes con tu organismo de tránsito.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Los faros nuevos van a funcionar bien?</summary>
+        <div><p>Esa es la parte que separa un buen montaje de uno malo. Los faros del modelo nuevo muchas veces traen otro conector, otra lógica o piden un módulo. Se resuelve, pero hay que resolverlo: conectado a la fuerza, un farol deja testigos encendidos o se termina quemando. Al cotizar te decimos qué necesita el tuyo.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Se nota que es un kit?</summary>
+        <div><p>Bien montado, no. Lo que delata un kit son tres cosas: las luces entre pieza y pieza desparejas, el color que no iguala y los bordes que no cierran. Por eso pintamos las piezas al color exacto de tu carro y revisamos el ajuste contigo antes de entregar.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Cuánto se demora?</summary>
+        <div><p>El montaje se cuenta en días, no en semanas. Lo que manda el tiempo es conseguir el kit: si está disponible se agenda de una, y si hay que encargarlo te damos la fecha antes de que dejes el carro.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Puedo llevar yo el kit y que solo lo monten?</summary>
+        <div><p>Sí. Cuéntanos qué compraste y para qué carro, y lo revisamos antes de recibirlo. Si vemos que la pieza no corresponde a tu versión o que viene con un defecto, te lo decimos antes de empezar y no a mitad del montaje.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cobertura">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cobertura</p>
+      <h2 class="sec__title chrome" data-reveal>Dónde estamos y a quién atendemos</h2>
+      <p class="sec__lead" data-reveal>
+        El taller queda en la <strong>Carrera 33 #24-60, Barrio San Francisco</strong>, en Villavicencio. Estamos a pocos minutos
+        de buena parte de la ciudad, así que si vives o trabajas en cualquiera de estas zonas, llegar es fácil.
+      </p>
+    </header>
+    <p class="zonas" data-reveal><b>Barrios y zonas de Villavicencio:</b> San Francisco &middot; Barzal &middot; Centro &middot; Siete de Agosto &middot; La Esperanza &middot; Ciudad Porfía &middot; Catumare &middot; El Buque &middot; Villa Bolívar &middot; La Rosita &middot; Los Centauros &middot; Balcones de Toledo &middot; Maizaro &middot; San Fernando &middot; Las Colinas &middot; Nueva Andalucía &middot; Camoa &middot; Montecarlo &middot; Las Américas &middot; Playa Rica &middot; El Refugio &middot; La Vega y el resto de la ciudad.</p>
+    <p class="zonas" data-reveal><b>¿Vienes de otro municipio del Meta?</b> Recibimos vehículos de Acacías &middot; Restrepo &middot; Cumaral &middot; Granada &middot; Puerto López &middot; San Martín &middot; Guamal &middot; Castilla la Nueva &middot; San Carlos de Guaroa &middot; Barranca de Upía &middot; Puerto Gaitán &middot; Fuente de Oro y demás municipios de la región. Escríbenos antes de viajar y coordinamos la cita para que aproveches el desplazamiento. Mira cómo funciona la <a class="link" href="/personalizacion-de-vehiculos-meta.html">atención para todo el departamento del Meta</a>.</p>
+    <div class="mapa-mini" data-reveal>
+      <iframe title="Ubicación de DACARS en Villavicencio"
+        src="https://www.google.com/maps?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;z=16&amp;output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Más servicios</p>
+      <h2 class="sec__title chrome" data-reveal>Todo en el mismo taller</h2>
+      <p class="sec__lead" data-reveal>Aprovecha la visita y resuelve varias cosas de una. Combinar servicios sale mejor que entrar al taller tres veces.</p>
+    </header>
+    {% include "sitio/_otros_servicios.html" %}
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="wrap cierre__in">
+    <h2 class="chrome" data-reveal>Kits de actualización en Villavicencio</h2>
+    <p data-reveal>Cuéntanos tu vehículo y qué necesitas. Te cotizamos y te damos tiempos reales.</p>
+    <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20kit%20de%20actualizaci%C3%B3n%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." target="_blank" rel="noopener" data-reveal>
+      <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+</main>
+{% endblock %}
+{% block pie %}{% include "sitio/_pie.html" with wa_flotante="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20kit%20de%20actualizaci%C3%B3n%20para%20mi%20veh%C3%ADculo%20en%20Villavicencio." %}{% endblock %}

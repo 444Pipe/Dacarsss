@@ -1,4 +1,4 @@
-"""Las páginas del sitio: portada, las 10 landings, el hub del Meta, robots y manifest."""
+"""Las páginas del sitio: portada, las landings, el hub del Meta, robots y manifest."""
 
 from django.conf import settings
 from django.http import Http404, HttpResponse

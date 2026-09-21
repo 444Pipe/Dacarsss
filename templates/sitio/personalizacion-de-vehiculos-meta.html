@@ -1,7 +1,7 @@
 {% extends "sitio/base.html" %}{% load static dacars %}
 
 {% block meta %}<title>Lujos, PPF y Detailing en el Meta | DACARS Villavicencio</title>
-<meta name="description" content="Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.">
+<meta name="description" content="Lujos, 4x4, PPF, detailing, polarizados, pintura y kits de actualización para todo el Meta. Atendemos Acacías, Granada y Puerto López desde Villavicencio.">
 <meta name="keywords" content="lujos para carros meta, accesorios para carros meta, ppf meta, polarizados meta, detailing meta, taller de lujos meta, personalizacion de vehiculos meta, accesorios 4x4 meta, pintura para carros meta, lujos para carros acacias, polarizados granada meta, accesorios para carros puerto lopez, taller de carros meta, autolujos meta, llantas meta">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#04060c">
@@ -20,7 +20,7 @@
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="DACARS">
 <meta property="og:title" content="Lujos, PPF y Detailing en el Meta | DACARS Villavicencio">
-<meta property="og:description" content="Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.">
+<meta property="og:description" content="Lujos, 4x4, PPF, detailing, polarizados, pintura y kits de actualización para todo el Meta. Atendemos Acacías, Granada y Puerto López desde Villavicencio.">
 <meta property="og:url" content="{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html">
 <meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 <meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lujos, PPF y Detailing en el Meta | DACARS Villavicencio">
-<meta name="twitter:description" content="Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.">
+<meta name="twitter:description" content="Lujos, 4x4, PPF, detailing, polarizados, pintura y kits de actualización para todo el Meta. Atendemos Acacías, Granada y Puerto López desde Villavicencio.">
 <meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
 
 <link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
@@ -49,7 +49,7 @@
       "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#pagina",
       "url": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html",
       "name": "Lujos, PPF y Detailing en el Meta | DACARS Villavicencio",
-      "description": "Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.",
+      "description": "Lujos, 4x4, PPF, detailing, polarizados, pintura y kits de actualización para todo el Meta. Atendemos Acacías, Granada y Puerto López desde Villavicencio.",
       "inLanguage": "es-CO",
       "isPartOf": {
         "@id": "{{ negocio.sitio }}/#sitio"
@@ -69,7 +69,7 @@
       "@type": "Service",
       "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#servicio",
       "name": "Personalización de vehículos en el departamento del Meta",
-      "description": "Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.",
+      "description": "Lujos, 4x4, PPF, detailing, polarizados, pintura y kits de actualización para todo el Meta. Atendemos Acacías, Granada y Puerto López desde Villavicencio.",
       "url": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html",
       "serviceType": "Personalización y protección de vehículos",
       "category": "Automotriz",
@@ -368,6 +368,20 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "name": "Latonería",
+              "url": "{{ negocio.sitio }}/latoneria-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
               "name": "Pintura automotriz",
               "url": "{{ negocio.sitio }}/pintura-automotriz-villavicencio.html",
               "areaServed": {
@@ -454,6 +468,20 @@
               "@type": "Service",
               "name": "Sonido e insonorización",
               "url": "{{ negocio.sitio }}/sonido-para-carros-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Kits de actualización",
+              "url": "{{ negocio.sitio }}/kits-de-actualizacion-villavicencio.html",
               "areaServed": {
                 "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
               },
@@ -1081,7 +1109,7 @@
     <header class="sec__head">
       <p class="tag" data-reveal>Servicios</p>
       <h2 class="sec__title chrome" data-reveal>Lo que puedes resolver en una sola visita</h2>
-      <p class="sec__lead" data-reveal>Diez especialidades en el mismo taller. Si viajas desde lejos,
+      <p class="sec__lead" data-reveal>Doce especialidades en el mismo taller. Si viajas desde lejos,
         combinar varias es justamente lo que hace que el desplazamiento valga la pena.</p>
     </header>
     <div class="cards cards--3">
@@ -1094,6 +1122,16 @@
           <h3>Accesorios y equipamiento 4x4</h3>
           <p>Snorkel, bumpers, winches, canastillas y protectores para las camionetas que salen del pavimento todos los días, no solo los domingos.</p>
           <a class="card__mas" href="/accesorios-4x4-villavicencio.html">Accesorios y equipamiento 4x4 en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Kits de actualización</h3>
+          <p>Frente, cola e interior del modelo nuevo sobre tu carro. En el Llano la Toyota de trabajo se cuida y dura: llega el punto en que lo único viejo es la cara.</p>
+          <a class="card__mas" href="/kits-de-actualizacion-villavicencio.html">Kits de actualización en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Latonería</h3>
+          <p>Enderezado de lámina y masillado. Si vienes de lejos conviene resolverlo junto con la pintura: un solo viaje, una sola cotización.</p>
+          <a class="card__mas" href="/latoneria-villavicencio.html">Latonería en Villavicencio &rarr;</a>
         </article>
         <article class="card" data-reveal>
           <h3>Pintura automotriz</h3>

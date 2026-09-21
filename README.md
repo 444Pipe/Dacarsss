@@ -37,7 +37,7 @@ dacars/           Configuración del proyecto
   admin.py          El AdminSite de DACARS (tablero con alertas)
 
 sitio/            Las páginas que no salen de la base de datos
-  paginas.py        Índice de las 10 landings y el hub del Meta
+  paginas.py        Índice de las landings y el hub del Meta
   views.py          Portada, landings, robots.txt, manifest
   sitemaps.py       Sitemap vivo: suma solos los productos nuevos
   templatetags/     pesos, foto (Cloudinary), whatsapp, json_txt
@@ -48,7 +48,7 @@ inventario/       Movimientos de stock. Lo único que toca las existencias
 pedidos/          Carrito (sesión), pedido y su ciclo de estados
 
 templates/
-  sitio/            base.html, los parciales y las 12 páginas del sitio
+  sitio/            base.html, los parciales y las páginas del sitio
   tienda/base.html  Base de las páginas nuevas (hereda de sitio/base.html)
   catalogo/         Listado, ficha, tarjeta y la franja para las landings
   pedidos/          Carrito, checkout y confirmación
@@ -100,7 +100,7 @@ local:
 python manage.py test sitio
 ```
 
-Comprueba, en cada una de las 12 páginas, que haya un solo `h1`, que el `title` y
+Comprueba, en cada página del sitio, que haya un solo `h1`, que el `title` y
 la `description` sean únicos y quepan en el fragmento de Google, que el canonical
 apunte al dominio configurado, que el JSON-LD parsee y traiga `WebPage`,
 `FAQPage`, `Service` y `BreadcrumbList`, y que ningún enlace interno esté roto.
@@ -417,7 +417,7 @@ python manage.py test catalogo
 
 Lo que cubren, por si hay que decidir qué no romper:
 
-- Las 12 URLs con `.html` responden 200 y `/index.html` redirige 301.
+- Todas las URLs con `.html` responden 200 y `/index.html` redirige 301.
 - Cada landing conserva su canonical, su JSON-LD y la pantalla de carga.
 - Un solo `h1` por página; `title` y `description` únicos y dentro del corte.
 - El JSON-LD parsea y trae los tipos que Google lee.

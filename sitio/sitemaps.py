@@ -1,8 +1,8 @@
 """El sitemap, ahora vivo.
 
-Antes era un XML a mano con 10 URLs. Ahora son 12 —la portada, las 10
-landings y el hub del Meta— y se le suman solas las categorías y los
-productos que publique el comercio. Un producto
+Antes era un XML a mano con 10 URLs. Ahora salen solas la portada, las
+landings y el hub del Meta, y se les suman las categorías y los productos
+que publique el comercio. Un producto
 nuevo aparece en el sitemap el mismo día, sin que nadie corra un script.
 """
 

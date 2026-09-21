@@ -1,0 +1,490 @@
+{% extends "sitio/base.html" %}{% load static dacars %}
+
+{% block meta %}<title>Latonería y pintura en Villavicencio | Golpes y choques — DACARS</title>
+<meta name="description" content="Latonería en Villavicencio: enderezado de lámina, masillado y preparación para pintura. Golpes de parqueadero y choques, en un solo taller.">
+<meta name="keywords" content="latoneria villavicencio, latoneria y pintura villavicencio, arreglar golpe de carro villavicencio, enderezar lamina carro villavicencio, reparar choque carro villavicencio, taller de latoneria villavicencio, latoneria automotriz meta, arreglar abolladura carro villavicencio">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#04060c">
+<meta name="author" content="DACARS VILLAVICENCIO S.A.S">
+<link rel="canonical" href="{{ negocio.sitio }}/latoneria-villavicencio.html">
+<link rel="alternate" hreflang="es-co" href="{{ negocio.sitio }}/latoneria-villavicencio.html">
+<link rel="alternate" hreflang="x-default" href="{{ negocio.sitio }}/latoneria-villavicencio.html">
+
+<!-- Geolocalización para búsqueda local -->
+<meta name="geo.region" content="CO-MET">
+<meta name="geo.placename" content="Villavicencio, Meta, Colombia">
+<meta name="geo.position" content="4.142;-73.634">
+<meta name="ICBM" content="4.142, -73.634">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="DACARS">
+<meta property="og:title" content="Latonería y pintura en Villavicencio | Golpes y choques — DACARS">
+<meta property="og:description" content="Latonería en Villavicencio: enderezado de lámina, masillado y preparación para pintura. Golpes de parqueadero y choques, en un solo taller.">
+<meta property="og:url" content="{{ negocio.sitio }}/latoneria-villavicencio.html">
+<meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Latonería y pintura en Villavicencio | Golpes y choques — DACARS">
+<meta name="twitter:description" content="Latonería en Villavicencio: enderezado de lámina, masillado y preparación para pintura. Golpes de parqueadero y choques, en un solo taller.">
+<meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="manifest" href="/manifest.webmanifest">
+
+{% endblock %}
+{% block css_extra %}{% if productos_del_servicio or destacados %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">{% endif %}{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "{{ negocio.sitio }}/latoneria-villavicencio.html#servicio",
+      "name": "Latonería en Villavicencio",
+      "alternateName": "Latonería en Villavicencio",
+      "description": "Latonería en Villavicencio: enderezado de lámina, masillado y preparación para pintura. Golpes de parqueadero y choques, en un solo taller.",
+      "url": "{{ negocio.sitio }}/latoneria-villavicencio.html",
+      "serviceType": "Latonería",
+      "category": "Automotriz",
+      "provider": {
+        "@type": "AutoPartsStore",
+        "@id": "{{ negocio.sitio }}/#dacars",
+        "name": "DACARS",
+        "telephone": "+573112629406",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+          "addressLocality": "Villavicencio",
+          "addressRegion": "Meta",
+          "addressCountry": "CO"
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Villavicencio"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Meta"
+        },
+        {
+          "@type": "City",
+          "name": "Acacías"
+        },
+        {
+          "@type": "City",
+          "name": "Restrepo"
+        },
+        {
+          "@type": "City",
+          "name": "Cumaral"
+        },
+        {
+          "@type": "City",
+          "name": "Granada"
+        },
+        {
+          "@type": "City",
+          "name": "Puerto López"
+        },
+        {
+          "@type": "City",
+          "name": "San Martín"
+        }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20trabajo%20de%20latoner%C3%ADa%20en%20Villavicencio.",
+        "servicePhone": "+573112629406",
+        "serviceLocation": {
+          "@type": "Place",
+          "name": "DACARS Villavicencio",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+            "addressLocality": "Villavicencio",
+            "addressRegion": "Meta",
+            "addressCountry": "CO"
+          }
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Latonería",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Golpes de parqueadero"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Choques menores"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Enderezado de lámina"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Masillado y lijado"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Platones y guardafangos"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Preparación para pintura"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ negocio.sitio }}/latoneria-villavicencio.html#migas",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "{{ negocio.sitio }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "{{ negocio.sitio }}/#servicios"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Latonería en Villavicencio",
+          "item": "{{ negocio.sitio }}/latoneria-villavicencio.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "{{ negocio.sitio }}/latoneria-villavicencio.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Hacen latonería y pintura juntas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y es lo normal: casi ningún trabajo de lámina termina sin pintura. Se cotizan juntas para que no pagues dos veces el alistamiento y para que el color se resuelva sabiendo qué se hizo debajo. Si solo necesitas la lámina, también se puede."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Latonería o PDR? ¿Cuál me sirve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si la pintura está intacta y solo hay abollón, el PDR es mejor: más rápido, más barato y conserva la pintura de fábrica. La latonería entra cuando la pintura está partida, la lámina quedó estirada o el golpe está donde el PDR no alcanza. Lo miramos contigo y te decimos cuál es tu caso, aunque nos convenga el otro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánta masilla le van a poner?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La menos posible. La masilla sirve para nivelar los últimos milímetros, no para rellenar un hundido que no se enderezó. Un panel con masilla gruesa pesa más, se agrieta con los años y el sol del Llano lo delata antes. Si vemos que tu caso pide demasiada, te lo decimos y te explicamos por qué."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Toman choques grandes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del caso. Golpes de parqueadero, choques menores y paneles deformados son lo que más entra. Si hay daño estructural —chasis, largueros, columnas— mándanos fotos por WhatsApp y te decimos de frente si lo tomamos o si te conviene un taller de colisión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se va a notar el arreglo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bien hecho, no. Lo que delata un arreglo son tres cosas: el panel ondulado al reflejo, el color que no iguala y los bordes que no cierran. Por eso revisamos bajo luz directa antes de pasar a pintura y otra vez antes de entregarte el carro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo se demora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del panel y de si va con pintura. Lo que manda el calendario es el secado y el curado, no el trabajo de lámina. Al cotizar te damos el tiempo real para que organices cómo te mueves mientras tanto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Trabajan con aseguradora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escríbenos con los datos de tu caso y te decimos cómo lo manejamos. Muchos clientes prefieren cotizar por su cuenta cuando el deducible sale parecido al arreglo, así que te damos la cifra para que compares antes de decidir."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ negocio.sitio }}/latoneria-villavicencio.html#pagina",
+      "url": "{{ negocio.sitio }}/latoneria-villavicencio.html",
+      "name": "Latonería y pintura en Villavicencio | Golpes y choques — DACARS",
+      "description": "Latonería en Villavicencio: enderezado de lámina, masillado y preparación para pintura. Golpes de parqueadero y choques, en un solo taller.",
+      "inLanguage": "es-CO",
+      "isPartOf": {
+        "@id": "{{ negocio.sitio }}/#sitio"
+      },
+      "about": {
+        "@id": "{{ negocio.sitio }}/latoneria-villavicencio.html#servicio"
+      },
+      "breadcrumb": {
+        "@id": "{{ negocio.sitio }}/latoneria-villavicencio.html#migas"
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block contenido %}<main id="contenido">
+
+<nav class="migas" aria-label="Ruta de navegación">
+  <div class="wrap">
+    <ol>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/#servicios">Servicios</a></li>
+      <li aria-current="page">Latonería en Villavicencio</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="shero">
+  <div class="shero__bg" aria-hidden="true"><span class="grid"></span><span class="glow glow--a"></span></div>
+  <div class="wrap">
+    <p class="tag" data-reveal>Latonería &middot; Villavicencio, Meta</p>
+    <h1 class="shero__title" data-reveal><span class="chrome">Latonería en Villavicencio</span></h1>
+    <p class="shero__sub" data-reveal>Sacamos el golpe y dejamos la lámina lista para pintar</p>
+    <p class="shero__lead" data-reveal>Enderezado, masillado y preparación de la lámina. El paso que decide si el repinte se va a notar o no.</p>
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20trabajo%20de%20latoner%C3%ADa%20en%20Villavicencio." target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Cotizar por WhatsApp
+      </a>
+      <a class="btn btn--ghost" href="#faq">Preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+      <p class="sec__lead" data-reveal>Un golpe se arregla dos veces: una en la lámina y otra en la pintura. Y de las dos, la que nadie ve es la que manda. Si el panel no quedó derecho, con la forma y la tensión que traía de fábrica, no hay pintura que lo salve: el reflejo lo delata apenas el carro sale al sol, que acá es todos los días.</p>
+      <p class="sec__lead" data-reveal>Eso es la latonería: devolverle al panel su forma. Enderezar la lámina, trabajar el hundido desde donde haya acceso, aplicar masilla solo donde de verdad hace falta y lijar hasta que la superficie quede plana de verdad, no plana al tacto. En el Llano entra de todo: el golpe del parqueadero, el choque en la vía, la rama que cayó sobre el capó y el platón de la camioneta de finca que lleva años cargando.</p>
+      <p class="sec__lead" data-reveal>Lo hacemos en el mismo taller donde se pinta, y eso importa más de lo que parece: no tienes que mover el carro de un lado a otro ni coordinar dos cotizaciones, y el que prepara la lámina sabe exactamente qué va a recibir el que aplica la <a class="link" href="/pintura-automotriz-villavicencio.html">pintura</a>.</p>
+  </div>
+</section>
+
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Alcance</p>
+      <h2 class="sec__title chrome" data-reveal>Qué trabajos de latonería hacemos</h2>
+    </header>
+    <ul class="checks checks--2" data-reveal>
+        <li><span></span><div><b>Golpes de parqueadero</b> El clásico: la puerta ajena, el poste que no se vio, el carrito del supermercado.</div></li>
+        <li><span></span><div><b>Choques menores</b> Bómper, guardafangos, puertas y paneles laterales con la lámina deformada.</div></li>
+        <li><span></span><div><b>Enderezado de lámina</b> Se trabaja el panel hasta devolverle la forma, con la menor cantidad de masilla posible.</div></li>
+        <li><span></span><div><b>Masillado y lijado</b> Solo donde hace falta. Una capa gruesa de masilla es un arreglo que se agrieta al año.</div></li>
+        <li><span></span><div><b>Platones y guardafangos</b> Las camionetas de finca y de obra llegan castigadas justo en esas zonas.</div></li>
+        <li><span></span><div><b>Preparación para pintura</b> El panel sale de latonería listo para el imprimante y sigue derecho a la cabina.</div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Contexto local</p>
+      <h2 class="sec__title chrome" data-reveal>Por qué importa cómo se hace</h2>
+    </header>
+    <div class="cards cards--3">
+        <article class="card" data-reveal>
+          <h3>La masilla no es el arreglo</h3>
+          <p>Es el ajuste final. Cuando se usa para rellenar un hundido que no se enderezó, el panel queda pesado, se agrieta con el tiempo y el sol del Llano lo marca antes.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>El reflejo no miente</h3>
+          <p>Un panel mal enderezado se ve derecho de frente y ondulado de costado. Por eso revisamos bajo luz directa, que es donde se nota todo.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Decide el resultado de la pintura</h3>
+          <p>El mejor pintor del mundo no arregla una lámina torcida. Lo que se hace acá es lo que define si el repinte se nota.</p>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cómo trabajamos</p>
+      <h2 class="sec__title chrome" data-reveal>El paso a paso</h2>
+    </header>
+    <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step__n">01</span>
+          <h3>Evaluamos el golpe</h3>
+          <p>Miramos profundidad, ubicación y acceso por detrás del panel. Acá se decide si conviene latonería o si tu caso sale mejor con un PDR.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">02</span>
+          <h3>Te decimos la verdad</h3>
+          <p>Si la pintura está intacta y el golpe se puede sacar sin repintar, te mandamos a PDR aunque sea el trabajo más chico. No abrimos una lámina que no hay que abrir.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">03</span>
+          <h3>Enderezado y ajuste</h3>
+          <p>Se trabaja el panel hasta recuperar la forma. La masilla entra al final y en capa fina, para nivelar, no para rellenar.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">04</span>
+          <h3>Lijado y entrega a pintura</h3>
+          <p>Lijado progresivo, revisión bajo luz directa contigo y el panel listo para imprimante. De ahí pasa a pintura sin salir del taller.</p>
+        </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cotización</p>
+      <h2 class="sec__title chrome" data-reveal>Qué define el precio de un trabajo de latonería</h2>
+      <p class="sec__lead" data-reveal>No publicamos listas de precios porque cada vehículo es distinto y preferimos no prometer cifras que después cambien. Estos son los factores que definen tu cotización:</p>
+    </header>
+    <ul class="factores" data-reveal>
+        <li>El <strong>tamaño y la profundidad</strong> del golpe: no es lo mismo un hundido de palma que un panel doblado.</li>
+        <li>La <strong>ubicación</strong>: un borde, un filo o una zona con refuerzo interno complica mucho el acceso.</li>
+        <li>El <strong>panel</strong>: algunos se desmontan en minutos y otros obligan a sacar media pieza para llegar.</li>
+        <li>Si la <strong>pintura</strong> va incluida: casi siempre sí, y se cotiza junto para que no pagues dos alistamientos.</li>
+        <li>El <strong>estado previo</strong>: masilla vieja o un arreglo anterior mal hecho hay que sacarlos antes de empezar.</li>
+    </ul>
+    <p class="sec__foot" data-reveal>
+      <a class="link" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20trabajo%20de%20latoner%C3%ADa%20en%20Villavicencio." target="_blank" rel="noopener">Pide tu cotización por WhatsApp &rarr;</a>
+    </p>
+  </div>
+</section>
+
+{% include "catalogo/_seccion.html" with productos=productos_del_servicio etiqueta="En el local" titulo="Productos para este servicio" ver_mas=categoria_del_servicio.get_absolute_url %}
+
+<section class="sec sec--alt" id="faq">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Preguntas frecuentes</p>
+      <h2 class="sec__title chrome" data-reveal>Latonería en Villavicencio: lo que más nos preguntan</h2>
+    </header>
+    <div class="faq">
+      <details data-reveal>
+        <summary>¿Hacen latonería y pintura juntas?</summary>
+        <div><p>Sí, y es lo normal: casi ningún trabajo de lámina termina sin pintura. Se cotizan juntas para que no pagues dos veces el alistamiento y para que el color se resuelva sabiendo qué se hizo debajo. Si solo necesitas la lámina, también se puede.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Latonería o PDR? ¿Cuál me sirve?</summary>
+        <div><p>Si la pintura está intacta y solo hay abollón, el PDR es mejor: más rápido, más barato y conserva la pintura de fábrica. La latonería entra cuando la pintura está partida, la lámina quedó estirada o el golpe está donde el PDR no alcanza. Lo miramos contigo y te decimos cuál es tu caso, aunque nos convenga el otro.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Cuánta masilla le van a poner?</summary>
+        <div><p>La menos posible. La masilla sirve para nivelar los últimos milímetros, no para rellenar un hundido que no se enderezó. Un panel con masilla gruesa pesa más, se agrieta con los años y el sol del Llano lo delata antes. Si vemos que tu caso pide demasiada, te lo decimos y te explicamos por qué.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Toman choques grandes?</summary>
+        <div><p>Depende del caso. Golpes de parqueadero, choques menores y paneles deformados son lo que más entra. Si hay daño estructural —chasis, largueros, columnas— mándanos fotos por WhatsApp y te decimos de frente si lo tomamos o si te conviene un taller de colisión.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Se va a notar el arreglo?</summary>
+        <div><p>Bien hecho, no. Lo que delata un arreglo son tres cosas: el panel ondulado al reflejo, el color que no iguala y los bordes que no cierran. Por eso revisamos bajo luz directa antes de pasar a pintura y otra vez antes de entregarte el carro.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Cuánto tiempo se demora?</summary>
+        <div><p>Depende del panel y de si va con pintura. Lo que manda el calendario es el secado y el curado, no el trabajo de lámina. Al cotizar te damos el tiempo real para que organices cómo te mueves mientras tanto.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Trabajan con aseguradora?</summary>
+        <div><p>Escríbenos con los datos de tu caso y te decimos cómo lo manejamos. Muchos clientes prefieren cotizar por su cuenta cuando el deducible sale parecido al arreglo, así que te damos la cifra para que compares antes de decidir.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cobertura">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cobertura</p>
+      <h2 class="sec__title chrome" data-reveal>Dónde estamos y a quién atendemos</h2>
+      <p class="sec__lead" data-reveal>
+        El taller queda en la <strong>Carrera 33 #24-60, Barrio San Francisco</strong>, en Villavicencio. Estamos a pocos minutos
+        de buena parte de la ciudad, así que si vives o trabajas en cualquiera de estas zonas, llegar es fácil.
+      </p>
+    </header>
+    <p class="zonas" data-reveal><b>Barrios y zonas de Villavicencio:</b> San Francisco &middot; Barzal &middot; Centro &middot; Siete de Agosto &middot; La Esperanza &middot; Ciudad Porfía &middot; Catumare &middot; El Buque &middot; Villa Bolívar &middot; La Rosita &middot; Los Centauros &middot; Balcones de Toledo &middot; Maizaro &middot; San Fernando &middot; Las Colinas &middot; Nueva Andalucía &middot; Camoa &middot; Montecarlo &middot; Las Américas &middot; Playa Rica &middot; El Refugio &middot; La Vega y el resto de la ciudad.</p>
+    <p class="zonas" data-reveal><b>¿Vienes de otro municipio del Meta?</b> Recibimos vehículos de Acacías &middot; Restrepo &middot; Cumaral &middot; Granada &middot; Puerto López &middot; San Martín &middot; Guamal &middot; Castilla la Nueva &middot; San Carlos de Guaroa &middot; Barranca de Upía &middot; Puerto Gaitán &middot; Fuente de Oro y demás municipios de la región. Escríbenos antes de viajar y coordinamos la cita para que aproveches el desplazamiento. Mira cómo funciona la <a class="link" href="/personalizacion-de-vehiculos-meta.html">atención para todo el departamento del Meta</a>.</p>
+    <div class="mapa-mini" data-reveal>
+      <iframe title="Ubicación de DACARS en Villavicencio"
+        src="https://www.google.com/maps?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;z=16&amp;output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Más servicios</p>
+      <h2 class="sec__title chrome" data-reveal>Todo en el mismo taller</h2>
+      <p class="sec__lead" data-reveal>Aprovecha la visita y resuelve varias cosas de una. Combinar servicios sale mejor que entrar al taller tres veces.</p>
+    </header>
+    {% include "sitio/_otros_servicios.html" %}
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="wrap cierre__in">
+    <h2 class="chrome" data-reveal>Latonería en Villavicencio</h2>
+    <p data-reveal>Cuéntanos tu vehículo y qué necesitas. Te cotizamos y te damos tiempos reales.</p>
+    <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20trabajo%20de%20latoner%C3%ADa%20en%20Villavicencio." target="_blank" rel="noopener" data-reveal>
+      <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+</main>
+{% endblock %}
+{% block pie %}{% include "sitio/_pie.html" with wa_flotante="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20trabajo%20de%20latoner%C3%ADa%20en%20Villavicencio." %}{% endblock %}

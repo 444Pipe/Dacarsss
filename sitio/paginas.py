@@ -1,6 +1,6 @@
 """Las páginas del sitio que no salen de la base de datos.
 
-Son las 10 landings de servicio, el hub del Meta y la portada. El contenido sigue viviendo en
+Son las 12 landings de servicio, el hub del Meta y la portada. El contenido sigue viviendo en
 las plantillas (una por página, migradas desde los HTML originales con
 `tools/migrar-a-django.py`); esta lista es solo el índice: qué URL sirve qué
 plantilla, y con qué prioridad va al sitemap.
@@ -20,7 +20,9 @@ SERVICIOS = [
     ("sonido-para-carros-villavicencio", "Sonido"),
     ("llantas-villavicencio", "Llantas"),
     ("pdr-desabolladura-sin-pintura-villavicencio", "PDR"),
+    ("latoneria-villavicencio", "Latonería"),
     ("pintura-automotriz-villavicencio", "Pintura"),
+    ("kits-de-actualizacion-villavicencio", "Kits de actualización"),
 ]
 
 SLUGS = [slug for slug, _ in SERVICIOS]

@@ -19,7 +19,7 @@ urlpatterns = [
     path("manifest.webmanifest", views.manifest, name="manifest"),
 ]
 
-# Las 10 landings, con el .html que ya tienen indexado.
+# Las landings, con el .html que ya tienen indexado.
 urlpatterns += [
     path(
         slug + ".html",
