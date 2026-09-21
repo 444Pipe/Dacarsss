@@ -9,18 +9,32 @@ generar-servicios.py SOBRESCRIBE las 9 landings, asi que todo lo que las
 retoca tiene que correr despues. Correr los scripts sueltos y en otro orden
 deja el sitio a medio parchear (fue lo que paso con los iconos de marca).
 
-    1. generar-servicios.py   crea las 9 landings desde cero
-    2. patch-index.py         capa de SEO local sobre index.html
-    3. patch-video.py         hero, reels y testimonio en index.html
-    4. patch-carga.py         pantalla de carga
-    5. fix-iconos.py          glifos de marca correctos (WhatsApp, IG, FB)
-    6. usar-cloudinary.py     assets a Cloudinary
-    7. versionar-assets.py    huella de contenido en css/js  <- SIEMPRE ultimo
+    1. generar-servicios.py   crea las 10 landings desde cero
+    2. generar-meta.py        hub departamental del Meta
+    3. patch-index.py         capa de SEO local sobre index.html
+    4. patch-video.py         hero, reels y testimonio en index.html
+    5. patch-carga.py         pantalla de carga
+    6. fix-iconos.py          glifos de marca correctos (WhatsApp, IG, FB)
+    7. generar-sitemap.py     sitemap.xml desde las paginas que existen
+    8. usar-cloudinary.py     assets a Cloudinary
+    9. versionar-assets.py    huella de contenido en css/js  <- SIEMPRE ultimo
 
-Los pasos 1-5 emiten rutas locales (statics/...) y el 6 las convierte, asi que
-el 6 no se puede adelantar.
+El 2 va detras del 1 porque generar-meta.py importa la plantilla compartida
+(TPL_CABEZA / TPL_PIE) de generar-servicios.py y escribe una pagina mas, que
+los parcheadores 5 y 6 tienen que alcanzar.
 
-Y el 7 va despues del 6 por una razon concreta: versionar-assets.py calcula el
+Los pasos 1-6 emiten rutas locales (statics/...) y el 8 las convierte, asi que
+el 8 no se puede adelantar.
+
+El 7 queda encajonado entre los parcheadores y Cloudinary a proposito:
+generar-sitemap.py le pone a cada URL un lastmod que solo se mueve cuando la
+huella del HTML cambia. Si corriera antes del 6 la huella seria de una pagina
+a medio parchear, y si corriera despues del 8 cada resubida de un asset a
+Cloudinary (que cambia el /v<numero>/ de las URLs) moveria la fecha de las 12
+paginas sin que el contenido hubiera cambiado. Ahi el lastmod dejaria de
+significar nada, que es la forma mas facil de que Google deje de mirarlo.
+
+Y el 9 va despues del 8 por una razon concreta: versionar-assets.py calcula el
 md5 de js/app.js, y usar-cloudinary.py MODIFICA js/app.js (le mete las URLs de
 los posters del hero). Si se corriera al reves, el ?v= del HTML tendria el hash
 del app.js viejo y los navegadores se quedarian con la version cacheada.
@@ -39,11 +53,13 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PASOS = [
-    ("generar-servicios.py", "las 9 landings de servicio"),
+    ("generar-servicios.py", "las 10 landings de servicio"),
+    ("generar-meta.py", "hub departamental del Meta"),
     ("patch-index.py", "SEO local en la portada"),
     ("patch-video.py", "hero, reels y testimonio"),
     ("patch-carga.py", "pantalla de carga"),
     ("fix-iconos.py", "glifos de marca"),
+    ("generar-sitemap.py", "sitemap.xml"),
     ("usar-cloudinary.py", "assets a Cloudinary"),
     ("versionar-assets.py", "huella de contenido en css/js"),
 ]

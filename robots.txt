@@ -1,16 +1,67 @@
 # DACARS VILLAVICENCIO S.A.S — Villavicencio, Meta, Colombia
+# Taller de personalización de vehículos: lujos, accesorios 4x4, PPF,
+# detailing, polarizados, pintura automotriz, iluminación, sonido,
+# llantas y PDR. Atendemos los 29 municipios del Meta.
+
 User-agent: *
 Allow: /
 Disallow: /tools/
 
-# Rastreadores de IA y buscadores alternativos: permitidos
+# ---------------------------------------------------------------
+# Rastreadores de IA y buscadores alternativos: permitidos a propósito.
+#
+# Cada vez más gente pregunta «dónde hacen PPF en Villavicencio» en un
+# asistente en vez de en un buscador. Si estos agentes no pueden leer el
+# sitio, DACARS no existe en esa respuesta. El contenido ya es público;
+# bloquearlos no protege nada y sí cierra un canal que está creciendo.
+# ---------------------------------------------------------------
+
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
 Allow: /
 
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://www.dacars.com.co/sitemap.xml
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://www.dacarslujos.com/sitemap.xml

@@ -9,3 +9,7 @@ statics/video/_tmp/
 # Credenciales de Cloudinary. NUNCA se commitean.
 # Plantilla sin secretos en .env.example
 .env
+
+# Bytecode de Python. Aparece desde que tools/generar-meta.py importa
+# generar-servicios.py con importlib para reutilizar la plantilla.
+tools/__pycache__/

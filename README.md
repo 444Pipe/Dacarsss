@@ -15,12 +15,14 @@ index.html                                    Portada
 ppf-villavicencio.html                        ┐
 polarizados-villavicencio.html                │
 detailing-villavicencio.html                  │
-accesorios-4x4-villavicencio.html             │ 9 landing pages de servicio,
+accesorios-4x4-villavicencio.html             │ 10 landing pages de servicio,
 lujos-y-accesorios-villavicencio.html         │ una por palabra clave local
 iluminacion-para-carros-villavicencio.html    │
 sonido-para-carros-villavicencio.html         │
 llantas-villavicencio.html                    │
-pdr-desabolladura-sin-pintura-villavicencio.html ┘
+pdr-desabolladura-sin-pintura-villavicencio.html │
+pintura-automotriz-villavicencio.html         ┘
+personalizacion-de-vehiculos-meta.html        Hub del departamento del Meta
 404.html                                      Página de error con la marca
 
 css/style.css       Estilos y sistema de diseño
@@ -38,11 +40,13 @@ statics/
 
 tools/
   build.py              Corre todo el pipeline en orden. EMPIEZA POR ACÁ.
-  generar-servicios.py  Las 9 landings
+  generar-servicios.py  Las 10 landings
+  generar-meta.py       Hub departamental (reusa la plantilla de las landings)
   patch-index.py        SEO local en la portada
   patch-video.py        Hero, reels y testimonio
   patch-carga.py        Pantalla de carga
   fix-iconos.py         Glifos de marca
+  generar-sitemap.py    sitemap.xml + tools/sitemap-fechas.json
   usar-cloudinary.py    Reescribe las URLs del sitio a Cloudinary
   versionar-assets.py   Huella de contenido en css/js
   subir-cloudinary.py   Sube statics/ a Cloudinary (necesita .env, fuera del pipeline)
@@ -121,14 +125,16 @@ railway up            # sube y despliega
 railway domain        # genera la URL pública
 ```
 
-### ⚠️ Después del primer despliegue: ajustar el dominio
+### El dominio del sitio
 
-El `canonical`, el Open Graph, el `sitemap.xml` y todo el JSON-LD apuntan hoy a
-`https://www.dacars.com.co`. **Si el sitio va a vivir en la URL de Railway, hay que
-cambiarlos**, porque un canonical que apunta a un dominio inexistente hace que
-Google no indexe nada.
+El `canonical`, el Open Graph, el `sitemap.xml` y todo el JSON-LD apuntan a
+`https://www.dacarslujos.com`, que es el dominio de producción. **La versión con
+`www` es la canónica**: el apex (`dacarslujos.com`) responde 301 hacia ella, en
+el `.htaccess` para Apache y en el `Caddyfile` para Railway — hacen falta los
+dos porque Railway no lee `.htaccess`.
 
-Es un solo comando con la URL que te dé `railway domain`:
+Si algún día el sitio tiene que vivir en otra URL (por ejemplo la provisional
+que da `railway domain` mientras se propaga el DNS) es un solo comando:
 
 ```bash
 python tools/set-dominio.py https://TU-URL.up.railway.app
@@ -136,9 +142,15 @@ git commit -am "Apuntar el sitio al dominio de producción"
 git push
 ```
 
-El script actualiza las 11 páginas, el sitemap, el robots, el `.htaccess` y los
-scripts de `tools/` para que lo que regeneres después siga apuntando bien.
-Cuando conecten `dacars.com.co`, se corre otra vez con ese dominio.
+El script actualiza las 12 páginas, el sitemap, el robots, el `.htaccess`, el
+`Caddyfile` y los scripts de `tools/` para que lo que regeneres después siga
+apuntando bien; con un dominio `.up.railway.app` quita además el 301 de apex a
+www, que ahí no aplica. Para volver, se corre otra vez con el dominio real.
+
+Importa porque un canonical que apunta a un dominio que no resuelve hace que
+Google no indexe nada. Al mudarse a un dominio nuevo hay que agregarlo a la
+lista `HOSTS` de `tools/set-dominio.py`, o la corrida siguiente no sabrá
+reconocerlo para cambiarlo.
 
 ### Probar la imagen en local
 
@@ -169,7 +181,7 @@ cada 2,4 s. **Sin barra ni porcentaje**: la animación sola indica que algo pasa
 **El CSS va en línea en el `<head>`, antes de las fuentes.** Si estuviera en
 `style.css` aparecería tarde, justo cuando ya no hace falta.
 
-**Solo se ve una vez por sesión.** El sitio tiene 11 páginas; una pantalla de
+**Solo se ve una vez por sesión.** El sitio tiene 13 páginas; una pantalla de
 carga en cada clic interno sería insoportable. Un script diminuto marca el
 `<html>` y la oculta antes de que pinte.
 
@@ -378,19 +390,31 @@ Las tres excepciones no son caprichos, son cosas que se midieron y salieron mal:
 | Portada | `AutoPartsStore` + `AutoRepair`, `Organization`, `WebSite`, `WebPage`, `BreadcrumbList`, `ItemList` (servicios), `ItemList` de 5 `VideoObject`, `FAQPage` |
 | Cada servicio | `Service`, `BreadcrumbList`, `FAQPage`, `WebPage` |
 | PPF, 4x4, lujos, iluminación | además un `VideoObject` propio |
+| Hub del Meta | `Service` con `areaServed` = `State` Meta + los 29 municipios, `ItemList` de municipios, `BreadcrumbList`, `FAQPage`, `WebPage` |
 
 La ficha de negocio incluye NIT, dirección, teléfono, `geo`, `hasMap`, `serviceArea`
 (radio de 80 km), `areaServed` con Villavicencio y 12 municipios del Meta, `sameAs`
-de las redes y catálogo de los 9 servicios.
+de las redes, `knowsAbout` con las 11 especialidades y catálogo de los 10 servicios.
+
+`knowsAbout` está puesto pensando en los buscadores de IA tanto como en Google:
+describe **de qué trata el negocio como entidad**, no qué palabras aparecen en la
+página. Es lo que permite que un asistente responda «¿dónde hacen PPF en
+Villavicencio?» con DACARS y no solo con quien repitió más veces la frase.
 
 El `FAQPage` es el que puede hacer que Google muestre las preguntas desplegables
 directamente en el resultado de búsqueda.
 
 ### Arquitectura de enlaces
 
-Portada → 9 landings (desde cada tarjeta de servicio y desde el footer).
-Cada landing → las otras 8 (bloque «Más servicios») y de vuelta a la portada.
+Portada → 10 landings (desde cada tarjeta de servicio y desde el footer) + el hub
+del Meta (desde «Cobertura», desde «Nosotros» y desde el footer).
+Cada landing → las otras 9 (bloque «Más servicios»), el hub del Meta y la portada.
+Hub del Meta → las 10 landings.
 Migas de pan visibles y marcadas con `BreadcrumbList`.
+
+El bloque «Más servicios» mostraba solo 6 de las hermanas. Con 10 landings eso
+dejaba páginas sin enlaces entrantes desde el resto del sitio, así que ahora
+muestra todas.
 
 ### Contenido
 
@@ -402,10 +426,36 @@ no relleno con el nombre de la ciudad repetido.
 Sección de **Cobertura** en la portada y en cada landing, con 22 barrios de
 Villavicencio y 12 municipios del Meta.
 
+### El hub del departamento del Meta
+
+`personalizacion-de-vehiculos-meta.html` responde a una intención distinta a la de
+las landings. Ellas compiten por «<servicio> **en Villavicencio**», que es una
+búsqueda de ciudad; el hub cubre «lujos para carros **en el Meta**», «polarizados
+Granada Meta» y, sobre todo, la pregunta real de quien no vive en la capital:
+*¿vale la pena el viaje?*
+
+Por eso el contenido es de verdad distinto y no la misma página con el nombre del
+departamento cambiado —que es justo lo que Google trata como *doorway page* y
+termina desindexando—. Lleva distancias aproximadas por carretera, corredores
+viales, qué suele entrar al taller desde cada zona, cómo se agenda un trabajo
+cuando el carro viene de fuera y los 29 municipios del departamento.
+
+También dice explícitamente que **no se hacen trabajos a domicilio**, porque el
+PPF, la pintura y el detailing de corrección necesitan área controlada. Es la
+respuesta honesta a la primera pregunta de quien está a dos horas.
+
 ### Técnico
 
-- `sitemap.xml` con las 10 URLs indexables y extensión de imágenes.
-- `robots.txt` que permite a Google y a los rastreadores de IA (GPTBot, PerplexityBot).
+- `sitemap.xml` **generado** por `tools/generar-sitemap.py` con las 12 URLs
+  indexables y extensión de imágenes. Antes se editaba a mano y se quedaba viejo.
+- El `lastmod` solo se mueve cuando cambia la huella del contenido de la página
+  (se guarda en `tools/sitemap-fechas.json`). Poner la fecha de hoy en cada build
+  sería mentir —el pipeline regenera las 12 páginas siempre, cambie algo o no— y
+  un sitemap que dice «todo cambió hoy» todos los días es un sitemap que Google
+  deja de creer.
+- `robots.txt` que permite a Google y a los rastreadores de IA actuales: GPTBot,
+  OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-User, PerplexityBot,
+  Google-Extended, Applebot, meta-externalagent, Amazonbot y DuckAssistBot.
 - `manifest.webmanifest` para instalación en móvil.
 - `.htaccess` con gzip, caché, HTTPS forzado, www forzado y 404 (solo Apache/cPanel;
   en Netlify o Vercel se ignora sin causar problemas).
@@ -426,7 +476,8 @@ puede estar perfecto y aun así no aparecer en el mapa cuando alguien busca
 - Categoría principal y secundarias (tienda de accesorios para automóviles, taller).
 - Dirección exacta, horario, teléfono (el mismo de la web: 311 262 9406).
 - Fotos reales del taller, del equipo y de trabajos.
-- Los 9 servicios cargados uno por uno.
+- Los 10 servicios cargados uno por uno (incluida **pintura automotriz**, que es
+  categoría propia en Google Business y trae búsquedas muy distintas a las de lujos).
 - **Pedir reseñas a los clientes.** Es el factor que más mueve la aguja.
 
 Cuando tengas la ficha, copia sus coordenadas exactas y reemplaza en el código
@@ -435,11 +486,16 @@ Aparece en `tools/generar-servicios.py`, `tools/patch-index.py` y en el `<head>`
 
 ### 2. Dominio
 
-Reemplazar `https://www.dacars.com.co/` por el dominio real en:
-`sitemap.xml`, `robots.txt`, `.htaccess`, los dos scripts de `tools/` y el `<head>` de cada página.
+Hecho: el sitio apunta a `https://www.dacarslujos.com` en el `canonical`, el
+Open Graph, el JSON-LD, el `sitemap.xml`, el `robots.txt` y los 301 de apex a
+www del `.htaccess` y del `Caddyfile`.
+
+Lo que queda es del lado del DNS: que **`dacarslujos.com` y
+`www.dacarslujos.com` apunten los dos al hosting**. Si el apex no resuelve, el
+301 que lo manda a www no tiene desde dónde salir.
 
 ```bash
-grep -rln "dacars.com.co" . --exclude-dir=.git
+grep -rln "dacarslujos.com" . --exclude-dir=.git   # dónde aparece el dominio
 ```
 
 ### 3. Search Console
@@ -481,8 +537,10 @@ Si más adelante quieres sumar fotos, el CSS de esa grilla (`.gal`, `.gal__i`) s
 ## Cómo editar las páginas de servicio
 
 Se generan desde [tools/generar-servicios.py](tools/generar-servicios.py), donde está
-todo el contenido de las 9 páginas en la lista `SERVICIOS` (títulos, textos, procesos,
-preguntas frecuentes). Para cambiar algo:
+todo el contenido de las 10 páginas en la lista `SERVICIOS` (títulos, textos, procesos,
+preguntas frecuentes). El hub del Meta tiene su propio archivo,
+[tools/generar-meta.py](tools/generar-meta.py), que reutiliza la cabeza y el pie de
+las landings (`TPL_CABEZA` / `TPL_PIE`) para no duplicar el `<head>`. Para cambiar algo:
 
 ```bash
 # 1. edita el contenido en tools/generar-servicios.py
@@ -491,25 +549,32 @@ python tools/build.py
 ```
 
 **Usa `tools/build.py`, no los scripts sueltos.** El orden importa y antes no
-estaba escrito en ningún lado: `generar-servicios.py` sobrescribe las 9 landings
+estaba escrito en ningún lado: `generar-servicios.py` sobrescribe las 10 landings
 desde cero, así que todo lo que las retoca tiene que correr después.
 
 | # | Script | Qué hace |
 |---|---|---|
-| 1 | `generar-servicios.py` | Crea las 9 landings |
-| 2 | `patch-index.py` | Capa de SEO local en la portada |
-| 3 | `patch-video.py` | Hero, reels y testimonio |
-| 4 | `patch-carga.py` | Pantalla de carga |
-| 5 | `fix-iconos.py` | Glifos de marca (WhatsApp, IG, FB) |
-| 6 | `usar-cloudinary.py` | Manda los assets a Cloudinary |
-| 7 | `versionar-assets.py` | Huella de contenido en css/js — **siempre último** |
+| 1 | `generar-servicios.py` | Crea las 10 landings |
+| 2 | `generar-meta.py` | Crea el hub del departamento del Meta |
+| 3 | `patch-index.py` | Capa de SEO local en la portada |
+| 4 | `patch-video.py` | Hero, reels y testimonio |
+| 5 | `patch-carga.py` | Pantalla de carga |
+| 6 | `fix-iconos.py` | Glifos de marca (WhatsApp, IG, FB) |
+| 7 | `generar-sitemap.py` | `sitemap.xml` desde las páginas que existen |
+| 8 | `usar-cloudinary.py` | Manda los assets a Cloudinary |
+| 9 | `versionar-assets.py` | Huella de contenido en css/js — **siempre último** |
 
-Dos dependencias de orden que no se pueden invertir:
+Tres dependencias de orden que no se pueden invertir:
 
-- Los pasos 1–5 emiten rutas locales (`statics/…`) y el **6** las convierte. Si
+- Los pasos 1–6 emiten rutas locales (`statics/…`) y el **8** las convierte. Si
   corres solo `generar-servicios.py`, las landings quedan apuntando a archivos que
   **no están en la imagen de producción**.
-- El **7** va después del 6 porque `versionar-assets.py` calcula el md5 de
+- El **7** va detrás de los parcheadores y delante de Cloudinary. Detrás, porque la
+  huella tiene que ser la del HTML definitivo. Delante, porque `usar-cloudinary.py`
+  mete en las páginas un `/v<número>/` que cambia en cada resubida de assets: si el
+  sitemap se generara después, cualquier subida de una foto movería el `lastmod` de
+  las 12 páginas sin que el contenido hubiera cambiado.
+- El **9** va después del 8 porque `versionar-assets.py` calcula el md5 de
   `js/app.js`, y `usar-cloudinary.py` **modifica** ese archivo (le mete las URLs
   de los posters del hero). Al revés, el `?v=` del HTML llevaría el hash del
   `app.js` viejo y los navegadores se quedarían con la copia cacheada.

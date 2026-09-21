@@ -17,7 +17,7 @@ import io
 import json
 import os
 
-SITE = "https://www.dacars.com.co"
+SITE = "https://www.dacarslujos.com"
 WA = "573112629406"
 WA_TEL = "+57 311 262 9406"
 DIR_CALLE = "Carrera 33 #24-60, Barrio San Francisco"
@@ -62,7 +62,7 @@ SERVICIOS = [
         "h1": "PPF en Villavicencio",
         "h1_sub": "Protección de pintura que aguanta la vía al Llano",
         "title": "PPF en Villavicencio | Paint Protection Film para carros — DACARS",
-        "desc": "Instalación de PPF en Villavicencio. Película de poliuretano que protege la pintura de tu carro de la grava, la arena y los insectos de la vía al Llano. Cotiza por WhatsApp.",
+        "desc": "PPF en Villavicencio: película de poliuretano que protege tu pintura de la grava, la arena y los insectos de la vía al Llano. Cotiza por WhatsApp.",
         "keywords": "ppf villavicencio, paint protection film villavicencio, proteccion de pintura villavicencio, lamina protectora de pintura villavicencio, ppf carros meta, proteger pintura carro villavicencio",
         "lead": "Película transparente de poliuretano instalada panel por panel. Recibe el impacto que hoy se lleva tu pintura de fábrica.",
         "intro": [
@@ -114,7 +114,7 @@ SERVICIOS = [
         "h1": "Polarizados en Villavicencio",
         "h1_sub": "Menos calor adentro, más privacidad, sin burbujas",
         "title": "Polarizados en Villavicencio | Láminas para vidrios — DACARS",
-        "desc": "Polarizado de vidrios en Villavicencio con corte y curado profesional. Menos calor, bloqueo UV y privacidad, sin burbujas ni bordes a la vista. Cotiza por WhatsApp.",
+        "desc": "Polarizado de vidrios en Villavicencio con corte y curado profesional: menos calor, bloqueo UV y privacidad, sin burbujas. Cotiza por WhatsApp.",
         "keywords": "polarizados villavicencio, polarizado de carros villavicencio, laminas para vidrios villavicencio, entintado de vidrios villavicencio, polarizado ceramico villavicencio, polarizar carro meta",
         "lead": "Instalación de láminas con corte a medida y curado controlado. El trabajo que se nota cuando abres la puerta a mediodía.",
         "intro": [
@@ -166,7 +166,7 @@ SERVICIOS = [
         "h1": "Detailing automotriz en Villavicencio",
         "h1_sub": "Lavado técnico, corrección de pintura y sellado",
         "title": "Detailing en Villavicencio | Pulimento de carros — DACARS",
-        "desc": "Detailing automotriz en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro. Cotiza por WhatsApp.",
+        "desc": "Detailing en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro.",
         "keywords": "detailing villavicencio, pulida de carro villavicencio, lavado tecnico villavicencio, correccion de pintura villavicencio, brillado de carros villavicencio, encerado de autos meta",
         "lead": "No es una lavada. Es sacarle a la pintura la contaminación, los rayones finos y la opacidad que acumuló el sol.",
         "intro": [
@@ -218,7 +218,7 @@ SERVICIOS = [
         "h1": "Accesorios 4x4 en Villavicencio",
         "h1_sub": "Equipamiento para camionetas que sí salen del pavimento",
         "title": "Accesorios 4x4 en Villavicencio | Snorkel y bumpers — DACARS",
-        "desc": "Accesorios 4x4 en Villavicencio: snorkel, bumpers, winches, canastillas, protectores y estribos reforzados para camionetas del Meta. Instalación técnica. Cotiza por WhatsApp.",
+        "desc": "Accesorios 4x4 en Villavicencio: snorkel, bumpers, winches, canastillas, protectores y estribos para camionetas del Meta. Cotiza por WhatsApp.",
         "keywords": "accesorios 4x4 villavicencio, snorkel villavicencio, bumper 4x4 villavicencio, winche villavicencio, canastilla de techo villavicencio, accesorios camionetas meta, equipamiento offroad villavicencio",
         "lead": "Snorkel, bumpers, winches, canastillas y protectores. Montados para trabajar, no para la foto.",
         "intro": [
@@ -270,7 +270,7 @@ SERVICIOS = [
         "h1": "Lujos y accesorios para carros en Villavicencio",
         "h1_sub": "El detalle que le da personalidad a tu vehículo",
         "title": "Lujos para carros en Villavicencio | Accesorios — DACARS",
-        "desc": "Lujos y accesorios para carros en Villavicencio: estribos, molduras, spoilers, tapetes, barras, emblemas, cámaras de reversa y más. Instalación profesional. Cotiza por WhatsApp.",
+        "desc": "Lujos y accesorios para carros en Villavicencio: estribos, molduras, spoilers, tapetes, barras y cámaras de reversa. Cotiza por WhatsApp.",
         "keywords": "lujos para carros villavicencio, accesorios para carros villavicencio, autolujos villavicencio, estribos villavicencio, tapetes para carro villavicencio, personalizacion de vehiculos villavicencio, lujos automotrices meta",
         "lead": "Estribos, molduras, spoilers, emblemas, tapetes y barras. Catálogo amplio y montaje que no deja huecos ni holguras.",
         "intro": [
@@ -322,7 +322,7 @@ SERVICIOS = [
         "h1": "Iluminación para carros en Villavicencio",
         "h1_sub": "LED, xenón, barras y exploradoras con conexión segura",
         "title": "Iluminación para carros en Villavicencio | LED y xenón — DACARS",
-        "desc": "Iluminación automotriz en Villavicencio: LED, xenón, barras, exploradoras y luces de cortesía instaladas con cableado seguro. Ve mejor en vías sin alumbrado. Cotiza por WhatsApp.",
+        "desc": "Iluminación para carros en Villavicencio: LED, xenón, barras, exploradoras y luces de cortesía con cableado seguro. Cotiza por WhatsApp.",
         "keywords": "iluminacion para carros villavicencio, luces led villavicencio, xenon villavicencio, barra led villavicencio, exploradoras villavicencio, luces auxiliares 4x4 meta",
         "lead": "Ver de noche en vía destapada no es lujo. Es seguridad, y depende tanto del equipo como del cableado.",
         "intro": [
@@ -374,7 +374,7 @@ SERVICIOS = [
         "h1": "Sonido para carros en Villavicencio",
         "h1_sub": "Equipos, parlantes, amplificación e insonorización",
         "title": "Sonido para carros en Villavicencio | Parlantes — DACARS",
-        "desc": "Instalación de sonido para carros en Villavicencio: pantallas, parlantes, amplificadores, subwoofers e insonorización. Montaje limpio y sin vibraciones. Cotiza por WhatsApp.",
+        "desc": "Sonido para carros en Villavicencio: pantallas, parlantes, amplificadores, subwoofers e insonorización. Montaje limpio. Cotiza por WhatsApp.",
         "keywords": "sonido para carros villavicencio, instalacion de sonido villavicencio, parlantes para carro villavicencio, amplificadores villavicencio, pantalla android carro villavicencio, insonorizacion vehicular meta",
         "lead": "Que suene fuerte es fácil. Que suene bien y no haga vibrar el carro entero es otra cosa.",
         "intro": [
@@ -426,7 +426,7 @@ SERVICIOS = [
         "h1": "Llantas en Villavicencio",
         "h1_sub": "Asesoría según el uso real de tu vehículo y montaje",
         "title": "Llantas en Villavicencio | Carros y camionetas — DACARS",
-        "desc": "Llantas en Villavicencio con asesoría según tu uso: ciudad, carretera o trocha. Medidas correctas para carros y camionetas del Meta y montaje. Cotiza por WhatsApp.",
+        "desc": "Llantas en Villavicencio con asesoría según tu uso: ciudad, carretera o trocha. La medida correcta para carros y camionetas. Cotiza por WhatsApp.",
         "keywords": "llantas villavicencio, venta de llantas villavicencio, llantas para camioneta villavicencio, llantas todoterreno villavicencio, llantas at villavicencio, montaje de llantas meta",
         "lead": "La llanta correcta cambia el carro más que casi cualquier accesorio. La incorrecta te cuesta consumo, ruido y seguridad.",
         "intro": [
@@ -478,7 +478,7 @@ SERVICIOS = [
         "h1": "PDR en Villavicencio",
         "h1_sub": "Desabolladura sin pintura: sacamos el golpe, conservamos la pintura",
         "title": "PDR en Villavicencio | Desabolladura sin pintura — DACARS",
-        "desc": "PDR en Villavicencio: desabolladura sin pintura para golpes de parqueadero y abolladuras menores. Se conserva la pintura original de fábrica, sin repintes. Cotiza por WhatsApp.",
+        "desc": "PDR en Villavicencio: desabolladura sin pintura para golpes de parqueadero. Conserva la pintura original de fábrica, sin repintes ni masilla.",
         "keywords": "pdr villavicencio, desabolladura sin pintura villavicencio, quitar abolladuras carro villavicencio, reparar golpe puerta carro villavicencio, desabollado sin pintar meta",
         "lead": "Sin masilla, sin repinte, sin diferencia de tono. El golpe se saca desde adentro del panel.",
         "intro": [
@@ -521,6 +521,62 @@ SERVICIOS = [
             ["¿Sirve para varios golpes pequeños?", "Sí, es justamente donde más se usa: abolladuras múltiples y poco profundas repartidas en el carro."],
         ],
         "wa": "Hola DACARS, quiero cotizar un PDR (desabolladura sin pintura) en Villavicencio.",
+    },
+
+    {
+        "slug": "pintura-automotriz-villavicencio",
+        "menu": "Pintura",
+        "nombre": "Pintura automotriz",
+        "h1": "Pintura automotriz en Villavicencio",
+        "h1_sub": "Latonería y pintura con igualación de color real",
+        "title": "Pintura de carros en Villavicencio | Latonería y pintura — DACARS",
+        "desc": "Pintura de carros en Villavicencio: repinte de paneles, pintura general y la latonería del repinte, con igualación de color. Cotiza por WhatsApp.",
+        "keywords": "pintura para carros villavicencio, latoneria y pintura villavicencio, pintura automotriz villavicencio, pintar carro villavicencio, taller de pintura para carros villavicencio, repintar carro meta, pintura de vehiculos villavicencio, latoneria villavicencio",
+        "lead": "Repinte de paneles y pintura general con preparación seria e igualación de color. Lo que define un buen trabajo pasa antes de aplicar el color.",
+        "intro": [
+            "El sol del Llano no perdona. Un carro que duerme a la intemperie en Villavicencio recibe radiación directa casi todos los días del año, y el barniz —que es la capa que sostiene el brillo— se va quemando: primero pierde profundidad, después se pone lechoso y al final se descascara. Casi siempre empieza por el techo y el capó, que son los que reciben el sol de frente. Cuando llega a ese punto, pulir ya no sirve, porque no queda barniz que pulir.",
+            "Súmale el resto: las picadas de grava de la vía al Llano que se abren y dejan entrar humedad, el rayón del portón, el golpe del parqueadero, el platón de una camioneta de trabajo que lleva años cargando. La pintura resuelve todo eso, pero el trabajo real no está en aplicar el color: está en la preparación y en la igualación del tono. Un repinte que se nota es un repinte mal preparado.",
+            "Antes de cotizarte pintura miramos si de verdad la necesitas. Si el golpe no partió el barniz, te conviene un <a class=\"link\" href=\"pdr-desabolladura-sin-pintura-villavicencio.html\">PDR</a>, que es más barato y conserva la pintura de fábrica. Y si lo que buscas es que el carro vuelva a brillar sin repintar, eso es <a class=\"link\" href=\"detailing-villavicencio.html\">detailing</a>. Te decimos cuál es tu caso aunque sea el trabajo más chico.",
+        ],
+        "incluye_titulo": "Qué trabajos de pintura hacemos",
+        "incluye": [
+            ["Repinte de panel", "Una puerta, un guardafango, un bómper o el capó. Lo más común, y donde la igualación de color lo es todo."],
+            ["Pintura general", "El vehículo completo, cuando el barniz ya está vencido en varios paneles y repintar uno solo no tiene sentido."],
+            ["Techo y capó quemados por el sol", "Los dos paneles que primero se descascaran en el Llano. Se lijan hasta llegar a base sana y se rehacen."],
+            ["Rayones hasta la base", "Los que ya no salen puliendo porque pasaron el barniz y llegaron a la lámina."],
+            ["Bómperes y partes plásticas", "Llevan imprimante flexible propio. Si se pintan como si fueran lámina, la pintura se parte."],
+            ["Preparación y latonería del repinte", "Enderezado, masillado y lijado de lo que haya que corregir antes de que entre el color."],
+        ],
+        "razones_titulo": "Por qué en el Llano se pinta distinto",
+        "razones": [
+            ["Sol directo casi todo el año", "Acá la radiación castiga el barniz sin tregua. Por eso pesa tanto la calidad del transparente y del curado, no solo el color que elijas."],
+            ["Humedad alta", "La humedad del Llano es enemiga de la pintura fresca: se mete en el proceso y deja velo. Por eso el secado controlado no es un lujo, es la diferencia entre brillo y opaco."],
+            ["Picadas que terminan en óxido", "Cada pica de grava sin sellar es una puerta abierta a la corrosión. Repintar a tiempo cuesta mucho menos que tratar una lámina ya picada."],
+        ],
+        "proceso": [
+            ["Diagnóstico honesto del panel", "Miramos si el caso pide pintura o no. Si el golpe no partió el barniz, te mandamos a PDR. Si el brillo se recupera puliendo, te lo decimos. No pintamos lo que no hay que pintar."],
+            ["Preparación", "Desmontaje de lo que estorbe, enderezado, masilla donde haga falta, lijado progresivo e imprimante. Es el 80% del trabajo y es lo que define si el repinte se nota o no."],
+            ["Igualación del color", "Partimos del código de fábrica, pero ningún carro con años conserva el tono original: el sol ya lo movió. Se prueba y se ajusta hasta que el panel nuevo calce con los vecinos, y se difumina hacia ellos cuando el caso lo pide."],
+            ["Aplicación, transparente y curado", "Color, barniz y curado en área controlada, lejos del polvo. Después armado, revisión bajo luz directa contigo y las indicaciones de los primeros días."],
+        ],
+        "precio_titulo": "Qué define el precio de un trabajo de pintura",
+        "precio": [
+            "La <strong>cantidad de paneles</strong>: no es lo mismo un guardafango suelto que una pintura general.",
+            "El <strong>estado de la lámina</strong>: si hay golpe, óxido o masilla vieja de otro taller, la preparación pesa más que la pintura misma.",
+            "El <strong>color</strong>: un tricapa, un perlado o un color con efecto son mucho más difíciles de igualar que un sólido.",
+            "El <strong>desmontaje</strong>: molduras, manijas, vidrios y accesorios que haya que sacar y volver a montar.",
+            "La <strong>calidad del material</strong>: hay transparentes con distinta resistencia al sol, y ahí la diferencia se ve a los dos años, no al entregar.",
+        ],
+        "faq": [
+            ["¿Se va a notar el panel repintado?", "Ese es justamente el objetivo: que no se note. Depende de la preparación y de la igualación del color. Un carro con años ya tiene el tono movido por el sol, así que muchas veces la solución correcta es difuminar hacia los paneles vecinos en vez de cortar el color en el filo de la puerta. Te explicamos qué necesita tu caso antes de empezar."],
+            ["¿Hacen latonería también?", "La latonería que exige el repinte —enderezar, masillar, lijar— va dentro del trabajo. Si lo tuyo es un choque fuerte con daño estructural, mándanos fotos por WhatsApp y te decimos de frente si lo tomamos o si te conviene un taller de colisión."],
+            ["¿Pintura o PDR? ¿Cuál me sirve?", "Regla simple: si la pintura está intacta y solo hay abollón, el PDR es mejor, más rápido y conserva la pintura de fábrica. Si el barniz está partido, rayado hasta la lámina o descascarado, ahí sí toca pintar. Lo miramos contigo y te decimos cuál es tu caso."],
+            ["¿Cuánto tiempo se demora?", "Un panel suelto y una pintura general son trabajos de escalas distintas. Y lo que manda el tiempo es la preparación y el curado, no la aplicación del color. Al cotizar te damos el tiempo real para que organices cómo te mueves mientras tanto."],
+            ["¿Cuándo puedo lavar el carro después de pintarlo?", "Hay que darle tiempo a que la pintura termine de curar. Te damos las indicaciones exactas al entregar: los primeros días nada de ceras, nada de hidrolavadora a presión alta y ojo con parquear debajo de árboles."],
+            ["¿Y si quiero cambiarle el color al carro?", "Se puede, pero conviene conversarlo antes. Un cambio de color bien hecho implica pintar vanos, marcos de puerta y bahías, porque si no el color viejo asoma apenas abres la puerta y el carro queda delatado. Cuéntanos qué buscas y te damos el alcance real con lo que cuesta."],
+            ["¿Pintan camionetas de trabajo y platones?", "Sí. Es de lo que más entra: camionetas de finca y de obra con el platón, los guardafangos y los estribos castigados. Se preparan igual que cualquier otro panel, con el imprimante que corresponda a cada material."],
+        ],
+        "wa": "Hola DACARS, quiero cotizar un trabajo de pintura para mi vehículo en Villavicencio.",
     },
 ]
 
@@ -572,6 +628,7 @@ def nav_html(activo):
         ("ppf-villavicencio.html", "PPF"),
         ("polarizados-villavicencio.html", "Polarizados"),
         ("detailing-villavicencio.html", "Detailing"),
+        ("pintura-automotriz-villavicencio.html", "Pintura"),
         ("accesorios-4x4-villavicencio.html", "4x4"),
         ("index.html#contacto", "Contacto"),
     ]
@@ -689,7 +746,9 @@ def jsonld(s):
 
 
 def otros_servicios(actual):
-    otros = [x for x in SERVICIOS if x["slug"] != actual][:6]
+    # Todos los demas, no un recorte: con 10 servicios, cortar en 6 dejaba
+    # paginas sin enlaces entrantes desde sus hermanas.
+    otros = [x for x in SERVICIOS if x["slug"] != actual]
     filas = []
     for o in otros:
         filas.append(
@@ -701,42 +760,10 @@ def otros_servicios(actual):
     return "\n".join(filas)
 
 
-def build(s):
-    url = SITE + "/" + s["slug"] + ".html"
-    wa = wa_url(s["wa"])
-
-    incluye = "\n".join(
-        '        <li><span></span><div><b>%s</b> %s</div></li>' % (esc(t), esc(d))
-        for t, d in s["incluye"]
-    )
-    razones = "\n".join(
-        '        <article class="card" data-reveal>\n'
-        '          <h3>%s</h3>\n'
-        '          <p>%s</p>\n'
-        '        </article>' % (esc(t), esc(d))
-        for t, d in s["razones"]
-    )
-    pasos = "\n".join(
-        '        <li class="step" data-reveal>\n'
-        '          <span class="step__n">0%d</span>\n'
-        '          <h3>%s</h3>\n'
-        '          <p>%s</p>\n'
-        '        </li>' % (i + 1, esc(t), esc(d))
-        for i, (t, d) in enumerate(s["proceso"])
-    )
-    precio = "\n".join('        <li>%s</li>' % p for p in s["precio"])
-    faq = "\n".join(
-        '      <details data-reveal>\n'
-        '        <summary>%s</summary>\n'
-        '        <div><p>%s</p></div>\n'
-        '      </details>' % (esc(q), esc(a))
-        for q, a in s["faq"]
-    )
-    intro = "\n".join('      <p class="sec__lead" data-reveal>%s</p>' % p for p in s["intro"])
-    barrios = " &middot; ".join(BARRIOS)
-    munis = " &middot; ".join(MUNICIPIOS)
-
-    html = """<!DOCTYPE html>
+# Cabeza compartida: <head>, pantalla de carga, topbar y header.
+# La reutiliza tools/generar-meta.py, por eso vive a nivel de modulo
+# y no dentro de build().
+TPL_CABEZA = """<!DOCTYPE html>
 <html lang="es-CO">
 <head>
 <meta charset="utf-8">
@@ -916,7 +943,11 @@ if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},6
     </button>
   </div>
 </header>
+"""
 
+
+# Cuerpo propio de una pagina de servicio.
+TPL_CUERPO = """
 <main id="contenido">
 
 <nav class="migas" aria-label="Ruta de navegación">
@@ -1028,7 +1059,7 @@ if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},6
       </p>
     </header>
     <p class="zonas" data-reveal><b>Barrios y zonas de Villavicencio:</b> @@BARRIOS@@ y el resto de la ciudad.</p>
-    <p class="zonas" data-reveal><b>¿Vienes de otro municipio del Meta?</b> Recibimos vehículos de @@MUNICIPIOS@@ y demás municipios de la región. Escríbenos antes de viajar y coordinamos la cita para que aproveches el desplazamiento.</p>
+    <p class="zonas" data-reveal><b>¿Vienes de otro municipio del Meta?</b> Recibimos vehículos de @@MUNICIPIOS@@ y demás municipios de la región. Escríbenos antes de viajar y coordinamos la cita para que aproveches el desplazamiento. Mira cómo funciona la <a class="link" href="personalizacion-de-vehiculos-meta.html">atención para todo el departamento del Meta</a>.</p>
     <div class="mapa-mini" data-reveal>
       <iframe title="Ubicación de DACARS en Villavicencio"
         src="https://www.google.com/maps?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;z=16&amp;output=embed"
@@ -1062,7 +1093,12 @@ if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},6
 </section>
 
 </main>
+"""
 
+
+# Pie compartido: footer, boton flotante de WhatsApp y cierre.
+# Tambien lo reutiliza tools/generar-meta.py.
+TPL_PIE = """
 <footer class="foot">
   <div class="wrap foot__in">
     <div class="foot__brand">
@@ -1077,12 +1113,14 @@ if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},6
       <a href="detailing-villavicencio.html">Detailing</a>
       <a href="polarizados-villavicencio.html">Polarizados</a>
       <a href="pdr-desabolladura-sin-pintura-villavicencio.html">PDR</a>
+      <a href="pintura-automotriz-villavicencio.html">Pintura automotriz</a>
     </nav>
     <nav class="foot__col" aria-label="Más servicios">
       <h4>También</h4>
       <a href="iluminacion-para-carros-villavicencio.html">Iluminación</a>
       <a href="sonido-para-carros-villavicencio.html">Sonido</a>
       <a href="llantas-villavicencio.html">Llantas</a>
+      <a href="personalizacion-de-vehiculos-meta.html">Cobertura en el Meta</a>
       <a href="index.html#nosotros">Nosotros</a>
       <a href="index.html#faq">Preguntas frecuentes</a>
     </nav>
@@ -1107,8 +1145,45 @@ if(c&&!c.hidden){c.classList.add('se-va');setTimeout(function(){c.hidden=true},6
 
 <script src="js/app.js" defer></script>
 </body>
-</html>
-"""
+</html>"""
+
+
+def build(s):
+    url = SITE + "/" + s["slug"] + ".html"
+    wa = wa_url(s["wa"])
+
+    incluye = "\n".join(
+        '        <li><span></span><div><b>%s</b> %s</div></li>' % (esc(t), esc(d))
+        for t, d in s["incluye"]
+    )
+    razones = "\n".join(
+        '        <article class="card" data-reveal>\n'
+        '          <h3>%s</h3>\n'
+        '          <p>%s</p>\n'
+        '        </article>' % (esc(t), esc(d))
+        for t, d in s["razones"]
+    )
+    pasos = "\n".join(
+        '        <li class="step" data-reveal>\n'
+        '          <span class="step__n">0%d</span>\n'
+        '          <h3>%s</h3>\n'
+        '          <p>%s</p>\n'
+        '        </li>' % (i + 1, esc(t), esc(d))
+        for i, (t, d) in enumerate(s["proceso"])
+    )
+    precio = "\n".join('        <li>%s</li>' % p for p in s["precio"])
+    faq = "\n".join(
+        '      <details data-reveal>\n'
+        '        <summary>%s</summary>\n'
+        '        <div><p>%s</p></div>\n'
+        '      </details>' % (esc(q), esc(a))
+        for q, a in s["faq"]
+    )
+    intro = "\n".join('      <p class="sec__lead" data-reveal>%s</p>' % p for p in s["intro"])
+    barrios = " &middot; ".join(BARRIOS)
+    munis = " &middot; ".join(MUNICIPIOS)
+
+    html = TPL_CABEZA + TPL_CUERPO + TPL_PIE
 
     reemplazos = {
         "@@TITLE@@": esc(s["title"]),

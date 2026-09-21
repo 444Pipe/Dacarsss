@@ -3,11 +3,22 @@
 
 import io, json, os, re
 
-SITE = "https://www.dacars.com.co"
+SITE = "https://www.dacarslujos.com"
+HUB_META = "personalizacion-de-vehiculos-meta.html"
 WA = "573112629406"
 LAT, LON = 4.1420, -73.6340
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IDX = os.path.join(ROOT, "index.html")
+
+KEYWORDS = (
+    '<meta name="keywords" content="lujos para carros villavicencio, accesorios para carros villavicencio, '
+    'ppf villavicencio, polarizados villavicencio, detailing villavicencio, accesorios 4x4 villavicencio, '
+    'autolujos villavicencio, llantas villavicencio, sonido para carros villavicencio, '
+    'iluminacion para carros villavicencio, pdr villavicencio, pintura para carros villavicencio, '
+    'latoneria y pintura villavicencio, pintura automotriz villavicencio, taller de lujos villavicencio, '
+    'personalizacion de vehiculos meta, lujos para carros meta, ppf meta, polarizados meta, '
+    'detailing meta, accesorios para carros meta">'
+)
 
 BARRIOS = ["San Francisco", "Barzal", "Centro", "Siete de Agosto", "La Esperanza",
            "Ciudad Porfía", "Catumare", "El Buque", "Villa Bolívar", "La Rosita",
@@ -29,6 +40,7 @@ SERVICIOS = [
     ("Sonido e insonorización", "sonido-para-carros-villavicencio"),
     ("Llantas y montaje", "llantas-villavicencio"),
     ("PDR - Desabolladura sin pintura", "pdr-desabolladura-sin-pintura-villavicencio"),
+    ("Pintura automotriz y latonería", "pintura-automotriz-villavicencio"),
 ]
 
 # Preguntas de la portada -> FAQPage
@@ -43,6 +55,14 @@ FAQ = [
      "Sí, y es una parte grande de lo que hacemos: snorkel, bumpers, winches, canastillas, protectores, iluminación auxiliar y llantas para uso mixto entre ciudad y trocha."),
     ("¿Dónde queda DACARS en Villavicencio?",
      "En la Carrera 33 #24-60, Barrio San Francisco, Villavicencio, Meta. Para confirmar el horario de atención del día, escríbenos por WhatsApp al 311 262 9406."),
+    ("¿Hacen pintura de carros?",
+     "Sí. Hacemos repinte de paneles, pintura general y los trabajos de latonería que el repinte exige, "
+     "con igualación de color. Y si el golpe no partió la pintura, te decimos si te sirve más un PDR, "
+     "que es más barato y conserva la pintura de fábrica."),
+    ("¿Atienden carros de otros municipios del Meta?",
+     "Sí. Recibimos vehículos de Acacías, Granada, Restrepo, Cumaral, Puerto López y el resto del "
+     "departamento. Escríbenos antes de viajar: agendamos el cupo y pedimos el material para que "
+     "hagas un solo viaje."),
     ("¿Puedo llevar mis propios accesorios para que los instalen?",
      "Cuéntanos qué tienes y lo revisamos. Si la pieza es compatible y está en buen estado, coordinamos la instalación; si vemos un riesgo para el vehículo, te lo decimos antes de montarla."),
 ]
@@ -89,8 +109,9 @@ def build_jsonld():
         "taxID": "901798060",
         "slogan": "Especialistas en personalización de vehículos",
         "description": ("Taller de personalización de vehículos en Villavicencio, Meta. Lujos y accesorios, "
-                        "equipamiento 4x4, PPF (Paint Protection Film), detailing, polarizados, iluminación, "
-                        "sonido, llantas y PDR."),
+                        "equipamiento 4x4, PPF (Paint Protection Film), detailing, polarizados, pintura "
+                        "automotriz y latonería, iluminación, sonido, llantas y PDR. Atendemos todo el "
+                        "departamento del Meta."),
         "url": SITE + "/",
         "telephone": "+" + WA,
         "image": [SITE + "/statics/og-image.jpg", SITE + "/statics/logo-dacars.png"],
@@ -114,6 +135,13 @@ def build_jsonld():
             "geoMidpoint": {"@type": "GeoCoordinates", "latitude": LAT, "longitude": LON},
             "geoRadius": "80000",
         },
+        "knowsAbout": [
+            "Paint Protection Film", "Polarizado de vidrios automotrices",
+            "Detailing automotriz", "Corrección de pintura", "Pintura automotriz",
+            "Latonería automotriz", "Desabolladura sin pintura (PDR)",
+            "Accesorios 4x4", "Iluminación automotriz LED",
+            "Sonido e insonorización automotriz", "Llantas y rines",
+        ],
         "knowsLanguage": "es-CO",
         "sameAs": [
             "https://www.instagram.com/dacarslujosvillavicencio/",
@@ -180,6 +208,17 @@ def build_jsonld():
             "primaryImageOfPage": {"@type": "ImageObject", "url": SITE + "/statics/og-image.jpg"},
         },
         {
+            "@type": "WebPage",
+            "@id": SITE + "/" + HUB_META + "#pagina",
+            "url": SITE + "/" + HUB_META,
+            "name": "Personalización de vehículos en el departamento del Meta",
+            "description": ("Cobertura de DACARS para los 29 municipios del Meta: distancias, cómo se "
+                            "organiza un trabajo cuando el cliente viene de otro municipio y qué "
+                            "servicios conviene combinar en un solo viaje."),
+            "inLanguage": "es-CO",
+            "isPartOf": {"@id": SITE + "/#sitio"},
+        },
+        {
             "@type": "BreadcrumbList",
             "@id": SITE + "/#migas",
             "itemListElement": [
@@ -241,18 +280,19 @@ def main():
         "<title>Lujos, PPF, Polarizados y Detailing en Villavicencio | DACARS</title>")
     html = re.sub(
         r'<meta name="description" content="[^"]*">',
-        '<meta name="description" content="Taller de personalización de vehículos en Villavicencio, Meta. '
-        'Lujos y accesorios 4x4, PPF, detailing, polarizados, iluminación, sonido, llantas y PDR. '
-        'Cra. 33 #24-60, Barrio San Francisco. Cotiza por WhatsApp.">',
+        '<meta name="description" content="Taller de personalización de vehículos en Villavicencio, '
+        'Meta: lujos, accesorios 4x4, PPF, detailing, polarizados y pintura. Cotiza por WhatsApp.">',
         html, count=1)
+
+    # Las keywords se reescriben SIEMPRE, no solo al insertar bloque_geo:
+    # ese bloque ya existe en index.html desde la primera corrida, asi que
+    # ahi dentro la lista habria quedado congelada para siempre.
+    html = re.sub(r'<meta name="keywords" content="[^"]*">', lambda _: KEYWORDS,
+                  html, count=1)
 
     # ---------- 2. Metadatos geográficos y de indexación ----------
     bloque_geo = (
-        '<meta name="keywords" content="lujos para carros villavicencio, accesorios para carros villavicencio, '
-        'ppf villavicencio, polarizados villavicencio, detailing villavicencio, accesorios 4x4 villavicencio, '
-        'autolujos villavicencio, llantas villavicencio, sonido para carros villavicencio, '
-        'iluminacion para carros villavicencio, pdr villavicencio, personalizacion de vehiculos meta, '
-        'taller de lujos villavicencio">\n'
+        KEYWORDS + '\n'
         '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">\n'
         '<meta name="googlebot" content="index, follow">\n'
         '\n'
@@ -315,12 +355,44 @@ def main():
     partes = html.split("      </article>")
     if len(partes) == len(SERVICIOS) + 1 and 'class="card__mas"' not in html:
         etiquetas = ["Lujos y accesorios", "Accesorios 4x4", "PPF", "Detailing",
-                     "Polarizados", "Iluminación", "Sonido", "Llantas", "PDR"]
+                     "Polarizados", "Iluminación", "Sonido", "Llantas", "PDR",
+                     "Pintura"]
         nuevo = partes[0]
         for i, (nombre, slug) in enumerate(SERVICIOS):
             nuevo += ('        <a class="card__mas" href="%s.html">%s en Villavicencio &rarr;</a>\n'
                       '      </article>' % (slug, etiquetas[i])) + partes[i + 1]
         html = nuevo
+
+    # ---------- 5b. Tarjeta de Pintura ----------
+    # index.html no se genera, se parchea, asi que la decima tarjeta se inserta
+    # aca en vez de a mano: si alguien restaura la portada desde el repositorio,
+    # el servicio no se pierde.
+    # OJO con la guarda: NO sirve preguntar por "pintura-automotriz-
+    # villavicencio.html" a secas, porque el JSON-LD del paso 3 ya escribio esa
+    # URL mas arriba y la condicion nunca se cumpliria. Se mira el enlace
+    # exacto de la tarjeta.
+    MARCA_TARJETA = '<a class="card__mas" href="pintura-automotriz-villavicencio.html">'
+    if MARCA_TARJETA not in html:
+        tarjeta = """
+      <article class="card" data-reveal>
+        <span class="card__n">10</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 8.6h5.2v11.8H9.4z"/><path d="M10.8 8.6V5.4h2.4v3.2"/><path d="M9.4 12.6h5.2"/><path d="M17.4 4.6h2.4M17.4 7.4h2.4M17.4 10.2h2.4"/></svg>
+        </span>
+        <h3>Pintura &middot; Latonería</h3>
+        <p>Repinte de paneles y pintura general con igualación de color. El sol del Llano quema el barniz del techo y el capó, y ahí pulir ya no alcanza.</p>
+        <a class="card__mas" href="pintura-automotriz-villavicencio.html">Pintura en Villavicencio &rarr;</a>
+      </article>
+"""
+        ancla = ('        <a class="card__mas" href="pdr-desabolladura-sin-pintura-villavicencio.html">'
+                 'PDR en Villavicencio &rarr;</a>\n      </article>\n')
+        if ancla in html:
+            html = html.replace(ancla, ancla + tarjeta, 1)
+
+    # El texto de la seccion contaba los servicios, asi que tambien sube.
+    html = html.replace(
+        "Nueve especialidades que normalmente te obligan",
+        "Diez especialidades que normalmente te obligan", 1)
 
     # ---------- 6. Sección de cobertura ----------
     if 'id="cobertura"' not in html:
@@ -353,13 +425,16 @@ def main():
 @@CHIPS_M@@
         </ul>
         <p class="cobertura__nota">Recibimos vehículos de toda la región. Agenda por WhatsApp
-          antes de venir para tener todo listo cuando llegues.</p>
+          antes de venir para tener todo listo cuando llegues.
+          <a class="link" href="@@HUB@@">Cómo atendemos al departamento del Meta &rarr;</a></p>
       </div>
     </div>
   </div>
 </section>
 """
-        seccion = seccion.replace("@@CHIPS_B@@", chips_b).replace("@@CHIPS_M@@", chips_m)
+        seccion = (seccion.replace("@@CHIPS_B@@", chips_b)
+                          .replace("@@CHIPS_M@@", chips_m)
+                          .replace("@@HUB@@", HUB_META))
         html = html.replace('\n<!-- ============ FAQ ============ -->', seccion +
                             '\n<!-- ============ FAQ ============ -->', 1)
         # Renumerar las etiquetas de las secciones siguientes
@@ -368,6 +443,16 @@ def main():
         html = html.replace('<p class="tag" data-reveal>07 &mdash; Contacto</p>',
                             '<p class="tag" data-reveal>08 &mdash; Contacto</p>', 1)
 
+    # La seccion de cobertura ya existe en index.html desde la primera
+    # corrida, asi que el enlace al hub se inyecta aparte o nunca aparecería.
+    # Misma trampa que con la tarjeta: HUB_META ya aparece en el JSON-LD.
+    if "Cómo atendemos al departamento del Meta" not in html:
+        html = html.replace(
+            "antes de venir para tener todo listo cuando llegues.</p>",
+            'antes de venir para tener todo listo cuando llegues.\n'
+            '          <a class="link" href="' + HUB_META + '">'
+            'Cómo atendemos al departamento del Meta &rarr;</a></p>', 1)
+
     # ---------- 7. Navegación: enlace a cobertura ----------
     html = html.replace('      <a href="#nosotros">Nosotros</a>\n      <a href="#contacto">Contacto</a>',
                         '      <a href="#nosotros">Nosotros</a>\n'
@@ -375,34 +460,36 @@ def main():
                         '      <a href="#contacto">Contacto</a>', 1)
 
     # ---------- 8. Footer con enlaces a las páginas de servicio ----------
-    viejo_foot = """      <a href="#servicios">Lujos y accesorios</a>
-      <a href="#servicios">Accesorios 4x4</a>
-      <a href="#ppf">PPF</a>
-      <a href="#servicios">Detailing</a>
-      <a href="#servicios">Polarizados</a>
-      <a href="#servicios">Iluminación y sonido</a>"""
-    nuevo_foot = """      <a href="lujos-y-accesorios-villavicencio.html">Lujos y accesorios en Villavicencio</a>
+    # Las dos columnas de enlaces del pie se reescriben ENTERAS con una
+    # expresion regular, no por reemplazo de texto exacto. Antes se buscaba el
+    # HTML original palabra por palabra, asi que en cuanto el parche corria una
+    # vez dejaba de encontrarse: sumar un servicio obligaba a editar index.html
+    # a mano. Asi el pie siempre queda como dice esta lista.
+    col_servicios = """<nav class="foot__col" aria-label="Servicios">
+      <h4>Servicios</h4>
+      <a href="lujos-y-accesorios-villavicencio.html">Lujos y accesorios en Villavicencio</a>
       <a href="accesorios-4x4-villavicencio.html">Accesorios 4x4 en Villavicencio</a>
       <a href="ppf-villavicencio.html">PPF en Villavicencio</a>
       <a href="detailing-villavicencio.html">Detailing en Villavicencio</a>
       <a href="polarizados-villavicencio.html">Polarizados en Villavicencio</a>
-      <a href="pdr-desabolladura-sin-pintura-villavicencio.html">PDR en Villavicencio</a>"""
-    html = html.replace(viejo_foot, nuevo_foot, 1)
+      <a href="pintura-automotriz-villavicencio.html">Pintura y latonería en Villavicencio</a>
+      <a href="pdr-desabolladura-sin-pintura-villavicencio.html">PDR en Villavicencio</a>
+    </nav>"""
 
-    viejo_emp = """      <a href="#nosotros">Nosotros</a>
-      <a href="#proceso">Cómo trabajamos</a>
-      <a href="#trabajos">Trabajos</a>
-      <a href="#faq">Preguntas frecuentes</a>
-      <a href="#contacto">Contacto</a>"""
-    nuevo_emp = """      <a href="iluminacion-para-carros-villavicencio.html">Iluminación para carros</a>
+    col_mas = """<nav class="foot__col" aria-label="Más servicios">
+      <h4>También</h4>
+      <a href="iluminacion-para-carros-villavicencio.html">Iluminación para carros</a>
       <a href="sonido-para-carros-villavicencio.html">Sonido para carros</a>
       <a href="llantas-villavicencio.html">Llantas</a>
+      <a href=\"""" + HUB_META + """\">Cobertura en todo el Meta</a>
       <a href="#nosotros">Nosotros</a>
-      <a href="#cobertura">Cobertura</a>
-      <a href="#faq">Preguntas frecuentes</a>"""
-    html = html.replace(viejo_emp, nuevo_emp, 1)
-    html = html.replace('<nav class="foot__col" aria-label="Empresa">\n      <h4>Empresa</h4>',
-                        '<nav class="foot__col" aria-label="Más servicios">\n      <h4>También</h4>', 1)
+      <a href="#faq">Preguntas frecuentes</a>
+    </nav>"""
+
+    html = re.sub(r'<nav class="foot__col" aria-label="Servicios">.*?</nav>',
+                  lambda _: col_servicios, html, count=1, flags=re.S)
+    html = re.sub(r'<nav class="foot__col" aria-label="(?:Empresa|Más servicios)">.*?</nav>',
+                  lambda _: col_mas, html, count=1, flags=re.S)
 
     # ---------- 9. Alt de imágenes con contexto local ----------
     html = html.replace('alt="DACARS" width="600" height="117"',
@@ -434,7 +521,10 @@ def main():
              '      <p class="sec__lead" data-reveal>\n'
              "        Si estás buscando <strong>lujos para carros en Villavicencio</strong>, un\n"
              "        <strong>polarizado</strong> que no se llene de burbujas, <strong>PPF</strong> que aguante\n"
-             "        la vía al Llano o <strong>accesorios 4x4</strong> para salir a trocha, este es el taller.\n"
+             "        la vía al Llano, <strong>pintura</strong> para el techo que ya se descascaró o\n"
+             "        <strong>accesorios 4x4</strong> para salir a trocha, este es el taller. Y si vienes de\n"
+             "        otro municipio, mira cómo organizamos la visita para\n"
+             '        <a class="link" href="' + HUB_META + '">todo el departamento del Meta</a>.\n'
              "      </p>")
     if extra not in html:
         html = html.replace(ancla, extra, 1)
