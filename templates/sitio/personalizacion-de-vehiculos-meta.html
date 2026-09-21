@@ -1,0 +1,1245 @@
+{% extends "sitio/base.html" %}{% load static dacars %}
+
+{% block meta %}<title>Lujos, PPF y Detailing en el Meta | DACARS Villavicencio</title>
+<meta name="description" content="Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.">
+<meta name="keywords" content="lujos para carros meta, accesorios para carros meta, ppf meta, polarizados meta, detailing meta, taller de lujos meta, personalizacion de vehiculos meta, accesorios 4x4 meta, pintura para carros meta, lujos para carros acacias, polarizados granada meta, accesorios para carros puerto lopez, taller de carros meta, autolujos meta, llantas meta">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#04060c">
+<meta name="author" content="DACARS VILLAVICENCIO S.A.S">
+<link rel="canonical" href="{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html">
+<link rel="alternate" hreflang="es-co" href="{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html">
+<link rel="alternate" hreflang="x-default" href="{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html">
+
+<!-- Geolocalización para búsqueda local -->
+<meta name="geo.region" content="CO-MET">
+<meta name="geo.placename" content="Villavicencio, Meta, Colombia">
+<meta name="geo.position" content="4.142;-73.634">
+<meta name="ICBM" content="4.142, -73.634">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="DACARS">
+<meta property="og:title" content="Lujos, PPF y Detailing en el Meta | DACARS Villavicencio">
+<meta property="og:description" content="Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.">
+<meta property="og:url" content="{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html">
+<meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lujos, PPF y Detailing en el Meta | DACARS Villavicencio">
+<meta name="twitter:description" content="Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.">
+<meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
+
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
+<link rel="manifest" href="/manifest.webmanifest">
+
+{% endblock %}
+{% block css_extra %}{% if productos_del_servicio or destacados %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">{% endif %}{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#pagina",
+      "url": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html",
+      "name": "Lujos, PPF y Detailing en el Meta | DACARS Villavicencio",
+      "description": "Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.",
+      "inLanguage": "es-CO",
+      "isPartOf": {
+        "@id": "{{ negocio.sitio }}/#sitio"
+      },
+      "about": {
+        "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#servicio"
+      },
+      "breadcrumb": {
+        "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#migas"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#servicio",
+      "name": "Personalización de vehículos en el departamento del Meta",
+      "description": "Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para todo el Meta. Atendemos Acacías, Granada, Puerto López y Restrepo desde Villavicencio.",
+      "url": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html",
+      "serviceType": "Personalización y protección de vehículos",
+      "category": "Automotriz",
+      "provider": {
+        "@type": [
+          "AutoPartsStore",
+          "AutoRepair"
+        ],
+        "@id": "{{ negocio.sitio }}/#dacars",
+        "name": "DACARS",
+        "telephone": "+573112629406",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+          "addressLocality": "Villavicencio",
+          "addressRegion": "Meta",
+          "postalCode": "500001",
+          "addressCountry": "CO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 4.142,
+          "longitude": -73.634
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "State",
+          "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta",
+          "name": "Meta",
+          "alternateName": "Departamento del Meta",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Colombia"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Acacías",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Barranca de Upía",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Cabuyaro",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Castilla la Nueva",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Cubarral",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Cumaral",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "El Calvario",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "El Castillo",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "El Dorado",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Fuente de Oro",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Granada",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Guamal",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "La Macarena",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Lejanías",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Mapiripán",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Mesetas",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Puerto Concordia",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Puerto Gaitán",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Puerto Lleras",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Puerto López",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Puerto Rico",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Restrepo",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "San Carlos de Guaroa",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "San Juan de Arama",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "San Juanito",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "San Martín",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Uribe",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Villavicencio",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Vistahermosa",
+          "containedInPlace": {
+            "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+          }
+        }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://wa.me/573112629406?text=Hola%20DACARS%2C%20vengo%20de%20otro%20municipio%20del%20Meta%20y%20quiero%20cotizar%20un%20servicio.",
+        "servicePhone": "+573112629406",
+        "serviceLocation": {
+          "@type": "Place",
+          "name": "DACARS Villavicencio",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Carrera 33 #24-60, Barrio San Francisco",
+            "addressLocality": "Villavicencio",
+            "addressRegion": "Meta",
+            "postalCode": "500001",
+            "addressCountry": "CO"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 4.142,
+            "longitude": -73.634
+          }
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios DACARS para el Meta",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "PPF · Paint Protection Film",
+              "url": "{{ negocio.sitio }}/ppf-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Accesorios y equipamiento 4x4",
+              "url": "{{ negocio.sitio }}/accesorios-4x4-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pintura automotriz",
+              "url": "{{ negocio.sitio }}/pintura-automotriz-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Polarizados",
+              "url": "{{ negocio.sitio }}/polarizados-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Detailing",
+              "url": "{{ negocio.sitio }}/detailing-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Lujos y accesorios",
+              "url": "{{ negocio.sitio }}/lujos-y-accesorios-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Iluminación",
+              "url": "{{ negocio.sitio }}/iluminacion-para-carros-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Llantas",
+              "url": "{{ negocio.sitio }}/llantas-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Sonido e insonorización",
+              "url": "{{ negocio.sitio }}/sonido-para-carros-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "PDR · Desabolladura sin pintura",
+              "url": "{{ negocio.sitio }}/pdr-desabolladura-sin-pintura-villavicencio.html",
+              "areaServed": {
+                "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#migas",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "{{ negocio.sitio }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cobertura",
+          "item": "{{ negocio.sitio }}/#cobertura"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Meta",
+          "item": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Atienden vehículos de fuera de Villavicencio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y es una parte importante de lo que hacemos. El taller está en Villavicencio, en la Carrera 33 #24-60 del Barrio San Francisco, y recibimos carros de todo el Meta. Lo único que pedimos es que escribas antes de viajar para agendar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Van hasta mi municipio a hacer el trabajo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Los trabajos se hacen en el taller de Villavicencio, porque el PPF, la pintura, el polarizado y el detailing necesitan área controlada, sin polvo y con tiempos de curado. Un trabajo de estos hecho a la intemperie se daña, y preferimos decírtelo antes que prometerte algo que quedaría mal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vengo de lejos. ¿Cuánto tiempo va a estar el carro en el taller?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del servicio, y por eso te lo decimos al cotizar y no al recibir el carro. Un polarizado es de horas; un PPF completo o una pintura general son de varios días. Si vienes de Granada, Puerto Gaitán o Fuente de Oro, organizamos la agenda alrededor de eso."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo dejar el carro varios días?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, es lo normal cuando el cliente viene de otro municipio y el trabajo es largo. Coordínalo por WhatsApp antes de viajar para que el cupo y el material estén listos el día que llegues."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Vale la pena viajar desde Granada o Acacías por esto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende de qué necesites. Para un servicio pequeño, quizá no. Para PPF, pintura, detailing de corrección o un equipamiento 4x4 completo, la mayoría de nuestros clientes del sur del Meta hace el viaje porque es donde consiguen el material y la mano de obra especializada. Cuéntanos tu caso y te decimos con franqueza si te conviene."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cotizan por WhatsApp sin que lleve el carro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, para la mayoría de los servicios. Con la marca, el modelo, el año y unas fotos podemos darte un rango cerrado. Lo que sí necesita ver el carro en persona es la pintura y el PDR, porque el estado real de la lámina no siempre se aprecia en una foto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Manejan facturación para empresas del Meta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trabajamos como DACARS VILLAVICENCIO S.A.S, con NIT 901.798.060. Si necesitas facturación para una empresa o una flota, escríbenos y coordinamos los datos antes del trabajo."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#municipios",
+      "name": "Municipios del Meta que atiende DACARS",
+      "numberOfItems": 29,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "City",
+            "name": "Acacías",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "City",
+            "name": "Barranca de Upía",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "City",
+            "name": "Cabuyaro",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "City",
+            "name": "Castilla la Nueva",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "City",
+            "name": "Cubarral",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "City",
+            "name": "Cumaral",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "City",
+            "name": "El Calvario",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "City",
+            "name": "El Castillo",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "City",
+            "name": "El Dorado",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "City",
+            "name": "Fuente de Oro",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "City",
+            "name": "Granada",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "City",
+            "name": "Guamal",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "City",
+            "name": "La Macarena",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "City",
+            "name": "Lejanías",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "City",
+            "name": "Mapiripán",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "City",
+            "name": "Mesetas",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "City",
+            "name": "Puerto Concordia",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "City",
+            "name": "Puerto Gaitán",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "City",
+            "name": "Puerto Lleras",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "City",
+            "name": "Puerto López",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "City",
+            "name": "Puerto Rico",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "City",
+            "name": "Restrepo",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "City",
+            "name": "San Carlos de Guaroa",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "City",
+            "name": "San Juan de Arama",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@type": "City",
+            "name": "San Juanito",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@type": "City",
+            "name": "San Martín",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "City",
+            "name": "Uribe",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@type": "City",
+            "name": "Villavicencio",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "City",
+            "name": "Vistahermosa",
+            "containedInPlace": {
+              "@id": "{{ negocio.sitio }}/personalizacion-de-vehiculos-meta.html#meta"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block contenido %}<main id="contenido">
+
+<nav class="migas" aria-label="Ruta de navegación">
+  <div class="wrap">
+    <ol>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/#cobertura">Cobertura</a></li>
+      <li aria-current="page">Departamento del Meta</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="shero">
+  <div class="shero__bg" aria-hidden="true"><span class="grid"></span><span class="glow glow--a"></span></div>
+  <div class="wrap">
+    <p class="tag" data-reveal>Cobertura &middot; Departamento del Meta</p>
+    <h1 class="shero__title" data-reveal><span class="chrome">Personalización de vehículos en el Meta</span></h1>
+    <p class="shero__sub" data-reveal>Un taller en Villavicencio que atiende todo el departamento</p>
+    <p class="shero__lead" data-reveal>Lujos, accesorios 4x4, PPF, detailing, polarizados y pintura para
+      quienes vienen de Acacías, Granada, Puerto López, Restrepo y el resto del Meta.</p>
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20vengo%20de%20otro%20municipio%20del%20Meta%20y%20quiero%20cotizar%20un%20servicio." target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Cotizar antes de viajar
+      </a>
+      <a class="btn btn--ghost" href="#municipios">Ver mi municipio</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap sec__narrow">
+    <p class="sec__lead" data-reveal>El Meta es grande y desigual: cabe casi tres veces Suiza, pero la
+      infraestructura de personalización automotriz está concentrada en la capital. Si vives en Granada,
+      en Puerto Gaitán o en Cumaral, es muy probable que tu mecánico de confianza quede a diez minutos
+      y que el taller que instala PPF quede a hora y media.</p>
+    <p class="sec__lead" data-reveal>DACARS queda en Villavicencio, en la <strong>Carrera 33 #24-60, Barrio San Francisco</strong>, y buena
+      parte de los carros que entran al taller no son de la ciudad. Vienen del sur por la ruta del Ariari,
+      del norte por Restrepo y Cumaral, y del oriente por la vía a Puerto López. Esta página existe para eso:
+      para que sepas de antemano cuánto se demora tu trabajo, qué conviene combinar y si el viaje te cuadra,
+      antes de arrancar.</p>
+    <p class="sec__lead" data-reveal>Lo decimos claro desde ya: <strong>no vamos hasta tu municipio</strong>.
+      El PPF, la pintura, el polarizado y el detailing de corrección necesitan área controlada y tiempos
+      de curado que no se improvisan. Lo que sí hacemos es organizar la visita para que viajes una sola vez.</p>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Por qué el viaje</p>
+      <h2 class="sec__title chrome" data-reveal>Por qué la gente del Meta termina en Villavicencio</h2>
+    </header>
+    <div class="cards cards--3">
+        <article class="card" data-reveal>
+          <h3>Acá está el material</h3>
+          <p>Láminas, películas, accesorios y repuestos de personalización se consiguen en la capital. En los municipios hay talleres buenos de mecánica, pero el material específico de lujos, PPF o polarizado casi siempre sale de Villavicencio.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Un solo viaje, varios servicios</h3>
+          <p>Si vives a hora y media, entrar tres veces al taller no tiene sentido. Combinar polarizado, accesorios y detailing en la misma visita es lo que hace que el desplazamiento valga.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Trabajos que necesitan área controlada</h3>
+          <p>El PPF, la pintura y el detailing de corrección dependen de trabajar sin polvo y con tiempos de curado respetados. Eso no se improvisa en un patio.</p>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cómo funciona</p>
+      <h2 class="sec__title chrome" data-reveal>Si vienes de otro municipio</h2>
+      <p class="sec__lead" data-reveal>El objetivo es simple: que no viajes dos veces. Todo lo que se puede
+        resolver por WhatsApp se resuelve antes de que salgas de tu casa.</p>
+    </header>
+    <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step__n">01</span>
+          <h3>Escríbenos con fotos</h3>
+          <p>Mándanos por WhatsApp la marca, el modelo, el año y fotos de lo que quieres resolver. Con eso hacemos la mitad del diagnóstico sin que hayas salido de tu municipio.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">02</span>
+          <h3>Cotización y tiempo real</h3>
+          <p>Te damos el precio y —más importante si vienes de lejos— cuántos días ocupa el carro. Así decides si lo dejas o si esperas.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">03</span>
+          <h3>Agendamos el día</h3>
+          <p>Reservamos el cupo y pedimos el material con antelación. Es la diferencia entre viajar una vez y viajar dos: nadie viene de Granada a que le digan que la lámina llega el jueves.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step__n">04</span>
+          <h3>Entrega y revisión contigo</h3>
+          <p>Revisamos el trabajo juntos antes de que arranques de vuelta, no después. Y te damos las indicaciones de cuidado de los primeros días.</p>
+        </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="municipios">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Municipio por municipio</p>
+      <h2 class="sec__title chrome" data-reveal>De dónde llegan los carros que atendemos</h2>
+      <p class="sec__lead" data-reveal>Distancias aproximadas por carretera desde el taller. Sirven para
+        que calcules el viaje, no para navegar: el estado de la vía manda más que los kilómetros.</p>
+    </header>
+    <div class="cards cards--3">
+        <article class="card" data-reveal>
+          <h3>Restrepo</h3>
+          <p><strong>unos 19 km</strong> desde el taller &middot; vía al norte</p>
+          <p>El municipio más cercano al taller: se viene y se vuelve el mismo día sin despeinarse. De Restrepo llega sobre todo detailing, polarizado y lujos, casi siempre gente que aprovecha una vuelta a Villavicencio y deja el carro un par de horas.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Acacías</h3>
+          <p><strong>unos 28 km</strong> desde el taller &middot; vía al sur, ruta a Acacías</p>
+          <p>La segunda ciudad más grande del área. Entra mucho vehículo de operación de empresas petroleras y de servicios: polarizado, protectores, iluminación auxiliar y PPF para las camionetas que se la pasan en carretera destapada.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Cumaral</h3>
+          <p><strong>unos 35 km</strong> desde el taller &middot; vía al norte, corredor Restrepo–Cumaral</p>
+          <p>Zona de fincas y de finca de fin de semana. De acá llegan camionetas que se mueven entre asfalto y trocha: accesorios 4x4, iluminación, llantas para uso mixto y cubiertas de platón.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Guamal</h3>
+          <p><strong>unos 38 km</strong> desde el taller &middot; vía al sur, pasando Acacías</p>
+          <p>Piedemonte y fincas. Vehículos que trabajan: estribos, protectores de bajos, llantas y pintura de paneles castigados por el sol y la carga.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Castilla la Nueva</h3>
+          <p><strong>unos 45 km</strong> desde el taller &middot; vía al sur, desvío después de Acacías</p>
+          <p>Zona petrolera. Lo que más entra son camionetas de operación que necesitan iluminación auxiliar, barras, protectores y mantenimiento de pintura, porque viven en vías internas sin pavimentar.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>San Carlos de Guaroa</h3>
+          <p><strong>unos 60 km</strong> desde el taller &middot; vía al sur y desvío hacia el oriente</p>
+          <p>Territorio de palma. Vehículos de trabajo duro que llegan por llantas, protección de pintura y repintes de platón y guardafangos.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>San Martín</h3>
+          <p><strong>unos 62 km</strong> desde el taller &middot; vía al sur, ruta del Ariari</p>
+          <p>Tierra ganadera. Camionetas doble cabina con uso real: cubiertas de platón, bumpers, estribos, iluminación y PPF en el frente, que es lo primero que se pica en esa vía.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Granada</h3>
+          <p><strong>unos 85 km</strong> desde el taller &middot; vía al sur, ruta del Ariari</p>
+          <p>El segundo polo urbano del departamento y el viaje más frecuente desde el sur. De Granada llega de todo el catálogo, y casi siempre en combinación: el que viaja hora y media no viene por un solo servicio.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Puerto López</h3>
+          <p><strong>unos 86 km</strong> desde el taller &middot; vía al oriente, ruta 40</p>
+          <p>El puerto sobre el Meta y paso obligado hacia la altillanura. Entra bastante detailing y PPF: esa vía deja el frente del carro tapizado de insectos y picado de grava.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Barranca de Upía</h3>
+          <p><strong>unos 100 km</strong> desde el taller &middot; vía al norte, corredor hacia Casanare</p>
+          <p>El extremo norte del departamento. Vehículos de trabajo y de finca que vienen por equipamiento 4x4, iluminación y llantas.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Fuente de Oro</h3>
+          <p><strong>unos 110 km</strong> desde el taller &middot; vía al sur, pasando Granada</p>
+          <p>Agro del Ariari. Camionetas de carga liviana que llegan por cubiertas, llantas, protectores y pintura, casi siempre agendando el trabajo con antelación.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Puerto Gaitán</h3>
+          <p><strong>unos 185 km</strong> desde el taller &middot; vía al oriente, pasando Puerto López</p>
+          <p>El viaje más largo de los frecuentes: tres horas largas de ida. Por eso desde acá casi siempre se agendan trabajos que valen el desplazamiento —PPF completo, pintura, equipamiento 4x4 de una vez— y el carro se deja varios días.</p>
+        </article>
+    </div>
+    <p class="sec__foot" data-reveal>¿Tu municipio no está en la lista? Igual te atendemos.
+      <a class="link" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20vengo%20de%20otro%20municipio%20del%20Meta%20y%20quiero%20cotizar%20un%20servicio." target="_blank" rel="noopener">Escríbenos y coordinamos &rarr;</a>
+    </p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Servicios</p>
+      <h2 class="sec__title chrome" data-reveal>Lo que puedes resolver en una sola visita</h2>
+      <p class="sec__lead" data-reveal>Diez especialidades en el mismo taller. Si viajas desde lejos,
+        combinar varias es justamente lo que hace que el desplazamiento valga la pena.</p>
+    </header>
+    <div class="cards cards--3">
+        <article class="card" data-reveal>
+          <h3>PPF · Paint Protection Film</h3>
+          <p>La vía al Llano y las rutas del Ariari y la altillanura son grava y piedra suelta. Si haces esos trayectos seguido, el PPF es lo que evita que la pintura se pique.</p>
+          <a class="card__mas" href="/ppf-villavicencio.html">PPF en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Accesorios y equipamiento 4x4</h3>
+          <p>Snorkel, bumpers, winches, canastillas y protectores para las camionetas que salen del pavimento todos los días, no solo los domingos.</p>
+          <a class="card__mas" href="/accesorios-4x4-villavicencio.html">Accesorios y equipamiento 4x4 en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Pintura automotriz</h3>
+          <p>Repinte de paneles y pintura general. En el Meta el sol quema el barniz del techo y el capó más rápido que en el resto del país.</p>
+          <a class="card__mas" href="/pintura-automotriz-villavicencio.html">Pintura automotriz en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Polarizados</h3>
+          <p>Menos calor adentro, que en el Llano no es un detalle estético sino una necesidad diaria.</p>
+          <a class="card__mas" href="/polarizados-villavicencio.html">Polarizados en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Detailing</h3>
+          <p>Lavado técnico, descontaminación y pulimento. Lo que pide un carro después de una temporada de carretera y sol.</p>
+          <a class="card__mas" href="/detailing-villavicencio.html">Detailing en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Lujos y accesorios</h3>
+          <p>Estribos, molduras, cubiertas de platón, tapetes y todo lo que le da carácter propio al carro.</p>
+          <a class="card__mas" href="/lujos-y-accesorios-villavicencio.html">Lujos y accesorios en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Iluminación</h3>
+          <p>Exploradoras, barras LED y luces auxiliares: en las vías veredales del Meta la iluminación de fábrica se queda corta.</p>
+          <a class="card__mas" href="/iluminacion-para-carros-villavicencio.html">Iluminación en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Llantas</h3>
+          <p>Asesoría según tu uso real. La llanta de ciudad y la de trocha no son intercambiables y acá muchos hacen las dos cosas.</p>
+          <a class="card__mas" href="/llantas-villavicencio.html">Llantas en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Sonido e insonorización</h3>
+          <p>Equipos, parlantes y aislamiento, montados sin improvisar el cableado.</p>
+          <a class="card__mas" href="/sonido-para-carros-villavicencio.html">Sonido e insonorización en Villavicencio &rarr;</a>
+        </article>
+        <article class="card" data-reveal>
+          <h3>PDR · Desabolladura sin pintura</h3>
+          <p>Golpes de parqueadero sacados sin repintar, conservando la pintura de fábrica.</p>
+          <a class="card__mas" href="/pdr-desabolladura-sin-pintura-villavicencio.html">PDR en Villavicencio &rarr;</a>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="faq">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Preguntas frecuentes</p>
+      <h2 class="sec__title chrome" data-reveal>Lo que nos preguntan desde fuera de Villavicencio</h2>
+    </header>
+    <div class="faq">
+      <details data-reveal>
+        <summary>¿Atienden vehículos de fuera de Villavicencio?</summary>
+        <div><p>Sí, y es una parte importante de lo que hacemos. El taller está en Villavicencio, en la Carrera 33 #24-60 del Barrio San Francisco, y recibimos carros de todo el Meta. Lo único que pedimos es que escribas antes de viajar para agendar.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Van hasta mi municipio a hacer el trabajo?</summary>
+        <div><p>No. Los trabajos se hacen en el taller de Villavicencio, porque el PPF, la pintura, el polarizado y el detailing necesitan área controlada, sin polvo y con tiempos de curado. Un trabajo de estos hecho a la intemperie se daña, y preferimos decírtelo antes que prometerte algo que quedaría mal.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>Vengo de lejos. ¿Cuánto tiempo va a estar el carro en el taller?</summary>
+        <div><p>Depende del servicio, y por eso te lo decimos al cotizar y no al recibir el carro. Un polarizado es de horas; un PPF completo o una pintura general son de varios días. Si vienes de Granada, Puerto Gaitán o Fuente de Oro, organizamos la agenda alrededor de eso.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Puedo dejar el carro varios días?</summary>
+        <div><p>Sí, es lo normal cuando el cliente viene de otro municipio y el trabajo es largo. Coordínalo por WhatsApp antes de viajar para que el cupo y el material estén listos el día que llegues.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Vale la pena viajar desde Granada o Acacías por esto?</summary>
+        <div><p>Depende de qué necesites. Para un servicio pequeño, quizá no. Para PPF, pintura, detailing de corrección o un equipamiento 4x4 completo, la mayoría de nuestros clientes del sur del Meta hace el viaje porque es donde consiguen el material y la mano de obra especializada. Cuéntanos tu caso y te decimos con franqueza si te conviene.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Cotizan por WhatsApp sin que lleve el carro?</summary>
+        <div><p>Sí, para la mayoría de los servicios. Con la marca, el modelo, el año y unas fotos podemos darte un rango cerrado. Lo que sí necesita ver el carro en persona es la pintura y el PDR, porque el estado real de la lámina no siempre se aprecia en una foto.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>¿Manejan facturación para empresas del Meta?</summary>
+        <div><p>Trabajamos como DACARS VILLAVICENCIO S.A.S, con NIT 901.798.060. Si necesitas facturación para una empresa o una flota, escríbenos y coordinamos los datos antes del trabajo.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cobertura">
+  <div class="wrap sec__narrow">
+    <header class="sec__head">
+      <p class="tag" data-reveal>Cobertura</p>
+      <h2 class="sec__title chrome" data-reveal>Los 29 municipios del Meta</h2>
+      <p class="sec__lead" data-reveal>Recibimos vehículos de todo el departamento. Los que quedan más lejos
+        —la Macarena, Mapiripán, Uribe— requieren planear el viaje con más antelación, pero la puerta del
+        taller es la misma para todos.</p>
+    </header>
+    <ul class="chips" data-reveal>
+      <li>Acacías</li>
+      <li>Barranca de Upía</li>
+      <li>Cabuyaro</li>
+      <li>Castilla la Nueva</li>
+      <li>Cubarral</li>
+      <li>Cumaral</li>
+      <li>El Calvario</li>
+      <li>El Castillo</li>
+      <li>El Dorado</li>
+      <li>Fuente de Oro</li>
+      <li>Granada</li>
+      <li>Guamal</li>
+      <li>La Macarena</li>
+      <li>Lejanías</li>
+      <li>Mapiripán</li>
+      <li>Mesetas</li>
+      <li>Puerto Concordia</li>
+      <li>Puerto Gaitán</li>
+      <li>Puerto Lleras</li>
+      <li>Puerto López</li>
+      <li>Puerto Rico</li>
+      <li>Restrepo</li>
+      <li>San Carlos de Guaroa</li>
+      <li>San Juan de Arama</li>
+      <li>San Juanito</li>
+      <li>San Martín</li>
+      <li>Uribe</li>
+      <li>Villavicencio</li>
+      <li>Vistahermosa</li>
+    </ul>
+    <p class="sec__lead" data-reveal>¿Estás en Villavicencio? Entonces te sirve más la
+      <a class="link" href="/#cobertura">cobertura por barrios de la ciudad</a>.</p>
+    <div class="mapa-mini" data-reveal>
+      <iframe title="Ubicación de DACARS en Villavicencio, Meta"
+        src="https://www.google.com/maps?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;z=16&amp;output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="wrap cierre__in">
+    <h2 class="chrome" data-reveal>Escríbenos antes de viajar</h2>
+    <p data-reveal>Cuéntanos de dónde vienes, qué vehículo tienes y qué necesitas. Te cotizamos, te decimos
+      cuántos días ocupa el carro y te agendamos el cupo.</p>
+    <a class="btn btn--primary" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20vengo%20de%20otro%20municipio%20del%20Meta%20y%20quiero%20cotizar%20un%20servicio." target="_blank" rel="noopener" data-reveal>
+      <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+</main>
+{% endblock %}
+{% block pie %}{% include "sitio/_pie.html" with wa_flotante="https://wa.me/573112629406?text=Hola%20DACARS%2C%20vengo%20de%20otro%20municipio%20del%20Meta%20y%20quiero%20cotizar%20un%20servicio." %}{% endblock %}

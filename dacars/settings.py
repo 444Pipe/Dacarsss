@@ -161,6 +161,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "sitio.context_processors.negocio",
+                "sitio.context_processors.paginas",
                 "pedidos.context_processors.carrito",
             ],
         },

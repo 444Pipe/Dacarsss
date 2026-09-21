@@ -1,7 +1,8 @@
 """El sitemap, ahora vivo.
 
-Antes era un XML a mano con 10 URLs. Ahora las 10 siguen ahí y se le suman
-solas las categorías y los productos que publique el comercio. Un producto
+Antes era un XML a mano con 10 URLs. Ahora son 12 —la portada, las 10
+landings y el hub del Meta— y se le suman solas las categorías y los
+productos que publique el comercio. Un producto
 nuevo aparece en el sitemap el mismo día, sin que nadie corra un script.
 """
 
@@ -9,7 +10,7 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 from catalogo.models import Categoria, Producto
-from sitio.paginas import SLUGS
+from sitio.paginas import HUB_META, SLUGS
 
 
 class Paginas(Sitemap):
@@ -17,13 +18,17 @@ class Paginas(Sitemap):
     changefreq = "monthly"
 
     def items(self):
-        return ["portada"] + SLUGS
+        return ["portada", HUB_META] + SLUGS
 
     def location(self, item):
         return "/" if item == "portada" else "/" + item + ".html"
 
     def priority(self, item):
-        return 1.0 if item == "portada" else 0.8
+        if item == "portada":
+            return 1.0
+        # El hub del Meta es la única página que cubre el departamento
+        # entero: para las búsquedas regionales no hay otra que la remplace.
+        return 0.9 if item == HUB_META else 0.8
 
 
 class Catalogo(Sitemap):

@@ -1,14 +1,14 @@
 {% extends "sitio/base.html" %}{% load static dacars %}
 
 {% block meta %}<title>Polarizados en Villavicencio | Láminas para vidrios — DACARS</title>
-<meta name="description" content="Polarizado de vidrios en Villavicencio con corte y curado profesional. Menos calor, bloqueo UV y privacidad, sin burbujas ni bordes a la vista. Cotiza por WhatsApp.">
+<meta name="description" content="Polarizado de vidrios en Villavicencio con corte y curado profesional: menos calor, bloqueo UV y privacidad, sin burbujas. Cotiza por WhatsApp.">
 <meta name="keywords" content="polarizados villavicencio, polarizado de carros villavicencio, laminas para vidrios villavicencio, entintado de vidrios villavicencio, polarizado ceramico villavicencio, polarizar carro meta">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#04060c">
 <meta name="author" content="DACARS VILLAVICENCIO S.A.S">
-<link rel="canonical" href="https://www.dacars.com.co/polarizados-villavicencio.html">
-<link rel="alternate" hreflang="es-co" href="https://www.dacars.com.co/polarizados-villavicencio.html">
-<link rel="alternate" hreflang="x-default" href="https://www.dacars.com.co/polarizados-villavicencio.html">
+<link rel="canonical" href="{{ negocio.sitio }}/polarizados-villavicencio.html">
+<link rel="alternate" hreflang="es-co" href="{{ negocio.sitio }}/polarizados-villavicencio.html">
+<link rel="alternate" hreflang="x-default" href="{{ negocio.sitio }}/polarizados-villavicencio.html">
 
 <!-- Geolocalización para búsqueda local -->
 <meta name="geo.region" content="CO-MET">
@@ -20,15 +20,15 @@
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="DACARS">
 <meta property="og:title" content="Polarizados en Villavicencio | Láminas para vidrios — DACARS">
-<meta property="og:description" content="Polarizado de vidrios en Villavicencio con corte y curado profesional. Menos calor, bloqueo UV y privacidad, sin burbujas ni bordes a la vista. Cotiza por WhatsApp.">
-<meta property="og:url" content="https://www.dacars.com.co/polarizados-villavicencio.html">
+<meta property="og:description" content="Polarizado de vidrios en Villavicencio con corte y curado profesional: menos calor, bloqueo UV y privacidad, sin burbujas. Cotiza por WhatsApp.">
+<meta property="og:url" content="{{ negocio.sitio }}/polarizados-villavicencio.html">
 <meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Polarizados en Villavicencio | Láminas para vidrios — DACARS">
-<meta name="twitter:description" content="Polarizado de vidrios en Villavicencio con corte y curado profesional. Menos calor, bloqueo UV y privacidad, sin burbujas ni bordes a la vista. Cotiza por WhatsApp.">
+<meta name="twitter:description" content="Polarizado de vidrios en Villavicencio con corte y curado profesional: menos calor, bloqueo UV y privacidad, sin burbujas. Cotiza por WhatsApp.">
 <meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
 
 <link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
@@ -46,16 +46,16 @@
   "@graph": [
     {
       "@type": "Service",
-      "@id": "https://www.dacars.com.co/polarizados-villavicencio.html#servicio",
+      "@id": "{{ negocio.sitio }}/polarizados-villavicencio.html#servicio",
       "name": "Polarizados en Villavicencio",
       "alternateName": "Polarizados en Villavicencio",
-      "description": "Polarizado de vidrios en Villavicencio con corte y curado profesional. Menos calor, bloqueo UV y privacidad, sin burbujas ni bordes a la vista. Cotiza por WhatsApp.",
-      "url": "https://www.dacars.com.co/polarizados-villavicencio.html",
+      "description": "Polarizado de vidrios en Villavicencio con corte y curado profesional: menos calor, bloqueo UV y privacidad, sin burbujas. Cotiza por WhatsApp.",
+      "url": "{{ negocio.sitio }}/polarizados-villavicencio.html",
       "serviceType": "Polarizados",
       "category": "Automotriz",
       "provider": {
         "@type": "AutoPartsStore",
-        "@id": "https://www.dacars.com.co/#dacars",
+        "@id": "{{ negocio.sitio }}/#dacars",
         "name": "DACARS",
         "telephone": "+573112629406",
         "address": {
@@ -167,31 +167,31 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.dacars.com.co/polarizados-villavicencio.html#migas",
+      "@id": "{{ negocio.sitio }}/polarizados-villavicencio.html#migas",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Inicio",
-          "item": "https://www.dacars.com.co/"
+          "item": "{{ negocio.sitio }}/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Servicios",
-          "item": "https://www.dacars.com.co/#servicios"
+          "item": "{{ negocio.sitio }}/#servicios"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Polarizados en Villavicencio",
-          "item": "https://www.dacars.com.co/polarizados-villavicencio.html"
+          "item": "{{ negocio.sitio }}/polarizados-villavicencio.html"
         }
       ]
     },
     {
       "@type": "FAQPage",
-      "@id": "https://www.dacars.com.co/polarizados-villavicencio.html#faq",
+      "@id": "{{ negocio.sitio }}/polarizados-villavicencio.html#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -237,19 +237,19 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://www.dacars.com.co/polarizados-villavicencio.html#pagina",
-      "url": "https://www.dacars.com.co/polarizados-villavicencio.html",
+      "@id": "{{ negocio.sitio }}/polarizados-villavicencio.html#pagina",
+      "url": "{{ negocio.sitio }}/polarizados-villavicencio.html",
       "name": "Polarizados en Villavicencio | Láminas para vidrios — DACARS",
-      "description": "Polarizado de vidrios en Villavicencio con corte y curado profesional. Menos calor, bloqueo UV y privacidad, sin burbujas ni bordes a la vista. Cotiza por WhatsApp.",
+      "description": "Polarizado de vidrios en Villavicencio con corte y curado profesional: menos calor, bloqueo UV y privacidad, sin burbujas. Cotiza por WhatsApp.",
       "inLanguage": "es-CO",
       "isPartOf": {
-        "@id": "https://www.dacars.com.co/#sitio"
+        "@id": "{{ negocio.sitio }}/#sitio"
       },
       "about": {
-        "@id": "https://www.dacars.com.co/polarizados-villavicencio.html#servicio"
+        "@id": "{{ negocio.sitio }}/polarizados-villavicencio.html#servicio"
       },
       "breadcrumb": {
-        "@id": "https://www.dacars.com.co/polarizados-villavicencio.html#migas"
+        "@id": "{{ negocio.sitio }}/polarizados-villavicencio.html#migas"
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
@@ -448,32 +448,7 @@
       <h2 class="sec__title chrome" data-reveal>Todo en el mismo taller</h2>
       <p class="sec__lead" data-reveal>Aprovecha la visita y resuelve varias cosas de una. Combinar servicios sale mejor que entrar al taller tres veces.</p>
     </header>
-    <div class="otros">
-        <a class="otro" href="/ppf-villavicencio.html">
-          <b>PPF</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/detailing-villavicencio.html">
-          <b>Detailing</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/accesorios-4x4-villavicencio.html">
-          <b>Accesorios 4x4</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/lujos-y-accesorios-villavicencio.html">
-          <b>Lujos y accesorios</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/iluminacion-para-carros-villavicencio.html">
-          <b>Iluminación</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/sonido-para-carros-villavicencio.html">
-          <b>Sonido</b>
-          <span>en Villavicencio</span>
-        </a>
-    </div>
+    {% include "sitio/_otros_servicios.html" %}
   </div>
 </section>
 

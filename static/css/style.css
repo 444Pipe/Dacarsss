@@ -456,6 +456,9 @@ svg.marca{fill:currentColor; stroke:none}
   letter-spacing:.005em; color:var(--text);
 }
 .card p{margin:0; font-size:14.6px; color:var(--muted); line-height:1.66}
+/* Tarjeta con dos párrafos (el hub del Meta pone distancia + descripción).
+   .card p lleva margin:0, así que sin esta regla los dos quedan pegados. */
+.card p + p{margin-top:10px}
 
 /* La portada mantiene SIEMPRE 2 columnas: se compacta la tarjeta en móvil */
 @media (max-width:640px){

@@ -1,31 +1,32 @@
-"""Que la migración no haya roto el sitio que ya estaba indexado.
+"""Que el sitio que ya está indexado siga en pie.
 
 Es la prueba más importante del proyecto. El SEO local es lo que trae los
-clientes, y una URL que cambia de dirección o deja de responder 200 no se nota
-mirando la página: se nota semanas después, cuando el tráfico bajó.
+clientes, y una URL que cambia de dirección, deja de responder 200 o pierde su
+JSON-LD no se nota mirando la página: se nota semanas después, cuando el
+tráfico bajó.
 """
 
-import difflib
+import json
 import re
-import unittest
-from pathlib import Path
 
 from django.conf import settings
 from django.test import TestCase
 
-from sitio.paginas import SLUGS
-
-# Los HTML originales, para comparar contra ellos. Viven en legacy/html/
-# después de la migración; si alguien los borra, la prueba se salta sola.
-LEGACY = Path(settings.BASE_DIR) / "legacy" / "html"
+from sitio.paginas import HUB_META, SLUGS
 
 
 class UrlsDelSitio(TestCase):
-    def test_las_9_landings_responden(self):
+    # Sin numero en el nombre a proposito: la lista de servicios crece, y un
+    # test llamado "las_9" o "las_10" obliga a renombrarlo cada vez o a mentir.
+    def test_todas_las_landings_responden(self):
         for slug in SLUGS:
             with self.subTest(slug=slug):
                 r = self.client.get("/" + slug + ".html")
                 self.assertEqual(r.status_code, 200, slug + " no responde 200")
+
+    def test_el_hub_del_meta_responde(self):
+        r = self.client.get("/" + HUB_META + ".html")
+        self.assertEqual(r.status_code, 200)
 
     def test_la_portada_responde(self):
         self.assertEqual(self.client.get("/").status_code, 200)
@@ -37,16 +38,20 @@ class UrlsDelSitio(TestCase):
         self.assertEqual(r["Location"], "/")
 
     def test_cada_landing_conserva_su_canonical(self):
-        for slug in SLUGS:
+        # El dominio se lee de la configuracion y no se escribe aca: si manana
+        # cambia DOMINIO, lo que tiene que seguir siendo cierto es que el
+        # canonical apunte al dominio configurado, no a uno concreto.
+        sitio = settings.NEGOCIO["sitio"]
+        for slug in SLUGS + [HUB_META]:
             with self.subTest(slug=slug):
                 html = self.client.get("/" + slug + ".html").content.decode()
                 self.assertIn(
-                    'rel="canonical" href="https://www.dacars.com.co/%s.html"' % slug,
+                    'rel="canonical" href="%s/%s.html"' % (sitio, slug),
                     html,
                 )
 
     def test_cada_landing_conserva_su_json_ld(self):
-        for slug in SLUGS:
+        for slug in SLUGS + [HUB_META]:
             with self.subTest(slug=slug):
                 html = self.client.get("/" + slug + ".html").content.decode()
                 self.assertIn('application/ld+json', html)
@@ -92,63 +97,128 @@ class UrlsDelSitio(TestCase):
         self.assertNotIn('href="/catalogo/"', html)
 
 
-# Lo que se le agregó al sitio después de la migración, y por eso no está en
-# los HTML originales.
+# =========================================================================
+#  Invariantes de SEO
 #
-# Se quita el bloque entero, no las líneas sueltas: un `</svg>` o un `</a>`
-# aparecen en muchos lados, y filtrar por esas líneas taparía cambios que no
-# tienen nada que ver. La lista es corta a propósito — cada entrada afloja un
-# poco la comparación, así que se suma solo con el motivo escrito al lado.
-AGREGADOS = [
-    # El acceso al panel, en la barra final del pie.
-    re.compile(r'[ \t]*<a class="foot__acceso".*?</a>\n', re.DOTALL),
-]
+#  Acá vivía `IgualAlSitioViejo`, que comparaba cada página renderizada contra
+#  su HTML original en legacy/html/, línea por línea. Cumplió su trabajo: la
+#  migración a Django se verificó con ella y pasó.
+#
+#  Pero una prueba que exige que la salida sea idéntica a la de antes también
+#  impide mejorarla. Al acortar las meta description, sumar Pintura y el hub
+#  del Meta y unificar el bloque «Más servicios», las diez páginas dejaron de
+#  coincidir con el archivo congelado — no por un error, sino por el cambio
+#  que se quería hacer. Mantenerla habría significado o no tocar el sitio
+#  nunca más, o reescribir legacy/html/, que es justamente el registro
+#  histórico que no hay que tocar.
+#
+#  Lo que sí había que conservar es el MOTIVO: que una edición futura no se
+#  lleve por delante el marcado del que depende la búsqueda local, porque eso
+#  no se ve en el navegador — se ve meses después, en las visitas. Así que en
+#  vez de congelar el texto se comprueban las reglas: un h1, title y
+#  description únicos y dentro de su largo, canonical al dominio configurado,
+#  JSON-LD que parsea y trae los tipos que Google lee, y ningún enlace interno
+#  roto.
+# =========================================================================
 
 
-def _normalizar(html):
-    """Deja fuera las diferencias que se introdujeron a propósito."""
-    html = html.replace('href="index.html#', 'href="/#')
-    html = html.replace('href="index.html"', 'href="/"')
-    for slug in SLUGS:
-        html = html.replace('href="%s.html' % slug, 'href="/%s.html' % slug)
-    html = html.replace('href="manifest.webmanifest"', 'href="/manifest.webmanifest"')
-    # El `?v=hash` que ponía versionar-assets.py ahora lo hace {% static %}.
-    html = re.sub(r'href="(/static/)?css/style\.css(\?v=[0-9a-f]+)?"', "CSS", html)
-    html = re.sub(r'src="(/static/)?js/app\.js(\?v=[0-9a-f]+)?"', "JS", html)
-    for agregado in AGREGADOS:
-        html = agregado.sub("", html)
-    return [l.rstrip() for l in html.splitlines() if l.strip()]
+def _paginas():
+    return ["/"] + ["/%s.html" % s for s in SLUGS + [HUB_META]]
 
 
-@unittest.skipUnless(LEGACY.exists(), "no están los HTML originales en legacy/html/")
-class IgualAlSitioViejo(TestCase):
-    """Lo que sirve Django tiene que ser lo mismo que servía Caddy.
+class InvariantesDeSeo(TestCase):
+    def setUp(self):
+        self.html = {ruta: self.client.get(ruta).content.decode() for ruta in _paginas()}
 
-    No es una prueba de estilo: en esas páginas hay entre 200 y 600 líneas de
-    JSON-LD que Google ya está leyendo. Un atributo que se pierda en una
-    edición futura no se ve en el navegador — se ve meses después, en las
-    visitas.
-    """
-
-    def test_las_10_paginas_salen_iguales(self):
-        for archivo, url in [("index.html", "/")] + [
-            (s + ".html", "/" + s + ".html") for s in SLUGS
-        ]:
-            with self.subTest(pagina=archivo):
-                original = _normalizar((LEGACY / archivo).read_text(encoding="utf-8"))
-                servido = _normalizar(self.client.get(url).content.decode())
-                diferencias = [
-                    linea
-                    for linea in difflib.unified_diff(original, servido, lineterm="", n=0)
-                    if linea.startswith(("+", "-"))
-                    and not linea.startswith(("+++", "---"))
-                ]
+    def test_cada_pagina_tiene_un_solo_h1(self):
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
                 self.assertEqual(
-                    diferencias,
-                    [],
-                    "%s cambió respecto del sitio original:\n%s"
-                    % (archivo, "\n".join(diferencias[:20])),
+                    len(re.findall(r"<h1\b", html)), 1, "debe haber exactamente un h1"
                 )
+
+    def test_title_unico_y_dentro_del_corte(self):
+        vistos = {}
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
+                t = re.search(r"<title>(.*?)</title>", html, re.S)
+                self.assertIsNotNone(t, "falta el title")
+                titulo = t.group(1).strip()
+                # Google corta el título alrededor de los 60-70 caracteres.
+                self.assertLessEqual(len(titulo), 70, titulo)
+                self.assertNotIn(titulo, vistos, "title repetido con " + vistos.get(titulo, ""))
+                vistos[titulo] = ruta
+
+    def test_description_unica_y_dentro_del_corte(self):
+        vistos = {}
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
+                d = re.search(r'<meta name="description" content="([^"]*)"', html)
+                self.assertIsNotNone(d, "falta la meta description")
+                desc = d.group(1).strip()
+                # Más de ~160 y el fragmento sale cortado: la llamada a la
+                # acción del final es lo primero que se pierde.
+                self.assertLessEqual(len(desc), 160, "%s: %d caracteres" % (ruta, len(desc)))
+                self.assertNotIn(desc, vistos, "description repetida con " + vistos.get(desc, ""))
+                vistos[desc] = ruta
+
+    def test_canonical_al_dominio_configurado(self):
+        sitio = settings.NEGOCIO["sitio"]
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
+                esperado = sitio + ruta
+                self.assertIn('rel="canonical" href="%s"' % esperado, html)
+
+    def test_el_json_ld_parsea_y_trae_lo_que_google_lee(self):
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
+                bloques = re.findall(
+                    r'<script type="application/ld\+json">(.*?)</script>', html, re.S
+                )
+                self.assertTrue(bloques, "falta el JSON-LD")
+                tipos = set()
+                for bloque in bloques:
+                    # Que parsee es la mitad del asunto: un JSON-LD roto no
+                    # avisa, simplemente deja de contar.
+                    datos = json.loads(bloque)
+                    for nodo in datos.get("@graph", [datos]):
+                        tipo = nodo.get("@type")
+                        tipos.update(tipo if isinstance(tipo, list) else [tipo])
+                self.assertIn("WebPage", tipos)
+                # El FAQPage es el que puede poner las preguntas desplegables
+                # en el resultado de búsqueda.
+                self.assertIn("FAQPage", tipos)
+                if ruta != "/":
+                    self.assertIn("Service", tipos)
+                    self.assertIn("BreadcrumbList", tipos)
+
+    def test_open_graph_completo(self):
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
+                for etiqueta in ("og:title", "og:description", "og:image", "og:url"):
+                    self.assertIn('property="%s"' % etiqueta, html)
+                self.assertIn('name="twitter:card"', html)
+
+    def test_sin_enlaces_internos_rotos(self):
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
+                for destino in set(re.findall(r'href="(/[a-z0-9-]+\.html)"', html)):
+                    self.assertEqual(
+                        self.client.get(destino).status_code,
+                        200,
+                        "%s enlaza a %s, que no responde" % (ruta, destino),
+                    )
+
+    def test_las_paginas_nuevas_estan_enlazadas(self):
+        # Una landing sin enlaces entrantes es una landing que Google rastrea
+        # tarde y mal. Las dos últimas en llegar son las que más riesgo corren
+        # de quedarse sueltas.
+        portada = self.html["/"]
+        for destino in ("/pintura-automotriz-villavicencio.html",
+                        "/%s.html" % HUB_META):
+            with self.subTest(destino=destino):
+                self.assertIn('href="%s"' % destino, portada,
+                              "la portada no enlaza a " + destino)
 
 
 class AccesoAlPanel(TestCase):

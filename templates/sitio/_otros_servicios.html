@@ -1,0 +1,20 @@
+{# Enlaces a las demás landings.
+
+   Antes este bloque estaba copiado dentro de cada plantilla de servicio y
+   listaba solo 6 de las hermanas. Con la lista escrita a mano pasaban dos
+   cosas: al sumar un servicio nuevo quedaba fuera de las otras nueve páginas,
+   y las que caían fuera del corte de 6 se quedaban sin enlaces entrantes
+   desde el resto del sitio. Ahora sale de sitio.paginas, así que está siempre
+   completo y no hay nada que acordarse de actualizar.
+
+   `slug` es el de la página actual: se excluye sola. #}
+<div class="otros">
+{% for s, nombre in servicios %}{% if s != slug %}        <a class="otro" href="/{{ s }}.html">
+          <b>{{ nombre }}</b>
+          <span>en Villavicencio</span>
+        </a>
+{% endif %}{% endfor %}        <a class="otro" href="/{{ hub_meta }}.html">
+          <b>Todo el Meta</b>
+          <span>cobertura del departamento</span>
+        </a>
+</div>

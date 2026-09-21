@@ -19,23 +19,19 @@ def _carpeta(sub):
     """Ruta dentro de Cloudinary (o de media/ en local)."""
     return settings.CLOUDINARY_CARPETA + "/" + sub
 
+from sitio.paginas import SERVICIOS as SERVICIOS_DEL_SITIO
 
 class Categoria(models.Model):
     """Agrupa productos y, cuando aplica, se enlaza con la landing del servicio."""
 
-    # Las 9 landings que ya existen. Enlazar la categoría con su servicio hace
-    # que el catálogo y el SEO se alimenten entre sí en vez de competir.
-    SERVICIOS = [
-        ("ppf-villavicencio", "PPF"),
-        ("polarizados-villavicencio", "Polarizados"),
-        ("detailing-villavicencio", "Detailing"),
-        ("accesorios-4x4-villavicencio", "Accesorios 4x4"),
-        ("lujos-y-accesorios-villavicencio", "Lujos y accesorios"),
-        ("iluminacion-para-carros-villavicencio", "Iluminación"),
-        ("sonido-para-carros-villavicencio", "Sonido"),
-        ("llantas-villavicencio", "Llantas"),
-        ("pdr-desabolladura-sin-pintura-villavicencio", "PDR"),
-    ]
+    # Las landings que existen. Enlazar la categoría con su servicio hace que
+    # el catálogo y el SEO se alimenten entre sí en vez de competir.
+    #
+    # La lista se toma de sitio.paginas y no se copia acá: eran dos listas
+    # que había que acordarse de tocar juntas, y al sumar un servicio esta se
+    # habría quedado corta, dejando la categoría nueva sin forma de enlazarse
+    # con su página.
+    SERVICIOS = SERVICIOS_DEL_SITIO
 
     nombre = models.CharField(max_length=80, unique=True)
     slug = models.SlugField(

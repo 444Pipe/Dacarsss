@@ -1,14 +1,14 @@
 {% extends "sitio/base.html" %}{% load static dacars %}
 
 {% block meta %}<title>Detailing en Villavicencio | Pulimento de carros — DACARS</title>
-<meta name="description" content="Detailing automotriz en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro. Cotiza por WhatsApp.">
+<meta name="description" content="Detailing en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro.">
 <meta name="keywords" content="detailing villavicencio, pulida de carro villavicencio, lavado tecnico villavicencio, correccion de pintura villavicencio, brillado de carros villavicencio, encerado de autos meta">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#04060c">
 <meta name="author" content="DACARS VILLAVICENCIO S.A.S">
-<link rel="canonical" href="https://www.dacars.com.co/detailing-villavicencio.html">
-<link rel="alternate" hreflang="es-co" href="https://www.dacars.com.co/detailing-villavicencio.html">
-<link rel="alternate" hreflang="x-default" href="https://www.dacars.com.co/detailing-villavicencio.html">
+<link rel="canonical" href="{{ negocio.sitio }}/detailing-villavicencio.html">
+<link rel="alternate" hreflang="es-co" href="{{ negocio.sitio }}/detailing-villavicencio.html">
+<link rel="alternate" hreflang="x-default" href="{{ negocio.sitio }}/detailing-villavicencio.html">
 
 <!-- Geolocalización para búsqueda local -->
 <meta name="geo.region" content="CO-MET">
@@ -20,15 +20,15 @@
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="DACARS">
 <meta property="og:title" content="Detailing en Villavicencio | Pulimento de carros — DACARS">
-<meta property="og:description" content="Detailing automotriz en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro. Cotiza por WhatsApp.">
-<meta property="og:url" content="https://www.dacars.com.co/detailing-villavicencio.html">
+<meta property="og:description" content="Detailing en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro.">
+<meta property="og:url" content="{{ negocio.sitio }}/detailing-villavicencio.html">
 <meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="DACARS — personalización de vehículos en Villavicencio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Detailing en Villavicencio | Pulimento de carros — DACARS">
-<meta name="twitter:description" content="Detailing automotriz en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro. Cotiza por WhatsApp.">
+<meta name="twitter:description" content="Detailing en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro.">
 <meta name="twitter:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
 
 <link rel="icon" type="image/png" href="https://res.cloudinary.com/a0e9tgif/image/upload/f_png,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm">
@@ -46,16 +46,16 @@
   "@graph": [
     {
       "@type": "Service",
-      "@id": "https://www.dacars.com.co/detailing-villavicencio.html#servicio",
+      "@id": "{{ negocio.sitio }}/detailing-villavicencio.html#servicio",
       "name": "Detailing en Villavicencio",
       "alternateName": "Detailing automotriz en Villavicencio",
-      "description": "Detailing automotriz en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro. Cotiza por WhatsApp.",
-      "url": "https://www.dacars.com.co/detailing-villavicencio.html",
+      "description": "Detailing en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro.",
+      "url": "{{ negocio.sitio }}/detailing-villavicencio.html",
       "serviceType": "Detailing",
       "category": "Automotriz",
       "provider": {
         "@type": "AutoPartsStore",
-        "@id": "https://www.dacars.com.co/#dacars",
+        "@id": "{{ negocio.sitio }}/#dacars",
         "name": "DACARS",
         "telephone": "+573112629406",
         "address": {
@@ -167,31 +167,31 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.dacars.com.co/detailing-villavicencio.html#migas",
+      "@id": "{{ negocio.sitio }}/detailing-villavicencio.html#migas",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Inicio",
-          "item": "https://www.dacars.com.co/"
+          "item": "{{ negocio.sitio }}/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Servicios",
-          "item": "https://www.dacars.com.co/#servicios"
+          "item": "{{ negocio.sitio }}/#servicios"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Detailing automotriz en Villavicencio",
-          "item": "https://www.dacars.com.co/detailing-villavicencio.html"
+          "item": "{{ negocio.sitio }}/detailing-villavicencio.html"
         }
       ]
     },
     {
       "@type": "FAQPage",
-      "@id": "https://www.dacars.com.co/detailing-villavicencio.html#faq",
+      "@id": "{{ negocio.sitio }}/detailing-villavicencio.html#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -237,19 +237,19 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://www.dacars.com.co/detailing-villavicencio.html#pagina",
-      "url": "https://www.dacars.com.co/detailing-villavicencio.html",
+      "@id": "{{ negocio.sitio }}/detailing-villavicencio.html#pagina",
+      "url": "{{ negocio.sitio }}/detailing-villavicencio.html",
       "name": "Detailing en Villavicencio | Pulimento de carros — DACARS",
-      "description": "Detailing automotriz en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro. Cotiza por WhatsApp.",
+      "description": "Detailing en Villavicencio: descontaminación, corrección de pintura, pulimento, sellado y limpieza de interiores. Recupera el brillo de tu carro.",
       "inLanguage": "es-CO",
       "isPartOf": {
-        "@id": "https://www.dacars.com.co/#sitio"
+        "@id": "{{ negocio.sitio }}/#sitio"
       },
       "about": {
-        "@id": "https://www.dacars.com.co/detailing-villavicencio.html#servicio"
+        "@id": "{{ negocio.sitio }}/detailing-villavicencio.html#servicio"
       },
       "breadcrumb": {
-        "@id": "https://www.dacars.com.co/detailing-villavicencio.html#migas"
+        "@id": "{{ negocio.sitio }}/detailing-villavicencio.html#migas"
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
@@ -448,32 +448,7 @@
       <h2 class="sec__title chrome" data-reveal>Todo en el mismo taller</h2>
       <p class="sec__lead" data-reveal>Aprovecha la visita y resuelve varias cosas de una. Combinar servicios sale mejor que entrar al taller tres veces.</p>
     </header>
-    <div class="otros">
-        <a class="otro" href="/ppf-villavicencio.html">
-          <b>PPF</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/polarizados-villavicencio.html">
-          <b>Polarizados</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/accesorios-4x4-villavicencio.html">
-          <b>Accesorios 4x4</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/lujos-y-accesorios-villavicencio.html">
-          <b>Lujos y accesorios</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/iluminacion-para-carros-villavicencio.html">
-          <b>Iluminación</b>
-          <span>en Villavicencio</span>
-        </a>
-        <a class="otro" href="/sonido-para-carros-villavicencio.html">
-          <b>Sonido</b>
-          <span>en Villavicencio</span>
-        </a>
-    </div>
+    {% include "sitio/_otros_servicios.html" %}
   </div>
 </section>
 

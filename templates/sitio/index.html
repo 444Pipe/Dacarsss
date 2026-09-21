@@ -1,11 +1,11 @@
 {% extends "sitio/base.html" %}{% load static dacars %}
 
 {% block meta %}<title>Lujos, PPF, Polarizados y Detailing en Villavicencio | DACARS</title>
-<meta name="description" content="Taller de personalización de vehículos en Villavicencio, Meta. Lujos y accesorios 4x4, PPF, detailing, polarizados, iluminación, sonido, llantas y PDR. Cra. 33 #24-60, Barrio San Francisco. Cotiza por WhatsApp.">
+<meta name="description" content="Taller de personalización de vehículos en Villavicencio, Meta: lujos, accesorios 4x4, PPF, detailing, polarizados y pintura. Cotiza por WhatsApp.">
 <meta name="theme-color" content="#04060c">
 <meta name="author" content="DACARS VILLAVICENCIO S.A.S">
-<link rel="canonical" href="https://www.dacars.com.co/">
-<meta name="keywords" content="lujos para carros villavicencio, accesorios para carros villavicencio, ppf villavicencio, polarizados villavicencio, detailing villavicencio, accesorios 4x4 villavicencio, autolujos villavicencio, llantas villavicencio, sonido para carros villavicencio, iluminacion para carros villavicencio, pdr villavicencio, personalizacion de vehiculos meta, taller de lujos villavicencio">
+<link rel="canonical" href="{{ negocio.sitio }}/">
+<meta name="keywords" content="lujos para carros villavicencio, accesorios para carros villavicencio, ppf villavicencio, polarizados villavicencio, detailing villavicencio, accesorios 4x4 villavicencio, autolujos villavicencio, llantas villavicencio, sonido para carros villavicencio, iluminacion para carros villavicencio, pdr villavicencio, pintura para carros villavicencio, latoneria y pintura villavicencio, pintura automotriz villavicencio, taller de lujos villavicencio, personalizacion de vehiculos meta, lujos para carros meta, ppf meta, polarizados meta, detailing meta, accesorios para carros meta">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="googlebot" content="index, follow">
 
@@ -17,8 +17,8 @@
 <meta name="DC.title" content="DACARS — Personalización de vehículos en Villavicencio">
 <meta name="DC.coverage" content="Villavicencio, Meta, Colombia">
 
-<link rel="alternate" hreflang="es-co" href="https://www.dacars.com.co/">
-<link rel="alternate" hreflang="x-default" href="https://www.dacars.com.co/">
+<link rel="alternate" hreflang="es-co" href="{{ negocio.sitio }}/">
+<link rel="alternate" hreflang="x-default" href="{{ negocio.sitio }}/">
 
 
 <meta property="og:type" content="website">
@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="DACARS">
 <meta property="og:title" content="DACARS | Personalización de vehículos en Villavicencio">
 <meta property="og:description" content="Lujos, accesorios 4x4, PPF, detailing y polarizados. Un solo taller para todo tu carro.">
-<meta property="og:url" content="https://www.dacars.com.co/">
+<meta property="og:url" content="{{ negocio.sitio }}/">
 <meta property="og:image" content="https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -57,7 +57,7 @@
         "AutoPartsStore",
         "AutoRepair"
       ],
-      "@id": "https://www.dacars.com.co/#dacars",
+      "@id": "{{ negocio.sitio }}/#dacars",
       "name": "DACARS",
       "alternateName": [
         "Dacars Lujos Villavicencio",
@@ -68,7 +68,7 @@
       "taxID": "901798060",
       "slogan": "Especialistas en personalización de vehículos",
       "description": "Taller de personalización de vehículos en Villavicencio, Meta. Lujos y accesorios, equipamiento 4x4, PPF (Paint Protection Film), detailing, polarizados, iluminación, sonido, llantas y PDR.",
-      "url": "https://www.dacars.com.co/",
+      "url": "{{ negocio.sitio }}/",
       "telephone": "+573112629406",
       "image": [
         "https://res.cloudinary.com/a0e9tgif/image/upload/q_auto/v1789710036/dacars/og-image",
@@ -168,6 +168,19 @@
         },
         "geoRadius": "80000"
       },
+      "knowsAbout": [
+        "Paint Protection Film",
+        "Polarizado de vidrios automotrices",
+        "Detailing automotriz",
+        "Corrección de pintura",
+        "Pintura automotriz",
+        "Latonería automotriz",
+        "Desabolladura sin pintura (PDR)",
+        "Accesorios 4x4",
+        "Iluminación automotriz LED",
+        "Sonido e insonorización automotriz",
+        "Llantas y rines"
+      ],
       "knowsLanguage": "es-CO",
       "sameAs": [
         "https://www.instagram.com/dacarslujosvillavicencio/",
@@ -191,13 +204,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Lujos y accesorios para vehículos",
-              "url": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html",
+              "url": "{{ negocio.sitio }}/lujos-y-accesorios-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -206,13 +219,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Accesorios y equipamiento 4x4",
-              "url": "https://www.dacars.com.co/accesorios-4x4-villavicencio.html",
+              "url": "{{ negocio.sitio }}/accesorios-4x4-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -221,13 +234,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "PPF - Paint Protection Film",
-              "url": "https://www.dacars.com.co/ppf-villavicencio.html",
+              "url": "{{ negocio.sitio }}/ppf-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -236,13 +249,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Detailing automotriz",
-              "url": "https://www.dacars.com.co/detailing-villavicencio.html",
+              "url": "{{ negocio.sitio }}/detailing-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -251,13 +264,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Polarizado de vidrios",
-              "url": "https://www.dacars.com.co/polarizados-villavicencio.html",
+              "url": "{{ negocio.sitio }}/polarizados-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -266,13 +279,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Iluminación automotriz",
-              "url": "https://www.dacars.com.co/iluminacion-para-carros-villavicencio.html",
+              "url": "{{ negocio.sitio }}/iluminacion-para-carros-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -281,13 +294,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Sonido e insonorización",
-              "url": "https://www.dacars.com.co/sonido-para-carros-villavicencio.html",
+              "url": "{{ negocio.sitio }}/sonido-para-carros-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -296,13 +309,13 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Llantas y montaje",
-              "url": "https://www.dacars.com.co/llantas-villavicencio.html",
+              "url": "{{ negocio.sitio }}/llantas-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           },
@@ -311,13 +324,28 @@
             "itemOffered": {
               "@type": "Service",
               "name": "PDR - Desabolladura sin pintura",
-              "url": "https://www.dacars.com.co/pdr-desabolladura-sin-pintura-villavicencio.html",
+              "url": "{{ negocio.sitio }}/pdr-desabolladura-sin-pintura-villavicencio.html",
               "areaServed": {
                 "@type": "City",
                 "name": "Villavicencio"
               },
               "provider": {
-                "@id": "https://www.dacars.com.co/#dacars"
+                "@id": "{{ negocio.sitio }}/#dacars"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pintura automotriz y latonería",
+              "url": "{{ negocio.sitio }}/pintura-automotriz-villavicencio.html",
+              "areaServed": {
+                "@type": "City",
+                "name": "Villavicencio"
+              },
+              "provider": {
+                "@id": "{{ negocio.sitio }}/#dacars"
               }
             }
           }
@@ -326,9 +354,9 @@
     },
     {
       "@type": "Organization",
-      "@id": "https://www.dacars.com.co/#organizacion",
+      "@id": "{{ negocio.sitio }}/#organizacion",
       "name": "DACARS VILLAVICENCIO S.A.S",
-      "url": "https://www.dacars.com.co/",
+      "url": "{{ negocio.sitio }}/",
       "logo": {
         "@type": "ImageObject",
         "url": "https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1000/v1789710035/dacars/logo-dacars"
@@ -351,27 +379,27 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://www.dacars.com.co/#sitio",
-      "url": "https://www.dacars.com.co/",
+      "@id": "{{ negocio.sitio }}/#sitio",
+      "url": "{{ negocio.sitio }}/",
       "name": "DACARS Villavicencio",
       "description": "Personalización de vehículos en Villavicencio, Meta.",
       "inLanguage": "es-CO",
       "publisher": {
-        "@id": "https://www.dacars.com.co/#organizacion"
+        "@id": "{{ negocio.sitio }}/#organizacion"
       }
     },
     {
       "@type": "WebPage",
-      "@id": "https://www.dacars.com.co/#pagina",
-      "url": "https://www.dacars.com.co/",
+      "@id": "{{ negocio.sitio }}/#pagina",
+      "url": "{{ negocio.sitio }}/",
       "name": "DACARS | Lujos, Accesorios 4x4, PPF, Detailing y Polarizados en Villavicencio",
       "description": "Taller de personalización de vehículos en Villavicencio, Meta. Lujos, accesorios 4x4, PPF, detailing, polarizados, iluminación, sonido, llantas y PDR.",
       "inLanguage": "es-CO",
       "isPartOf": {
-        "@id": "https://www.dacars.com.co/#sitio"
+        "@id": "{{ negocio.sitio }}/#sitio"
       },
       "about": {
-        "@id": "https://www.dacars.com.co/#dacars"
+        "@id": "{{ negocio.sitio }}/#dacars"
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
@@ -380,80 +408,86 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.dacars.com.co/#migas",
+      "@id": "{{ negocio.sitio }}/#migas",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Inicio",
-          "item": "https://www.dacars.com.co/"
+          "item": "{{ negocio.sitio }}/"
         }
       ]
     },
     {
       "@type": "ItemList",
-      "@id": "https://www.dacars.com.co/#listaservicios",
+      "@id": "{{ negocio.sitio }}/#listaservicios",
       "name": "Servicios de DACARS en Villavicencio",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Lujos y accesorios para vehículos",
-          "url": "https://www.dacars.com.co/lujos-y-accesorios-villavicencio.html"
+          "url": "{{ negocio.sitio }}/lujos-y-accesorios-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Accesorios y equipamiento 4x4",
-          "url": "https://www.dacars.com.co/accesorios-4x4-villavicencio.html"
+          "url": "{{ negocio.sitio }}/accesorios-4x4-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "PPF - Paint Protection Film",
-          "url": "https://www.dacars.com.co/ppf-villavicencio.html"
+          "url": "{{ negocio.sitio }}/ppf-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Detailing automotriz",
-          "url": "https://www.dacars.com.co/detailing-villavicencio.html"
+          "url": "{{ negocio.sitio }}/detailing-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 5,
           "name": "Polarizado de vidrios",
-          "url": "https://www.dacars.com.co/polarizados-villavicencio.html"
+          "url": "{{ negocio.sitio }}/polarizados-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 6,
           "name": "Iluminación automotriz",
-          "url": "https://www.dacars.com.co/iluminacion-para-carros-villavicencio.html"
+          "url": "{{ negocio.sitio }}/iluminacion-para-carros-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 7,
           "name": "Sonido e insonorización",
-          "url": "https://www.dacars.com.co/sonido-para-carros-villavicencio.html"
+          "url": "{{ negocio.sitio }}/sonido-para-carros-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 8,
           "name": "Llantas y montaje",
-          "url": "https://www.dacars.com.co/llantas-villavicencio.html"
+          "url": "{{ negocio.sitio }}/llantas-villavicencio.html"
         },
         {
           "@type": "ListItem",
           "position": 9,
           "name": "PDR - Desabolladura sin pintura",
-          "url": "https://www.dacars.com.co/pdr-desabolladura-sin-pintura-villavicencio.html"
+          "url": "{{ negocio.sitio }}/pdr-desabolladura-sin-pintura-villavicencio.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "name": "Pintura automotriz y latonería",
+          "url": "{{ negocio.sitio }}/pintura-automotriz-villavicencio.html"
         }
       ]
     },
     {
       "@type": "ItemList",
-      "@id": "https://www.dacars.com.co/#listavideos",
+      "@id": "{{ negocio.sitio }}/#listavideos",
       "name": "Videos de trabajos de DACARS en Villavicencio",
       "itemListElement": [
         {
@@ -461,7 +495,7 @@
           "position": 1,
           "item": {
             "@type": "VideoObject",
-            "@id": "https://www.dacars.com.co/#video-reel-ppf-sportage",
+            "@id": "{{ negocio.sitio }}/#video-reel-ppf-sportage",
             "name": "Full PPF mate en un Kia Sportage 2025",
             "description": "Instalacion de PPF mate completo sobre un Kia Sportage 2025 en el taller de DACARS en Villavicencio, Meta.",
             "duration": "PT36S",
@@ -470,7 +504,7 @@
             "inLanguage": "es-CO",
             "isFamilyFriendly": true,
             "publisher": {
-              "@id": "https://www.dacars.com.co/#organizacion"
+              "@id": "{{ negocio.sitio }}/#organizacion"
             },
             "locationCreated": {
               "@type": "Place",
@@ -490,7 +524,7 @@
           "position": 2,
           "item": {
             "@type": "VideoObject",
-            "@id": "https://www.dacars.com.co/#video-reel-led-4x4",
+            "@id": "{{ negocio.sitio }}/#video-reel-led-4x4",
             "name": "Exploradoras LED para camioneta 4x4",
             "description": "Montaje de exploradoras LED SC para camioneta 4x4 en DACARS Villavicencio.",
             "duration": "PT34S",
@@ -499,7 +533,7 @@
             "inLanguage": "es-CO",
             "isFamilyFriendly": true,
             "publisher": {
-              "@id": "https://www.dacars.com.co/#organizacion"
+              "@id": "{{ negocio.sitio }}/#organizacion"
             },
             "locationCreated": {
               "@type": "Place",
@@ -519,7 +553,7 @@
           "position": 3,
           "item": {
             "@type": "VideoObject",
-            "@id": "https://www.dacars.com.co/#video-reel-hummer-ev",
+            "@id": "{{ negocio.sitio }}/#video-reel-hummer-ev",
             "name": "Hummer EV: barra LED, faros y rines",
             "description": "Personalizacion de una Hummer EV en Villavicencio: barra LED, faros e iluminacion delantera y rines.",
             "duration": "PT55S",
@@ -528,7 +562,7 @@
             "inLanguage": "es-CO",
             "isFamilyFriendly": true,
             "publisher": {
-              "@id": "https://www.dacars.com.co/#organizacion"
+              "@id": "{{ negocio.sitio }}/#organizacion"
             },
             "locationCreated": {
               "@type": "Place",
@@ -548,7 +582,7 @@
           "position": 4,
           "item": {
             "@type": "VideoObject",
-            "@id": "https://www.dacars.com.co/#video-reel-volante-gr",
+            "@id": "{{ negocio.sitio }}/#video-reel-volante-gr",
             "name": "Volante deportivo en fibra de carbono",
             "description": "Instalacion de un volante deportivo GR en fibra de carbono sobre Toyota, en DACARS Villavicencio.",
             "duration": "PT44S",
@@ -557,7 +591,7 @@
             "inLanguage": "es-CO",
             "isFamilyFriendly": true,
             "publisher": {
-              "@id": "https://www.dacars.com.co/#organizacion"
+              "@id": "{{ negocio.sitio }}/#organizacion"
             },
             "locationCreated": {
               "@type": "Place",
@@ -577,7 +611,7 @@
           "position": 5,
           "item": {
             "@type": "VideoObject",
-            "@id": "https://www.dacars.com.co/#video-reel-testimonio-cubierta",
+            "@id": "{{ negocio.sitio }}/#video-reel-testimonio-cubierta",
             "name": "Testimonio de cliente: cubierta de platon",
             "description": "Un cliente de DACARS Villavicencio cuenta como quedo la cubierta de platon instalada en su camioneta.",
             "duration": "PT1M3S",
@@ -586,7 +620,7 @@
             "inLanguage": "es-CO",
             "isFamilyFriendly": true,
             "publisher": {
-              "@id": "https://www.dacars.com.co/#organizacion"
+              "@id": "{{ negocio.sitio }}/#organizacion"
             },
             "locationCreated": {
               "@type": "Place",
@@ -605,7 +639,7 @@
     },
     {
       "@type": "FAQPage",
-      "@id": "https://www.dacars.com.co/#faq",
+      "@id": "{{ negocio.sitio }}/#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -733,7 +767,7 @@
     <header class="sec__head">
       <p class="tag" data-reveal>01 &mdash; Servicios</p>
       <h2 class="sec__title chrome" data-reveal>Todo lo que tu vehículo necesita</h2>
-      <p class="sec__lead" data-reveal>Nueve especialidades que normalmente te obligan a recorrer media ciudad. Acá las resolvemos en el mismo taller, con la misma gente y una sola garantía de trabajo.</p>
+      <p class="sec__lead" data-reveal>Diez especialidades que normalmente te obligan a recorrer media ciudad. Acá las resolvemos en el mismo taller, con la misma gente y una sola garantía de trabajo.</p>
     </header>
 
     <div class="cards">
@@ -826,6 +860,16 @@
         <h3>PDR &middot; Sin pintura</h3>
         <p>Desabolladura sin pintura: sacamos el golpe desde adentro y conservamos la pintura original de fábrica. Más rápido y sin repintes.</p>
         <a class="card__mas" href="/pdr-desabolladura-sin-pintura-villavicencio.html">PDR en Villavicencio &rarr;</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__n">10</span>
+        <span class="card__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 8.6h5.2v11.8H9.4z"/><path d="M10.8 8.6V5.4h2.4v3.2"/><path d="M9.4 12.6h5.2"/><path d="M17.4 4.6h2.4M17.4 7.4h2.4M17.4 10.2h2.4"/></svg>
+        </span>
+        <h3>Pintura &middot; Latonería</h3>
+        <p>Repinte de paneles y pintura general con igualación de color. El sol del Llano quema el barniz del techo y el capó, y ahí pulir ya no alcanza.</p>
+        <a class="card__mas" href="/pintura-automotriz-villavicencio.html">Pintura en Villavicencio &rarr;</a>
       </article>
 
     </div>
@@ -1110,7 +1154,7 @@
             <li>Puerto Gaitán</li>
             <li>Fuente de Oro</li>
         </ul>
-        <p class="cobertura__nota">Recibimos vehículos de toda la región. Agenda por WhatsApp
+        <p class="cobertura__nota"><a class="link" href="/personalizacion-de-vehiculos-meta.html">Cómo atendemos al departamento del Meta &rarr;</a><br>Recibimos vehículos de toda la región. Agenda por WhatsApp
           antes de venir para tener todo listo cuando llegues.</p>
       </div>
     </div>

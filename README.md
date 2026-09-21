@@ -37,7 +37,7 @@ dacars/           Configuración del proyecto
   admin.py          El AdminSite de DACARS (tablero con alertas)
 
 sitio/            Las páginas que no salen de la base de datos
-  paginas.py        Índice de las 9 landings
+  paginas.py        Índice de las 10 landings y el hub del Meta
   views.py          Portada, landings, robots.txt, manifest
   sitemaps.py       Sitemap vivo: suma solos los productos nuevos
   templatetags/     pesos, foto (Cloudinary), whatsapp, json_txt
@@ -48,7 +48,7 @@ inventario/       Movimientos de stock. Lo único que toca las existencias
 pedidos/          Carrito (sesión), pedido y su ciclo de estados
 
 templates/
-  sitio/            base.html, los parciales y las 10 páginas migradas
+  sitio/            base.html, los parciales y las 12 páginas del sitio
   tienda/base.html  Base de las páginas nuevas (hereda de sitio/base.html)
   catalogo/         Listado, ficha, tarjeta y la franja para las landings
   pedidos/          Carrito, checkout y confirmación
@@ -93,15 +93,27 @@ Esto es lo más importante de la migración y conviene no perderlo de vista.
 indexadas y a las que apunta el canonical de cada página. Cambiarlas obliga a
 redirigir y a esperar semanas de reindexado, a cambio de nada.
 
-Hay una prueba que compara, línea por línea, lo que sirve Django contra los HTML
-de `legacy/html/`:
+Hay un juego de pruebas que verifica las reglas de las que depende la búsqueda
+local:
 
 ```bash
 python manage.py test sitio
 ```
 
-Si alguien edita una plantilla y se lleva por delante un pedazo de JSON-LD, esa
-prueba falla. Es la red de seguridad del SEO: no se borra.
+Comprueba, en cada una de las 12 páginas, que haya un solo `h1`, que el `title` y
+la `description` sean únicos y quepan en el fragmento de Google, que el canonical
+apunte al dominio configurado, que el JSON-LD parsee y traiga `WebPage`,
+`FAQPage`, `Service` y `BreadcrumbList`, y que ningún enlace interno esté roto.
+
+Es la red de seguridad del SEO: **no se borra.** Si alguien edita una plantilla y
+se lleva por delante un pedazo de JSON-LD, esa prueba falla.
+
+Antes comparaba línea por línea contra los HTML de `legacy/html/`. Cumplió su
+trabajo —con ella se verificó la migración a Django— pero una prueba que exige
+que la salida sea idéntica a la de antes también impide mejorarla: al acortar
+las `description` y sumar páginas nuevas, las diez dejaron de coincidir con el
+archivo congelado, y no por un error. Se cambió el texto congelado por las
+reglas, que es lo que de verdad había que proteger.
 
 ---
 
@@ -268,20 +280,24 @@ siguiente despliegue.
 
 ### Después del primer despliegue: el dominio
 
-El canonical, el Open Graph y el JSON-LD de las 10 páginas migradas apuntan hoy a
-`https://www.dacars.com.co`. Si el sitio va a vivir en la URL de Railway, hay que
-cambiarlos: **un canonical que apunta a un dominio inexistente hace que Google no
-indexe nada.**
+El canonical, el Open Graph y el JSON-LD salen todos de la variable `DOMINIO`.
+Cambiar el dominio es **un solo paso**, en Railway → Variables:
 
-```bash
-python tools/set-dominio.py https://TU-URL.up.railway.app
-git commit -am "Apuntar el sitio al dominio de producción"
-git push
+```
+DOMINIO=www.el-dominio-que-sea.com
 ```
 
-Y en Railway → Variables: `DOMINIO=TU-URL.up.railway.app`. Son dos pasos porque
-son dos fuentes: las plantillas migradas traen el dominio escrito a mano (herencia
-del sitio estático), y todo lo nuevo lo arma con esa variable.
+**Un canonical que apunta a un dominio inexistente hace que Google no indexe
+nada**, así que vale la pena confirmarlo después de desplegar:
+
+```bash
+curl -s https://tu-dominio/ | grep canonical
+```
+
+Antes eran dos fuentes y dos pasos: las plantillas migradas traían el dominio
+escrito a mano, herencia del sitio estático, así que cambiar la variable movía el
+sitemap pero **no** el canonical de las diez landings. Las 218 apariciones pasaron
+a `{{ negocio.sitio }}`; `tools/set-dominio.py` ya no hace falta para esto.
 
 ### Nota sobre el costo
 
@@ -401,9 +417,12 @@ python manage.py test catalogo
 
 Lo que cubren, por si hay que decidir qué no romper:
 
-- Las 10 URLs con `.html` responden 200 y `/index.html` redirige 301.
+- Las 12 URLs con `.html` responden 200 y `/index.html` redirige 301.
 - Cada landing conserva su canonical, su JSON-LD y la pantalla de carga.
-- El HTML servido es **idéntico** al del sitio estático.
+- Un solo `h1` por página; `title` y `description` únicos y dentro del corte.
+- El JSON-LD parsea y trae los tipos que Google lee.
+- Ningún enlace interno roto, y las páginas nuevas están enlazadas desde la
+  portada (una landing sin enlaces entrantes se rastrea tarde y mal).
 - Un pedido reserva, confirma y cancela moviendo el inventario como corresponde.
 - Dos pedidos no se llevan la misma última unidad.
 - Editar existencias en el panel deja un ajuste a nombre de quien lo hizo.
