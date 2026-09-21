@@ -141,6 +141,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # Primero, antes que el redirect a HTTPS: así http://dacarslujos.com llega
+    # a https://www.dacarslujos.com en un solo salto y no en dos.
+    "sitio.middleware.DominioCanonico",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

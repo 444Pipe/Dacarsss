@@ -314,3 +314,27 @@ class Iconos(TestCase):
         # Sin el maskable, Android recorta el icono normal en círculo y se
         # come las puntas del logo.
         self.assertIn("maskable", [i["purpose"] for i in datos["icons"]])
+
+
+class DominioCanonico(TestCase):
+    """El dominio raíz redirige al www; nada más se toca.
+
+    Lo que se protege acá es que la redirección no se pierda otra vez (ya se
+    perdió una: al salir Caddy del camino) y que nunca alcance a un host que
+    no sea el raíz, porque un 301 de más en el www es el sitio caído entero.
+    """
+
+    def test_el_raiz_va_al_www_con_la_misma_ruta(self):
+        raiz = settings.DOMINIO.removeprefix("www.")
+        r = self.client.get("/ppf-villavicencio?x=1", HTTP_HOST=raiz)
+        self.assertEqual(r.status_code, 301)
+        self.assertEqual(r["Location"], "https://%s/ppf-villavicencio?x=1" % settings.DOMINIO)
+
+    def test_el_www_no_se_redirige(self):
+        r = self.client.get("/", HTTP_HOST=settings.DOMINIO)
+        self.assertEqual(r.status_code, 200)
+
+    def test_otros_hosts_no_se_redirigen(self):
+        # El de pruebas hace de cualquier host ajeno: el de Railway, el del
+        # healthcheck, localhost.
+        self.assertEqual(self.client.get("/").status_code, 200)
