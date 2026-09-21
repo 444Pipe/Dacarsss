@@ -18,10 +18,8 @@ Por que con fondo propio: antes el icono era el logo con fondo transparente, y
 cada lugar que lo muestra (la pestana, el resultado de Google, el celular) le
 ponia el fondo que queria. Un fondo fijo hace que se vea igual en todos lados.
 
-El fondo es el del hero del sitio: #071020 con la misma cuadricula azul tenue
-(.grid en style.css), que se apaga hacia los bordes. La cuadricula va solo en
-los tamanos grandes: a 16-48 px las lineas serian ruido, asi que la pestana
-queda con el azul liso.
+El fondo es negro puro, como la foto de perfil de la marca: el logo (cromo y
+destellos azules) esta pensado para verse sobre negro.
 
 Por que cuadrado: el logo mide 1000x729. Un icono que no es cuadrado lo
 aplastan o le meten bandas, y Google solo acepta cuadrados (multiplo de 48 px).
@@ -30,11 +28,10 @@ Fuente: statics/logo-dacars.png, que esta en el repo pero no en la imagen de
 Docker. Los iconos generados si viajan: estan en static/.
 """
 
-import math
 import os
 
 try:
-    from PIL import Image, ImageChops, ImageDraw
+    from PIL import Image
 except ImportError:
     raise SystemExit("Falta Pillow:\n\n    pip install Pillow\n")
 
@@ -42,16 +39,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIGEN = os.path.join(ROOT, "statics", "logo-dacars.png")
 DESTINO = os.path.join(ROOT, "static", "img", "icono")
 
-FONDO = (0x07, 0x10, 0x20)  # el del hero del sitio
-
-# La cuadricula de .grid en style.css: lineas rgba(122,163,255,.055) de 1 px
-# cada 62 px, con una mascara radial que las apaga hacia afuera. Aqui el icono
-# es mucho mas chico que una pantalla, asi que se escala a ~7 celdas por lado
-# y se sube un poco la opacidad para que se alcance a ver.
-LINEA = (122, 163, 255)
-LINEA_ALFA = 0.16
-CELDAS = 7
-CUADRICULA_DESDE = 128  # px de lado; debajo de esto, fondo liso
+FONDO = (0, 0, 0)  # negro, como la foto de perfil de la marca
 
 # Cuanto del ancho ocupa el logo
 ANCHO_NORMAL = 0.86
@@ -67,41 +55,11 @@ def cargar_logo():
     return logo.crop(visible.getbbox())
 
 
-def fondo(lado, con_cuadricula):
-    base = Image.new("RGBA", (lado, lado), FONDO + (255,))
-    if not con_cuadricula:
-        return base
-    lineas = Image.new("L", (lado, lado), 0)
-    trazo = ImageDraw.Draw(lineas)
-    paso = lado / CELDAS
-    grosor = max(1, round(lado / 180))
-    for i in range(1, CELDAS):
-        p = round(i * paso)
-        trazo.rectangle([p, 0, p + grosor - 1, lado], fill=255)
-        trazo.rectangle([0, p, lado, p + grosor - 1], fill=255)
-    # Mascara radial como la del sitio: plena al centro, nada en las esquinas
-    # Es un degradado suave: se calcula a 256 px y se escala.
-    chica = 256
-    mascara = Image.new("L", (chica, chica), 0)
-    px = mascara.load()
-    c = chica / 2.0
-    for y in range(chica):
-        for x in range(chica):
-            d = math.hypot((x - c) / (0.75 * c), (y - c * 0.92) / (0.72 * c))
-            px[x, y] = int(255 * max(0.0, 1 - d / 1.04))
-    mascara = mascara.resize((lado, lado), Image.BILINEAR)
-    alfa = ImageChops.multiply(lineas, mascara).point(lambda v: int(v * LINEA_ALFA))
-    capa = Image.new("RGBA", (lado, lado), LINEA + (0,))
-    capa.putalpha(alfa)
-    base.alpha_composite(capa)
-    return base
-
-
 def icono(logo, lado, ancho):
     # Se compone a 4x y se reduce: a 16 px, componer directo deja el logo
     # mas sucio que reducirlo desde grande.
     grande = lado * 4
-    base = fondo(grande, lado >= CUADRICULA_DESDE)
+    base = Image.new("RGBA", (grande, grande), FONDO + (255,))
     w = round(grande * ancho)
     h = round(logo.height * w / logo.width)
     base.alpha_composite(logo.resize((w, h), Image.LANCZOS),
