@@ -203,9 +203,10 @@
                        /^(slow-2g|2g)$/.test(conexion.effectiveType || '')));
     var vertical = window.matchMedia('(max-width: 860px)').matches;
 
-    hero.poster = vertical
-      ? 'https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/dacars/video/hero-poster-9x16'
-      : 'https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9';
+    // Las URLs viven en la plantilla, junto a las del video: con una copia
+    // aqui, un poster roto hay que arreglarlo en dos sitios y se escapa uno.
+    var poster = vertical ? hero.dataset.posterAlto : hero.dataset.posterAncho;
+    if (poster) { hero.poster = poster; }
 
     // Enciende el fondo pase lo que pase: si el video no llega, el poster
     // tiene que quedar visible igual. Nunca dejar el hero en negro.

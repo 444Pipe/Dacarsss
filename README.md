@@ -389,8 +389,15 @@ deja el sitio inservible:
 
 Sin cambios. El fondo del hero es un montaje de 12 tomas sacadas de 4 reels
 (21,9 s, arranca y termina en negro para que el loop no se note), en dos
-versiones que elige `app.js` según la pantalla: `hero-16x9.mp4` (3,0 MB) para
-≥ 861 px y `hero-9x16.mp4` (2,8 MB) para menos.
+versiones que elige `app.js` según la pantalla: `hero-16x9.mp4` (3,5 MB) para
+≥ 861 px y `hero-3x4.mp4` (2,5 MB) para menos. Las URLs de video y poster
+viven solo en el `<video>` de `templates/sitio/index.html` (`data-src-*` y
+`data-poster-*`); `app.js` las lee de ahí.
+
+Ojo: el `hero-9x16.mp4` que deja `generar-video.py` en `statics/video/` **no
+está en Cloudinary**. Mientras el sitio lo pidió, el hero salía vacío en
+celular (404 en video y poster). Para usarlo hay que subirlo primero con
+`subir-cloudinary.py` y después cambiar las URLs con la versión del mapa.
 
 No se descarga si el visitante tiene activado *reducir movimiento* o *ahorro de
 datos*, ni en 2G. Se pausa solo al salir de pantalla.
