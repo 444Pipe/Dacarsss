@@ -79,7 +79,11 @@ if not SECRET_KEY:
             "servicio."
         )
 
-DOMINIO = os.environ.get("DOMINIO", "www.dacars.com.co")
+# El canonical, og:url y el JSON-LD de todas las paginas salen de aca. Si
+# no coincide con el dominio que de verdad sirve el sitio, Google recibe
+# la orden de indexar otro: en Railway no hace falta definir DOMINIO
+# mientras este valor sea el correcto.
+DOMINIO = os.environ.get("DOMINIO", "www.dacarslujos.com")
 
 ALLOWED_HOSTS = _lista("ALLOWED_HOSTS") or [DOMINIO, DOMINIO.replace("www.", "", 1)]
 
