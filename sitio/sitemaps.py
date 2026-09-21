@@ -21,7 +21,7 @@ class Paginas(Sitemap):
         return ["portada", HUB_META] + SLUGS
 
     def location(self, item):
-        return "/" if item == "portada" else "/" + item + ".html"
+        return "/" if item == "portada" else "/" + item
 
     def priority(self, item):
         if item == "portada":

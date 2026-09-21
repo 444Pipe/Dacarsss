@@ -9,11 +9,11 @@
 
    `slug` es el de la página actual: se excluye sola. #}
 <div class="otros">
-{% for s, nombre in servicios %}{% if s != slug %}        <a class="otro" href="/{{ s }}.html">
+{% for s, nombre in servicios %}{% if s != slug %}        <a class="otro" href="/{{ s }}">
           <b>{{ nombre }}</b>
           <span>en Villavicencio</span>
         </a>
-{% endif %}{% endfor %}        <a class="otro" href="/{{ hub_meta }}.html">
+{% endif %}{% endfor %}        <a class="otro" href="/{{ hub_meta }}">
           <b>Todo el Meta</b>
           <span>cobertura del departamento</span>
         </a>

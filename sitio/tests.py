@@ -21,11 +21,11 @@ class UrlsDelSitio(TestCase):
     def test_todas_las_landings_responden(self):
         for slug in SLUGS:
             with self.subTest(slug=slug):
-                r = self.client.get("/" + slug + ".html")
+                r = self.client.get("/" + slug)
                 self.assertEqual(r.status_code, 200, slug + " no responde 200")
 
     def test_el_hub_del_meta_responde(self):
-        r = self.client.get("/" + HUB_META + ".html")
+        r = self.client.get("/" + HUB_META)
         self.assertEqual(r.status_code, 200)
 
     def test_la_portada_responde(self):
@@ -37,6 +37,30 @@ class UrlsDelSitio(TestCase):
         self.assertEqual(r.status_code, 301)
         self.assertEqual(r["Location"], "/")
 
+    def test_las_urls_con_html_redirigen_a_la_limpia(self):
+        # Son las que ya circulan: Google, Google Business, Instagram, los
+        # chats. Tienen que seguir llegando, y con 301 (permanente), que es el
+        # que le dice a Google que traspase lo ganado a la dirección nueva.
+        for pagina in SLUGS + [HUB_META]:
+            with self.subTest(pagina=pagina):
+                r = self.client.get("/" + pagina + ".html")
+                self.assertEqual(r.status_code, 301)
+                self.assertEqual(r["Location"], "/" + pagina)
+
+    def test_la_barra_final_tambien_redirige(self):
+        # Una sola dirección por página: con y sin barra servirían lo mismo.
+        for pagina in SLUGS + [HUB_META]:
+            with self.subTest(pagina=pagina):
+                r = self.client.get("/" + pagina + "/")
+                self.assertEqual(r.status_code, 301)
+                self.assertEqual(r["Location"], "/" + pagina)
+
+    def test_la_redireccion_conserva_la_campana(self):
+        # Sin esto, un anuncio que enlaza al .html pierde el ?utm_ en el salto
+        # y la visita aparece como tráfico directo.
+        r = self.client.get("/ppf-villavicencio.html?utm_source=instagram")
+        self.assertEqual(r["Location"], "/ppf-villavicencio?utm_source=instagram")
+
     def test_cada_landing_conserva_su_canonical(self):
         # El dominio se lee de la configuracion y no se escribe aca: si manana
         # cambia DOMINIO, lo que tiene que seguir siendo cierto es que el
@@ -44,16 +68,16 @@ class UrlsDelSitio(TestCase):
         sitio = settings.NEGOCIO["sitio"]
         for slug in SLUGS + [HUB_META]:
             with self.subTest(slug=slug):
-                html = self.client.get("/" + slug + ".html").content.decode()
+                html = self.client.get("/" + slug).content.decode()
                 self.assertIn(
-                    'rel="canonical" href="%s/%s.html"' % (sitio, slug),
+                    'rel="canonical" href="%s/%s"' % (sitio, slug),
                     html,
                 )
 
     def test_cada_landing_conserva_su_json_ld(self):
         for slug in SLUGS + [HUB_META]:
             with self.subTest(slug=slug):
-                html = self.client.get("/" + slug + ".html").content.decode()
+                html = self.client.get("/" + slug).content.decode()
                 self.assertIn('application/ld+json', html)
                 self.assertIn('"@type": "Service"', html)
 
@@ -63,7 +87,7 @@ class UrlsDelSitio(TestCase):
         self.assertIn("901798060", html.replace(".", ""))
 
     def test_la_pantalla_de_carga_sigue_en_todas(self):
-        for ruta in ["/"] + ["/" + s + ".html" for s in SLUGS]:
+        for ruta in ["/"] + ["/" + s for s in SLUGS]:
             with self.subTest(ruta=ruta):
                 html = self.client.get(ruta).content.decode()
                 self.assertIn('id="carga"', html)
@@ -83,8 +107,9 @@ class UrlsDelSitio(TestCase):
         r = self.client.get("/sitemap.xml")
         self.assertEqual(r.status_code, 200)
         xml = r.content.decode()
-        for slug in SLUGS:
-            self.assertIn("/%s.html" % slug, xml)
+        for slug in SLUGS + [HUB_META]:
+            self.assertIn("/%s</loc>" % slug, xml)
+        self.assertNotIn(".html</loc>", xml)
 
     def test_404_usa_la_plantilla_de_marca(self):
         r = self.client.get("/esto-no-existe.html")
@@ -123,7 +148,7 @@ class UrlsDelSitio(TestCase):
 
 
 def _paginas():
-    return ["/"] + ["/%s.html" % s for s in SLUGS + [HUB_META]]
+    return ["/"] + ["/%s" % s for s in SLUGS + [HUB_META]]
 
 
 class InvariantesDeSeo(TestCase):
@@ -200,22 +225,32 @@ class InvariantesDeSeo(TestCase):
                 self.assertIn('name="twitter:card"', html)
 
     def test_sin_enlaces_internos_rotos(self):
+        # Exige 200, no 301: un enlace interno que pasa por una redirección
+        # funciona, pero le cuesta un salto a cada visita y a cada rastreo.
         for ruta, html in self.html.items():
             with self.subTest(ruta=ruta):
-                for destino in set(re.findall(r'href="(/[a-z0-9-]+\.html)"', html)):
+                for destino in set(re.findall(r'href="(/[a-z0-9-]+(?:\.html)?)"', html)):
                     self.assertEqual(
                         self.client.get(destino).status_code,
                         200,
-                        "%s enlaza a %s, que no responde" % (ruta, destino),
+                        "%s enlaza a %s, que no responde 200" % (ruta, destino),
                     )
+
+    def test_ninguna_url_propia_lleva_html(self):
+        # Ni en enlaces, ni en el canonical, ni en og:url, ni en el JSON-LD: si
+        # el canonical dijera .html, Google recibiría dos señales contrarias.
+        propias = re.compile(r"/(%s)\.html" % "|".join(SLUGS + [HUB_META]))
+        for ruta, html in self.html.items():
+            with self.subTest(ruta=ruta):
+                self.assertEqual(propias.findall(html), [])
 
     def test_las_paginas_nuevas_estan_enlazadas(self):
         # Una landing sin enlaces entrantes es una landing que Google rastrea
         # tarde y mal. Las dos últimas en llegar son las que más riesgo corren
         # de quedarse sueltas.
         portada = self.html["/"]
-        for destino in ("/pintura-automotriz-villavicencio.html",
-                        "/%s.html" % HUB_META):
+        for destino in ("/pintura-automotriz-villavicencio",
+                        "/%s" % HUB_META):
             with self.subTest(destino=destino):
                 self.assertIn('href="%s"' % destino, portada,
                               "la portada no enlaza a " + destino)
@@ -229,7 +264,7 @@ class AccesoAlPanel(TestCase):
     """
 
     def test_esta_en_la_portada_y_en_las_landings(self):
-        for ruta in ["/"] + ["/" + s + ".html" for s in SLUGS]:
+        for ruta in ["/"] + ["/" + s for s in SLUGS]:
             with self.subTest(ruta=ruta):
                 html = self.client.get(ruta).content.decode()
                 self.assertIn("foot__acceso", html)

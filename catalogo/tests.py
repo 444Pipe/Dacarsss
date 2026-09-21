@@ -129,7 +129,7 @@ class Precios(Base):
 
 class EnlaceConElSitio(Base):
     def test_la_landing_muestra_los_productos_de_su_categoria(self):
-        r = self.client.get("/iluminacion-para-carros-villavicencio.html")
+        r = self.client.get("/iluminacion-para-carros-villavicencio")
         self.assertEqual(r.status_code, 200)
         self.assertIn(self.producto, r.context["productos_del_servicio"])
 

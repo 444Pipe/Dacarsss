@@ -84,7 +84,7 @@ class Categoria(models.Model):
 
     @property
     def url_servicio(self):
-        return "/" + self.servicio + ".html" if self.servicio else ""
+        return "/" + self.servicio if self.servicio else ""
 
 
 class Marca(models.Model):

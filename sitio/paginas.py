@@ -5,9 +5,10 @@ las plantillas (una por página, migradas desde los HTML originales con
 `tools/migrar-a-django.py`); esta lista es solo el índice: qué URL sirve qué
 plantilla, y con qué prioridad va al sitemap.
 
-Los `.html` del final **no son un descuido**. Son las URLs que Google ya tiene
-indexadas y las que apunta el canonical de cada página. Cambiarlas obliga a
-redirigir y a esperar semanas de reindexado, a cambio de nada.
+Cada página se sirve en /<slug>, sin extensión. Hasta septiembre de 2026 las
+URLs terminaban en `.html`; esas direcciones siguen respondiendo con un 301 a
+la limpia, así que un slug de esta lista **no se renombra**: cambiarlo rompe
+las dos URLs a la vez, la nueva y la vieja que redirige a ella.
 """
 
 SERVICIOS = [

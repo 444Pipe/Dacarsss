@@ -1,8 +1,10 @@
 """Mapa de URLs de DACARS.
 
-Regla que no se negocia: **las URLs del sitio viejo no cambian**, incluido el
-`.html` del final. El SEO local que ya está invertido (canonical, sitemap,
-JSON-LD, enlaces desde Google) apunta ahí. Lo nuevo cuelga de rutas propias.
+Las páginas del sitio viven en URLs limpias, sin extensión
+(`/ppf-villavicencio`). Regla que no se negocia: **las direcciones viejas con
+`.html` no se rompen**. Responden 301 a la limpia (ver sitio/urls.py), porque
+son las que ya tienen Google, el perfil de Google Business, Instagram y cada
+enlace compartido por WhatsApp. Lo nuevo cuelga de rutas propias.
 """
 
 from django.conf import settings

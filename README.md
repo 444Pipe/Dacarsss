@@ -73,14 +73,16 @@ legacy/           El sitio estático anterior. Referencia, no corre
 
 ---
 
-## Las URLs no cambiaron
+## Las URLs
 
-Esto es lo más importante de la migración y conviene no perderlo de vista.
+Esto es lo más importante para el SEO y conviene no perderlo de vista.
 
 | URL | Qué sirve |
 |---|---|
 | `/` | Portada |
-| `/ppf-villavicencio.html` y las otras 8 | Las landings de servicio |
+| `/ppf-villavicencio` y las otras 11 | Las landings de servicio |
+| `/personalizacion-de-vehiculos-meta` | El hub del departamento del Meta |
+| `/<página>.html` y `/<página>/` | Redirigen 301 a `/<página>` |
 | `/index.html` | Redirige 301 a `/` |
 | `/catalogo/` | El catálogo completo |
 | `/catalogo/<categoria>/` | Una categoría |
@@ -89,9 +91,15 @@ Esto es lo más importante de la migración y conviene no perderlo de vista.
 | `/admin/` | El panel |
 | `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest` | Generados por Django |
 
-**El `.html` del final se conserva a propósito.** Son las URLs que Google tiene
-indexadas y a las que apunta el canonical de cada página. Cambiarlas obliga a
-redirigir y a esperar semanas de reindexado, a cambio de nada.
+**Las páginas van sin `.html`** desde septiembre de 2026, cuando el sitio pasó a
+`www.dacarslujos.com`. Las direcciones viejas con `.html` no se rompen:
+responden 301 a la limpia y conservan el `?utm_` de las campañas. Son las que
+ya circulan en Google, en Google Business, en Instagram y en los chats, y el
+301 es lo que le dice a Google que traspase lo que la vieja había ganado.
+
+Los enlaces internos, el canonical, el `og:url`, el JSON-LD y el sitemap van
+todos a la URL limpia: un enlace interno que pase por la redirección funciona,
+pero le cuesta un salto a cada visita. Las pruebas lo vigilan.
 
 Hay un juego de pruebas que verifica las reglas de las que depende la búsqueda
 local:
@@ -493,7 +501,8 @@ sea cierto.
 
 ## Cosas que conviene no hacer
 
-- **No cambiar las URLs con `.html`.** Ver arriba.
+- **No quitar las redirecciones de los `.html` ni renombrar un slug.** Ver
+  arriba: romperían las direcciones que ya circulan.
 - **No editar `variante.stock` fuera de `inventario/servicios.py`.** El número
   quedaría sin historia.
 - **No volver a correr los scripts de `legacy/tools/`.** Sobrescriben las
