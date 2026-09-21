@@ -139,11 +139,13 @@ def manifest(request):
     )
 
 
-@cache_control(max_age=86400)
+@cache_control(max_age=3600)
 def favicon(request):
-    # El navegador y Google piden /favicon.ico aunque la página declare sus
-    # iconos. Se sirve el archivo directo y no con una redirección a la
-    # versión con hash de /static/: un 301 quedaría guardado en la caché
+    # Las páginas enlazan el icono por su dirección con huella (ver
+    # sitio/_iconos.html). Esta queda para quien pide /favicon.ico a ciegas:
+    # Google y algunos navegadores. Caché corta, porque la dirección es fija
+    # y no cambia cuando cambia el icono. Se sirve el archivo directo y no
+    # con una redirección a la versión con huella: un 301 quedaría guardado
     # apuntando al icono viejo el día que cambie.
     ruta = settings.BASE_DIR / "static" / "img" / "icono" / "favicon.ico"
     return HttpResponse(ruta.read_bytes(), content_type="image/x-icon")

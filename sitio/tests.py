@@ -300,7 +300,9 @@ class Iconos(TestCase):
             with self.subTest(ruta=ruta):
                 html = self.client.get(ruta).content.decode()
                 self.assertIsNone(viejo.search(html))
-                self.assertIn('href="/favicon.ico"', html)
+                # Por la dirección con huella, no por /favicon.ico: con una
+                # dirección fija el navegador se queda con el icono viejo.
+                self.assertRegex(html, r'<link rel="icon" href="/static/img/icono/favicon[^"]*\.ico"')
                 self.assertIn("img/icono/apple-touch-icon", html)
 
     def test_el_manifest_trae_iconos_cuadrados(self):

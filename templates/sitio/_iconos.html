@@ -1,8 +1,13 @@
 {% load static %}{% comment %}
   Los iconos del sitio, en un solo lugar para que cambiarlos no obligue a tocar
-  cada pagina. Cuadrados y con fondo azul marino propio: antes eran el logo con
+  cada pagina. Cuadrados y con fondo negro propio: antes eran el logo con
   fondo transparente y cada lugar que los mostraba les ponia el fondo que
   queria. Se generan con tools/generar-iconos.py.
-{% endcomment %}<link rel="icon" href="/favicon.ico" sizes="48x48">
+
+  Todos van por {% static %}, que les pone la huella del contenido en el
+  nombre (favicon.<huella>.ico). No es detalle: el navegador guarda el icono
+  por direccion, y con una fija como /favicon.ico se queda con el viejo aunque
+  el archivo cambie. Con la huella, un icono nuevo es una direccion nueva.
+{% endcomment %}<link rel="icon" href="{% static 'img/icono/favicon.ico' %}" sizes="48x48">
 <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/icono/icono-192.png' %}">
 <link rel="apple-touch-icon" href="{% static 'img/icono/apple-touch-icon.png' %}">
