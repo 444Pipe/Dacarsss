@@ -137,3 +137,13 @@ def manifest(request):
     return render(
         request, "sitio/manifest.webmanifest", content_type="application/manifest+json"
     )
+
+
+@cache_control(max_age=86400)
+def favicon(request):
+    # El navegador y Google piden /favicon.ico aunque la página declare sus
+    # iconos. Se sirve el archivo directo y no con una redirección a la
+    # versión con hash de /static/: un 301 quedaría guardado en la caché
+    # apuntando al icono viejo el día que cambie.
+    ruta = settings.BASE_DIR / "static" / "img" / "icono" / "favicon.ico"
+    return HttpResponse(ruta.read_bytes(), content_type="image/x-icon")

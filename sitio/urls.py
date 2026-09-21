@@ -13,6 +13,7 @@ urlpatterns = [
     path(HUB_META, views.hub_meta, name="hub-meta"),
     path("robots.txt", views.robots, name="robots"),
     path("manifest.webmanifest", views.manifest, name="manifest"),
+    path("favicon.ico", views.favicon, name="favicon"),
 ]
 
 # Las landings, sin extensión: /ppf-villavicencio.

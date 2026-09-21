@@ -280,3 +280,35 @@ class AccesoAlPanel(TestCase):
     def test_los_buscadores_no_rastrean_el_panel(self):
         robots = self.client.get("/robots.txt").content.decode()
         self.assertIn("Disallow: /admin/", robots)
+
+
+class Iconos(TestCase):
+    """El icono de la pestaña, de Google y de la pantalla de inicio.
+
+    Era el logo con fondo transparente y cada lugar le ponía el fondo que
+    quería. Ahora es cuadrado y trae su propio azul marino.
+    """
+
+    def test_favicon_ico_responde(self):
+        r = self.client.get("/favicon.ico")
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r["Content-Type"], "image/x-icon")
+
+    def test_ninguna_pagina_usa_el_icono_transparente(self):
+        viejo = re.compile(r'<link rel="(?:icon|apple-touch-icon)"[^>]*logo-dacars')
+        for ruta in _paginas():
+            with self.subTest(ruta=ruta):
+                html = self.client.get(ruta).content.decode()
+                self.assertIsNone(viejo.search(html))
+                self.assertIn('href="/favicon.ico"', html)
+                self.assertIn("img/icono/apple-touch-icon", html)
+
+    def test_el_manifest_trae_iconos_cuadrados(self):
+        datos = json.loads(self.client.get("/manifest.webmanifest").content)
+        for icono in datos["icons"]:
+            with self.subTest(icono=icono["src"]):
+                ancho, alto = icono["sizes"].split("x")
+                self.assertEqual(ancho, alto)
+        # Sin el maskable, Android recorta el icono normal en círculo y se
+        # come las puntas del logo.
+        self.assertIn("maskable", [i["purpose"] for i in datos["icons"]])
