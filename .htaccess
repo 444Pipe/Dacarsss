@@ -35,8 +35,8 @@ AddDefaultCharset UTF-8
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
   # Forzar www (debe coincidir con el canonical del HTML)
-  RewriteCond %{HTTP_HOST} ^dacars\.com\.co$ [NC]
-  RewriteRule ^(.*)$ https://www.dacars.com.co/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^dacarslujos\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.dacarslujos.com/$1 [R=301,L]
 
   # index.html -> /
   RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]

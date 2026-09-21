@@ -42,7 +42,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAPA = os.path.join(ROOT, "tools", "cloudinary-map.json")
-SITE = "https://www.dacars.com.co"
+SITE = "https://www.dacarslujos.com"
 
 # Archivos donde se reescriben las referencias. Ningun .py: ver el docstring.
 # El js/ se barre entero a proposito, no solo app.js: cualquier script nuevo
@@ -95,7 +95,7 @@ def url_de(cloud, rel, info):
 
 
 def patron_local(rel):
-    """Coincide con statics/x.png y con https://www.dacars.com.co/statics/x.png"""
+    """Coincide con statics/x.png y con https://www.dacarslujos.com/statics/x.png"""
     return re.compile(r"(?:" + re.escape(SITE) + r"/)?" + re.escape(rel))
 
 

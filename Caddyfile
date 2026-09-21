@@ -13,6 +13,14 @@
 	root * /srv
 	encode zstd gzip
 
+	# --- Una sola versión del dominio ---
+	# Railway manda el apex y el www al mismo servicio: sin este 301 las dos
+	# versiones responden 200 y Google ve el sitio duplicado. Tiene que
+	# coincidir con el canonical del HTML. El .htaccess hace lo mismo en
+	# Apache, pero Railway no lo lee.
+	@otra-variante host dacarslujos.com
+	redir @otra-variante https://www.dacarslujos.com{uri} permanent
+
 	# --- Caché ---
 	# El HTML siempre se revalida (con ETag, así que casi siempre responde 304).
 	@html path *.html /
