@@ -277,7 +277,13 @@ STORAGES = {
     },
 }
 
-CLOUDINARY_STORAGE = {"PREFIX": CLOUDINARY_URL}
+# Las credenciales las toma el paquete de la variable CLOUDINARY_URL. PREFIX
+# no es la credencial: es una carpeta que se antepone a cada foto. Con la URL
+# ahí, cada foto se subía a una carpeta con la clave y el secreto en el
+# nombre, y el nombre pasaba de 100 caracteres: Postgres lo rechazaba y
+# catalogo_inicial se deshacía en cada arranque. Vacío, la ruta es la de
+# upload_to: dacars/catalogo/productos/...
+CLOUDINARY_STORAGE = {"PREFIX": ""}
 
 # Carpeta dentro de Cloudinary donde caen las fotos que suba el comercio.
 # Los assets del sitio viven en `dacars/`; el catálogo va aparte para que se
