@@ -1,0 +1,10 @@
+{% load static %}{% comment %}
+  La foto que acompaña la intro de una landing. Espera `foto` (el nombre base en
+  static/img/servicios/, sin tamaño ni extensión) y `alt`. Cada foto existe en
+  600, 900 y 1200 px de lado; el navegador elige según la pantalla.
+{% endcomment %}<figure class="intro__media" data-reveal>
+      <img src="{% static 'img/servicios/'|add:foto|add:'-900.webp' %}"
+           srcset="{% static 'img/servicios/'|add:foto|add:'-600.webp' %} 600w, {% static 'img/servicios/'|add:foto|add:'-900.webp' %} 900w, {% static 'img/servicios/'|add:foto|add:'-1200.webp' %} 1200w"
+           sizes="(min-width: 1200px) 470px, (min-width: 900px) 40vw, calc(100vw - 40px)"
+           width="1200" height="1200" alt="{{ alt }}" loading="lazy" decoding="async">
+    </figure>

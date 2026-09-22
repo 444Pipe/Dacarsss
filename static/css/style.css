@@ -884,6 +884,47 @@ svg.marca{fill:currentColor; stroke:none}
 .sec__narrow{max-width:860px}
 .sec__narrow .sec__head{max-width:none}
 
+/* --- Intro con imagen ---
+   En PC el texto va a la izquierda y la foto se queda quieta a la derecha
+   mientras se lee. En celular la foto se mete después del primer párrafo:
+   arriba de todo empujaría el texto y al final nadie llega a verla. */
+.intro{
+  display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:clamp(36px,5vw,72px); align-items:start;
+}
+.intro__copy .sec__lead:last-child{margin-bottom:0}
+.intro__media{
+  position:sticky; top:calc(var(--head-h) + 28px);
+  margin:0; aspect-ratio:4/5; overflow:hidden; isolation:isolate;
+  border-radius:var(--r); border:1px solid var(--line-hi);
+  background:
+    radial-gradient(80% 60% at 30% 10%, rgba(10,92,255,.25), transparent 70%),
+    var(--panel);
+  box-shadow:0 40px 90px -40px rgba(10,92,255,.45), 0 18px 40px -20px rgba(0,0,0,.7);
+}
+.intro__media img{width:100%; height:100%; object-fit:cover}
+/* Funde el borde de abajo con el fondo y deja un filo de cromo arriba */
+.intro__media::before,.intro__media::after{content:''; position:absolute; pointer-events:none}
+.intro__media::before{
+  inset:0; z-index:1;
+  background:linear-gradient(180deg, transparent 58%, rgba(4,6,12,.55));
+}
+.intro__media::after{
+  top:0; left:12%; right:12%; height:1px; z-index:2;
+  background:linear-gradient(90deg, transparent, rgba(233,238,248,.55), transparent);
+}
+@media (max-width:899px){
+  .intro{display:flex; flex-direction:column; gap:0}
+  .intro__copy{display:contents}
+  .intro__copy > *{order:2}
+  .intro__copy > :first-child{order:0}
+  .intro__media{order:1; position:relative; top:auto; aspect-ratio:4/3; margin:10px 0 30px}
+}
+/* En tablet vertical el 4:3 a todo el ancho se come la pantalla */
+@media (min-width:600px) and (max-width:899px){
+  .intro__media{aspect-ratio:3/2}
+}
+
 /* --- Checks a dos columnas --- */
 .checks--2{grid-template-columns:repeat(2,1fr); gap:18px 34px}
 @media (max-width:760px){ .checks--2{grid-template-columns:1fr} }
