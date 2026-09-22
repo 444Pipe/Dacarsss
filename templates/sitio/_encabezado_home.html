@@ -1,7 +1,6 @@
 {% load static dacars %}{# Generado por tools/migrar-a-django.py desde el sitio estático. A partir de acá se edita a mano: el script no se vuelve a correr. #}
 
 <a class="skip" href="#servicios">Saltar al contenido</a>
-{% if hay_catalogo %}<a href="{% url 'catalogo:lista' %}"{% if seccion == "catalogo" %} class="is-active"{% endif %}>Catálogo</a>{% endif %}
 
 <!-- ============ TOPBAR ============ -->
 <div class="topbar">
@@ -27,6 +26,7 @@
 
     <nav class="nav" id="nav" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
+      {% if hay_catalogo %}<a href="{% url 'catalogo:lista' %}">Catálogo</a>{% endif %}
       <a href="#ppf">PPF</a>
       <a href="#proceso">Proceso</a>
       <a href="#trabajos">Trabajos</a>

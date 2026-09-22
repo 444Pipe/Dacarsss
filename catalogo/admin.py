@@ -103,7 +103,7 @@ class FiltroCompletitud(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         return [
             ("sin_foto", "Sin fotos"),
-            ("sin_variante", "Sin precio ni existencias"),
+            ("sin_variante", "A cotizar (sin precio)"),
             ("sin_descripcion", "Sin descripción"),
             ("listo", "Completos"),
         ]
@@ -128,7 +128,7 @@ class FiltroCompletitud(admin.SimpleListFilter):
 class ImagenInline(admin.TabularInline):
     model = ImagenProducto
     extra = 1
-    fields = ("vista", "imagen", "alt", "orden")
+    fields = ("vista", "imagen", "tipo", "referencia", "alt", "orden")
     readonly_fields = ("vista",)
     verbose_name = "foto"
     verbose_name_plural = "Fotos (la de menor número es la principal)"
@@ -145,12 +145,14 @@ class ImagenInline(admin.TabularInline):
 
 class VarianteInline(admin.TabularInline):
     model = Variante
-    extra = 1
-    min_num = 1
+    extra = 0
     fields = ("nombre", "sku", "precio", "precio_antes", "stock", "stock_minimo", "situacion", "activa", "orden")
     readonly_fields = ("situacion",)
     verbose_name = "medida / presentación"
-    verbose_name_plural = "Precios y existencias — al menos una fila"
+    verbose_name_plural = (
+        "Precios y existencias — sin ninguna fila, el producto sale «a cotizar» "
+        "con el botón de WhatsApp"
+    )
 
     @admin.display(description="Estado")
     def situacion(self, obj):
@@ -243,9 +245,7 @@ class ProductoAdmin(admin.ModelAdmin):
     def precios(self, obj):
         desde = obj.precio_desde
         if desde is None:
-            return format_html(
-                '<span style="color:{}">falta cargarlo</span>', colores.MAL
-            )
+            return format_html('<span style="color:{}">a cotizar</span>', colores.OJO)
         if obj.rango_de_precios:
             return "${:,.0f} a ${:,.0f}".format(desde, obj.precio_hasta).replace(",", ".")
         return "${:,.0f}".format(desde).replace(",", ".")
@@ -254,9 +254,7 @@ class ProductoAdmin(admin.ModelAdmin):
     def existencias(self, obj):
         variantes = obj.variantes_activas
         if not variantes:
-            return format_html(
-                '<span style="color:{}">sin variantes</span>', colores.MAL
-            )
+            return "—"
         total = sum(v.disponible for v in variantes)
         bajas = [v for v in variantes if v.bajo_stock]
         if total <= 0:

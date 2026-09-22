@@ -1,9 +1,16 @@
 """El catálogo público."""
 
+import io
+import json
+import shutil
+import tempfile
+
+from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
 
-from catalogo.models import Categoria, Marca, Producto, Variante
+from catalogo.management.commands.catalogo_inicial import SEMILLAS
+from catalogo.models import Categoria, ImagenProducto, Marca, Producto, Variante
 
 
 class Base(TestCase):
@@ -32,13 +39,40 @@ class QueSePublica(Base):
         self.assertEqual(r.status_code, 200)
         self.assertContains(r, "Barra LED 22 pulgadas")
 
-    def test_un_producto_sin_variantes_no_se_publica(self):
-        # No tiene precio: publicarlo solo consigue que pregunten por algo que
-        # no se les puede vender.
-        huerfano = Producto.objects.create(nombre="Snorkel sin cargar", categoria=self.categoria)
+    def test_un_producto_sin_variantes_sale_a_cotizar(self):
+        # Sin precio se publica igual, con el botón de WhatsApp en vez del
+        # carrito: así es como DACARS muestra hoy su catálogo.
+        snorkel = Producto.objects.create(nombre="Snorkel Safari", categoria=self.categoria)
+        self.assertTrue(snorkel.a_cotizar)
         r = self.client.get(reverse("catalogo:lista"))
-        self.assertNotContains(r, "Snorkel sin cargar")
-        self.assertNotIn(huerfano, r.context["pagina"].object_list)
+        self.assertIn(snorkel, r.context["pagina"].object_list)
+        self.assertContains(r, "Cotizar Snorkel Safari por WhatsApp")
+
+    def test_la_ficha_a_cotizar_no_ofrece_carrito(self):
+        snorkel = Producto.objects.create(nombre="Snorkel Safari", categoria=self.categoria)
+        html = self.client.get(snorkel.get_absolute_url()).content.decode()
+        self.assertIn("Cotizar por WhatsApp", html)
+        self.assertNotIn('id="form-compra"', html)
+        # El mensaje lleva el nombre y el enlace de la ficha.
+        self.assertIn("quiero%20cotizar%3A%20Snorkel%20Safari", html)
+        self.assertIn("producto/snorkel-safari/", html)
+
+    def test_la_ficha_a_cotizar_no_publica_un_product_sin_precio(self):
+        # Google exige offers con precio en un Product: sin él, Search Console
+        # marca error en cada ficha. Las migas sí salen.
+        snorkel = Producto.objects.create(nombre="Snorkel Safari", categoria=self.categoria)
+        html = self.client.get(snorkel.get_absolute_url()).content.decode()
+        self.assertNotIn('"@type": "Product"', html)
+        self.assertIn('"@type": "BreadcrumbList"', html)
+
+    def test_a_cotizar_no_es_agotado(self):
+        snorkel = Producto.objects.create(nombre="Snorkel Safari", categoria=self.categoria)
+        self.assertFalse(snorkel.agotado)
+
+    def test_con_precio_deja_de_estar_a_cotizar(self):
+        snorkel = Producto.objects.create(nombre="Snorkel Safari", categoria=self.categoria)
+        Variante.objects.create(producto=snorkel, precio=950000, stock=1)
+        self.assertFalse(Producto.objects.get(pk=snorkel.pk).a_cotizar)
 
     def test_un_producto_desactivado_no_se_publica(self):
         self.producto.activo = False
@@ -103,6 +137,45 @@ class Filtros(Base):
         self.assertEqual(filtrado.context["canonical"], "/catalogo/")
 
 
+class Categorias(Base):
+    def test_el_selector_no_ofrece_categorias_vacias(self):
+        Categoria.objects.create(nombre="Polarizados")
+        r = self.client.get(reverse("catalogo:lista"))
+        nombres = [c.nombre for c in r.context["categorias"]]
+        self.assertIn("Iluminación", nombres)
+        self.assertNotIn("Polarizados", nombres)
+
+    def test_la_entrada_muestra_las_categorias_en_grande(self):
+        otra = Categoria.objects.create(nombre="Pitos y alarmas")
+        Producto.objects.create(nombre="Pito caracol", categoria=otra)
+        r = self.client.get(reverse("catalogo:lista"))
+        self.assertEqual(len(r.context["portadas"]), 2)
+        # Con un filtro puesto, lo que se busca son productos.
+        r = self.client.get(reverse("catalogo:lista"), {"q": "pito"})
+        self.assertEqual(r.context["portadas"], [])
+
+
+class Fotos(Base):
+    def test_la_tarjeta_muestra_la_foto_instalada_al_pasar(self):
+        ImagenProducto.objects.create(producto=self.producto, imagen="p/barra.webp", orden=0)
+        ImagenProducto.objects.create(
+            producto=self.producto, imagen="p/barra-en-hilux.webp", orden=1,
+            tipo=ImagenProducto.INSTALADO, referencia=True,
+        )
+        html = self.client.get(reverse("catalogo:lista")).content.decode()
+        self.assertIn("prod--doble", html)
+        self.assertIn("barra-en-hilux.webp", html)
+
+    def test_la_imagen_de_referencia_se_etiqueta_en_la_ficha(self):
+        ImagenProducto.objects.create(
+            producto=self.producto, imagen="p/barra-en-hilux.webp", orden=0,
+            tipo=ImagenProducto.INSTALADO, referencia=True,
+        )
+        html = self.client.get(self.producto.get_absolute_url()).content.decode()
+        self.assertIn("Imagen de referencia", html)
+        self.assertNotIn('id="foto-nota" hidden', html)
+
+
 class Precios(Base):
     def test_producto_de_una_sola_variante(self):
         self.assertFalse(self.producto.rango_de_precios)
@@ -141,3 +214,64 @@ class EnlaceConElSitio(Base):
         xml = self.client.get("/sitemap.xml").content.decode()
         self.assertIn(self.producto.get_absolute_url(), xml)
         self.assertIn(self.categoria.get_absolute_url(), xml)
+
+
+class CatalogoInicial(TestCase):
+    """El comando que carga los productos fotografiados en el local."""
+
+    def setUp(self):
+        media = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, media, ignore_errors=True)
+        ajuste = self.settings(
+            MEDIA_ROOT=media,
+            STORAGES={
+                "default": {
+                    "BACKEND": "django.core.files.storage.FileSystemStorage",
+                    "OPTIONS": {"location": media},
+                },
+                "staticfiles": {
+                    "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
+                },
+            },
+        )
+        ajuste.enable()
+        self.addCleanup(ajuste.disable)
+        self.datos = json.loads((SEMILLAS / "catalogo.json").read_text(encoding="utf-8"))
+
+    def cargar(self, *args):
+        call_command("catalogo_inicial", *args, stdout=io.StringIO())
+
+    def test_las_semillas_estan_completas(self):
+        categorias = {c["nombre"] for c in self.datos["categorias"]}
+        slugs = [p["slug"] for p in self.datos["productos"]]
+        self.assertEqual(len(slugs), len(set(slugs)))
+        for p in self.datos["productos"]:
+            self.assertIn(p["categoria"], categorias, p["slug"])
+            self.assertLessEqual(len(p["seo_titulo"]), 70, p["slug"])
+            self.assertTrue(p["fotos"], p["slug"])
+            for f in p["fotos"]:
+                self.assertTrue((SEMILLAS / "fotos" / f["archivo"]).exists(), f["archivo"])
+
+    def test_carga_los_productos_con_sus_fotos(self):
+        self.cargar()
+        productos = self.datos["productos"]
+        self.assertEqual(Producto.objects.count(), len(productos))
+        self.assertEqual(ImagenProducto.objects.count(), sum(len(p["fotos"]) for p in productos))
+        # Entran todos publicados y a cotizar.
+        self.assertEqual(Producto.objects.publicados().count(), len(productos))
+        self.assertTrue(all(p.a_cotizar for p in Producto.objects.all()))
+
+    def test_correrlo_dos_veces_no_duplica(self):
+        self.cargar()
+        antes = (Producto.objects.count(), ImagenProducto.objects.count(), Categoria.objects.count())
+        self.cargar()
+        despues = (Producto.objects.count(), ImagenProducto.objects.count(), Categoria.objects.count())
+        self.assertEqual(antes, despues)
+
+    def test_en_el_arranque_no_toca_un_catalogo_con_productos(self):
+        # Así un producto borrado a propósito no reaparece en el siguiente
+        # despliegue.
+        cat = Categoria.objects.create(nombre="Iluminación")
+        Producto.objects.create(nombre="Barra LED", categoria=cat)
+        self.cargar("--si-vacio")
+        self.assertEqual(Producto.objects.count(), 1)

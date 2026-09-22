@@ -42,7 +42,13 @@ EXPOSE 8080
 #                                nada. Es la única forma de crear el primer
 #                                usuario cuando la base vive solo en la nube y
 #                                no es alcanzable desde afuera.
+#   catalogo_inicial             carga los productos de catalogo/semillas/ y
+#     --si-vacio                 sube sus fotos a Cloudinary, solo si todavía
+#                                no hay ningún producto. Corre en segundo
+#                                plano: subir 40 fotos toma más que el minuto
+#                                del healthcheck, y el sitio no tiene por qué
+#                                esperar. Los productos aparecen al terminar.
 #
-# Los dos últimos nunca terminan con error: una variable mal puesta no puede
+# Los tres últimos nunca terminan con error: una variable mal puesta no puede
 # impedir que el sitio levante.
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && (python manage.py catalogo_inicial --si-vacio &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]

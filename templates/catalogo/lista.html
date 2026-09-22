@@ -9,65 +9,95 @@
 </ol>
 
 <header class="cat__head">
-  <div>
-    <p class="tag">{% if categoria %}{{ categoria.nombre }}{% else %}Catálogo{% endif %}</p>
+  <div class="cat__copy">
+    <p class="tag">{% if categoria %}{{ categoria.nombre }}{% else %}Catálogo DACARS{% endif %}</p>
     <h1 class="cat__title chrome">{% if categoria %}{{ categoria.nombre }} en Villavicencio{% else %}Lujos y accesorios para tu carro{% endif %}</h1>
     <p class="cat__lead">
       {% if categoria and categoria.descripcion %}{{ categoria.descripcion }}
-      {% else %}Todo lo que tenemos en el local, con precio y existencias al día.
-      Lo que veas disponible, está. Cualquier duda se resuelve por WhatsApp antes de comprar.{% endif %}
+      {% else %}Lo que tenemos en el local de Villavicencio. Mira cada producto de cerca
+      y cómo queda instalado, y cotízalo por WhatsApp: te damos el precio para tu
+      vehículo, con o sin instalación.{% endif %}
     </p>
     {% if categoria.servicio %}
-    <p class="cat__lead" style="margin-top:12px">
-      ¿Buscabas el servicio? Mirá <a class="link" href="{{ categoria.url_servicio }}">{{ categoria.get_servicio_display }} en Villavicencio</a>.
+    <p class="cat__lead cat__lead--serv">
+      ¿Buscabas el servicio? Mira <a class="link" href="{{ categoria.url_servicio }}">{{ categoria.get_servicio_display }} en Villavicencio</a>.
     </p>
     {% endif %}
   </div>
-  <p class="cat__cuenta">{{ total }} producto{{ total|pluralize }}</p>
+
+  <ul class="cat__datos" aria-label="Cómo funciona el catálogo">
+    <li><b>{{ total }}</b><span>producto{{ total|pluralize }}{% if categoria %} en esta categoría{% else %} en el local{% endif %}</span></li>
+    <li><b>Taller</b><span>propio para instalarlos</span></li>
+    <li><b>WhatsApp</b><span>precio para tu vehículo</span></li>
+  </ul>
 </header>
 
+{# --- Categorías en grande: solo en la entrada del catálogo -------------- #}
+{% if portadas %}
+<nav class="rubros" aria-label="Categorías del catálogo">
+  {% for c in portadas %}
+  <a class="rubro" href="{{ c.get_absolute_url }}">
+    <span class="rubro__foto">
+      {% if c.portada %}<img src="{{ c.portada|foto:420 }}" alt="" width="420" height="420" loading="lazy" decoding="async">{% endif %}
+    </span>
+    <span class="rubro__txt">
+      <span class="rubro__nom">{{ c.nombre }}</span>
+      <span class="rubro__n">{{ c.cuantos }} producto{{ c.cuantos|pluralize }}</span>
+    </span>
+  </a>
+  {% endfor %}
+</nav>
+{% endif %}
+
 {# --- Filtros ---------------------------------------------------------- #}
-<form class="filtros" method="get" action="{% if categoria %}{{ categoria.get_absolute_url }}{% else %}{% url 'catalogo:lista' %}{% endif %}">
+<form class="filtros" id="productos" method="get" action="{% if categoria %}{{ categoria.get_absolute_url }}{% else %}{% url 'catalogo:lista' %}{% endif %}">
   <div class="filtros__fila">
     <div class="filtros__buscar">
       <label class="skip" for="f-q">Buscar en el catálogo</label>
-      <input id="f-q" type="search" name="q" value="{{ busqueda }}" placeholder="Buscar: llanta, barra LED, 265/65R17…">
+      <input id="f-q" type="search" name="q" value="{{ busqueda }}" placeholder="Buscar: CarPlay, H4, cámara de reversa…">
     </div>
 
+    {% if marcas|length > 1 %}
     <label class="skip" for="f-marca">Marca</label>
-    <select id="f-marca" name="marca" style="flex:0 1 180px">
+    <select id="f-marca" name="marca" class="filtros__sel">
       <option value="">Todas las marcas</option>
       {% for m in marcas %}<option value="{{ m.slug }}"{% if m.slug == marca_activa %} selected{% endif %}>{{ m.nombre }}</option>{% endfor %}
     </select>
+    {% endif %}
 
     <label class="skip" for="f-orden">Ordenar</label>
-    <select id="f-orden" name="orden" style="flex:0 1 170px">
+    <select id="f-orden" name="orden" class="filtros__sel">
       <option value="relevancia"{% if orden == "relevancia" %} selected{% endif %}>Recomendados</option>
       <option value="nuevos"{% if orden == "nuevos" %} selected{% endif %}>Más nuevos</option>
       <option value="nombre"{% if orden == "nombre" %} selected{% endif %}>Por nombre</option>
     </select>
 
+    {% if hay_vendibles or solo_disponibles %}
     <label class="filtros__check">
       <input type="checkbox" name="hay" value="1"{% if solo_disponibles %} checked{% endif %}>
       Solo lo que hay
     </label>
+    {% endif %}
 
-    <button class="btn btn--primary" type="submit">Filtrar</button>
+    <button class="btn btn--primary" type="submit">Buscar</button>
     {% if busqueda or marca_activa or solo_disponibles %}
     <a class="btn btn--ghost" href="{% if categoria %}{{ categoria.get_absolute_url }}{% else %}{% url 'catalogo:lista' %}{% endif %}">Limpiar</a>
     {% endif %}
   </div>
 
+  {% if categorias|length > 1 %}
   <ul class="cats">
     <li><a class="{% if not categoria %}is-active{% endif %}" href="{% url 'catalogo:lista' %}">Todo</a></li>
     {% for c in categorias %}
-    <li><a class="{% if categoria.pk == c.pk %}is-active{% endif %}" href="{{ c.get_absolute_url }}">{{ c.nombre }}</a></li>
+    <li><a class="{% if categoria.pk == c.pk %}is-active{% endif %}" href="{{ c.get_absolute_url }}">{{ c.nombre }} <small>{{ c.cuantos }}</small></a></li>
     {% endfor %}
   </ul>
+  {% endif %}
 </form>
 
 {# --- Productos --------------------------------------------------------- #}
 {% if pagina.object_list %}
+{% if busqueda %}<p class="cat__res">{{ total }} resultado{{ total|pluralize }} para «{{ busqueda }}»</p>{% endif %}
 <div class="prods">
   {% for producto in pagina %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
 </div>
@@ -96,9 +126,19 @@
   <h2>No encontramos nada así</h2>
   <p>
     {% if busqueda %}Nada con «{{ busqueda }}».{% else %}Todavía no hay productos en esta categoría.{% endif %}
-    Escribinos y te decimos si lo conseguimos.
+    Escríbenos y te decimos si lo conseguimos.
   </p>
-  <a class="btn btn--wa" href="{% whatsapp 'Hola DACARS, estoy buscando un producto que no vi en el catálogo.' %}" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+  <a class="btn btn--wa" href="{% whatsapp 'Hola DACARS, estoy buscando un producto que no vi en el catálogo.' %}" target="_blank" rel="noopener">{% include "catalogo/_ico_wa.html" %} Preguntar por WhatsApp</a>
 </div>
 {% endif %}
+
+{# --- Cierre ----------------------------------------------------------- #}
+<aside class="cat__cierre">
+  <div>
+    <h2 class="cat__cierre-tit">¿No ves lo que buscas?</h2>
+    <p>En el local hay más de lo que alcanza a salir acá, y lo que no tenemos lo conseguimos.
+    Cuéntanos qué necesitas y para qué vehículo.</p>
+  </div>
+  <a class="btn btn--wa" href="{% whatsapp 'Hola DACARS, estoy buscando un accesorio para mi vehículo.' %}" target="_blank" rel="noopener">{% include "catalogo/_ico_wa.html" %} Escribir por WhatsApp</a>
+</aside>
 {% endblock %}

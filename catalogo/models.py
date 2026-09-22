@@ -4,8 +4,11 @@ La pieza central es la **variante**, no el producto. Una llanta no se vende:
 se vende una medida concreta (265/65R17), y una película no se vende: se vende
 un porcentaje. El producto agrupa y describe; la variante tiene el SKU, el
 precio y las existencias. Un producto que no tiene medidas igual necesita una
-variante (la "única"), y el admin la crea sola para que el comercio no tenga
-que entenderlo.
+variante (la "única") para venderse con carrito.
+
+Un producto sin ninguna variante se publica igual, "a cotizar": la ficha
+muestra el botón de WhatsApp en lugar del precio. Es como sale hoy el
+catálogo de DACARS, que no publica precios.
 """
 
 from django.conf import settings
@@ -110,14 +113,13 @@ class ProductoQuerySet(models.QuerySet):
     def publicados(self):
         """Lo que el público puede ver.
 
-        Exige al menos una variante activa: un producto sin precio no se puede
-        comprar, y publicarlo solo consigue que alguien pregunte por algo que
-        no se le puede vender. El panel avisa cuáles están en ese estado con el
-        filtro "qué le falta".
+        Un producto sin variantes activas también se publica: sale "a cotizar",
+        con el botón de WhatsApp en lugar del carrito. Así funciona hoy el
+        catálogo de DACARS, que no publica precios porque dependen del
+        vehículo y de la instalación. El día que se le carga una variante con
+        precio, pasa solo a venderse con carrito.
         """
-        return self.filter(
-            activo=True, categoria__activa=True, variantes__activa=True
-        ).distinct()
+        return self.filter(activo=True, categoria__activa=True)
 
     def con_todo(self):
         return self.select_related("categoria", "marca").prefetch_related(
@@ -228,6 +230,17 @@ class Producto(models.Model):
         return imagenes[0] if imagenes else None
 
     @property
+    def imagen_instalado(self):
+        """La primera foto del producto puesto en un carro, si hay.
+
+        La tarjeta del listado la muestra al pasar el mouse.
+        """
+        for imagen in self.imagenes.all():
+            if imagen.tipo == ImagenProducto.INSTALADO:
+                return imagen
+        return None
+
+    @property
     def variantes_activas(self):
         return [v for v in self.variantes.all() if v.activa]
 
@@ -256,8 +269,15 @@ class Producto(models.Model):
         return sum(v.disponible for v in self.variantes_activas)
 
     @property
+    def a_cotizar(self):
+        """Sin variantes activas no hay precio: la ficha ofrece cotizar."""
+        return not self.variantes_activas
+
+    @property
     def agotado(self):
-        return self.disponible_total <= 0
+        # Un producto a cotizar no tiene existencias que contar: decir
+        # "agotado" de algo que nunca tuvo stock cargado sería mentir.
+        return not self.a_cotizar and self.disponible_total <= 0
 
     @property
     def bajo_stock(self):
@@ -284,6 +304,26 @@ class ImagenProducto(models.Model):
         verbose_name="texto alternativo",
         help_text="Qué se ve en la foto. Lo lee Google y los lectores de pantalla. "
         "Vacío = se arma con el nombre del producto.",
+    )
+    PRODUCTO = "producto"
+    INSTALADO = "instalado"
+    TIPOS = [
+        (PRODUCTO, "El producto"),
+        (INSTALADO, "Instalado en un carro"),
+    ]
+
+    tipo = models.CharField(
+        max_length=12,
+        choices=TIPOS,
+        default=PRODUCTO,
+        help_text="«Instalado» es la que muestra la tarjeta al pasar el mouse.",
+    )
+    referencia = models.BooleanField(
+        default=False,
+        verbose_name="imagen de referencia",
+        help_text="Marcala si no es una foto real de este producto (generada con "
+        "IA o sacada del fabricante). La ficha le pone la etiqueta «Imagen de "
+        "referencia», para no prometer algo que no es exactamente así.",
     )
     orden = models.PositiveSmallIntegerField(
         default=0, help_text="La de menor número es la principal."

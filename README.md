@@ -60,6 +60,7 @@ static/css/panel.css      La marca aplicada al admin de Django
 static/js/app.js          Menú, reveals, video, formulario → WhatsApp
 
 tools/            Lo que sigue sirviendo
+  fotos-catalogo.py     Foto del mostrador -> foto de estudio del catálogo
   subir-cloudinary.py   Sube statics/ a Cloudinary
   generar-video.py      Reprocesa los reels con ffmpeg
   set-dominio.py        Cambia el dominio en las plantillas
@@ -135,12 +136,64 @@ vende una medida (265/65R17). Una película no se vende: se vende un porcentaje.
 - El **producto** agrupa y describe: nombre, fotos, descripción, compatibilidad.
 - La **variante** tiene el SKU, el precio y las existencias.
 
-Un producto sin medidas igual necesita una variante (la «única»); el panel exige
-al menos una y el SKU se genera solo.
+Un producto sin medidas que se quiera vender con carrito necesita una variante
+(la «única»); el SKU se genera solo.
 
-**Un producto sin variantes activas no se publica.** No tiene precio, así que no
-se puede comprar, y publicarlo solo consigue que alguien pregunte por algo que no
-se le puede vender. El tablero avisa cuáles están así.
+### A cotizar
+
+**Un producto sin variantes activas se publica «a cotizar».** En vez de precio y
+carrito, la tarjeta y la ficha muestran «Cotizar por WhatsApp», con un mensaje
+que ya lleva el nombre del producto y el enlace de su ficha, y deja empezada la
+frase «Mi vehículo es:». Es como sale hoy todo el catálogo: DACARS no publica
+precios porque dependen del vehículo y de la instalación (lo mismo que dicen las
+landings).
+
+El día que a un producto se le carga una variante con precio, pasa solo a
+venderse con carrito. No hay casilla que marcar.
+
+Dos cosas cambian con un producto a cotizar:
+
+- **No lleva JSON-LD de `Product`.** Google exige `offers` con precio, y un
+  `Product` sin oferta le aparece a Search Console como error en cada ficha. Las
+  migas (`BreadcrumbList`) salen igual.
+- **No dice «agotado».** No tiene existencias cargadas, y decir agotado de algo
+  que está en la vitrina sería mentir.
+
+### Fotos: el producto y el producto instalado
+
+Cada foto tiene un **tipo** («El producto» o «Instalado en un carro») y una
+casilla de **imagen de referencia**. La tarjeta del listado muestra la primera
+foto de tipo *instalado* al pasar el mouse, y la ficha le pone la etiqueta
+«Imagen de referencia» a las que la tengan marcada.
+
+La casilla es para las imágenes que no son una foto real de ese producto: las
+generadas con IA (Higgsfield) y las del fabricante. Una escena generada muestra
+cómo queda algo parecido instalado, no esa unidad, y la etiqueta evita prometer
+algo que no es exactamente así.
+
+### El catálogo inicial
+
+Los 19 productos fotografiados en el local en septiembre de 2026 viven en
+`catalogo/semillas/`: el texto en `catalogo.json` y las fotos en `fotos/`. El
+contenedor los carga solo en el arranque (`catalogo_inicial --si-vacio`), en
+segundo plano y **solo si no hay ningún producto**: corre una vez, y un
+producto borrado a propósito no reaparece en el siguiente despliegue. Es todo o
+nada: si una foto no sube a Cloudinary no queda nada a medias y el próximo
+arranque lo reintenta.
+
+En local:
+
+```bash
+python manage.py catalogo_inicial
+```
+
+Las fotos salen de [tools/fotos-catalogo.py](tools/fotos-catalogo.py), que
+recorta la caja de la foto del mostrador (sin la mano ni el local), la endereza
+y la pone sobre un fondo de estudio con los colores del sitio. Las fotos
+originales están en la carpeta PRODUCTOS del Drive. Los textos se armaron con
+lo que dice cada caja y lo que se pudo confirmar en la web; lo que no se pudo
+confirmar quedó fuera. Los prompts para generar las versiones con Higgsfield
+(estudio e instalado) están en `tools/higgsfield-prompts.json`.
 
 ### Existencias
 
@@ -174,8 +227,9 @@ nuevo la cuenta se rompe en silencio.
 
 Es el admin de Django con la marca de DACARS y un tablero de entrada que muestra
 lo que hay que atender hoy: pedidos sin responder, agotados, existencias bajo el
-mínimo, productos sin foto y productos sin precio. Cada ficha es un enlace a la
-lista ya filtrada.
+mínimo y productos sin foto. También cuenta los productos a cotizar (sin
+precio), que no es una alerta sino cómo sale hoy el catálogo. Cada ficha es un
+enlace a la lista ya filtrada.
 
 ### Cómo está hecha la apariencia
 
@@ -201,7 +255,10 @@ encabezado del admin: ahí todavía no hay dónde navegar.
 1. **Catálogo → Productos → Agregar**
 2. Nombre, categoría, resumen (la línea que se lee en la tarjeta).
 3. En **Precios y existencias**: una fila por medida. El SKU se genera solo.
-4. En **Fotos**: la de menor número es la principal.
+   Sin ninguna fila, el producto sale «a cotizar».
+4. En **Fotos**: la de menor número es la principal. Si hay una del producto
+   instalado, marcale el tipo «Instalado en un carro»; si es generada con IA o
+   del fabricante, marcá también «imagen de referencia».
 5. Guardar. Ya está en `/catalogo/`.
 
 ### Cuándo llega mercancía

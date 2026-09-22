@@ -1,13 +1,20 @@
 {% load dacars %}{# Una tarjeta de producto. La usan el catálogo, la portada y las landings. #}
-<article class="prod">
+{% with principal=producto.imagen_principal instalado=producto.imagen_instalado %}
+<article class="prod{% if instalado and instalado != principal %} prod--doble{% endif %}">
   <div class="prod__foto">
-    {% with principal=producto.imagen_principal %}
-      {% if principal %}
-        <img src="{{ principal.imagen|foto:520 }}" alt="{{ principal.texto_alt }}" width="520" height="390" loading="lazy" decoding="async">
-      {% else %}
-        <span class="prod__sinfoto">DACARS</span>
-      {% endif %}
-    {% endwith %}
+    {% if principal %}
+      <img src="{{ principal.imagen|foto:520 }}" alt="{{ principal.texto_alt }}" width="520" height="520" loading="lazy" decoding="async">
+    {% else %}
+      <span class="prod__sinfoto">DACARS</span>
+    {% endif %}
+    {% comment %} La foto del producto instalado aparece al pasar el mouse. Va
+       con alt vacío: es la misma cosa vista de otra forma, y el lector de
+       pantalla ya leyó la principal. {% endcomment %}
+    {% if instalado and instalado != principal %}
+      <img class="prod__alt" src="{{ instalado.imagen|foto:520 }}" alt="" width="520" height="520" loading="lazy" decoding="async">
+      <span class="prod__pista" aria-hidden="true">Instalado</span>
+    {% endif %}
+    {% if producto.marca %}<span class="prod__marca">{{ producto.marca.nombre }}</span>{% endif %}
   </div>
 
   <div class="prod__in">
@@ -16,23 +23,30 @@
     {% if producto.resumen %}<p class="prod__res">{{ producto.resumen }}</p>{% endif %}
 
     <div class="prod__pie">
-      <span class="precio">
-        {% if producto.rango_de_precios %}<small>Desde</small>{% endif %}
-        {{ producto.precio_desde|pesos }}
-      </span>
-
-      {% comment %} La cuenta solo se muestra cuando el producto tiene una sola
-         medida. Con varias, el total no dice nada útil: "Últimas 8" cuando hay
-         8 en una medida y 0 en otra es engañoso en los dos sentidos. {% endcomment %}
-      {% if producto.agotado %}
-        <span class="stockb stockb--no">Agotado</span>
-      {% elif producto.variante_unica and producto.bajo_stock %}
-        <span class="stockb stockb--poco">Últimas {{ producto.disponible_total }}</span>
-      {% elif producto.bajo_stock %}
-        <span class="stockb stockb--poco">Quedan pocas</span>
+      {% if producto.a_cotizar %}
+        <span class="prod__mas" aria-hidden="true">Ver detalles</span>
+        <a class="prod__wa" href="{% whatsapp_cotizar producto %}" target="_blank" rel="noopener"
+           aria-label="Cotizar {{ producto.nombre }} por WhatsApp">{% include "catalogo/_ico_wa.html" %}<span>Cotizar</span></a>
       {% else %}
-        <span class="stockb stockb--hay">Disponible</span>
+        <span class="precio">
+          {% if producto.rango_de_precios %}<small>Desde</small>{% endif %}
+          {{ producto.precio_desde|pesos }}
+        </span>
+
+        {% comment %} La cuenta solo se muestra cuando el producto tiene una sola
+           medida. Con varias, el total no dice nada útil: "Últimas 8" cuando hay
+           8 en una medida y 0 en otra es engañoso en los dos sentidos. {% endcomment %}
+        {% if producto.agotado %}
+          <span class="stockb stockb--no">Agotado</span>
+        {% elif producto.variante_unica and producto.bajo_stock %}
+          <span class="stockb stockb--poco">Últimas {{ producto.disponible_total }}</span>
+        {% elif producto.bajo_stock %}
+          <span class="stockb stockb--poco">Quedan pocas</span>
+        {% else %}
+          <span class="stockb stockb--hay">Disponible</span>
+        {% endif %}
       {% endif %}
     </div>
   </div>
 </article>
+{% endwith %}

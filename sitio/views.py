@@ -25,16 +25,24 @@ def portada(request):
 def servicio(request, slug):
     if slug not in SLUGS:
         raise Http404
-    categorias = Categoria.objects.filter(activa=True, servicio=slug)
+    categorias = list(Categoria.objects.filter(activa=True, servicio=slug))
     productos = list(
         Producto.objects.publicados().con_todo().filter(categoria__servicio=slug)[:4]
+    )
+    # Varias categorías pueden colgar del mismo servicio (Seguridad y Pitos
+    # cuelgan de Lujos y accesorios). El «ver más» tiene que llevar a una que
+    # tenga algo, no a la primera por orden, que puede estar vacía.
+    con_productos = {p.categoria_id for p in productos}
+    categoria = next(
+        (c for c in categorias if c.pk in con_productos),
+        categorias[0] if categorias else None,
     )
     return render(
         request,
         "sitio/" + slug + ".html",
         {
             "slug": slug,
-            "categoria_del_servicio": categorias.first(),
+            "categoria_del_servicio": categoria,
             "productos_del_servicio": productos,
             "hay_catalogo": _hay_catalogo(),
         },

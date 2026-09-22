@@ -9,12 +9,42 @@
 /* --- Encabezado de sección ------------------------------------------- */
 .cat{padding:calc(var(--head-h) + 46px) 0 90px}
 .cat__head{display:flex; align-items:flex-end; justify-content:space-between;
-  gap:24px; flex-wrap:wrap; margin-bottom:26px}
+  gap:28px; flex-wrap:wrap; margin-bottom:30px}
+.cat__copy{flex:1 1 520px; min-width:0}
 .cat__title{font-family:var(--f-display); font-style:italic; font-weight:900;
   text-transform:uppercase; letter-spacing:.01em; line-height:1.02;
   font-size:clamp(30px,4.6vw,50px); margin:8px 0 10px}
 .cat__lead{margin:0; max-width:64ch; color:var(--muted); font-size:15.5px; line-height:1.7}
 .cat__cuenta{font-size:13px; color:var(--muted-2); white-space:nowrap}
+.cat__lead--serv{margin-top:12px}
+
+.cat__datos{display:flex; gap:10px; margin:0; padding:0; list-style:none; flex-wrap:wrap}
+.cat__datos li{display:flex; flex-direction:column; gap:3px; min-width:128px;
+  padding:13px 16px; border:1px solid var(--line); border-radius:12px;
+  background:linear-gradient(180deg,rgba(13,21,38,.8),rgba(7,11,20,.6))}
+.cat__datos b{font-family:var(--f-display); font-style:italic; font-weight:900;
+  font-size:21px; line-height:1; text-transform:uppercase; color:var(--text)}
+.cat__datos span{font-size:12px; color:var(--muted-2); line-height:1.4}
+.cat__res{margin:0 0 16px; font-size:13.5px; color:var(--muted-2)}
+
+/* --- Categorías en grande (entrada del catálogo) ----------------------- */
+.rubros{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px;
+  margin:0 0 26px}
+.rubro{position:relative; display:flex; flex-direction:column; overflow:hidden;
+  border:1px solid var(--line); border-radius:var(--r);
+  background:radial-gradient(90% 70% at 50% 30%,#0f1a31,#070b14);
+  transition:transform .3s var(--ease), border-color .3s, box-shadow .3s}
+.rubro:hover{transform:translateY(-4px); border-color:rgba(61,139,255,.45);
+  box-shadow:0 16px 36px -22px rgba(10,92,255,.7)}
+.rubro__foto{display:block; aspect-ratio:4/3; overflow:hidden}
+.rubro__foto img{width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s var(--ease)}
+.rubro:hover .rubro__foto img{transform:scale(1.06)}
+.rubro__txt{display:flex; flex-direction:column; gap:2px; padding:11px 14px 13px;
+  border-top:1px solid var(--line)}
+.rubro__nom{font-family:var(--f-display); font-style:italic; font-weight:800;
+  text-transform:uppercase; font-size:15px; line-height:1.15; color:var(--text)}
+.rubro__n{font-size:12px; color:var(--muted-2)}
 
 .migas{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 6px;
   padding:0; list-style:none; font-size:12.5px; color:var(--muted-2)}
@@ -39,6 +69,7 @@
   background-position:calc(100% - 17px) 50%, calc(100% - 12px) 50%;
   background-size:5px 5px, 5px 5px; background-repeat:no-repeat}
 .filtros select option{background:#0a1020; color:var(--text)}
+.filtros__sel{flex:0 1 180px}
 .filtros input:focus,.filtros select:focus{outline:none; border-color:var(--blue-hi);
   box-shadow:0 0 0 3px rgba(61,139,255,.16)}
 .filtros__check{display:inline-flex; align-items:center; gap:8px; font-size:13.5px;
@@ -51,6 +82,7 @@
   background:rgba(10,16,32,.6); transition:all .2s var(--ease)}
 .cats a:hover{color:var(--text); border-color:rgba(61,139,255,.45)}
 .cats a.is-active{color:#04160c; background:var(--blue-hi); border-color:var(--blue-hi)}
+.cats small{margin-left:4px; font-size:11px; font-weight:700; opacity:.6}
 
 /* --- Grilla de productos ---------------------------------------------- */
 .prods{display:grid; grid-template-columns:repeat(auto-fill,minmax(248px,1fr)); gap:18px}
@@ -62,11 +94,24 @@
 .prod:hover{transform:translateY(-5px); border-color:rgba(61,139,255,.4);
   box-shadow:0 18px 40px -22px rgba(10,92,255,.6)}
 
-.prod__foto{position:relative; aspect-ratio:4/3; overflow:hidden;
+.prod__foto{position:relative; aspect-ratio:1/1; overflow:hidden;
   background:radial-gradient(70% 70% at 50% 40%,#0d1526,#070b14)}
 .prod__foto img{width:100%; height:100%; object-fit:cover; display:block;
-  transition:transform .5s var(--ease)}
+  transition:transform .5s var(--ease), opacity .45s var(--ease)}
 .prod:hover .prod__foto img{transform:scale(1.05)}
+.prod__alt{position:absolute; inset:0; opacity:0}
+.prod--doble:hover .prod__alt{opacity:1}
+.prod__marca{position:absolute; top:11px; left:11px; padding:4px 9px; border-radius:999px;
+  font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--text); background:rgba(4,6,12,.72); border:1px solid var(--line-hi);
+  backdrop-filter:blur(6px)}
+.prod__pista{position:absolute; right:11px; bottom:11px; padding:4px 9px 4px 22px;
+  border-radius:999px; font-size:10.5px; font-weight:600; letter-spacing:.06em;
+  color:var(--muted); background:rgba(4,6,12,.72); border:1px solid var(--line);
+  transition:opacity .3s}
+.prod__pista::before{content:""; position:absolute; left:9px; top:50%; width:7px; height:7px;
+  margin-top:-3.5px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan)}
+.prod--doble:hover .prod__pista{opacity:0}
 .prod__sinfoto{position:absolute; inset:0; display:grid; place-items:center;
   color:var(--muted-2); font-size:12px; letter-spacing:.14em; text-transform:uppercase}
 
@@ -75,9 +120,19 @@
   color:var(--blue-hi); font-weight:700}
 .prod__nom{margin:0; font-size:15.5px; font-weight:600; line-height:1.38; color:var(--text)}
 .prod__nom a::after{content:""; position:absolute; inset:0}
-.prod__res{margin:0; font-size:13.4px; color:var(--muted); line-height:1.55}
+.prod__res{margin:0; font-size:13.4px; color:var(--muted); line-height:1.55;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
 .prod__pie{display:flex; align-items:flex-end; justify-content:space-between;
   gap:10px; margin-top:auto; padding-top:10px}
+.prod__mas{font-size:12.5px; font-weight:600; color:var(--blue-hi); align-self:center}
+.prod__mas::after{content:" →"; transition:margin .2s}
+.prod:hover .prod__mas::after{margin-left:4px}
+/* Encima del enlace que cubre toda la tarjeta (prod__nom a::after). */
+.prod__wa{position:relative; z-index:2; display:inline-flex; align-items:center; gap:6px;
+  padding:8px 13px; border-radius:999px; font-size:12.5px; font-weight:700;
+  color:#04160c; background:var(--wa); transition:transform .2s, box-shadow .2s}
+.prod__wa:hover{transform:translateY(-1px); box-shadow:0 6px 18px -6px rgba(37,211,102,.9)}
+.prod__wa svg{width:15px; height:15px; fill:currentColor}
 
 /* --- Precio ----------------------------------------------------------- */
 .precio{font-family:var(--f-display); font-style:italic; font-weight:800;
@@ -105,16 +160,23 @@
 .ficha{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(24px,4vw,52px);
   align-items:start}
 
-.fotos__grande{position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:var(--r);
+.fotos__grande{position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:var(--r);
   border:1px solid var(--line); background:radial-gradient(70% 70% at 50% 40%,#0d1526,#070b14)}
 .fotos__grande img{width:100%; height:100%; object-fit:cover; display:block}
 .fotos__tiras{display:flex; gap:9px; margin-top:11px; flex-wrap:wrap}
-.fotos__tiras button{width:72px; height:56px; padding:0; overflow:hidden; cursor:pointer;
+.fotos__nota{position:absolute; left:12px; bottom:12px; padding:5px 10px; border-radius:999px;
+  font-size:11.5px; font-weight:600; color:var(--muted); background:rgba(4,6,12,.78);
+  border:1px solid var(--line-hi); backdrop-filter:blur(6px)}
+.fotos__nota[hidden]{display:none}
+.fotos__tiras button{position:relative; width:74px; height:74px; padding:0; overflow:hidden; cursor:pointer;
   border:1px solid var(--line); border-radius:9px; background:#070b14;
   transition:border-color .2s, opacity .2s; opacity:.65}
 .fotos__tiras button:hover{opacity:1}
 .fotos__tiras button[aria-current=true]{border-color:var(--blue-hi); opacity:1}
 .fotos__tiras img{width:100%; height:100%; object-fit:cover; display:block}
+.fotos__tiras span{position:absolute; left:0; right:0; bottom:0; padding:2px 0;
+  font-size:9.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--text); background:rgba(4,6,12,.75)}
 
 .ficha__titulo{font-family:var(--f-display); font-style:italic; font-weight:900;
   text-transform:uppercase; line-height:1.04; font-size:clamp(26px,3.6vw,40px); margin:10px 0 12px}
@@ -129,6 +191,51 @@
   border-radius:2px; background:linear-gradient(135deg,var(--blue-hi),var(--cyan))}
 .ficha__dato{display:flex; gap:10px; font-size:14px; color:var(--muted); margin:0 0 8px}
 .ficha__dato b{color:var(--text); font-weight:600; min-width:120px}
+/* --- Productos a cotizar ---------------------------------------------- */
+.cotiza{margin:6px 0 0; padding:20px; border:1px solid var(--line-hi); border-radius:var(--r);
+  background:linear-gradient(160deg,rgba(10,92,255,.14),rgba(7,11,20,.7) 60%)}
+.cotiza__tit{margin:0 0 6px; font-family:var(--f-display); font-style:italic; font-weight:900;
+  text-transform:uppercase; font-size:22px; line-height:1.1; color:var(--text)}
+.cotiza__txt{margin:0 0 16px; font-size:14.4px; color:var(--muted); line-height:1.65}
+.cotiza__tel{margin:12px 0 0; text-align:center; font-size:13px; color:var(--muted-2)}
+.cotiza__tel a{color:var(--text); font-weight:600}
+.cotiza__tel a:hover{color:var(--cyan)}
+
+.ficha__plus{display:grid; gap:12px; margin:20px 0 0; padding:0; list-style:none}
+.ficha__plus li{position:relative; padding-left:30px; font-size:13.8px; color:var(--muted);
+  line-height:1.55}
+.ficha__plus li::before{content:""; position:absolute; left:0; top:2px; width:18px; height:18px;
+  border-radius:50%; background:rgba(61,139,255,.16); border:1px solid rgba(61,139,255,.45)}
+.ficha__plus li::after{content:""; position:absolute; left:6px; top:7px; width:6px; height:3.5px;
+  border-left:2px solid var(--cyan); border-bottom:2px solid var(--cyan); transform:rotate(-45deg)}
+.ficha__plus b{display:block; color:var(--text); font-weight:600; font-size:14.2px}
+
+.pasos{margin-top:56px}
+.pasos__lista{counter-reset:paso; display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px; margin:0; padding:0; list-style:none}
+.pasos__lista li{counter-increment:paso; position:relative; padding:52px 18px 18px;
+  border:1px solid var(--line); border-radius:var(--r); background:rgba(10,16,32,.55);
+  font-size:14px; color:var(--muted); line-height:1.6}
+.pasos__lista li::before{content:counter(paso); position:absolute; left:18px; top:16px;
+  width:26px; height:26px; display:grid; place-items:center; border-radius:50%;
+  background:rgba(61,139,255,.18); border:1px solid rgba(61,139,255,.4);
+  font-family:var(--f-display); font-style:italic; font-weight:800; font-size:13px;
+  color:var(--blue-hi)}
+.pasos__lista b{display:block; margin-bottom:4px; color:var(--text); font-weight:600; font-size:15px}
+
+/* Barra fija de WhatsApp: solo en el celular, donde el botón de arriba
+   queda lejos apenas se empieza a leer la ficha. */
+.barra-wa{display:none}
+
+/* --- Cierre del listado ------------------------------------------------- */
+.cat__cierre{display:flex; align-items:center; justify-content:space-between; gap:22px;
+  flex-wrap:wrap; margin-top:56px; padding:24px 26px; border-radius:var(--r);
+  border:1px solid var(--line-hi);
+  background:linear-gradient(120deg,rgba(10,92,255,.16),rgba(7,11,20,.8) 55%)}
+.cat__cierre-tit{margin:0 0 6px; font-family:var(--f-display); font-style:italic; font-weight:900;
+  text-transform:uppercase; font-size:22px; color:var(--text)}
+.cat__cierre p{margin:0; max-width:60ch; font-size:14.6px; color:var(--muted); line-height:1.65}
+
 .ficha__h3{font-family:var(--f-display); font-style:italic; font-weight:800;
   text-transform:uppercase; font-size:17px; letter-spacing:.02em; margin:0 0 14px; color:var(--text)}
 
@@ -268,6 +375,16 @@
 /* --- Responsive ----------------------------------------------------------- */
 @media (max-width:900px){
   .ficha{grid-template-columns:1fr; gap:28px}
+  .pasos__lista{grid-template-columns:1fr}
+  .barra-wa{position:fixed; left:0; right:0; bottom:0; z-index:40; display:flex;
+    align-items:center; gap:12px; padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(4,6,12,.94); border-top:1px solid var(--line-hi); backdrop-filter:blur(10px)}
+  .barra-wa__nom{flex:1; min-width:0; font-size:13px; font-weight:600; color:var(--text);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .barra-wa .btn{flex:0 0 auto; padding-block:11px}
+  .cat:has(.barra-wa){padding-bottom:120px}
+  /* La barra reemplaza al botón flotante: los dos juntos se tapan. */
+  body:has(.barra-wa) .wa{display:none}
   .bolsa{grid-template-columns:1fr}
   .resumen{position:static}
 }
@@ -276,6 +393,20 @@
   .prod__in{padding:12px 13px 14px; gap:7px}
   .prod__res{display:none}
   .prod__pie{flex-direction:column; align-items:stretch; gap:8px}
+  .prod__mas{display:none}
+  .prod__wa{justify-content:center}
+  .prod__marca{top:8px; left:8px; font-size:9.5px; padding:3px 7px}
+  .prod__pista{display:none}
+  /* En columna, el flex-basis de 520px se vuelve alto: un hueco enorme. */
+  .cat__copy{flex:0 0 auto}
+  .cat__datos{width:100%}
+  .cat__datos li{flex:1 1 0; min-width:0; padding:11px 10px}
+  .cat__datos b{font-size:14.5px}
+  .cat__datos span{font-size:11px}
+  .prod__nom{font-size:14px}
+  .rubros{grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+  .rubro__nom{font-size:13.5px}
+  .cat__cierre{padding:20px}
   .precio{font-size:17px}
   .linea{grid-template-columns:64px minmax(0,1fr); gap:11px}
   .linea__foto{width:64px; height:56px}

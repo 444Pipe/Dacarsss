@@ -92,3 +92,19 @@ def whatsapp_producto(producto, variante=None):
     return "https://wa.me/{}?text={}".format(
         settings.NEGOCIO["whatsapp"], quote(texto)
     )
+
+
+@register.simple_tag
+def whatsapp_cotizar(producto):
+    """El botón de los productos a cotizar.
+
+    Lleva el enlace de la ficha para que quien atiende sepa de qué producto
+    le hablan sin preguntar, y deja la frase del vehículo empezada: el precio
+    de casi todo depende de él.
+    """
+    texto = "Hola DACARS, quiero cotizar: {}\n{}{}\n\nMi vehículo es: ".format(
+        producto.nombre, settings.NEGOCIO["sitio"], producto.get_absolute_url()
+    )
+    return "https://wa.me/{}?text={}".format(
+        settings.NEGOCIO["whatsapp"], quote(texto)
+    )

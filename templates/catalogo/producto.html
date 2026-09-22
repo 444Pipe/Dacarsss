@@ -1,6 +1,10 @@
 {% extends "tienda/base.html" %}{% load dacars %}
 
 {% block jsonld %}
+{% comment %} El Product solo sale cuando hay precio. Google exige `offers` con
+   precio para leerlo, y un Product a cotizar sin oferta le aparece a Search
+   Console como error en cada ficha. Las migas salen siempre. {% endcomment %}
+{% if not producto.a_cotizar %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -34,6 +38,7 @@
   }
 }
 </script>
+{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,7 +67,8 @@
     <div class="fotos__grande">
       {% with principal=producto.imagen_principal %}
         {% if principal %}
-          <img id="foto-grande" src="{{ principal.imagen|foto:1000 }}" alt="{{ principal.texto_alt }}" width="1000" height="750">
+          <img id="foto-grande" src="{{ principal.imagen|foto:1000 }}" alt="{{ principal.texto_alt }}" width="1000" height="1000">
+          <span class="fotos__nota" id="foto-nota"{% if not principal.referencia %} hidden{% endif %}>Imagen de referencia</span>
         {% else %}
           <span class="prod__sinfoto">Foto en camino</span>
         {% endif %}
@@ -72,8 +78,9 @@
     {% if producto.imagenes.all|length > 1 %}
     <div class="fotos__tiras" role="group" aria-label="Más fotos">
       {% for i in producto.imagenes.all %}
-      <button type="button" data-grande="{{ i.imagen|foto:1000 }}" data-alt="{{ i.texto_alt }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
-        <img src="{{ i.imagen|foto:160 }}" alt="" width="160" height="120" loading="lazy">
+      <button type="button" data-grande="{{ i.imagen|foto:1000 }}" data-alt="{{ i.texto_alt }}" data-referencia="{% if i.referencia %}1{% endif %}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+        <img src="{{ i.imagen|foto:160 }}" alt="" width="160" height="160" loading="lazy">
+        {% if i.tipo == "instalado" %}<span>Instalado</span>{% endif %}
       </button>
       {% endfor %}
     </div>
@@ -86,6 +93,21 @@
     <h1 class="ficha__titulo chrome">{{ producto.nombre }}</h1>
     {% if producto.resumen %}<p class="ficha__res">{{ producto.resumen }}</p>{% endif %}
 
+    {% if producto.a_cotizar %}
+    <div class="cotiza">
+      <p class="cotiza__tit">Precio según tu vehículo</p>
+      <p class="cotiza__txt">Escríbenos y te damos el precio del producto{% if producto.instalacion %} y de la instalación{% endif %},
+      te confirmamos que lo tengamos en el local y te decimos si le sirve a tu carro.</p>
+      <a class="btn btn--wa btn--block" href="{% whatsapp_cotizar producto %}" target="_blank" rel="noopener">{% include "catalogo/_ico_wa.html" %} Cotizar por WhatsApp</a>
+      <p class="cotiza__tel">o llama al <a href="tel:+57{{ negocio.telefono_visible|cut:' ' }}">{{ negocio.telefono_visible }}</a></p>
+    </div>
+
+    <ul class="ficha__plus">
+      {% if producto.instalacion %}<li><b>Instalación en el taller</b> Lo dejamos puesto y funcionando en nuestro taller de Villavicencio.</li>{% endif %}
+      <li><b>Asesoría antes de comprar</b> Te decimos si es el adecuado para tu vehículo antes de que pagues.</li>
+      <li><b>En el local</b> {{ negocio.direccion }}, {{ negocio.ciudad }}.</li>
+    </ul>
+    {% else %}
     <p class="ficha__precio">
       <span class="precio precio--grande" id="precio-vivo">{{ producto.precio_desde|pesos }}</span>
       <span class="precio__antes" id="antes-vivo" hidden></span>
@@ -101,7 +123,7 @@
 
       {% if variantes|length > 1 %}
       <fieldset class="vars" style="margin-top:22px">
-        <legend>Elegí la medida</legend>
+        <legend>Elige la medida</legend>
         {% for v in variantes %}
         <label class="var">
           <input type="radio" name="sku" value="{{ v.sku }}"
@@ -144,9 +166,10 @@
     </form>
 
     <p style="margin:16px 0 0; font-size:13.4px; color:var(--muted-2); line-height:1.6">
-      Sin pago en línea: dejás el pedido y lo terminamos por WhatsApp.
+      Sin pago en línea: dejas el pedido y lo terminamos por WhatsApp.
       {% if producto.instalacion %} La instalación se cotiza aparte según el vehículo.{% endif %}
     </p>
+    {% endif %}
 
     {% if producto.compatibilidad %}
     <div class="ficha__sep"></div>
@@ -176,6 +199,18 @@
 </div>
 {% endif %}
 
+{# --- Cómo se cotiza --- #}
+{% if producto.a_cotizar %}
+<section class="pasos" aria-labelledby="pasos-tit">
+  <h2 class="ficha__h3" id="pasos-tit">Cómo lo compras</h2>
+  <ol class="pasos__lista">
+    <li><b>Escríbenos</b> Toca «Cotizar por WhatsApp». El mensaje ya lleva el producto: solo agrega tu vehículo.</li>
+    <li><b>Te cotizamos</b> Precio del producto{% if producto.instalacion %} y de la instalación{% endif %}, y disponibilidad en el local.</li>
+    <li><b>{% if producto.instalacion %}Lo instalamos{% else %}Lo recoges{% endif %}</b> {% if producto.instalacion %}Agendamos y te lo dejamos funcionando en el taller.{% else %}Pasas por el local o te decimos cómo te lo hacemos llegar.{% endif %}</li>
+  </ol>
+</section>
+{% endif %}
+
 {# --- Relacionados --- #}
 {% if relacionados %}
 <div class="enlanding" style="margin-top:64px">
@@ -183,6 +218,14 @@
   <div class="prods">
     {% for producto in relacionados %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
   </div>
+</div>
+{% endif %}
+
+{% if producto.a_cotizar %}
+{# En el celular el botón queda siempre a mano, sin volver a subir. #}
+<div class="barra-wa">
+  <span class="barra-wa__nom">{{ producto.nombre }}</span>
+  <a class="btn btn--wa" href="{% whatsapp_cotizar producto %}" target="_blank" rel="noopener">{% include "catalogo/_ico_wa.html" %} Cotizar</a>
 </div>
 {% endif %}
 
@@ -202,6 +245,25 @@
   var senal   = document.getElementById('stock-vivo');
   var cuantos = document.getElementById('cantidad');
   var forma   = document.getElementById('form-compra');
+
+  /* Galería. Va primero: los productos a cotizar no tienen formulario, y
+     sin él el resto del script no corre. */
+  var tiras = document.querySelector('.fotos__tiras');
+  var grande = document.getElementById('foto-grande');
+  var nota = document.getElementById('foto-nota');
+  if (tiras && grande) {
+    tiras.addEventListener('click', function(e){
+      var boton = e.target.closest('button[data-grande]');
+      if (!boton) return;
+      grande.src = boton.dataset.grande;
+      grande.alt = boton.dataset.alt || '';
+      if (nota) nota.hidden = !boton.dataset.referencia;
+      tiras.querySelectorAll('button').forEach(function(b){
+        b.setAttribute('aria-current', b === boton ? 'true' : 'false');
+      });
+    });
+  }
+
   if (!forma) return;
 
   function pintar(radio){
@@ -242,20 +304,6 @@
     cuantos.value = Math.min(Math.max(v + parseInt(boton.dataset.paso, 10), 1), tope);
   });
 
-  /* Galería */
-  var tiras = document.querySelector('.fotos__tiras');
-  var grande = document.getElementById('foto-grande');
-  if (tiras && grande) {
-    tiras.addEventListener('click', function(e){
-      var boton = e.target.closest('button[data-grande]');
-      if (!boton) return;
-      grande.src = boton.dataset.grande;
-      grande.alt = boton.dataset.alt || '';
-      tiras.querySelectorAll('button').forEach(function(b){
-        b.setAttribute('aria-current', b === boton ? 'true' : 'false');
-      });
-    });
-  }
 })();
 </script>
 {% endblock %}

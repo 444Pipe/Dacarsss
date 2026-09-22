@@ -1,0 +1,660 @@
+{
+  "categorias": [
+    {
+      "nombre": "Iluminación",
+      "servicio": "iluminacion-para-carros-villavicencio",
+      "orden": 30,
+      "descripcion": "Barras LED, exploradoras, luces de cortesía y bombillos. Más luz en la vía al Llano, que de noche no perdona."
+    },
+    {
+      "nombre": "Multimedia y CarPlay",
+      "servicio": "sonido-para-carros-villavicencio",
+      "orden": 35,
+      "descripcion": "CarPlay y Android Auto inalámbricos y cajas Android para la pantalla original de tu carro. Te lo dejamos conectado y probado."
+    },
+    {
+      "nombre": "Seguridad y parqueo",
+      "servicio": "lujos-y-accesorios-villavicencio",
+      "orden": 36,
+      "descripcion": "Cámaras de reversa, sensores de parqueo, cámaras DVR y encendido por botón, instalados con el cableado oculto en el taller."
+    },
+    {
+      "nombre": "Pitos y alarmas",
+      "servicio": "lujos-y-accesorios-villavicencio",
+      "orden": 37,
+      "descripcion": "Pitos de caracol y de disco, y alarmas de reversa para carros, camionetas y vehículos de trabajo."
+    },
+    {
+      "nombre": "Detailing",
+      "servicio": "detailing-villavicencio",
+      "orden": 80,
+      "descripcion": "Ceras, selladores, cerámicos y productos de mantenimiento para dejar el carro como recién entregado."
+    }
+  ],
+  "productos": [
+    {
+      "slug": "adaptador-inalambrico-carplay-y-android-auto-2-en-1",
+      "nombre": "Adaptador inalámbrico CarPlay y Android Auto 2 en 1 XUDA",
+      "categoria": "Multimedia y CarPlay",
+      "marca": "XUDA",
+      "resumen": "Mini adaptador USB que vuelve inalámbricos el CarPlay y el Android Auto por cable de tu carro. Plug and play, se conecta solo al encender.",
+      "descripcion": "Convierte el CarPlay o el Android Auto por cable de tu carro en inalámbrico. Conectas este mini adaptador XUDA al puerto USB de la pantalla original, emparejas el celular una vez y, desde ahí, la conexión se hace sola cada vez que enciendes el carro.\n\nSirve para iPhone (CarPlay) y para celulares Android (Android Auto), así que funciona aunque en la casa usen los dos sistemas. Se alimenta del mismo USB del carro (5 V, 1 A) y no necesitas instalar aplicaciones ni cortar cables.\n\nEn DACARS, en Villavicencio, verificamos primero que tu carro tenga CarPlay o Android Auto por cable de fábrica y te lo dejamos conectado y emparejado con tu celular.",
+      "caracteristicas": [
+        "2 en 1: CarPlay y Android Auto inalámbricos",
+        "Para pantallas con CarPlay / Android Auto por cable de fábrica",
+        "Conexión con el celular por Bluetooth y Wi-Fi",
+        "Plug and play por USB, sin apps adicionales",
+        "Alimentación 5 V, 1 A desde el USB del carro",
+        "Formato mini dongle USB"
+      ],
+      "compatibilidad": "Solo para carros que ya traen Apple CarPlay o Android Auto por cable (USB) de fábrica; no los agrega a radios que no los tienen. Funciona con iPhone y con celulares Android compatibles con Android Auto inalámbrico.",
+      "instalacion": true,
+      "destacado": true,
+      "orden": 10,
+      "seo_titulo": "Adaptador CarPlay y Android Auto inalámbrico | DACARS",
+      "fotos": [
+        {
+          "archivo": "xuda-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja del adaptador inalámbrico CarPlay y Android Auto XUDA"
+        }
+      ]
+    },
+    {
+      "slug": "camara-para-carro-ultra-dvr-ult-801-dos-canales",
+      "nombre": "Cámara DVR Ultra ULT-801 Full HD, frontal y trasera, pantalla 3,16\"",
+      "categoria": "Seguridad y parqueo",
+      "marca": "Ultra",
+      "resumen": "Dash cam de dos canales con pantalla de 3,16\": graba adelante y atrás en Full HD desde que enciendes el carro. 1 año de garantía Ultra.",
+      "descripcion": "La DVR ULT-801 de Ultra graba lo que pasa adelante y atrás de tu carro al mismo tiempo: trae la cámara frontal con pantalla de 3,16 pulgadas y una cámara trasera. Empieza a grabar sola cuando enciendes el carro, en Full HD 1080p.\n\nGuarda los videos en ciclos de 1, 2 o 3 minutos, así los archivos quedan ordenados y fáciles de revisar, y admite memoria de hasta 64 GB. También toma fotos, graba audio, tiene visión nocturna y sensor de movimiento.\n\nTiene 1 año de garantía con el respaldo de Ultra. En DACARS, en Villavicencio, la instalamos con el cableado oculto y ubicamos la cámara trasera donde mejor quede en tu carro.",
+      "caracteristicas": [
+        "Dos canales: cámara frontal y cámara trasera",
+        "Pantalla de 3,16 pulgadas",
+        "Video Full HD 1920×1080 (también 1280×720)",
+        "Grabación automática al encender y en ciclos de 1, 2 o 3 min",
+        "Sensor de movimiento, fotos, audio y visión nocturna",
+        "Memoria de hasta 64 GB",
+        "Funciona a 12 V",
+        "1 año de garantía Ultra"
+      ],
+      "compatibilidad": "Para carros y camionetas con sistema de 12 V. El largo del cable de la cámara trasera y su ubicación dependen del vehículo; lo revisamos en la instalación.",
+      "instalacion": true,
+      "destacado": true,
+      "orden": 20,
+      "seo_titulo": "Cámara DVR Ultra ULT-801 frontal y trasera | DACARS",
+      "fotos": [
+        {
+          "archivo": "ultra-801-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de la cámara DVR Ultra ULT-801 de dos canales"
+        },
+        {
+          "archivo": "ultra-801-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja de la DVR Ultra ULT-801"
+        }
+      ]
+    },
+    {
+      "slug": "bombillo-led-h4-c12-super-power-6000k",
+      "nombre": "Bombillos LED H4 C12 Super Power 6000K",
+      "categoria": "Iluminación",
+      "marca": "",
+      "resumen": "Bombillos LED H4 para farola, luz blanca 6000K, chips CSP 3570, ventilador y cuerpo de aluminio. Trabajan de 9 a 36 V con protección IP68.",
+      "descripcion": "Los bombillos LED C12 Super Power reemplazan los halógenos H4 de tu farola y dan luz blanca de 6000 K. Usan chips CSP 3570 que, según el fabricante, entregan hasta tres veces más luz que un bombillo halógeno, con un haz enfocado y una base que gira 360° para dejar la luz bien orientada.\n\nEl cuerpo es de aluminio con disipador calado y ventilador, con control de temperatura y una vida útil declarada de más de 50.000 horas. Trabajan de 9 a 36 V, así que sirven en carros y camionetas de 12 V y también en vehículos de 24 V, y tienen protección IP68.\n\nTe los instalamos en DACARS, en Villavicencio, y revisamos que el corte de la luz baja quede bien alineado para que veas mejor sin encandilar a los demás conductores.",
+      "caracteristicas": [
+        "Socket H4: luz alta y baja en el mismo bombillo",
+        "Luz blanca de 6000 K",
+        "Chips LED CSP 3570",
+        "Voltaje de operación 9–36 V DC (12 V y 24 V)",
+        "Protección IP68",
+        "Cuerpo de aluminio con ventilador y disipación de 360°",
+        "Vida útil declarada de más de 50.000 horas; opera de -40 °C a +80 °C",
+        "Empaque declara 200 W y 50.000 lm"
+      ],
+      "compatibilidad": "Vehículos que usan bombillo H4 (también llamado 9003/HB2) en la farola principal, con luz alta y baja en el mismo bombillo. Sistemas de 9 a 36 V. Verifica que quede espacio detrás de la farola para el ventilador.",
+      "instalacion": true,
+      "destacado": true,
+      "orden": 30,
+      "seo_titulo": "Bombillos LED H4 C12 Super Power 6000K | DACARS",
+      "fotos": [
+        {
+          "archivo": "c12-h4-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de los bombillos LED H4 C12 Super Power"
+        },
+        {
+          "archivo": "c12-h4-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Especificaciones en el reverso de la caja C12"
+        }
+      ]
+    },
+    {
+      "slug": "kit-iluminacion-led-ambiente-18-en-1",
+      "nombre": "Kit de luces LED de ambiente 18 en 1",
+      "categoria": "Iluminación",
+      "marca": "",
+      "resumen": "Kit universal de iluminación ambiental RGB con tiras acrílicas para tablero y puertas, y luces para pies, manijas y compartimentos.",
+      "descripcion": "Este kit de luces de ambiente le da a la cabina de tu carro la iluminación de colores que traen los vehículos de gama alta. Incluye tiras de luz acrílicas para el tablero y las puertas, y luces puntuales para los pies, las manijas y los compartimentos, como muestran las imágenes de la caja.\n\nEn el local te mostramos qué trae la caja y cómo se controla. Para que quede limpio, las tiras van metidas en las uniones de los paneles y los cables quedan ocultos. En DACARS, en Villavicencio, te lo instalamos y lo conectamos a la corriente del carro de forma segura.",
+      "caracteristicas": [
+        "Kit 18 en 1 universal",
+        "Tiras acrílicas de luz para tablero y puertas",
+        "Luces para pies, manijas y compartimentos",
+        "Iluminación RGB multicolor"
+      ],
+      "compatibilidad": "Universal: carros, camionetas y SUV con sistema de 12 V. Las tiras se acomodan en las uniones del tablero y de los paneles de puerta; en algunas cabinas hay que adaptar el recorrido.",
+      "instalacion": true,
+      "destacado": true,
+      "orden": 40,
+      "seo_titulo": "Kit de luces LED de ambiente 18 en 1 | DACARS",
+      "fotos": [
+        {
+          "archivo": "ambiente-18-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja del kit de iluminación LED de ambiente 18 en 1"
+        }
+      ]
+    },
+    {
+      "slug": "adaptador-carplay-inalambrico-rwdp15",
+      "nombre": "Adaptador CarPlay inalámbrico Renwoda RWDP15",
+      "categoria": "Multimedia y CarPlay",
+      "marca": "Renwoda",
+      "resumen": "Mini adaptador USB que vuelve inalámbrico el CarPlay por cable de tu carro: se conecta solo al subirte, con Bluetooth y Wi-Fi 5 GHz.",
+      "descripcion": "Si tu carro ya trae CarPlay por cable de fábrica, este adaptador te quita el cable. Lo conectas al puerto USB donde hoy enchufas el iPhone, lo emparejas una vez y, desde ahí, CarPlay se abre solo en la pantalla original cada vez que te subes al carro.\n\nEs un módulo pequeño (26 × 48 × 10 mm) que se alimenta del mismo USB, consume 2 W y se comunica con el celular por Bluetooth 4.2 y Wi-Fi de 5 GHz. Mantiene la resolución original de tu pantalla y sigues manejando todo desde el táctil y los controles del carro, como siempre.\n\nEn DACARS, en Villavicencio, te lo dejamos emparejado y probado. Si no sabes si tu carro trae CarPlay por cable, tráelo y lo verificamos antes de la compra.",
+      "caracteristicas": [
+        "Convierte CarPlay por cable de fábrica en inalámbrico",
+        "Bluetooth 4.2 + Wi-Fi 5 GHz (5150–5250 / 5725–5850 MHz)",
+        "Mantiene la resolución original de la pantalla",
+        "Alimentación 5 V por el USB del carro, consumo 2 W",
+        "Tamaño: 26 × 48 × 10 mm",
+        "Temperatura de trabajo: -20 a +80 °C"
+      ],
+      "compatibilidad": "Solo para carros que ya traen Apple CarPlay por cable (USB) de fábrica; no agrega CarPlay a radios que no lo tienen. Verificamos tu carro antes de venderlo.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 50,
+      "seo_titulo": "Adaptador CarPlay inalámbrico RWDP15 | DACARS",
+      "fotos": [
+        {
+          "archivo": "rwdp15-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja del adaptador CarPlay inalámbrico RWDP15"
+        }
+      ]
+    },
+    {
+      "slug": "carplay-ai-box-android-para-pantalla-original",
+      "nombre": "Android AI Box para pantallas con CarPlay",
+      "categoria": "Multimedia y CarPlay",
+      "marca": "",
+      "resumen": "Caja Android que se conecta al USB de CarPlay de tu carro y lleva apps como YouTube, Netflix y Maps a la pantalla original, sin cambiar el radio.",
+      "descripcion": "Si tu carro trae CarPlay por cable de fábrica, esta AI Box convierte esa pantalla en un sistema Android. Se conecta al mismo puerto USB donde hoy conectas el celular y, desde la pantalla original, puedes abrir aplicaciones como YouTube, Netflix, Spotify o Google Maps.\n\nNo se cambia el radio ni se corta cableado: la caja toma la energía del USB y se maneja con la pantalla táctil que ya tiene el carro. Para ver video necesita internet, por ejemplo compartiendo datos desde tu celular. Las apps de video son para usar con el carro detenido o para los pasajeros.\n\nEn DACARS, en Villavicencio, la conectamos y la probamos en tu carro antes de entregártela, y te dejamos configuradas tus cuentas y la conexión a internet.",
+      "caracteristicas": [
+        "Se conecta al puerto USB de CarPlay de fábrica",
+        "Corre apps Android: YouTube, Netflix, Spotify, Google Maps",
+        "Usa la pantalla y el táctil originales del carro",
+        "Plug and play: sin cambiar el radio ni cortar cables",
+        "Internet por datos compartidos del celular (hotspot)"
+      ],
+      "compatibilidad": "Solo para carros con Apple CarPlay por cable (USB) de fábrica. No sirve en radios sin CarPlay. Se recomienda pantalla táctil. Tráenos tu carro y verificamos compatibilidad antes de comprar.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 60,
+      "seo_titulo": "Android AI Box para pantallas con CarPlay | DACARS",
+      "fotos": [
+        {
+          "archivo": "ai-box-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de la Android AI Box para CarPlay"
+        }
+      ]
+    },
+    {
+      "slug": "encendido-por-boton-smart-key-novotec",
+      "nombre": "Kit Smart Key Novotec: encendido con botón Start/Stop",
+      "categoria": "Seguridad y parqueo",
+      "marca": "Novotec",
+      "resumen": "Kit para encender y apagar el motor con botón Start/Stop, con llave inteligente y control desde el celular. Instalación en taller.",
+      "descripcion": "Con el kit Smart Key de Novotec enciendes y apagas el motor con un botón Engine Start/Stop, como en los carros de gama alta. El sistema combina el botón para el tablero, una llave inteligente con botones de bloqueo y desbloqueo, y control desde una app en tu celular.\n\nEste kit se conecta al sistema de encendido del carro, por eso la instalación se hace en taller: revisamos el cableado y el inmovilizador de tu vehículo antes de montar el botón en un lugar cómodo del tablero.\n\nAgenda la instalación en DACARS, en Villavicencio. Te entregamos el carro funcionando y te explicamos cómo usar la llave y la app.",
+      "caracteristicas": [
+        "Botón Engine Start/Stop para encender y apagar el motor",
+        "Llave inteligente (Smart Key) con botones de bloqueo y desbloqueo",
+        "Control desde app en el celular",
+        "Marca Novotec Systems, referencia TC-60757",
+        "Requiere instalación profesional en taller"
+      ],
+      "compatibilidad": "La caja no trae lista de vehículos. Se instala en carros con encendido por llave; la viabilidad depende del sistema eléctrico e inmovilizador de cada carro, por eso lo revisamos en el taller antes de instalar.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 70,
+      "seo_titulo": "Kit Smart Key Novotec, encendido con botón | DACARS",
+      "fotos": [
+        {
+          "archivo": "smart-key-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja del kit Smart Key de Novotec"
+        },
+        {
+          "archivo": "smart-key-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja del Smart Key Novotec"
+        }
+      ]
+    },
+    {
+      "slug": "bombillo-led-h11-imax-pro",
+      "nombre": "Bombillos LED H11 IMAX Pro 12V y 24V",
+      "categoria": "Iluminación",
+      "marca": "IMAX Truck",
+      "resumen": "Bombillos LED H11 IMAX Pro para luz baja o exploradoras. El empaque declara 30.000 lúmenes, 300% más luz y 70% de ahorro; para 12 V y 24 V.",
+      "descripcion": "Los IMAX Pro de IMAX Truck son bombillos LED con socket H11, el que usan muchos carros y camionetas en la luz baja o en las exploradoras. El empaque declara 30.000 lúmenes, 300% más luminosidad y 70% de ahorro de energía frente a un bombillo halógeno.\n\nSegún la caja, sirven para vehículos de 12 V y de 24 V, así que funcionan tanto en tu carro como en camiones y busetas. La marca destaca además una instalación sin cortes ni modificaciones, buena disipación del calor y 2 años de garantía.\n\nTe los instalamos en DACARS, en Villavicencio: verificamos que tu vehículo use H11 y dejamos el haz bien alineado.",
+      "caracteristicas": [
+        "Socket H11",
+        "30.000 lúmenes declarados en el empaque",
+        "300% más luminosidad que halógeno (según empaque)",
+        "70% de ahorro de energía (según empaque)",
+        "Para vehículos de 12 V y 24 V",
+        "Instalación sin cortes ni modificaciones",
+        "Disipación eficiente del calor",
+        "Garantía de 2 años indicada en la caja"
+      ],
+      "compatibilidad": "Vehículos que usan bombillo H11 en luz baja o exploradoras, con sistema eléctrico de 12 V o 24 V según la caja. Confirma el socket en el manual del vehículo o en el bombillo original antes de comprar.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 80,
+      "seo_titulo": "Bombillos LED H11 IMAX Pro 12V y 24V | DACARS",
+      "fotos": [
+        {
+          "archivo": "imax-pro-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de los bombillos LED H11 IMAX Pro"
+        },
+        {
+          "archivo": "imax-pro-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Tapa de la caja IMAX Truck"
+        }
+      ]
+    },
+    {
+      "slug": "luz-led-para-baul-osram-ledambient-trunk-light",
+      "nombre": "Luz LED para baúl OSRAM LEDambient Trunk Light",
+      "categoria": "Iluminación",
+      "marca": "OSRAM",
+      "resumen": "Lámpara LED recargable para el baúl que se enciende sola al abrirlo; se desmonta y funciona como lámpara de inspección o linterna.",
+      "descripcion": "La OSRAM LEDambient Trunk Light ilumina el baúl de tu carro con luz blanca de 6000 K. Tiene sensor de aceleración y de luz: cuando abres el baúl y está oscuro, se enciende sola. Si prefieres, también la prendes y la apagas a mano.\n\nFunciona con batería recargable de 1500 mAh que cargas por USB-C, así que no hay que cablearla a la instalación eléctrica del carro. Se fija con imán o con la placa de montaje que trae la caja, y cuando la necesitas la retiras y la usas como lámpara de inspección para cambiar una llanta de noche o buscar algo debajo de las sillas.\n\nEs un producto original OSRAM, referencia LEDINT106, con garantía OSRAM de 2 años. En DACARS, en Villavicencio, te ayudamos a ubicarla en el punto del baúl donde más rinde.",
+      "caracteristicas": [
+        "Encendido automático al abrir el baúl (sensor de aceleración y de luz)",
+        "También con encendido y apagado manual",
+        "2 en 1: luz de baúl y lámpara de inspección / linterna",
+        "Batería recargable de 1500 mAh, carga por USB-C (cable incluido)",
+        "Luz blanca de 6000 K",
+        "Fijación con imán o con placa de montaje incluida",
+        "Medidas de la lámpara: 100 × 55 × 15 mm",
+        "Garantía OSRAM de 2 años"
+      ],
+      "compatibilidad": "Universal: baúl de carros, camionetas y SUV, y cualquier compartimento donde se pueda fijar con imán o con la placa de montaje incluida. No requiere conexión eléctrica al vehículo.",
+      "instalacion": false,
+      "destacado": false,
+      "orden": 90,
+      "seo_titulo": "Luz LED para baúl OSRAM LEDambient | DACARS",
+      "fotos": [
+        {
+          "archivo": "osram-trunk-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de la luz LED para baúl OSRAM LEDambient Trunk Light"
+        },
+        {
+          "archivo": "osram-trunk-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja OSRAM LEDambient"
+        }
+      ]
+    },
+    {
+      "slug": "sensor-de-parqueo-con-video",
+      "nombre": "Sensor de parqueo con video JDL, con aviso por voz",
+      "categoria": "Seguridad y parqueo",
+      "marca": "JDL",
+      "resumen": "Sensores de reversa con aviso por voz y distancia en pantalla: detectan obstáculos de 2 m a 30 cm y alertan por debajo de 1,5 m.",
+      "descripcion": "Este sensor de parqueo JDL te avisa con voz qué tan cerca estás de un obstáculo cuando das reversa. Detecta objetos entre 2 m y 30 cm, muestra la distancia desde 2,5 m hasta 0,3 m y activa la alarma, de más de 50 dB, cuando el obstáculo está a menos de 1,5 m.\n\nEs un sensor tipo video: está hecho para mostrar la distancia en pantalla, junto con la imagen de reversa. Los sensores van en el bumper trasero y el sistema se activa al meter reversa. En tienda te confirmamos qué pantalla o cámara necesitas según tu carro.\n\nLo instalamos en DACARS, en Villavicencio: ubicamos los sensores alineados en el bumper y dejamos el cableado oculto.",
+      "caracteristicas": [
+        "Rango de detección: 200 a 30 cm",
+        "Distancia mostrada: de 2,5 m a 0,3 m",
+        "Alarma por debajo de 1,5 m, sonido de más de 50 dB",
+        "Aviso por voz (voice reminding)",
+        "Se activa con la reversa",
+        "Alimentación 10–15 V DC, consumo menor a 0,2 A"
+      ],
+      "compatibilidad": "Para carros con sistema eléctrico de 12 V (trabaja entre 10 y 15 V DC). Para ver la distancia en pantalla necesitas un monitor o pantalla con entrada de video; confirmamos en tienda qué necesita tu carro.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 100,
+      "seo_titulo": "Sensor de parqueo con video y aviso por voz | DACARS",
+      "fotos": [
+        {
+          "archivo": "sensor-video-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja del sensor de parqueo con video JDL"
+        },
+        {
+          "archivo": "sensor-video-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja del sensor de parqueo JDL"
+        }
+      ]
+    },
+    {
+      "slug": "camara-de-reversa-jlt",
+      "nombre": "Cámara de reversa AHD JLT Imports 170° con visión nocturna",
+      "categoria": "Seguridad y parqueo",
+      "marca": "JLT Imports",
+      "resumen": "Cámara de reversa AHD a color de JLT Imports, con visión nocturna, gran angular de 170°, impermeable y antipolvo, en cuerpo compacto con soporte.",
+      "descripcion": "La cámara JLT Imports trabaja con señal AHD, que según el empaque entrega imagen sin ruido. Tiene gran angular de 170°, visión nocturna e imagen a color, así que ves con claridad lo que hay detrás del vehículo al meter reversa, de día y de noche.\n\nEs hermética, impermeable y antipolvo, de tamaño compacto y trae soporte para montarla sobre la placa o en la compuerta.\n\nPara aprovechar la señal AHD, tu radio o monitor debe ser compatible con AHD. En DACARS, en Villavicencio, revisamos tu pantalla, te la instalamos y la dejamos conectada a la reversa.",
+      "caracteristicas": [
+        "Señal AHD 'sin ruido'",
+        "Gran angular de 170°",
+        "Visión nocturna",
+        "Cámara a color, alta definición",
+        "Hermética: impermeable y antipolvo",
+        "Tamaño compacto con soporte de montaje",
+        "Empaque con sellos CE y FCC"
+      ],
+      "compatibilidad": "Vehículos con radio multimedia o monitor compatible con señal AHD. Con pantallas que solo reciben señal análoga (CVBS) puede no dar imagen; en DACARS lo verificamos antes de instalar.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 110,
+      "seo_titulo": "Cámara de reversa AHD 170° JLT Imports | DACARS",
+      "fotos": [
+        {
+          "archivo": "jlt-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de la cámara de reversa AHD JLT Imports"
+        },
+        {
+          "archivo": "jlt-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja de la cámara JLT"
+        }
+      ]
+    },
+    {
+      "slug": "camara-de-reversa-tipo-domo-hanex-hx-cm01",
+      "nombre": "Cámara de reversa tipo domo Hanex HX-CM01",
+      "categoria": "Seguridad y parqueo",
+      "marca": "Hanex",
+      "resumen": "Cámara de reversa tipo domo Hanex HX-CM01 que muestra lo que hay detrás del vehículo en la pantalla del radio o en un monitor al meter reversa.",
+      "descripcion": "La cámara Hanex HX-CM01 es de tipo domo: un cuerpo pequeño y redondeado que se monta en la compuerta y te muestra lo que hay detrás del vehículo cada vez que metes reversa. Te ayuda a ver bolardos, andenes, motos y niños que no alcanzas a ver por los espejos.\n\nNecesita una pantalla con entrada de cámara, ya sea el radio multimedia o un monitor. En DACARS, en Villavicencio, revisamos que tu radio sea compatible, te la instalamos, pasamos el cableado por dentro de la carrocería y la dejamos activándose con la luz de reversa.",
+      "caracteristicas": [
+        "Cámara de reversa tipo domo",
+        "Referencia HX-CM01",
+        "Montaje en la compuerta (según espacio de fábrica)",
+        "Se activa con la luz de reversa",
+        "Requiere radio o monitor con entrada de cámara",
+        "Marca Hanex (Next Harness)"
+      ],
+      "compatibilidad": "Vehículos con radio multimedia o monitor con entrada de video para cámara. Según el distribuidor, va en la compuerta solo si el vehículo trae el espacio de fábrica; si no, se evalúa otra ubicación en taller.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 120,
+      "seo_titulo": "Cámara de reversa tipo domo Hanex HX-CM01 | DACARS",
+      "fotos": [
+        {
+          "archivo": "hanex-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de la cámara de reversa tipo domo Hanex HX-CM01"
+        }
+      ]
+    },
+    {
+      "slug": "camara-de-reversa-hd-gran-angular",
+      "nombre": "Cámara de reversa HD gran angular con visión nocturna",
+      "categoria": "Seguridad y parqueo",
+      "marca": "",
+      "resumen": "Cámara de reversa universal HD, a prueba de agua, con visión nocturna y lente gran angular para ver lo que hay detrás al parquear.",
+      "descripcion": "Esta cámara de reversa universal te da una vista amplia de lo que hay detrás del carro cada vez que metes reversa. Según su empaque es HD, a prueba de agua, con visión nocturna y lente gran angular, para que parquees con más seguridad aun de noche.\n\nFunciona con cualquier radio multimedia o monitor que tenga entrada de cámara. En DACARS, en Villavicencio, te la instalamos en la zona de la placa o la compuerta, pasamos el cable por dentro y la conectamos a la luz de reversa para que se encienda sola.",
+      "caracteristicas": [
+        "Imagen HD según el empaque",
+        "Lente gran angular (170°-180° según la caja)",
+        "A prueba de agua",
+        "Visión nocturna",
+        "Sistema de cámara a color (CCD/CMOS)",
+        "Requiere radio o monitor con entrada de cámara"
+      ],
+      "compatibilidad": "Universal: carros, camionetas y SUV con radio multimedia o monitor con entrada de cámara. Se alimenta de la luz de reversa (12 V) y se monta en la zona de la placa o la compuerta.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 130,
+      "seo_titulo": "Cámara de reversa HD gran angular | DACARS",
+      "fotos": [
+        {
+          "archivo": "cam-170-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de la cámara de reversa HD gran angular"
+        },
+        {
+          "archivo": "cam-170-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja de la cámara de reversa HD"
+        }
+      ]
+    },
+    {
+      "slug": "camara-de-reversa-hd-a-prueba-de-agua",
+      "nombre": "Cámara de reversa universal HD a prueba de agua con LEDs",
+      "categoria": "Seguridad y parqueo",
+      "marca": "",
+      "resumen": "Cámara de reversa universal HD a prueba de agua, con anillo de LEDs alrededor del lente y ángulo de 170° según el empaque.",
+      "descripcion": "Esta cámara de reversa universal te muestra lo que tienes detrás cada vez que metes reversa, con un ángulo de 170° según el empaque. Es a prueba de agua y trae un anillo de LEDs alrededor del lente para ayudarte cuando hay poca luz.\n\nEs de cuerpo pequeño y redondo, por lo que se acomoda en la zona de la placa o en la compuerta sin cambiar el aspecto del carro. Necesita una pantalla con entrada de cámara: el radio multimedia o un monitor.\n\nEn DACARS, en Villavicencio, te la instalamos, llevamos el cable por dentro hasta la pantalla y la dejamos conectada a la luz de reversa para que se encienda sola.",
+      "caracteristicas": [
+        "Imagen HD según el empaque",
+        "A prueba de agua",
+        "Ángulo de visión de 170°",
+        "Anillo de LEDs alrededor del lente",
+        "Cuerpo compacto redondo",
+        "Requiere radio o monitor con entrada de cámara"
+      ],
+      "compatibilidad": "Universal: carros, camionetas y SUV con radio multimedia o monitor con entrada de cámara. Se monta en la zona de la placa o la compuerta y se alimenta de la luz de reversa (12 V).",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 140,
+      "seo_titulo": "Cámara de reversa HD a prueba de agua | DACARS",
+      "fotos": [
+        {
+          "archivo": "cam-waterproof-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de la cámara de reversa HD a prueba de agua"
+        },
+        {
+          "archivo": "cam-waterproof-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja de la cámara a prueba de agua"
+        }
+      ]
+    },
+    {
+      "slug": "pito-caracol-elephant-future-ninety",
+      "nombre": "Pitos caracol Elephant Future Ninety FR-90D 12V (par)",
+      "categoria": "Pitos y alarmas",
+      "marca": "Elephant",
+      "resumen": "Par de pitos tipo caracol Elephant Future Ninety de 12 V, con tonos de 500 Hz y 400 Hz que suenan juntos para un pitazo lleno y de buen timbre.",
+      "descripcion": "Si el pito de tu carro suena débil o 'de juguete', el Elephant Future Ninety es un cambio que se nota. Es un par de pitos tipo caracol para 12 V, uno de 500 Hz y otro de 400 Hz: al sonar juntos dan un tono doble, más lleno que el de un pito sencillo.\n\nPor su forma de caracol son compactos y normalmente caben detrás de la parrilla o en el frente del vano del motor. En DACARS, en Villavicencio, te los montamos, revisamos que el circuito del pito tenga relé y dejamos la conexión firme y aislada.",
+      "caracteristicas": [
+        "Par de pitos tipo caracol",
+        "Tonos de 500 Hz y 400 Hz",
+        "Funciona en 12 V",
+        "Referencia FR-90D",
+        "Sonido 'Refined Sound' de tono doble"
+      ],
+      "compatibilidad": "Carros y camionetas con sistema de 12 V. No apto para 24 V. Se recomienda instalar con relé; el espacio disponible detrás de la parrilla varía según el modelo del vehículo.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 150,
+      "seo_titulo": "Pitos caracol Elephant Future Ninety 12V | DACARS",
+      "fotos": [
+        {
+          "archivo": "elephant-90-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de los pitos caracol Elephant Future Ninety"
+        },
+        {
+          "archivo": "elephant-90-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja Elephant Future Ninety"
+        }
+      ]
+    },
+    {
+      "slug": "pito-de-disco-elephant-super-micro-sm-70d",
+      "nombre": "Pitos de disco Elephant Super Micro Horn SM-70D (par)",
+      "categoria": "Pitos y alarmas",
+      "marca": "Elephant",
+      "resumen": "Par de pitos de disco compactos Elephant Super Micro Horn SM-70D, de TAIYO Corporation, para reemplazar o reforzar el pito original de 12 V.",
+      "descripcion": "El Elephant Super Micro Horn SM-70D es un par de pitos de disco de tamaño reducido, pensados para cuando el espacio en el frente del carro es poco. Sirven para reemplazar un pito original dañado o para sumar un segundo tono y que el pitazo se oiga con más fuerza.\n\nCada pito trae su platina de montaje para fijarlo al soporte del radiador o a la estructura del bómper. En DACARS, en Villavicencio, te los instalamos con relé para proteger el interruptor del timón.\n\nElephant es la marca de pitos de TAIYO Corporation, de Osaka.",
+      "caracteristicas": [
+        "Par de pitos tipo disco compactos",
+        "Referencia Type SM-70D",
+        "Sonido 'High-Power Sound'",
+        "Funciona en 12 V",
+        "Platina de montaje en cada pito",
+        "Marca Elephant de TAIYO Corporation (Osaka)"
+      ],
+      "compatibilidad": "Carros, camionetas y motos con sistema de 12 V. No apto para 24 V. Por su tamaño cabe en frentes con poco espacio; se recomienda instalar con relé.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 160,
+      "seo_titulo": "Pitos de disco Elephant Super Micro SM-70D | DACARS",
+      "fotos": [
+        {
+          "archivo": "elephant-sm70d-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de los pitos de disco Elephant Super Micro SM-70D"
+        },
+        {
+          "archivo": "elephant-sm70d-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Costado de la caja Elephant SM-70D"
+        }
+      ]
+    },
+    {
+      "slug": "alarma-de-reversa-loyta-107-db",
+      "nombre": "Alarma de reversa Loyta 107 dB 12-24V",
+      "categoria": "Pitos y alarmas",
+      "marca": "Loyta",
+      "resumen": "Alarma de reversa de 107 dB para vehículos de 12 y 24 V, con normas SAE J994 Tipo B, DOT y ECE y protección contra polaridad invertida.",
+      "descripcion": "La alarma de reversa Loyta suena cada vez que metes reversa, para que peatones, ayudantes y otros conductores sepan que el vehículo se va a mover hacia atrás. Entrega 107 dB, trabaja con sistemas de 12 V y de 24 V y, según su empaque, cumple las normas SAE J994 Tipo B, DOT y ECE.\n\nTiene protección contra polaridad invertida, así que no se daña si se conecta al revés, y trae base con orificios para atornillarla y bornes de tornillo para el cableado. Está pensada para camionetas de reparto, camiones, remolques, buses y vehículos recreacionales, y Loyta la respalda con 2 años de garantía.\n\nEn DACARS, en Villavicencio, te la instalamos debajo del bómper trasero y la conectamos a la luz de reversa para que suene solo cuando la necesitas.",
+      "caracteristicas": [
+        "Nivel sonoro de 107 dB",
+        "Funciona en 12 V y 24 V",
+        "Cumple SAE J994 Tipo B, DOT y ECE",
+        "Protección contra polaridad invertida",
+        "Base con orificios de montaje y bornes de tornillo",
+        "Garantía de 2 años de la marca"
+      ],
+      "compatibilidad": "Vehículos con sistema eléctrico de 12 V o 24 V: camionetas, camiones, buses, remolques, vehículos de reparto y recreacionales. Se conecta al circuito de la luz de reversa.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 170,
+      "seo_titulo": "Alarma de reversa Loyta 107 dB 12-24V | DACARS",
+      "fotos": [
+        {
+          "archivo": "loyta-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Alarma de reversa Loyta de 107 dB en su empaque"
+        }
+      ]
+    },
+    {
+      "slug": "luces-decorativas-novotec",
+      "nombre": "Luces decorativas Novotec Decoration Lights",
+      "categoria": "Iluminación",
+      "marca": "Novotec",
+      "resumen": "Luces decorativas de la línea Decoration Lights de Novotec Systems para personalizar tu vehículo. Pregunta en tienda por el tipo y el color.",
+      "descripcion": "Las Decoration Lights de Novotec Systems son luces decorativas para darle un toque personal a tu vehículo. Llegan en caja cerrada de la marca.\n\nAntes de comprarlas, cuéntanos qué efecto buscas y en qué parte del vehículo las quieres. Te mostramos el contenido de la caja y te recomendamos la mejor forma de instalarlas.\n\nEn DACARS, en Villavicencio, te las instalamos con una conexión segura a la corriente del vehículo.",
+      "caracteristicas": [
+        "Marca Novotec Systems",
+        "Línea Decoration Lights (luces decorativas)",
+        "Instalación disponible en DACARS Villavicencio"
+      ],
+      "compatibilidad": "Te confirmamos en el local en qué parte del vehículo van y cómo se conectan, según el efecto que busques.",
+      "instalacion": true,
+      "destacado": false,
+      "orden": 180,
+      "seo_titulo": "Luces decorativas Novotec | DACARS Villavicencio",
+      "fotos": [
+        {
+          "archivo": "novotec-deco-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja de las luces decorativas Novotec Decoration Lights"
+        }
+      ]
+    },
+    {
+      "slug": "restaurador-jcm-plastico-caucho-vinilo-cuero",
+      "nombre": "Kit restaurador cremoso JCM plástico, caucho, vinilo y cuero",
+      "categoria": "Detailing",
+      "marca": "JCM",
+      "resumen": "Restaurador cremoso de acabado semimate para plástico, caucho, vinilo y cuero, con protección UV. Viene en caja con paño de microfibra.",
+      "descripcion": "El restaurador cremoso JCM le devuelve el color a las piezas de plástico, caucho, vinilo y cuero que el sol y el uso han dejado opacas o grisáceas. Deja un acabado semimate y el empaque indica protección UV, así que te sirve para tablero, puertas, consola, molduras y cauchos.\n\nSe aplica fácil: limpias bien la pieza y la dejas seca, aplicas el producto con un paño, lo dejas secar unos minutos y frotas con un trapo seco para emparejar el acabado. La caja trae un paño de microfibra para que empieces de una vez.\n\nJCM lo maneja en dos versiones, negro y neutro. Pregunta en DACARS, en Villavicencio, cuál te conviene según el color de tus piezas.",
+      "caracteristicas": [
+        "Fórmula cremosa con acabado semimate",
+        "Para plástico, caucho, vinilo y cuero",
+        "Protección UV según el empaque",
+        "Sello Eco Friendly en la caja",
+        "Incluye paño de microfibra",
+        "Disponible en versión Negro y Neutro"
+      ],
+      "compatibilidad": "Piezas de plástico, caucho, vinilo y cuero del vehículo, por dentro y por fuera. Aplica sobre la superficie limpia y seca; prueba primero en una zona pequeña, sobre todo en cuero o vinilo de color claro.",
+      "instalacion": false,
+      "destacado": false,
+      "orden": 190,
+      "seo_titulo": "Restaurador JCM plástico, caucho, vinilo y cuero | DACARS",
+      "fotos": [
+        {
+          "archivo": "jcm-1.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Caja del restaurador cremoso JCM con el frasco a la vista"
+        },
+        {
+          "archivo": "jcm-2.webp",
+          "tipo": "producto",
+          "referencia": false,
+          "alt": "Kit restaurador JCM con paño de microfibra"
+        }
+      ]
+    }
+  ]
+}
