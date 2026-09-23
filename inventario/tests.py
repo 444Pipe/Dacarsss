@@ -172,5 +172,10 @@ class ElPanelNoRompeElHistorial(Base):
         servicios.salida(self.variante, 9)  # queda 1, bajo el mínimo
         panel = self.client.get(reverse("admin:index"))
         self.assertEqual(panel.status_code, 200)
-        self.assertEqual(panel.context["alertas"]["stock_bajo"], 1)
-        self.assertTrue(panel.context["alertas"]["hay_algo"])
+
+        alertas = panel.context["alertas"]
+        self.assertTrue(alertas["hay_algo"])
+        # La ficha de reposición lleva al listado ya filtrado por las que
+        # están bajo el mínimo, con la cuenta de cuántas son.
+        reponer = [f for f in alertas["fichas"] if "situacion=bajas" in f["url"]]
+        self.assertEqual([f["cuantos"] for f in reponer], [1])

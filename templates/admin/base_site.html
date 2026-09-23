@@ -1,17 +1,34 @@
 {% extends "admin/base.html" %}
 {% load static %}
 {% comment %} La marca del panel: el logotipo en lugar del texto, las fuentes
-de DACARS y la hoja que tematiza el admin entero. {% endcomment %}
+de DACARS y la hoja que tematiza el admin entero.
+
+El sprite de iconos se cuela al principio del `header` —antes que nada— para
+que los `<use>` de la página encuentren su símbolo ya en el DOM y no haya un
+parpadeo de huecos vacíos al cargar. Va ahí y no en el `<head>` porque un
+`<svg>` dentro del head no es HTML válido y el navegador lo saca de lugar.
+Las ventanas emergentes del admin (`is_popup`) se saltan el header entero,
+pero tampoco dibujan iconos nuestros, así que no pierden nada. {% endcomment %}
 
 {% block extrastyle %}{{ block.super }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Saira:ital,wght@0,600;0,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/panel.css' %}">
 {% include "sitio/_iconos.html" %}
 {% endblock %}
 
+{% comment %} La hoja del panel va en `extrahead` y no en `extrastyle` por el
+orden de carga: `admin/index.html` agrega dashboard.css dentro de `extrastyle`,
+o sea después de lo nuestro, y nos pisaría las reglas del tablero. `extrahead`
+se imprime más abajo en el `<head>`, así que la última palabra es siempre de
+esta hoja. {% endcomment %}
+{% block extrahead %}{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/panel.css' %}">
+{% endblock %}
+
 {% block title %}{% if subtitle %}{{ subtitle }} · {% endif %}{{ title }} · Panel DACARS{% endblock %}
+
+{% block header %}{% include "admin/_sprite.html" %}{{ block.super }}{% endblock %}
 
 {% block branding %}
 <h1 id="site-name">
@@ -19,6 +36,51 @@ de DACARS y la hoja que tematiza el admin entero. {% endcomment %}
     <img class="dc-logo" src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="DACARS" width="600" height="117">
   </a>
 </h1>
+{% endblock %}
+
+{% comment %} La barra de usuario de fábrica es una fila de enlaces separados
+por barras: todo pesa lo mismo y «Cerrar sesión» queda al lado de «Ver el
+sitio» como si fueran la misma clase de cosa. Acá se separan en tres: el aviso
+de lo pendiente (que lleva al tablero), el atajo al sitio público, y recién
+después quién sos y cómo salir. {% endcomment %}
+{% block usertools %}
+{% if has_permission %}
+<div id="user-tools">
+
+  {% if alertas.hay_algo %}
+  <a class="dc-aviso" href="{% url 'admin:index' %}" title="Ver el tablero">
+    <svg aria-hidden="true"><use href="#i-alerta"></use></svg>
+    <b>{{ alertas.pendientes }}</b>
+    <span>por atender</span>
+  </a>
+  {% endif %}
+
+  {% if site_url %}
+  <a class="dc-cabecera__enlace" href="{{ site_url }}" target="_blank" rel="noopener">
+    <svg aria-hidden="true"><use href="#i-web"></use></svg>
+    <span>Ver el sitio</span>
+  </a>
+  {% endif %}
+
+  {% firstof user.get_short_name user.get_username as quien %}
+  <div class="dc-yo">
+    <span class="dc-yo__inicial" aria-hidden="true">{{ quien|slice:":1" }}</span>
+    <span class="dc-yo__nombre">{{ quien }}</span>
+  </div>
+
+  {% if user.has_usable_password %}
+  <a class="dc-cabecera__enlace" href="{% url 'admin:password_change' %}">
+    <svg aria-hidden="true"><use href="#i-llave"></use></svg>
+    <span>Contraseña</span>
+  </a>
+  {% endif %}
+
+  <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+    {% csrf_token %}
+    <button type="submit">Salir</button>
+  </form>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

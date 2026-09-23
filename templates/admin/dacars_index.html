@@ -1,72 +1,203 @@
 {% extends "admin/index.html" %}
-{% load i18n static %}
+{% load i18n static log humanize %}
 {% comment %} El tablero de entrada del panel.
 
    La idea es que quien abra esto sepa en tres segundos si hay algo que
-   atender, sin entrar a cada lista a revisar. Los números salen de
-   `dacars.admin.PanelDacars.each_context`; los estilos, de
-   static/css/panel.css. {% endcomment %}
+   atender, sin entrar a cada lista a revisar. El orden de la página es el
+   orden en que se piensa al llegar: cómo viene el negocio (el encabezado),
+   qué está mal (las fichas), qué voy a hacer (los atajos) y recién después
+   dónde está cada cosa (las secciones).
+
+   Los números salen de `dacars.admin.PanelDacars`; los estilos, de
+   static/css/panel.css.
+
+   Se vacían dos bloques del admin de fábrica: `content_title`, porque el
+   encabezado de acá ya dice de qué se trata la página y si no salía dos veces
+   el mismo texto; y `sidebar`, porque las acciones recientes se reacomodan
+   más abajo, dentro de la grilla propia. {% endcomment %}
+
+{% block content_title %}{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% comment %} `colMS` es el ancho de dos columnas del admin, y le reserva 300px
+a la derecha para el bloque `sidebar` que acá queda vacío. Sin este cambio el
+tablero se dibujaría corrido, esquivando una columna que ya no existe. {% endcomment %}
+{% block coltype %}colM{% endblock %}
 
 {% block content %}
-{% if alertas %}
-<div class="dc-tablero">
-  <h2 class="dc-titulo">Qué hay para hoy</h2>
+<div id="content-main" class="dc-tablero">
 
-  {% if alertas.hay_algo %}
-  <div class="dc-fichas">
-    {% if alertas.pedidos_nuevos %}
-    <a class="dc-ficha dc-ficha--azul" href="{{ alertas.url_pedidos }}">
-      <b>{{ alertas.pedidos_nuevos }}</b>
-      <span>pedido{{ alertas.pedidos_nuevos|pluralize }} sin responder</span>
-    </a>
-    {% endif %}
+  {# ------------------------------------------------------------ encabezado #}
+  <header class="dc-hola">
+    <div class="dc-hola__texto">
+      <p class="dc-hola__fecha">
+        <svg aria-hidden="true"><use href="#i-reloj"></use></svg>
+        {% now "l j \d\e F" %}
+      </p>
+      <h1 class="dc-hola__titulo">Buenas, {% firstof user.get_short_name user.get_username %}</h1>
+      {% if alertas.hay_algo %}
+      <p class="dc-hola__bajada">
+        Hay <b>{{ alertas.pendientes }}</b> cosa{{ alertas.pendientes|pluralize }} esperando en el
+        tablero. Empezá por las fichas rojas.
+      </p>
+      {% else %}
+      <p class="dc-hola__bajada dc-hola__bajada--ok">
+        <svg aria-hidden="true"><use href="#i-chequeo"></use></svg>
+        Todo en orden: ni pedidos pendientes ni existencias por debajo del mínimo.
+      </p>
+      {% endif %}
+    </div>
 
-    {% if alertas.agotadas %}
-    <a class="dc-ficha dc-ficha--mal" href="{{ alertas.url_agotadas }}">
-      <b>{{ alertas.agotadas }}</b>
-      <span>agotado{{ alertas.agotadas|pluralize }} — se ven en la web sin poder venderse</span>
-    </a>
-    {% endif %}
+    <div class="dc-hola__acciones">
+      <a class="dc-btn dc-btn--fuerte" href="{% url 'admin:catalogo_producto_add' %}">
+        <svg aria-hidden="true"><use href="#i-mas"></use></svg>
+        Producto nuevo
+      </a>
+      <a class="dc-btn" href="/catalogo/" target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-web"></use></svg>
+        Ver el catálogo
+      </a>
+    </div>
+  </header>
 
-    {% if alertas.stock_bajo %}
-    <a class="dc-ficha dc-ficha--ojo" href="{{ alertas.url_stock_bajo }}">
-      <b>{{ alertas.stock_bajo }}</b>
-      <span>bajo el mínimo — conviene reponer</span>
+  {# ---------------------------------------------------- cómo viene el mes #}
+  {% if resumen %}
+  <section class="dc-medidores" aria-label="Resumen del mes">
+    {% for m in resumen %}
+    <a class="dc-medidor" href="{{ m.url }}" style="--i:{{ forloop.counter0 }}">
+      <svg class="dc-medidor__ico" aria-hidden="true"><use href="#i-{{ m.icono }}"></use></svg>
+      <b class="dc-medidor__valor">{% if m.plata %}<i>$</i>{% endif %}{{ m.valor|intcomma }}</b>
+      <span class="dc-medidor__rotulo">{{ m.rotulo }}</span>
     </a>
-    {% endif %}
-
-    {% if alertas.sin_variante %}
-    <a class="dc-ficha" href="{{ alertas.url_sin_variante }}">
-      <b>{{ alertas.sin_variante }}</b>
-      <span>a cotizar — salen con «Cotizar por WhatsApp» en vez de precio</span>
-    </a>
-    {% endif %}
-
-    {% if alertas.sin_foto %}
-    <a class="dc-ficha" href="{{ alertas.url_sin_foto }}">
-      <b>{{ alertas.sin_foto }}</b>
-      <span>sin fotos — se ven pobres en el catálogo</span>
-    </a>
-    {% endif %}
-  </div>
-  {% else %}
-  <p class="dc-calma">Todo en orden: no hay pedidos pendientes ni existencias por debajo del mínimo.</p>
+    {% endfor %}
+  </section>
   {% endif %}
 
-  <div class="dc-atajos">
-    <a href="{% url 'admin:catalogo_producto_add' %}">+ Producto nuevo</a>
-    <a href="{% url 'admin:inventario_movimiento_add' %}">+ Llegó mercancía</a>
-    <a href="{% url 'admin:catalogo_variante_changelist' %}">Ver existencias</a>
-    <a href="{% url 'admin:pedidos_pedido_changelist' %}">Ver pedidos</a>
-    <a href="/catalogo/" target="_blank" rel="noopener">Ver el catálogo en la web</a>
-  </div>
-  <p class="dc-ayuda">
-    Recordá: confirmar un pedido descuenta la mercancía del inventario, y
-    cancelarlo la devuelve. Las existencias se pueden editar a mano en
-    «Variantes y existencias»; cada cambio queda anotado en el historial.
-  </p>
-</div>
-{% endif %}
+  {# ------------------------------------------------------------- lo urgente #}
+  {% if alertas.hay_algo %}
+  <section class="dc-seccion" aria-labelledby="dc-t-atender">
+    <h2 class="dc-seccion__titulo" id="dc-t-atender">
+      <svg aria-hidden="true"><use href="#i-alerta"></use></svg>
+      Para atender
+    </h2>
 
-{{ block.super }}
+    <div class="dc-fichas">
+      {% for f in alertas.fichas %}
+      <a class="dc-ficha dc-ficha--{{ f.tono }}" href="{{ f.url }}" style="--i:{{ forloop.counter0 }}">
+        <span class="dc-ficha__ico" aria-hidden="true">
+          <svg><use href="#i-{{ f.icono }}"></use></svg>
+        </span>
+        <b class="dc-ficha__numero">{{ f.cuantos }}</b>
+        <span class="dc-ficha__texto">{{ f.texto }}</span>
+        <span class="dc-ficha__ir" aria-hidden="true">
+          <svg><use href="#i-flecha"></use></svg>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {# ---------------------------------------------------------- qué voy a hacer #}
+  <section class="dc-seccion" aria-labelledby="dc-t-atajos">
+    <h2 class="dc-seccion__titulo" id="dc-t-atajos">
+      <svg aria-hidden="true"><use href="#i-rayo"></use></svg>
+      Lo de todos los días
+    </h2>
+
+    <div class="dc-atajos">
+      <a class="dc-atajo" href="{% url 'admin:inventario_movimiento_add' %}">
+        <svg class="dc-atajo__ico" aria-hidden="true"><use href="#i-camion"></use></svg>
+        <b>Llegó mercancía</b>
+        <span>Sumar unidades al inventario</span>
+      </a>
+      <a class="dc-atajo" href="{% url 'admin:pedidos_pedido_changelist' %}">
+        <svg class="dc-atajo__ico" aria-hidden="true"><use href="#i-recibo"></use></svg>
+        <b>Pedidos</b>
+        <span>Responder, confirmar o cancelar</span>
+      </a>
+      <a class="dc-atajo" href="{% url 'admin:catalogo_variante_changelist' %}">
+        <svg class="dc-atajo__ico" aria-hidden="true"><use href="#i-etiqueta"></use></svg>
+        <b>Existencias</b>
+        <span>Ver y corregir el stock</span>
+      </a>
+      <a class="dc-atajo" href="{% url 'admin:inventario_movimiento_changelist' %}">
+        <svg class="dc-atajo__ico" aria-hidden="true"><use href="#i-flechas"></use></svg>
+        <b>Historial</b>
+        <span>Qué entró y qué salió</span>
+      </a>
+    </div>
+  </section>
+
+  {# ------------------------------------------------- dónde está cada cosa #}
+  <div class="dc-cuerpo">
+    <section class="dc-seccion" aria-labelledby="dc-t-secciones">
+      <h2 class="dc-seccion__titulo" id="dc-t-secciones">
+        <svg aria-hidden="true"><use href="#i-cuadricula"></use></svg>
+        Secciones del panel
+      </h2>
+      {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+    </section>
+
+    {% comment %} Los títulos van afuera de las tarjetas, igual que el de las
+       secciones: así las dos columnas arrancan a la misma altura en lugar de
+       quedar escalonadas por un encabezado que solo tiene una. {% endcomment %}
+    <aside class="dc-lado">
+      <section>
+        <h2 class="dc-seccion__titulo">
+          <svg aria-hidden="true"><use href="#i-actividad"></use></svg>
+          Lo último que hiciste
+        </h2>
+        <div class="dc-tarjeta">
+
+        {% get_admin_log 8 as admin_log for_user user %}
+        {% if not admin_log %}
+          <p class="dc-tarjeta__vacio">
+            Todavía no hay movimientos tuyos. Lo que vayas creando o editando
+            se va a ir anotando acá.
+          </p>
+        {% else %}
+          <ul class="dc-historial">
+          {% for entry in admin_log %}
+            <li class="dc-historial__item dc-historial__item--{% if entry.is_addition %}alta{% elif entry.is_deletion %}baja{% else %}cambio{% endif %}">
+              <span class="dc-historial__punto" aria-hidden="true"></span>
+              <span class="dc-historial__que">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                  {{ entry.object_repr }}
+                {% else %}
+                  <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+              </span>
+              <span class="dc-historial__meta">
+                {% if entry.is_addition %}Creado{% elif entry.is_deletion %}Borrado{% else %}Editado{% endif %}
+                ·
+                {% if entry.content_type %}{{ entry.content_type.name|capfirst }}{% else %}Sin identificar{% endif %}
+              </span>
+            </li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="dc-seccion__titulo">
+          <svg aria-hidden="true"><use href="#i-ojo"></use></svg>
+          Tené en cuenta
+        </h2>
+        <div class="dc-tarjeta dc-tarjeta--nota">
+        <ul class="dc-nota">
+          <li>Confirmar un pedido <b>descuenta</b> la mercancía del inventario;
+              cancelarlo la <b>devuelve</b>.</li>
+          <li>Las existencias se editan a mano en «Variantes y existencias», y
+              cada cambio queda anotado en el historial con tu nombre.</li>
+          <li>Un producto sin variante activa se publica igual, <b>a cotizar</b>:
+              la ficha muestra el botón de WhatsApp en lugar del precio.</li>
+        </ul>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+</div>
 {% endblock %}
