@@ -182,9 +182,13 @@ class Pedido(models.Model):
 class ItemPedido(models.Model):
     """Una línea del pedido.
 
-    Guarda el precio y la descripción **copiados** al momento de comprar. Si
-    mañana suben el precio o le cambian el nombre al producto, el pedido viejo
-    tiene que seguir diciendo lo que el cliente aceptó.
+    Guarda el precio, el costo y la descripción **copiados** al momento de
+    comprar. Si mañana suben el precio o le cambian el nombre al producto, el
+    pedido viejo tiene que seguir diciendo lo que el cliente aceptó.
+
+    El costo se copia por la misma razón, y no es un detalle: si la ganancia se
+    calculara con el costo de hoy, cada vez que el proveedor sube los precios
+    cambiaría sola la ganancia de todas las ventas del año pasado.
     """
 
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name="items")
@@ -194,6 +198,14 @@ class ItemPedido(models.Model):
     descripcion = models.CharField(max_length=220, verbose_name="descripción")
     sku = models.CharField(max_length=40)
     precio = models.DecimalField(max_digits=12, decimal_places=0)
+    costo = models.DecimalField(
+        max_digits=12,
+        decimal_places=0,
+        null=True,
+        blank=True,
+        help_text="Lo que costaba la variante cuando se vendió. Vacío si no "
+        "estaba cargado.",
+    )
     cantidad = models.PositiveIntegerField(default=1)
 
     class Meta:
@@ -206,3 +218,10 @@ class ItemPedido(models.Model):
     @property
     def subtotal(self):
         return self.precio * self.cantidad
+
+    @property
+    def ganancia(self):
+        """Lo que dejó esta línea. None si no había costo cargado."""
+        if self.costo is None:
+            return None
+        return (self.precio - self.costo) * self.cantidad

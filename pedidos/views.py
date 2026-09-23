@@ -164,6 +164,7 @@ def _crear_pedido(form, lineas):
                 descripcion=str(linea["variante"])[:220],
                 sku=linea["variante"].sku,
                 precio=linea["precio"],
+                costo=linea["variante"].costo,
                 cantidad=linea["cantidad"],
             )
             for linea in lineas

@@ -382,6 +382,15 @@ class Variante(models.Model):
         decimal_places=0,
         help_text="En pesos, sin puntos ni centavos. Ej: 450000",
     )
+    costo = models.DecimalField(
+        max_digits=12,
+        decimal_places=0,
+        null=True,
+        blank=True,
+        verbose_name="costo de compra",
+        help_text="Lo que te costó a vos. No sale nunca en la web: sirve para "
+        "saber cuánto estás ganando.",
+    )
     precio_antes = models.DecimalField(
         max_digits=12,
         decimal_places=0,
@@ -464,6 +473,26 @@ class Variante(models.Model):
         if not self.precio_antes or self.precio_antes <= self.precio:
             return 0
         return int(round((1 - self.precio / self.precio_antes) * 100))
+
+    # -- Plata ---------------------------------------------------------------
+    # El costo es opcional, y por eso vacío y cero son cosas distintas: sin
+    # costo cargado no se sabe cuánto se gana, mientras que un costo de cero
+    # diría que se gana todo. Las dos propiedades devuelven None en el primer
+    # caso para que el panel pueda decir «sin costo» en vez de inventar un
+    # margen del 100%.
+    @property
+    def ganancia(self):
+        """Lo que deja cada unidad vendida."""
+        if self.costo is None:
+            return None
+        return self.precio - self.costo
+
+    @property
+    def margen(self):
+        """Qué porcentaje del precio de venta es ganancia."""
+        if self.costo is None or not self.precio:
+            return None
+        return int(round((self.precio - self.costo) / self.precio * 100))
 
     @classmethod
     def bajo_minimo(cls):

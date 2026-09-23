@@ -11,6 +11,8 @@ tendría huecos justo donde más se lo necesita.
 from dacars import colores
 from django.contrib import admin
 from django.db.models import Count, F
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils.html import format_html
 
 from catalogo.models import Categoria, ImagenProducto, Marca, Producto, Variante
@@ -125,13 +127,28 @@ class FiltroCompletitud(admin.SimpleListFilter):
 # ---------------------------------------------------------------------------
 # Inlines
 # ---------------------------------------------------------------------------
+# Los dos inlines se muestran distinto al crear que al editar. Cuando se carga
+# un producto nuevo hace falta lo mínimo —una foto y un precio— y cualquier
+# columna de más es una pregunta que no se sabe responder todavía; una vez
+# guardado, ya con el producto delante, aparece todo.
 class ImagenInline(admin.TabularInline):
     model = ImagenProducto
-    extra = 1
-    fields = ("vista", "imagen", "tipo", "referencia", "alt", "orden")
-    readonly_fields = ("vista",)
     verbose_name = "foto"
     verbose_name_plural = "Fotos (la de menor número es la principal)"
+
+    CAMPOS_ALTA = ("imagen", "tipo", "alt")
+    CAMPOS = ("vista", "imagen", "tipo", "referencia", "alt", "orden")
+
+    def get_fields(self, request, obj=None):
+        return self.CAMPOS_ALTA if obj is None else self.CAMPOS
+
+    def get_readonly_fields(self, request, obj=None):
+        # `vista` dibuja la miniatura de una foto ya subida: en el alta todavía
+        # no hay ninguna y sería una columna de guiones.
+        return () if obj is None else ("vista",)
+
+    def get_extra(self, request, obj=None, **kwargs):
+        return 1
 
     @admin.display(description="")
     def vista(self, obj):
@@ -145,14 +162,28 @@ class ImagenInline(admin.TabularInline):
 
 class VarianteInline(admin.TabularInline):
     model = Variante
-    extra = 0
-    fields = ("nombre", "sku", "precio", "precio_antes", "stock", "stock_minimo", "situacion", "activa", "orden")
-    readonly_fields = ("situacion",)
     verbose_name = "medida / presentación"
-    verbose_name_plural = (
-        "Precios y existencias — sin ninguna fila, el producto sale «a cotizar» "
-        "con el botón de WhatsApp"
+    # Corto a propósito: el título del inline se dibuja en versalitas con
+    # tracking, y una frase larga ahí se vuelve ilegible.
+    verbose_name_plural = "Precios y existencias (sin filas, sale «a cotizar»)"
+
+    CAMPOS_ALTA = ("nombre", "costo", "precio", "stock", "stock_minimo")
+    CAMPOS = (
+        "nombre", "sku", "costo", "precio", "precio_antes",
+        "stock", "stock_minimo", "situacion", "activa", "orden",
     )
+
+    def get_fields(self, request, obj=None):
+        return self.CAMPOS_ALTA if obj is None else self.CAMPOS
+
+    def get_readonly_fields(self, request, obj=None):
+        return () if obj is None else ("situacion",)
+
+    def get_extra(self, request, obj=None, **kwargs):
+        # Al crear, una fila ya abierta: lo normal es un solo precio, y dejarla
+        # lista ahorra el clic de «añadir otro» que casi nadie encuentra. Al
+        # editar, ninguna: las filas vacías confunden más de lo que ayudan.
+        return 1 if obj is None else 0
 
     @admin.display(description="Estado")
     def situacion(self, obj):
@@ -171,6 +202,21 @@ class CategoriaAdmin(admin.ModelAdmin):
     list_filter = ("activa",)
     search_fields = ("nombre", "descripcion")
     prepopulated_fields = {"slug": ("nombre",)}
+
+    # A crear una categoría se llega casi siempre desde el «+» que está al lado
+    # del selector, en mitad de la carga de un producto. Ahí no se viene a
+    # pensar el SEO ni el orden: se viene a escribir un nombre y volver.
+    FIELDSETS_ALTA = (
+        (
+            None,
+            {
+                "fields": ("nombre", "descripcion"),
+                "description": "Con el nombre alcanza: la dirección en la web se "
+                "arma sola. Lo demás lo podés ajustar después desde «Categorías».",
+            },
+        ),
+    )
+
     fieldsets = (
         (None, {"fields": ("nombre", "slug", "descripcion", "imagen")}),
         (
@@ -182,6 +228,15 @@ class CategoriaAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    def get_fieldsets(self, request, obj=None):
+        return self.FIELDSETS_ALTA if obj is None else self.fieldsets
+
+    def get_prepopulated_fields(self, request, obj=None):
+        # Sin `slug` en el formulario de alta, apuntarle sería un KeyError.
+        if obj is None:
+            return {}
+        return super().get_prepopulated_fields(request, obj)
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(_n=Count("productos"))
@@ -210,6 +265,21 @@ class ProductoAdmin(admin.ModelAdmin):
     save_on_top = True
     actions = ("publicar", "despublicar", "destacar", "quitar_destacado")
 
+    # Al crear se pide lo mínimo para publicar; la ficha entera aparece recién
+    # al editar. Un formulario de veinte campos frente a un producto que
+    # todavía no existe hace que se carguen a medias o no se carguen.
+    FIELDSETS_ALTA = (
+        (
+            "El producto",
+            {
+                "fields": ("nombre", "categoria", "marca", "resumen"),
+                "description": "Con esto ya queda publicado. Apenas lo guardes vas "
+                "a poder completar la ficha: descripción larga, características, "
+                "compatibilidad, más fotos, más medidas y el texto para Google.",
+            },
+        ),
+    )
+
     fieldsets = (
         (
             "Lo básico",
@@ -237,6 +307,37 @@ class ProductoAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    def get_fieldsets(self, request, obj=None):
+        return self.FIELDSETS_ALTA if obj is None else self.fieldsets
+
+    def get_prepopulated_fields(self, request, obj=None):
+        # El slug no se muestra en el alta —lo arma solo `Producto.save`— y
+        # `prepopulated_fields` revienta con un KeyError si apunta a un campo
+        # que no está en el formulario.
+        if obj is None:
+            return {}
+        return super().get_prepopulated_fields(request, obj)
+
+    def response_add(self, request, obj, post_url_continue=None):
+        """Al crear, quedarse en la ficha en vez de volver al listado.
+
+        El alta muestra lo mínimo, así que siempre queda algo por completar.
+        Volver al listado escondería justo el paso siguiente; acá se cae en la
+        ficha completa, que es donde están las fotos y las demás medidas.
+        """
+        atajos = ("_continue", "_addanother", "_saveasnew", "_popup")
+        if any(a in request.POST for a in atajos):
+            return super().response_add(request, obj, post_url_continue)
+
+        self.message_user(
+            request,
+            "«{}» quedó creado y publicado. Abajo podés terminar de armarle la "
+            "ficha: más fotos, más medidas y el texto para Google.".format(obj),
+        )
+        return HttpResponseRedirect(
+            reverse("admin:catalogo_producto_change", args=[obj.pk])
+        )
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related("categoria", "marca").prefetch_related("variantes")
@@ -311,8 +412,8 @@ class ProductoAdmin(admin.ModelAdmin):
 class VarianteAdmin(admin.ModelAdmin):
     """La pantalla de inventario: todas las existencias en una sola lista."""
 
-    list_display = ("descripcion_corta", "sku", "precio", "stock", "reservado", "stock_minimo", "situacion", "activa")
-    list_editable = ("precio", "stock", "stock_minimo", "activa")
+    list_display = ("descripcion_corta", "sku", "costo", "precio", "ganancia", "stock", "reservado", "stock_minimo", "situacion", "activa")
+    list_editable = ("costo", "precio", "stock", "stock_minimo", "activa")
     list_filter = (FiltroSituacion, "activa", "producto__categoria", "producto__marca")
     search_fields = ("sku", "nombre", "producto__nombre")
     list_per_page = 60
@@ -321,7 +422,14 @@ class VarianteAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {"fields": ("producto", "nombre", "sku", "sku_actual", "activa", "orden")}),
-        ("Precio", {"fields": ("precio", "precio_antes")}),
+        (
+            "Plata",
+            {
+                "fields": ("costo", "precio", "precio_antes"),
+                "description": "El costo no sale nunca en la web: es para saber "
+                "cuánto te deja cada venta.",
+            },
+        ),
         (
             "Existencias",
             {
@@ -341,6 +449,21 @@ class VarianteAdmin(admin.ModelAdmin):
     @admin.display(description="situación")
     def situacion(self, obj):
         return _pinta_stock(obj)
+
+    @admin.display(description="ganancia")
+    def ganancia(self, obj):
+        if obj.ganancia is None:
+            return format_html(
+                '<span style="color:{}">sin costo</span>', colores.APAGADO
+            )
+        color = colores.OK if obj.ganancia > 0 else colores.MAL
+        return format_html(
+            '<b style="color:{}">${}</b> <span style="color:{}">{}%</span>',
+            color,
+            "{:,.0f}".format(obj.ganancia).replace(",", "."),
+            colores.APAGADO,
+            obj.margen,
+        )
 
     @admin.display(description="SKU generado")
     def sku_actual(self, obj):

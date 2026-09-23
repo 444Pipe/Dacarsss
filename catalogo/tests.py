@@ -275,3 +275,108 @@ class CatalogoInicial(TestCase):
         Producto.objects.create(nombre="Barra LED", categoria=cat)
         self.cargar("--si-vacio")
         self.assertEqual(Producto.objects.count(), 1)
+
+
+class Ganancia(Base):
+    """El costo es opcional, así que hay que distinguir «vacío» de «cero»."""
+
+    def test_sin_costo_no_se_inventa_una_ganancia(self):
+        self.assertIsNone(self.variante.costo)
+        self.assertIsNone(self.variante.ganancia)
+        self.assertIsNone(self.variante.margen)
+
+    def test_con_costo_calcula_ganancia_y_margen(self):
+        self.variante.costo = 300000
+        self.variante.save()
+        self.assertEqual(self.variante.ganancia, 180000)
+        self.assertEqual(self.variante.margen, 38)  # 180000 / 480000
+
+    def test_un_costo_de_cero_no_es_lo_mismo_que_no_tenerlo(self):
+        self.variante.costo = 0
+        self.variante.save()
+        self.assertEqual(self.variante.ganancia, 480000)
+        self.assertEqual(self.variante.margen, 100)
+
+
+class AltaDeProducto(Base):
+    """El formulario de alta: pocos campos, y la ficha completa al editar."""
+
+    def setUp(self):
+        super().setUp()
+        from django.contrib.auth import get_user_model
+
+        User = get_user_model()
+        self.jefa = User.objects.create_superuser("jefa", "jefa@dacars.co", "clave-larga-123")
+        self.client.force_login(self.jefa)
+
+    def test_el_alta_pide_lo_minimo_y_la_ficha_completa_aparece_al_editar(self):
+        alta = self.client.get(reverse("admin:catalogo_producto_add")).content.decode()
+        # Lo que no se pregunta todavía.
+        for campo in ("seo_titulo", "compatibilidad", "caracteristicas"):
+            self.assertNotIn('name="{}"'.format(campo), alta, campo)
+        # Lo que sí.
+        for campo in ("nombre", "categoria", "resumen"):
+            self.assertIn('name="{}"'.format(campo), alta, campo)
+        # Y el costo, en la primera fila de precios ya abierta.
+        self.assertIn("variantes-0-costo", alta)
+
+        ficha = self.client.get(
+            reverse("admin:catalogo_producto_change", args=[self.producto.pk])
+        ).content.decode()
+        for campo in ("seo_titulo", "compatibilidad", "caracteristicas", "slug"):
+            self.assertIn('name="{}"'.format(campo), ficha, campo)
+
+    def test_crear_un_producto_deja_su_precio_y_su_costo(self):
+        respuesta = self.client.post(
+            reverse("admin:catalogo_producto_add"),
+            {
+                "nombre": "Exploradora LED 7 pulgadas",
+                "categoria": self.categoria.pk,
+                "marca": "",
+                "resumen": "Redonda, para bumper.",
+                "variantes-TOTAL_FORMS": "1",
+                "variantes-INITIAL_FORMS": "0",
+                "variantes-MIN_NUM_FORMS": "0",
+                "variantes-MAX_NUM_FORMS": "1000",
+                "variantes-0-nombre": "",
+                "variantes-0-costo": "120000",
+                "variantes-0-precio": "195000",
+                "variantes-0-stock": "4",
+                "variantes-0-stock_minimo": "1",
+                "imagenes-TOTAL_FORMS": "0",
+                "imagenes-INITIAL_FORMS": "0",
+                "imagenes-MIN_NUM_FORMS": "0",
+                "imagenes-MAX_NUM_FORMS": "1000",
+            },
+        )
+        nuevo = Producto.objects.get(nombre="Exploradora LED 7 pulgadas")
+        # Se queda en la ficha, que es donde está lo que falta completar.
+        self.assertRedirects(
+            respuesta,
+            reverse("admin:catalogo_producto_change", args=[nuevo.pk]),
+        )
+        self.assertTrue(nuevo.slug, "el slug se arma solo aunque no se muestre")
+
+        variante = nuevo.variantes.get()
+        self.assertEqual(variante.costo, 120000)
+        self.assertEqual(variante.precio, 195000)
+        self.assertEqual(variante.ganancia, 75000)
+        # El stock inicial entró por inventario, no escrito a mano.
+        self.assertEqual(variante.stock, 4)
+        self.assertEqual(variante.movimientos.count(), 1)
+
+    def test_la_categoria_se_puede_crear_desde_el_alta(self):
+        # Es el «+ Nueva» que está al lado del selector: una ventana emergente
+        # sobre el formulario de categorías.
+        emergente = self.client.get(reverse("admin:catalogo_categoria_add") + "?_popup=1")
+        self.assertEqual(emergente.status_code, 200)
+        html = emergente.content.decode()
+        self.assertIn('name="nombre"', html)
+        self.assertNotIn('name="servicio"', html)  # eso se ajusta después
+
+        self.client.post(
+            reverse("admin:catalogo_categoria_add") + "?_popup=1",
+            {"nombre": "Cámaras y sensores", "descripcion": "", "_popup": "1"},
+        )
+        creada = Categoria.objects.get(nombre="Cámaras y sensores")
+        self.assertEqual(creada.slug, "camaras-y-sensores")

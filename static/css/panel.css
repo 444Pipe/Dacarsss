@@ -227,8 +227,11 @@ body.popup #container { padding-inline-start: 0; }
 .dashboard #content-main { float: none; width: auto; }
 
 /* Un formulario no gana nada por ser más ancho: los campos miden lo mismo y el
-   ojo tiene que cruzar vacío para ir de la etiqueta al campo. */
+   ojo tiene que cruzar vacío para ir de la etiqueta al campo. Un listado sí:
+   ahí cada columna que no entra es un dato que hay que ir a buscar con el
+   scroll horizontal. */
 body.change-form #content { max-width: 1040px; }
+body.change-list #content { max-width: none; }
 
 /* base.css pinta TODO enlace con `a:link{color:var(--link-fg)}`, que por llevar
    una pseudoclase le gana a una regla de clase suelta. Nuestros componentes que
@@ -750,6 +753,14 @@ body.change-form #content { max-width: 1040px; }
 }
 #result_list tbody tr:last-child td,
 #result_list tbody tr:last-child th { border-bottom: 0; }
+
+/* La primera columna es el nombre y el enlace a la ficha: sin un mínimo, los
+   campos editables del resto de la fila la estrujan hasta partir el nombre en
+   una palabra por renglón. Y esos campos tampoco necesitan 250px para un
+   número de seis cifras. */
+#result_list tbody th { min-width: 190px; }
+#result_list input[type=number],
+#result_list input[type=text] { max-width: 140px; }
 #result_list tbody tr { background: none; transition: background .15s; }
 #result_list tbody tr:hover { background: var(--bg-card-2); }
 #result_list tbody tr.selected { background: var(--az-tinte-3); }
@@ -943,16 +954,85 @@ fieldset.collapsed .form-row { display: none; }
 .submit-row a.deletelink { background: none; border: 1px solid var(--mal); color: var(--mal); }
 .submit-row a.deletelink:hover { background: #160b0d; }
 
-/* Los iconos del widget de relacionados (lápiz, más, cruz, ojo) los emite
-   Django como <img> de colores fijos —verde chillón y azul— que no se pueden
-   recolorear por CSS. Se los pasa a gris para que no sean lo más llamativo de
-   un formulario. */
-.related-widget-wrapper-link img,
-.related-lookup img,
-a.related-lookup img {
-  filter: grayscale(1);
+/* Los botoncitos que hay al lado de un selector de categoría o de marca.
+
+   De fábrica son cuatro iconos sueltos de colores fijos —un más verde chillón,
+   un lápiz azul— sin una palabra que diga qué hacen: el de crear una categoría
+   nueva, que es el que más falta hace mientras se carga un producto, es el más
+   difícil de encontrar. Acá pasan a ser botones con texto. La etiqueta se pone
+   por CSS porque el HTML lo arma Django y no hay plantilla que tocar sin
+   copiarla entera. */
+.related-widget-wrapper { align-items: center; gap: 0 6px; }
+.related-widget-wrapper-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color .15s, background .15s, color .15s;
 }
-.related-widget-wrapper-link:hover img { filter: grayscale(1) brightness(1.5); }
+.related-widget-wrapper-link,
+.related-widget-wrapper-link:link,
+.related-widget-wrapper-link:visited { color: var(--tx-3); }
+.related-widget-wrapper-link:hover {
+  background: var(--bg-card-2);
+  border-color: var(--line-ctl);
+  color: var(--tx);
+}
+.related-widget-wrapper-link img,
+.related-lookup img { width: 13px; height: 13px; filter: grayscale(1); }
+
+.related-widget-wrapper-link.add-related::after { content: "Nueva"; }
+.related-widget-wrapper-link.change-related::after { content: "Editar"; }
+.related-widget-wrapper-link.view-related::after { content: "Ver"; }
+.related-widget-wrapper-link.delete-related::after { content: "Quitar"; }
+/* «Nueva» es la que de verdad se busca mientras se carga un producto y la
+   categoría todavía no existe: lleva el color de acento para que se distinga
+   de las otras tres, que casi siempre están deshabilitadas. */
+.related-widget-wrapper-link.add-related,
+.related-widget-wrapper-link.add-related:link,
+.related-widget-wrapper-link.add-related:visited {
+  color: var(--az-texto);
+  border-color: var(--line-ctl);
+}
+.related-widget-wrapper-link.add-related:hover {
+  color: var(--az-texto);
+  border-color: var(--az-borde);
+  background: var(--az-tinte);
+}
+.related-widget-wrapper-link.delete-related:hover { color: var(--mal); border-color: var(--mal); }
+
+/* Un select de ancho automático se encoge hasta el texto de la opción elegida,
+   y el de categoría arranca vacío: queda una ranura de 40px. */
+.aligned select { min-width: 240px; }
+
+/* Subir una foto. Sin JavaScript no se puede hacer la caja punteada de
+   «arrastrá el archivo acá», pero sí que el botón del selector deje de ser el
+   gris del sistema y se parezca al resto del panel. */
+input[type=file] { font-size: 13px; color: var(--tx-3); }
+input[type=file]::file-selector-button {
+  margin-inline-end: 10px;
+  padding: 8px 14px;
+  border: 1px solid var(--line-ctl);
+  border-radius: var(--r-sm);
+  background: var(--bg-card);
+  color: var(--tx-2);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+input[type=file]::file-selector-button:hover { background: var(--bg-card-2); color: var(--tx); }
 
 .inline-group { border: 0; padding: 0; }
 .inline-related h3 {

@@ -18,7 +18,7 @@ agregar un `_ficha(...)` a la lista; la plantilla no se toca.
 """
 
 from django.contrib import admin
-from django.db.models import Sum
+from django.db.models import DecimalField, ExpressionWrapper, F, Sum
 from django.urls import reverse
 from django.utils import timezone
 
@@ -122,19 +122,40 @@ class PanelDacars(admin.AdminSite):
     # -- Cómo viene el mes ---------------------------------------------------
     def _resumen(self):
         from catalogo.models import Producto
-        from pedidos.models import Pedido
+        from pedidos.models import ItemPedido, Pedido
 
         hoy = timezone.localdate()
         desde = hoy.replace(day=1)
 
         # Lo vendido cuenta desde que el pedido se confirma: es el momento en
         # que la mercancía sale del inventario. Los cancelados nunca entran.
+        confirmados = {
+            "confirmado_en__date__gte": desde,
+            "estado__in": [Pedido.CONFIRMADO, Pedido.ENTREGADO],
+        }
         del_mes = Pedido.objects.filter(creado__date__gte=desde)
         vendido = (
-            Pedido.objects.filter(
-                confirmado_en__date__gte=desde,
-                estado__in=[Pedido.CONFIRMADO, Pedido.ENTREGADO],
-            ).aggregate(plata=Sum("total"))["plata"]
+            Pedido.objects.filter(**confirmados).aggregate(plata=Sum("total"))["plata"]
+            or 0
+        )
+
+        # La ganancia se calcula línea por línea y con el costo copiado en el
+        # pedido, no con el de hoy: así una subida de precios del proveedor no
+        # reescribe lo que se ganó el mes pasado. Las líneas sin costo cargado
+        # quedan afuera —es preferible un número corto y cierto a uno completo
+        # que cuenta como ganancia pura lo que no se sabe.
+        ganado = (
+            ItemPedido.objects.filter(
+                costo__isnull=False,
+                **{"pedido__" + k: v for k, v in confirmados.items()},
+            ).aggregate(
+                g=Sum(
+                    ExpressionWrapper(
+                        (F("precio") - F("costo")) * F("cantidad"),
+                        output_field=DecimalField(max_digits=14, decimal_places=0),
+                    )
+                )
+            )["g"]
             or 0
         )
 
@@ -165,5 +186,11 @@ class PanelDacars(admin.AdminSite):
                 "rotulo": "vendido este mes",
                 "plata": True,
                 "url": reverse("admin:pedidos_pedido_changelist"),
+            },
+            {
+                "valor": ganado,
+                "rotulo": "ganado este mes",
+                "plata": True,
+                "url": reverse("admin:catalogo_variante_changelist"),
             },
         ]
