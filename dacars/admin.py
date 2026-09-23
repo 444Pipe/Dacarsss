@@ -3,17 +3,18 @@
 Es el admin de Django con dos cambios: la marca DACARS y un tablero de entrada
 que muestra lo que hay que atender hoy (stock bajo, pedidos sin responder,
 productos a medio cargar). Las alertas se calculan en `each_context`, así
-aparecen en el encabezado de todas las pantallas del panel y no solo en el
-índice: el contador de pendientes vive arriba a la derecha en cada página.
+aparecen en todas las pantallas del panel y no solo en el índice: el contador
+de pendientes vive en el ítem «Tablero» de la barra lateral, que está siempre
+a la vista.
 
 El resumen del mes, en cambio, se calcula en `index`. Son consultas que solo
 mira quien entra al tablero, y cobrárselas a cada pantalla del panel —incluidas
 las de guardar un formulario— sería pagar de más por un número que nadie está
 viendo.
 
-Las fichas de alerta salen de acá armadas (número, texto, color e icono) en vez
-de escribirse una por una en la plantilla. Sumar una alerta nueva es agregar un
-`_ficha(...)` a la lista; la plantilla no se toca.
+Las fichas de alerta salen de acá armadas (número, título, detalle y color) en
+vez de escribirse una por una en la plantilla. Sumar una alerta nueva es
+agregar un `_ficha(...)` a la lista; la plantilla no se toca.
 """
 
 from django.contrib import admin
@@ -22,22 +23,29 @@ from django.urls import reverse
 from django.utils import timezone
 
 
-def _ficha(cuantos, texto, url, tono, icono):
+def _ficha(cuantos, titulo, detalle, url, tono):
     return {
         "cuantos": cuantos,
-        "texto": texto,
+        "titulo": titulo,    # qué es, en dos o tres palabras
+        "detalle": detalle,  # por qué importa
         "url": url,
-        "tono": tono,      # mal | ojo | azul | neutro
-        "icono": icono,    # símbolo de templates/admin/_sprite.html
+        "tono": tono,        # mal | ojo | neutro
     }
 
 
 class PanelDacars(admin.AdminSite):
     site_header = "DACARS"
     site_title = "Panel DACARS"
-    index_title = "Qué hay para hoy"
+    index_title = "Tablero"
     index_template = "admin/dacars_index.html"
-    enable_nav_sidebar = True
+
+    # El panel trae su propia barra lateral fija. Apagar ésta no es sólo dejar
+    # de dibujarla: `admin/base.html` mira esta bandera para decidir si carga
+    # nav_sidebar.css y nav_sidebar.js, y esas dos hojas son las que más pelean
+    # contra un rail propio (el colapso por `margin-left:-276px`, el
+    # `visibility:hidden` que sólo levanta su JS, y un `display:none` en
+    # celular). Apagándola no hay nada que neutralizar.
+    enable_nav_sidebar = False
 
     def each_context(self, request):
         contexto = super().each_context(request)
@@ -75,34 +83,32 @@ class PanelDacars(admin.AdminSite):
 
         fichas = [
             _ficha(
-                pedidos_nuevos,
-                "pedido{} sin responder".format("s" if pedidos_nuevos != 1 else ""),
-                reverse("admin:pedidos_pedido_changelist") + "?estado__exact=nuevo",
-                "azul",
-                "recibo",
-            ),
-            _ficha(
                 len(agotadas),
-                "agotad{} — se ven en la web sin poder venderse".format(
-                    "as" if len(agotadas) != 1 else "a"
-                ),
+                "Agotadas",
+                "Se ven en la web sin poder venderse",
                 lista + "?situacion=agotadas",
                 "mal",
-                "alerta",
+            ),
+            _ficha(
+                pedidos_nuevos,
+                "Pedidos sin responder",
+                "Entraron por la web y siguen esperando",
+                reverse("admin:pedidos_pedido_changelist") + "?estado__exact=nuevo",
+                "ojo",
             ),
             _ficha(
                 por_reponer,
-                "bajo el mínimo — conviene reponer",
+                "Bajo el mínimo",
+                "Conviene reponer antes de que se agoten",
                 lista + "?situacion=bajas",
                 "ojo",
-                "flechas",
             ),
             _ficha(
                 sin_foto,
-                "sin fotos — se ven pobres en el catálogo",
+                "Sin fotos",
+                "Se ven pobres en el catálogo de la web",
                 productos + "?completitud=sin_foto",
                 "neutro",
-                "foto",
             ),
         ]
         fichas = [f for f in fichas if f["cuantos"]]
@@ -135,13 +141,11 @@ class PanelDacars(admin.AdminSite):
         productos = reverse("admin:catalogo_producto_changelist")
         return [
             {
-                "icono": "caja",
                 "valor": Producto.objects.publicados().count(),
                 "rotulo": "publicados en la web",
                 "url": productos,
             },
             {
-                "icono": "etiqueta",
                 # Sin variante activa no hay precio y la ficha ofrece cotizar.
                 # No es una falla: así se publica hoy casi todo el catálogo, y
                 # por eso el número va acá y no entre las alertas.
@@ -152,13 +156,11 @@ class PanelDacars(admin.AdminSite):
                 "url": productos + "?completitud=sin_variante",
             },
             {
-                "icono": "recibo",
                 "valor": del_mes.count(),
                 "rotulo": "pedidos este mes",
                 "url": reverse("admin:pedidos_pedido_changelist"),
             },
             {
-                "icono": "rayo",
                 "valor": vendido,
                 "rotulo": "vendido este mes",
                 "plata": True,

@@ -1,0 +1,55 @@
+{% extends "admin/base_site.html" %}
+{% load panel %}
+{% comment %} La página de una sección (/admin/catalogo/ y sus hermanas).
+
+   Con la barra lateral fija, a esta pantalla casi no se llega: el rail enlaza
+   derecho a cada listado y ya no hay migas de pan. Igual existe y se puede
+   caer acá escribiendo la dirección, así que se dibuja con el mismo lenguaje
+   que el resto en vez de dejarla con las tablas del admin de fábrica.
+
+   Extiende `base_site` y no `admin/index.html` a propósito: de ésa heredaría
+   el `coltype` de dos columnas y el bloque de acciones recientes, y quedaría
+   con un layout distinto al del tablero. {% endcomment %}
+
+{% block bodyclass %}{{ block.super }} app-{{ app_label }}{% endblock %}
+{% block coltype %}colM{% endblock %}
+{% block content_title %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  {% for app in app_list %}
+  <header class="pagina">
+    <div class="pagina__texto">
+      <h1 class="pagina__titulo">{{ app.name }}</h1>
+      {% comment %} A mano y no con `pluralize`: «sección» pierde la tilde en
+         plural, y pegarle «es» daría «secciónes». {% endcomment %}
+      <p class="pagina__bajada">
+        {% if app.models|length == 1 %}1 sección{% else %}{{ app.models|length }} secciones{% endif %}
+        en esta parte del panel.
+      </p>
+    </div>
+  </header>
+
+  <div class="tarjeta tarjeta--lista">
+    {% for model in app.models %}
+    <div class="fila">
+      {% if model.admin_url %}
+      <a class="fila__nombre" href="{{ model.admin_url }}">
+        <svg aria-hidden="true"><use href="#i-{% icono_de model.object_name app.app_label %}"></use></svg>
+        <span>{{ model.name }}</span>
+      </a>
+      {% else %}
+      <span class="fila__nombre fila__nombre--mudo">
+        <svg aria-hidden="true"><use href="#i-{% icono_de model.object_name app.app_label %}"></use></svg>
+        <span>{{ model.name }}</span>
+      </span>
+      {% endif %}
+      {% if model.add_url %}
+      <a class="fila__accion" href="{{ model.add_url }}">Nuevo</a>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

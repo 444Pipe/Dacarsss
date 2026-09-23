@@ -1,86 +1,122 @@
 {% extends "admin/base.html" %}
-{% load static %}
-{% comment %} La marca del panel: el logotipo en lugar del texto, las fuentes
-de DACARS y la hoja que tematiza el admin entero.
+{% load static panel %}
+{% comment %} La estructura del panel: una barra lateral fija y el contenido.
 
-El sprite de iconos se cuela al principio del `header` —antes que nada— para
-que los `<use>` de la página encuentren su símbolo ya en el DOM y no haya un
-parpadeo de huecos vacíos al cargar. Va ahí y no en el `<head>` porque un
-`<svg>` dentro del head no es HTML válido y el navegador lo saca de lugar.
-Las ventanas emergentes del admin (`is_popup`) se saltan el header entero,
-pero tampoco dibujan iconos nuestros, así que no pierden nada. {% endcomment %}
+El rail se dibuja dentro de `{% block header %}`, que es el único punto de
+anclaje del admin que ninguna otra plantilla de Django pisa. Eso trae tres
+cosas gratis:
+
+  · `admin/base.html` envuelve ese bloque en `{% if not is_popup %}`, así que
+    las ventanas emergentes del widget de relacionados no dibujan el rail sin
+    que haya que pedirlo.
+  · Queda antes del `<main>` en el DOM, así que el orden de tabulación sale
+    correcto sin un solo `tabindex`.
+  · `admin/index.html` y `admin/login.html` vacían `nav-sidebar`, no `header`.
+    Poner el rail en `nav-sidebar` lo habría hecho desaparecer justo en el
+    tablero de entrada.
+
+El `{% if has_permission %}` no sobra: las pantallas de recuperar contraseña
+extienden esta plantilla sin estar logueado, y ahí `available_apps` viene
+vacío. Sin la guarda se dibujaría un rail con la marca y ningún enlace.
+
+No hay barra superior. El contador de pendientes vive en el ítem del tablero,
+que es donde hay que ir a atenderlos; una franja horizontal con un solo dato
+adentro es una franja de más.
+{% endcomment %}
 
 {% block extrastyle %}{{ block.super }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Saira:ital,wght@0,600;0,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:ital,wght@0,600;0,700;1,900&display=swap" rel="stylesheet">
 {% include "sitio/_iconos.html" %}
 {% endblock %}
 
-{% comment %} La hoja del panel va en `extrahead` y no en `extrastyle` por el
-orden de carga: `admin/index.html` agrega dashboard.css dentro de `extrastyle`,
-o sea después de lo nuestro, y nos pisaría las reglas del tablero. `extrahead`
-se imprime más abajo en el `<head>`, así que la última palabra es siempre de
-esta hoja. {% endcomment %}
-{% block extrahead %}{{ block.super }}
+{% comment %} La hoja del panel va al final de `responsive`, que es el último
+bloque del `<head>`. Django emite ahí `responsive.css`, y antes `base.css`,
+`changelists.css`, `forms.css` y `dashboard.css`: cargando después de todas,
+esta hoja gana cualquier empate de especificidad y no hace falta inflar los
+selectores para ganarle a las de fábrica. {% endcomment %}
+{% block responsive %}{{ block.super }}
 <link rel="stylesheet" href="{% static 'css/panel.css' %}">
 {% endblock %}
 
 {% block title %}{% if subtitle %}{{ subtitle }} · {% endif %}{{ title }} · Panel DACARS{% endblock %}
 
-{% block header %}{% include "admin/_sprite.html" %}{{ block.super }}{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
 
-{% block branding %}
-<h1 id="site-name">
-  <a href="{% url 'admin:index' %}">
-    <img class="dc-logo" src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="DACARS" width="600" height="117">
-  </a>
-</h1>
-{% endblock %}
-
-{% comment %} La barra de usuario de fábrica es una fila de enlaces separados
-por barras: todo pesa lo mismo y «Cerrar sesión» queda al lado de «Ver el
-sitio» como si fueran la misma clase de cosa. Acá se separan en tres: el aviso
-de lo pendiente (que lleva al tablero), el atajo al sitio público, y recién
-después quién sos y cómo salir. {% endcomment %}
-{% block usertools %}
+{% block header %}{% include "admin/_sprite.html" %}
 {% if has_permission %}
-<div id="user-tools">
+{% menu_panel available_apps as menu %}
+<aside class="rail">
 
-  {% if alertas.hay_algo %}
-  <a class="dc-aviso" href="{% url 'admin:index' %}" title="Ver el tablero">
-    <svg aria-hidden="true"><use href="#i-alerta"></use></svg>
-    <b>{{ alertas.pendientes }}</b>
-    <span>por atender</span>
+  <a class="rail__marca" href="{% url 'admin:index' %}">
+    <img class="rail__logo" src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="DACARS" width="600" height="117">
+    <span class="rail__leyenda">Panel de control</span>
   </a>
-  {% endif %}
 
-  {% if site_url %}
-  <a class="dc-cabecera__enlace" href="{{ site_url }}" target="_blank" rel="noopener">
-    <svg aria-hidden="true"><use href="#i-web"></use></svg>
-    <span>Ver el sitio</span>
-  </a>
-  {% endif %}
+  <nav class="rail__nav" aria-label="Secciones del panel">
+    {% url 'admin:index' as inicio %}
+    {% comment %} El tablero se compara por igualdad y no por prefijo: «/admin/»
+       es el comienzo de toda dirección del panel, así que un prefijo lo dejaría
+       marcado como activo en todas las pantallas. {% endcomment %}
+    <a class="rail__item{% if request.path == inicio %} es-actual{% endif %}" href="{{ inicio }}"
+       {% if request.path == inicio %}aria-current="page"{% endif %}>
+      <svg class="rail__ico" aria-hidden="true"><use href="#i-tablero"></use></svg>
+      <span class="rail__texto">Tablero</span>
+      {% if alertas.pendientes %}<span class="rail__cuenta">{{ alertas.pendientes }}</span>{% endif %}
+    </a>
 
-  {% firstof user.get_short_name user.get_username as quien %}
-  <div class="dc-yo">
-    <span class="dc-yo__inicial" aria-hidden="true">{{ quien|slice:":1" }}</span>
-    <span class="dc-yo__nombre">{{ quien }}</span>
+    {% for m in menu.trabajo %}
+    {% activo m.admin_url as marcado %}
+    <a class="rail__item{{ marcado }}" href="{{ m.admin_url }}"{% if marcado %} aria-current="page"{% endif %}>
+      <svg class="rail__ico" aria-hidden="true"><use href="#i-{% icono_de m.object_name m.app_label %}"></use></svg>
+      <span class="rail__texto">{{ m.name }}</span>
+    </a>
+    {% endfor %}
+
+    {% if menu.ajustes %}
+    <hr class="rail__corte">
+    {% for m in menu.ajustes %}
+    {% activo m.admin_url as marcado %}
+    <a class="rail__item{{ marcado }}" href="{{ m.admin_url }}"{% if marcado %} aria-current="page"{% endif %}>
+      <svg class="rail__ico" aria-hidden="true"><use href="#i-{% icono_de m.object_name m.app_label %}"></use></svg>
+      <span class="rail__texto">{{ m.name }}</span>
+    </a>
+    {% endfor %}
+    {% endif %}
+  </nav>
+
+  <div class="rail__pie">
+    {% firstof user.get_short_name user.get_username as quien %}
+    <div class="rail__yo">
+      <span class="rail__inicial" aria-hidden="true">{{ quien|slice:":1" }}</span>
+      <span class="rail__quien">
+        <b>{{ quien }}</b>
+        <small>{% if user.is_superuser %}Dueño{% else %}Equipo{% endif %}</small>
+      </span>
+    </div>
+
+    <form class="rail__salir" method="post" action="{% url 'admin:logout' %}">{% csrf_token %}
+      <button type="submit" title="Cerrar sesión">
+        <svg aria-hidden="true"><use href="#i-salir"></use></svg>
+        <span>Cerrar sesión</span>
+      </button>
+    </form>
+
+    {% if site_url %}
+    <a class="rail__enlace" href="{{ site_url }}" target="_blank" rel="noopener" title="Ver el sitio">
+      <svg aria-hidden="true"><use href="#i-web"></use></svg>
+      <span>Ver el sitio</span>
+    </a>
+    {% endif %}
+    {% if user.has_usable_password %}
+    <a class="rail__enlace" href="{% url 'admin:password_change' %}" title="Cambiar contraseña">
+      <svg aria-hidden="true"><use href="#i-llave"></use></svg>
+      <span>Cambiar contraseña</span>
+    </a>
+    {% endif %}
   </div>
 
-  {% if user.has_usable_password %}
-  <a class="dc-cabecera__enlace" href="{% url 'admin:password_change' %}">
-    <svg aria-hidden="true"><use href="#i-llave"></use></svg>
-    <span>Contraseña</span>
-  </a>
-  {% endif %}
-
-  <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
-    {% csrf_token %}
-    <button type="submit">Salir</button>
-  </form>
-</div>
+</aside>
 {% endif %}
 {% endblock %}
-
-{% block nav-global %}{% endblock %}

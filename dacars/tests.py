@@ -158,7 +158,11 @@ class ElPanelSeDibuja(TestCase):
         html = self.client.get(reverse("admin:index")).content.decode()
         self.assertIn("css/panel.css", html)
         self.assertIn("logo-wordmark", html)
-        self.assertIn("Qué hay para hoy", html)
+        # La barra lateral propia: la marca, la navegación y el pie de usuario.
+        # Es lo que reemplazó al encabezado del admin de fábrica.
+        self.assertIn('class="rail"', html)
+        self.assertIn("Panel de control", html)
+        self.assertIn("Cerrar sesión", html)
 
 
 class LaEntradaAlPanel(TestCase):

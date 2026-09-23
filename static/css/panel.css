@@ -1,1135 +1,1184 @@
 /* ==========================================================================
    DACARS — El panel
 
+   Un panel plano. La jerarquía se construye con TAMAÑO y ESPACIO, nunca con
+   brillo ni saturación: por eso acá no hay un solo gradiente, ni una sombra,
+   ni un desenfoque, y el azul de la marca no rellena ninguna superficie salvo
+   el botón principal. Lo que en el sitio público es un gesto deportivo, en una
+   herramienta que se mira ocho horas es ruido.
+
+   Reglas duras (si alguna aparece, la hoja volvió al diseño anterior):
+     1. Cero linear-gradient y cero radial-gradient.
+     2. Cero box-shadow, salvo el anillo de foco.
+     3. Cero backdrop-filter y cero blur.
+     4. Cero itálica.
+     5. Saira nunca por debajo de 20px: abajo de eso manda Inter.
+     6. Un solo acento, el azul. El cian se queda en el sitio público.
+     7. Ninguna superficie rellena de color excepto el botón principal; los
+        estados viven en bordes, puntos y texto.
+     8. Nada se mueve al pasar el mouse: cambian color, borde y fondo.
+     9. Cero `opacity` para atenuar texto — se usa el gris que corresponda.
+    10. Seis tamaños de letra, tres grises de texto, tres radios. No más.
+
    El admin de Django se tematiza por variables CSS, así que la primera parte
-   de esta hoja es redefinirlas con la paleta de la marca. Lo que sigue son los
-   retoques de forma: el encabezado, las listas, los formularios y el tablero
-   de entrada.
-
-   La idea de fondo es el tablero de un auto: números grandes en itálica, cada
-   ficha con su franja de color encendida arriba como un testigo, y una rejilla
-   técnica muy tenue detrás de todo. La tipografía y los colores son los mismos
-   del sitio público (static/css/style.css) a propósito: es la misma marca, y
-   quien atiende el local pasa del catálogo al panel sin cambiar de mundo.
-
-   Las variables se declaran en los cuatro selectores de tema (`:root` más los
-   tres `data-theme`) a propósito. Django define la versión clara y la oscura
-   con la misma especificidad; como esta hoja carga después, gana la nuestra en
-   los tres modos. El resultado: el panel se ve igual siempre, que es lo que se
-   quiere de una herramienta de trabajo.
+   es redefinir las suyas; el resto es forma. Esta hoja se carga al final del
+   `<head>` (bloque `responsive` de base_site.html), después de responsive.css,
+   así que le gana a las de fábrica sin inflar selectores.
    ========================================================================== */
 
 :root,
 html[data-theme="auto"],
 html[data-theme="light"],
 html[data-theme="dark"] {
-  /* --- Paleta de marca (las mismas de style.css) --- */
-  --dc-ink:      #04060c;
-  --dc-ink-2:    #070b14;
-  --dc-panel:    #0a1020;
-  --dc-panel-2:  #0d1526;
-  --dc-line:     rgba(122, 163, 255, .14);
-  --dc-line-hi:  rgba(122, 163, 255, .28);
-  --dc-blue:     #0a5cff;
-  --dc-blue-hi:  #3d8bff;
-  --dc-cyan:     #00c8ff;
-  --dc-text:     #e9eef8;
-  --dc-muted:    #93a0b8;
-  --dc-muted-2:  #6c7a93;
 
-  /* Señales. Más claras que las del sitio: acá van sobre fondo oscuro. */
-  --dc-ok:       #3ddc84;
-  --dc-ojo:      #ffb74d;
-  --dc-mal:      #ff7a8f;
+  /* --- Superficies. Negro azulado: es el de la marca, y a dos puntos de azul
+         del negro puro se lee como negro. Todo hex plano, nunca rgba: un rgba
+         calculado sobre dos fondos distintos da dos colores distintos en la
+         misma pantalla, que es justo lo que rompe la sensación de plano. --- */
+  --bg:        #06080e;   /* fondo de la página */
+  --bg-rail:   #090c14;   /* barra lateral */
+  --bg-card:   #0b0f18;   /* tarjeta, fila de tabla, campo */
+  --bg-card-2: #101625;   /* fila con el mouse encima, campo enfocado */
 
-  /* --- Variables del admin --- */
-  --primary:     var(--dc-blue-hi);
-  --secondary:   var(--dc-panel);
-  --accent:      var(--dc-cyan);
+  /* --- Líneas. Dos trabajos distintos que no se mezclan: las decorativas
+         pueden ser casi invisibles; las de un control real (campo, botón
+         secundario) tienen que llegar al 3:1 que pide WCAG 1.4.11. --- */
+  --line:     #171d2b;    /* divisor, borde de tarjeta */
+  --line-hi:  #232b3d;    /* divisor de sección */
+  --line-ctl: #59637a;    /* borde de campo, select, botón secundario */
+
+  /* --- Texto. Tres tonos, ni uno más: si algo tiene que pesar menos se hace
+         más chico o se le da más aire, nunca más apagado. Los tres pasan AA
+         sobre los tres fondos (16.9:1 / 8.1:1 / 5.5:1). --- */
+  --tx:   #e8ecf5;
+  --tx-2: #9aa5bb;
+  --tx-3: #7b8699;
+
+  /* --- El acento. #0a5cff da 3.78:1 sobre el fondo: no puede ser texto. Su
+         único trabajo es relleno sólido con texto blanco encima. El azul que
+         se lee es --az-texto, que da 7.35:1. --- */
+  --az-tinte:     #09142c;  /* fondo del ítem activo del rail */
+  --az-tinte-2:   #091122;  /* ítem del rail con el mouse encima */
+  --az-tinte-3:   #0b172f;  /* fila seleccionada sobre tarjeta */
+  --az-borde:     #2f7bff;  /* barra del ítem activo, borde de chip activo */
+  --az-solido:    #0a5cff;  /* relleno del botón principal, y nada más */
+  --az-solido-2:  #0847c9;  /* su hover: OSCURECE, ver nota abajo */
+  --az-texto:     #5f9dff;  /* todo azul que sea texto o icono */
+
+  /* El hover del botón principal oscurece en vez de aclarar. No es gusto: con
+     un azul más claro el texto blanco encima cae a 3.89:1 y falla AA; con éste
+     sube a 7.62:1. Y de paso encaja con la contención — acá nada se enciende. */
+
+  /* --- Estados. Menos saturados que los del sitio a propósito: verde de
+         señal, no de neón; rojo, no rosa. --- */
+  --ok:  #2fae79;
+  --ojo: #e0a33c;
+  --mal: #f2555f;
+
+  /* --- Medidas --- */
+  /* 264 y no 250: es lo que necesita «Movimientos de inventario», el nombre
+     más largo del menú, para entrar entero en una línea. */
+  --rail:  264px;
+  --r:     6px;    /* tarjeta */
+  --r-sm:  4px;    /* fila, ítem de navegación */
+  --pad:   32px;   /* margen del contenido */
+
+  --f-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Segoe UI y no Arial Narrow como respaldo: Arial Narrow es mucho más
+     estrecha que Saira y, si Google Fonts no responde, descuadra el layout. */
+  --f-display: 'Saira', 'Segoe UI', system-ui, sans-serif;
+
+  /* --- Variables del admin de Django --- */
+  --primary:     var(--az-solido);
+  --secondary:   var(--bg-card);
+  --accent:      var(--az-texto);
   --primary-fg:  #ffffff;
 
-  --body-fg:          var(--dc-text);
-  --body-bg:          var(--dc-ink);
-  --body-quiet-color: var(--dc-muted);
-  --body-loud-color:  #ffffff;
+  --body-fg:          var(--tx);
+  --body-bg:          var(--bg);
+  --body-quiet-color: var(--tx-2);
+  --body-loud-color:  var(--tx);
 
-  --header-color:          var(--dc-muted);
-  --header-branding-color: var(--dc-text);
-  --header-bg:             var(--dc-ink-2);
-  --header-link-color:     var(--dc-text);
+  --header-color:          var(--tx-2);
+  --header-branding-color: var(--tx);
+  --header-bg:             var(--bg-rail);
+  --header-link-color:     var(--tx);
 
-  --breadcrumbs-fg:      var(--dc-muted-2);
-  --breadcrumbs-link-fg: var(--dc-muted);
-  --breadcrumbs-bg:      transparent;
+  --breadcrumbs-fg:      var(--tx-3);
+  --breadcrumbs-link-fg: var(--tx-2);
+  --breadcrumbs-bg:      var(--bg-rail);
 
-  --link-fg:          var(--dc-blue-hi);
-  --link-hover-color: var(--dc-cyan);
-  --link-selected-fg: var(--dc-cyan);
+  --link-fg:          var(--az-texto);
+  --link-hover-color: var(--az-texto);
+  --link-selected-fg: var(--az-texto);
 
-  --hairline-color: var(--dc-line);
-  --border-color:   var(--dc-line-hi);
+  --hairline-color: var(--line);
+  --border-color:   var(--line-ctl);
 
-  --error-fg: var(--dc-mal);
+  --error-fg: var(--mal);
 
-  --message-success-bg: rgba(20, 70, 45, .55);
-  --message-warning-bg: rgba(75, 55, 15, .55);
-  --message-error-bg:   rgba(75, 22, 32, .55);
+  --message-success-bg: #0c1b16;
+  --message-warning-bg: #1d1708;
+  --message-error-bg:   #1e0d10;
 
-  --darkened-bg:  var(--dc-ink-2);
-  --selected-bg:  var(--dc-panel-2);
-  --selected-row: rgba(61, 139, 255, .14);
+  --darkened-bg:  var(--bg-rail);
+  --selected-bg:  var(--bg-card-2);
+  --selected-row: var(--az-tinte-3);
 
-  --button-fg:              #ffffff;
-  --button-bg:              var(--dc-blue);
-  --button-hover-bg:        var(--dc-blue-hi);
-  --default-button-bg:      var(--dc-blue);
-  --default-button-hover-bg: var(--dc-blue-hi);
-  --close-button-bg:        #1a2338;
-  --close-button-hover-bg:  #27324d;
-  --delete-button-bg:       #a3213a;
-  --delete-button-hover-bg: #c22a48;
+  --button-fg:               #ffffff;
+  --button-bg:               var(--az-solido);
+  --button-hover-bg:         var(--az-solido-2);
+  --default-button-bg:       var(--az-solido);
+  --default-button-hover-bg: var(--az-solido-2);
+  --close-button-bg:         var(--bg-card);
+  --close-button-hover-bg:   var(--bg-card-2);
+  --delete-button-bg:        #8f2029;
+  --delete-button-hover-bg:  #6f181f;
 
-  --object-tools-fg:       var(--dc-text);
-  --object-tools-bg:       #1a2338;
-  --object-tools-hover-bg: var(--dc-blue);
+  --object-tools-fg:       var(--tx-2);
+  --object-tools-bg:       var(--bg-card);
+  --object-tools-hover-bg: var(--bg-card-2);
 
-  --font-family-primary: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-
-  /* --- Propias --- */
-  --dc-display: 'Saira', 'Arial Narrow', system-ui, sans-serif;
-  --dc-r:       14px;
-  --dc-r-sm:    10px;
-  --dc-cab-h:   63px;   /* alto del encabezado fijo: 35px de la barra + 2×14 */
-  --dc-ease:    cubic-bezier(.22, .61, .36, 1);
-  --dc-sombra:  0 20px 44px -28px rgba(0, 0, 0, .95);
-  --dc-carta:   linear-gradient(180deg, rgba(13, 21, 38, .92), rgba(9, 15, 29, .92));
-  --dc-borde-luz: inset 0 1px 0 rgba(255, 255, 255, .045);
+  --font-family-primary: var(--f-body);
 }
 
 /* El selector de tema claro/oscuro se esconde: el panel tiene un solo aspecto
-   y ofrecer un cambio que no cambia nada solo confunde. Para devolverlo,
-   borrá esta regla. */
+   y ofrecer un cambio que no cambia nada solo confunde. */
 .theme-toggle { display: none !important; }
 
-/* El sprite no se dibuja; solo guarda los símbolos que copian los `<use>`. */
+/* El sprite no se dibuja; sólo guarda los símbolos que copian los `<use>`. */
 .dc-sprite { display: none; }
 
-/* ==========================================================================
-   Atmósfera
-   ========================================================================== */
 body {
-  background-color: var(--dc-ink);
-  background-image: radial-gradient(90% 52% at 50% -12%, rgba(12, 62, 168, .3) 0%, transparent 64%);
-  background-attachment: fixed;
+  background: var(--bg);
+  color: var(--tx);
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* La rejilla de fondo. Se desvanece hacia abajo con una máscara para que no
-   compita con las tablas, que ya son una rejilla de por sí. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(122, 163, 255, .05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(122, 163, 255, .05) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(75% 55% at 50% 0%, #000 0%, transparent 80%);
-  mask-image: radial-gradient(75% 55% at 50% 0%, #000 0%, transparent 80%);
-}
-#container { position: relative; z-index: 1; }
-
-/* Los iconos son de trazo y heredan el color de su caja. Se limita a los
-   lugares donde ponemos los nuestros para no tocar los del admin de fábrica,
-   que son de relleno. */
-.dc-tablero svg,
-.dc-apps svg,
-#user-tools svg,
-#nav-sidebar svg {
+/* Todos los iconos propios son de trazo y heredan el color de su caja. Se
+   limita a nuestras zonas para no tocar los del admin de fábrica, que son
+   imágenes. */
+.rail svg,
+.tablero svg,
+#content-main svg,
+.vacio svg {
   width: 1em;
   height: 1em;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.7;
+  stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
   flex: none;
 }
 
+/* El anillo de foco: la única sombra de toda la hoja. */
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--az-texto);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
 /* ==========================================================================
-   Encabezado
+   Armazón: rail fijo + contenido
+
+   El rail es `position: fixed` y el contenido se corre con `padding` sobre
+   #container. Tiene que ser padding y no margin: #container es `position:
+   relative`, o sea el bloque contenedor de los absolutos de adentro, y un
+   margen le movería el origen — con lo cual los calendarios y relojes que
+   Django cuelga del body aparecerían 252px corridos.
    ========================================================================== */
-/* Sin `min-height`: en un celular la barra de usuario se parte en dos líneas y
-   una altura mínima le impediría crecer, dejando los últimos enlaces pisando el
-   contenido. La altura sale del relleno, y `--dc-cab-h` la repite para que la
-   barra lateral sepa dónde pegarse. */
-#header {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  gap: 18px;
-  padding: 14px clamp(16px, 3vw, 34px);
-  background: rgba(7, 11, 20, .86);
-  -webkit-backdrop-filter: saturate(150%) blur(14px);
-  backdrop-filter: saturate(150%) blur(14px);
-  border-bottom: 1px solid var(--dc-line);
+#container {
+  box-sizing: border-box;   /* base.css no trae reset global de box-sizing */
+  min-width: 0;             /* anula el min-width:980px de base.css */
+  padding-inline-start: var(--rail);
 }
-#header a:link, #header a:visited { color: var(--dc-muted); }
-#header a:focus, #header a:hover { text-decoration: none; color: var(--dc-text); }
-#branding h1 { margin: 0; }
-#branding h1 a { display: block; }
-.dc-logo { height: 24px; width: auto; display: block; }
 
-#user-tools {
+/* Entrar y las ventanas emergentes no dibujan el rail: tampoco se corren. */
+body.login #container,
+body.popup #container { padding-inline-start: 0; }
+
+/* Sin esto una tabla ancha no deja encoger a su contenedor flex y se escapa
+   por encima del rail. */
+#container > .main { min-width: 0; }
+.main > .content { min-width: 0; flex-shrink: 1; }
+
+/* El enlace de «saltar al contenido» aparece en 0,0 al enfocarlo, justo debajo
+   del rail. Se lo corre y se lo sube. */
+.skip-to-content-link:focus {
+  inset-inline-start: var(--rail);
+  z-index: 100;
+  background: var(--bg-card);
+  color: var(--tx);
+  border: 1px solid var(--line-ctl);
+  border-radius: var(--r-sm);
+}
+
+#content { padding: var(--pad); max-width: 1400px; }
+#footer:empty { padding: 0; }      /* base.css le deja 20px muertos */
+
+/* base.css encierra el tablero en 600px fijos (`.dashboard #content`), que con
+   el rail al lado dejaría el contenido apretado contra la izquierda y media
+   pantalla vacía. */
+.dashboard #content { width: auto; }
+.dashboard #content-main { float: none; width: auto; }
+
+/* Un formulario no gana nada por ser más ancho: los campos miden lo mismo y el
+   ojo tiene que cruzar vacío para ir de la etiqueta al campo. */
+body.change-form #content { max-width: 1040px; }
+
+/* base.css pinta TODO enlace con `a:link{color:var(--link-fg)}`, que por llevar
+   una pseudoclase le gana a una regla de clase suelta. Nuestros componentes que
+   son enlaces (el rail, las métricas, los avisos, los botones) repiten
+   `:link, :visited` para empatarle en especificidad y ganar por orden de hoja.
+   Sin esto el rail entero sale azul. */
+.rail__item, .rail__item:link, .rail__item:visited,
+.rail__enlace, .rail__enlace:link, .rail__enlace:visited { color: var(--tx-2); }
+.rail__item:hover, .rail__item:focus { color: var(--tx); }
+.rail__item.es-actual, .rail__item.es-actual:link, .rail__item.es-actual:visited { color: var(--az-texto); }
+.rail__enlace:hover { color: var(--tx-2); }
+
+.rail__marca, .rail__marca:link, .rail__marca:visited { color: inherit; }
+.boton, .boton:link, .boton:visited { color: var(--tx-2); }
+.boton:hover { color: var(--tx); }
+.boton--primario, .boton--primario:link, .boton--primario:visited,
+.boton--primario:hover { color: #fff; }
+.metrica, .metrica:link, .metrica:visited,
+.aviso, .aviso:link, .aviso:visited,
+.fila__nombre, .fila__nombre:link, .fila__nombre:visited { color: inherit; }
+.fila__accion, .fila__accion:link, .fila__accion:visited { color: var(--tx-3); }
+.fila__accion:hover { color: var(--az-texto); }
+.historial__que a:link, .historial__que a:visited { color: var(--tx); }
+.historial__que a:hover { color: var(--az-texto); }
+.dc-volver, .dc-volver:link, .dc-volver:visited { color: var(--tx-3); }
+.dc-volver:hover { color: var(--tx-2); }
+
+/* ==========================================================================
+   El rail
+   ========================================================================== */
+.rail {
+  position: fixed;
+  /* `inset-block: 0` y no `height: 100vh`: en celular el 100vh ignora la barra
+     de direcciones y el pie del rail queda tapado por el navegador. */
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--rail);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-rail);
+  border-inline-end: 1px solid var(--line);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.rail__marca {
+  display: block;
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+.rail__logo { height: 24px; width: auto; display: block; }
+.rail__leyenda {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--tx-3);
+}
+
+/* `min-height: 0` no es opcional: un hijo flex arranca en `min-height: auto`,
+   y sin esto la lista no encoge y el pie de usuario se va fuera de pantalla en
+   lugar de que la navegación haga scroll. */
+.rail__nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.rail__item {
   display: flex;
   align-items: center;
-  gap: 9px;
-  margin: 0;
-  padding: 0;
-  font-size: 12.5px;
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--dc-muted-2);
-}
-
-/* Los enlaces del encabezado: icono + palabra, en cápsula. Que «Salir» no se
-   parezca a «Ver el sitio» es la mitad del trabajo de esta barra. */
-.dc-cabecera__enlace,
-#logout-form button {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  background: none;
-  font-size: 12.5px;
+  gap: 12px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: var(--r-sm);
+  border-inline-start: 2px solid transparent;
+  font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
-  transition: background .18s, border-color .18s, color .18s;
+  color: var(--tx-2);
+  text-decoration: none;
+  transition: background .15s, color .15s;
 }
-.dc-cabecera__enlace:hover,
-#logout-form button:hover {
-  background: rgba(61, 139, 255, .1);
-  border-color: var(--dc-line-hi);
-  color: var(--dc-text);
+.rail__item:hover { background: var(--az-tinte-2); color: var(--tx); }
+.rail__item.es-actual {
+  background: var(--az-tinte);
+  border-inline-start-color: var(--az-borde);
+  color: var(--az-texto);
 }
-#logout-form { display: inline; margin: 0; padding: 0; }
-#logout-form button { color: var(--dc-muted-2); }
-#logout-form button:hover { color: var(--dc-mal); border-color: rgba(255, 122, 143, .38); background: rgba(255, 122, 143, .09); }
+.rail__ico { font-size: 17px; color: var(--tx-3); }
+.rail__item:hover .rail__ico { color: var(--tx-2); }
+.rail__item.es-actual .rail__ico { color: var(--az-texto); }
+.rail__texto { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-/* El aviso de lo pendiente. Va en el encabezado y no solo en el tablero
-   porque lo urgente no deja de serlo cuando uno está editando un producto. */
-.dc-aviso {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 13px 5px 10px;
+/* El contador. Gris salvo que haya algo pendiente: uno que está siempre
+   encendido deja de comunicar a los dos días. */
+.rail__cuenta {
+  margin-inline-start: auto;
+  min-width: 20px;
+  padding: 1px 6px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 183, 77, .38);
-  background: rgba(255, 183, 77, .1);
-  font-size: 12px;
-  font-weight: 500;
-  transition: border-color .2s, background .2s;
+  background: var(--bg-card);
+  border: 1px solid var(--ojo);
+  color: var(--ojo);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
-#header .dc-aviso:link, #header .dc-aviso:visited { color: var(--dc-ojo); }
-#header .dc-aviso:hover { color: var(--dc-ojo); background: rgba(255, 183, 77, .17); border-color: rgba(255, 183, 77, .6); }
-.dc-aviso b { font-family: var(--dc-display); font-style: italic; font-weight: 800; font-size: 14.5px; }
-.dc-aviso svg { animation: dc-late 2.6s ease-in-out infinite; }
-@keyframes dc-late { 0%, 100% { opacity: .55 } 50% { opacity: 1 } }
 
-.dc-yo {
+.rail__corte {
+  height: 0;
+  margin: 12px 12px;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.rail__pie {
+  border-top: 1px solid var(--line);
+  padding: 14px 12px 16px;
+}
+.rail__yo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding-left: 10px;
-  margin-left: 2px;
-  border-left: 1px solid var(--dc-line);
+  gap: 10px;
+  padding: 0 12px 12px;
 }
-.dc-yo__inicial {
-  width: 27px;
-  height: 27px;
+.rail__inicial {
+  width: 30px;
+  height: 30px;
+  flex: none;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--dc-blue), #0733a0);
+  background: var(--az-solido);
   color: #fff;
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 800;
   font-size: 13px;
+  font-weight: 600;
   text-transform: uppercase;
 }
-.dc-yo__nombre { color: var(--dc-text); font-weight: 600; }
-
-/* ==========================================================================
-   Migas de pan
-   ========================================================================== */
-div.breadcrumbs {
-  border-bottom: 1px solid var(--dc-line);
-  background: rgba(7, 11, 20, .5);
-  padding: 10px clamp(16px, 3vw, 34px);
-  font-size: 12.5px;
-}
-
-/* ==========================================================================
-   Barra lateral
-   ========================================================================== */
-/* Arranca debajo del encabezado, que ahora queda fijo. */
-#nav-sidebar.sticky, .toggle-nav-sidebar.sticky {
-  top: var(--dc-cab-h);
-  max-height: calc(100vh - var(--dc-cab-h));
-}
-#nav-sidebar {
-  background: rgba(7, 11, 20, .72);
-  border-right: 1px solid var(--dc-line);
-  padding-bottom: 20px;
-}
-.toggle-nav-sidebar {
-  background: transparent;
-  border-right: 1px solid var(--dc-line);
-  color: var(--dc-muted-2);
-  transition: color .18s, background .18s;
-}
-.toggle-nav-sidebar:hover, .toggle-nav-sidebar:focus { background: rgba(61, 139, 255, .1); color: var(--dc-cyan); }
-
-#nav-filter {
-  margin: 12px 14px;
-  width: calc(100% - 28px);
-  padding: 8px 11px;
-  border-radius: 9px;
-  border: 1px solid var(--dc-line-hi);
-  background: rgba(4, 6, 12, .6);
-  font-size: 12.5px;
-}
-#nav-filter:focus { border-color: var(--dc-blue-hi); box-shadow: 0 0 0 3px rgba(61, 139, 255, .14); outline: none; }
-
-#nav-sidebar .module { background: none; border: 0; border-radius: 0; box-shadow: none; margin-bottom: 4px; }
-#nav-sidebar .module caption {
-  background: none;
-  border: 0;
-  padding: 14px 16px 6px;
-  font-family: var(--dc-display);
-  font-style: normal;
-  font-weight: 700;
-  font-size: 10.5px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--dc-muted-2);
-}
-#nav-sidebar .module caption a:link, #nav-sidebar .module caption a:visited { color: inherit; }
-#nav-sidebar .module th, #nav-sidebar .module td { border: 0; padding: 0; }
-#nav-sidebar .module th { padding-left: 14px; }
-#nav-sidebar tr { transition: background .15s; }
-#nav-sidebar tr:hover { background: rgba(61, 139, 255, .07); }
-#nav-sidebar th { display: flex; align-items: center; gap: 9px; }
-.dc-nav__ico { font-size: 14px; color: var(--dc-muted-2); }
-#nav-sidebar th a {
+.rail__quien { min-width: 0; line-height: 1.25; }
+.rail__quien b { display: block; font-size: 13.5px; font-weight: 600; color: var(--tx); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail__quien small {
   display: block;
-  padding: 7px 0;
-  font-size: 13px;
-  color: var(--dc-muted);
-  border: 0;
-}
-#nav-sidebar tr:hover th a { color: var(--dc-text); }
-#nav-sidebar td { vertical-align: middle; }
-/* El relleno de la izquierda es el hueco del icono que Django le pone de
-   fondo a `.addlink`; sin él el signo «+» le queda debajo del texto. Y el
-   fondo se centra a lo alto porque el suyo va clavado arriba, que con este
-   relleno lo dejaba flotando sobre la palabra. */
-#nav-sidebar td a {
-  display: inline-block;
-  padding: 7px 12px 7px 18px;
-  background-position: 0 50%;
-  font-size: 11.5px;
-  color: var(--dc-muted-2);
-}
-#nav-sidebar td a:hover { color: var(--dc-ok); }
-
-#nav-sidebar .current-model { background: rgba(61, 139, 255, .14); box-shadow: inset 2px 0 0 var(--dc-blue-hi); }
-#nav-sidebar .current-model th a, #nav-sidebar .current-model .dc-nav__ico { color: var(--dc-cyan); }
-#nav-sidebar .current-app .section:link, #nav-sidebar .current-app .section:visited { color: var(--dc-muted); }
-
-/* ==========================================================================
-   Ancho y ritmo del contenido
-   ========================================================================== */
-#content { padding: 26px clamp(16px, 3vw, 34px) 70px; }
-
-/* Django encierra el tablero en 600px fijos (`.dashboard #content`), que en un
-   monitor de escritorio deja media pantalla vacía y apila todo contra el borde
-   izquierdo. Acá se suelta y se le pone un tope cómodo de lectura. */
-.dashboard #content { width: auto; max-width: 1680px; }
-.dashboard #content-main { float: none; width: auto; }
-
-/* Un formulario no gana nada por ser más ancho: los campos quedan igual de
-   largos y el ojo tiene que viajar de la etiqueta al campo cruzando vacío. */
-body.change-form #content { max-width: 1180px; }
-
-#content > h1 {
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .015em;
-  font-size: 23px;
-  color: var(--dc-text);
-  margin-bottom: 18px;
-}
-
-/* ==========================================================================
-   Módulos, tablas y listados
-   ========================================================================== */
-.module {
-  background: var(--dc-carta);
-  border: 1px solid var(--dc-line);
-  border-radius: var(--dc-r);
-  box-shadow: var(--dc-sombra), var(--dc-borde-luz);
-  overflow: hidden;
-}
-.module caption,
-.module h2,
-.inline-group h2 {
-  background: rgba(61, 139, 255, .08);
-  color: var(--dc-text);
-  border-bottom: 1px solid var(--dc-line);
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  font-size: 12.5px;
-  padding: 11px 16px;
-}
-thead th { background: rgba(4, 6, 12, .45); border-bottom: 1px solid var(--dc-line-hi); }
-thead th, thead th a:link, thead th a:visited {
-  color: var(--dc-muted-2);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: .08em;
+  letter-spacing: .14em;
   text-transform: uppercase;
+  color: var(--tx-3);
 }
-td, th { border-bottom: 1px solid var(--dc-line); }
-#result_list tbody tr { transition: background .14s, box-shadow .14s; }
-#result_list tbody tr:hover { background: rgba(61, 139, 255, .07); box-shadow: inset 2px 0 0 var(--dc-blue-hi); }
-#result_list tbody tr.selected { background: rgba(61, 139, 255, .13); }
-#changelist-form .results { border-radius: var(--dc-r); overflow: hidden; border: 1px solid var(--dc-line); }
-.row1, .row2 { background: none; }
+
+.rail__salir { margin: 0; padding: 0; }
+.rail__salir button,
+.rail__enlace {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--tx-3);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.rail__salir button svg,
+.rail__enlace svg { font-size: 15px; }
+.rail__enlace:hover { background: var(--az-tinte-2); color: var(--tx-2); }
+.rail__salir button { color: var(--mal); }
+.rail__salir button:hover { background: #160b0d; }
 
 /* ==========================================================================
-   Buscador, filtros y acciones
+   Encabezado de página
    ========================================================================== */
-#toolbar {
-  background: none;
-  border: 0;
-  padding: 0 0 14px;
+.pagina {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
 }
+.pagina__texto { min-width: 0; }
+.pagina__titulo,
+#content > h1 {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--tx);
+}
+#content > h1 { margin-bottom: 24px; }
+.pagina__bajada { margin: 8px 0 0; font-size: 14px; color: var(--tx-2); }
+.pagina__acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Django dibuja las herramientas de objeto («Añadir producto», «Historial»)
+   como una lista flotante después del <h1>, y las sube con un margen negativo
+   para dejarlas a su lado. Se conserva el mecanismo con la medida de nuestro
+   h1: 30px por 1.15 de interlínea más 24px de margen ≈ 58px. */
+.object-tools {
+  float: right;
+  margin: 0 0 0 16px;
+  margin-top: -58px;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+.object-tools li { display: inline-block; margin: 0 0 0 8px; }
+.object-tools a,
+.object-tools a:link,
+.object-tools a:visited {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--line-ctl);
+  border-radius: 999px;
+  background: none;
+  color: var(--tx-2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.object-tools a:hover { background: var(--bg-card-2); color: var(--tx); border-color: var(--tx-3); }
+/* Los iconos de fondo de Django no se pueden recolorear: se sacan. */
+.object-tools a.addlink,
+.object-tools a.changelink,
+.object-tools a.viewsitelink,
+.object-tools a.historylink { background-image: none; padding-inline-start: 16px; }
+
+/* ==========================================================================
+   Botones
+   ========================================================================== */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  border: 1px solid var(--line-ctl);
+  border-radius: var(--r-sm);
+  background: none;
+  color: var(--tx-2);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.boton:hover { background: var(--bg-card-2); color: var(--tx); border-color: var(--tx-3); }
+.boton svg { font-size: 15px; }
+.boton--primario {
+  background: var(--az-solido);
+  border-color: var(--az-solido);
+  color: #fff;
+}
+.boton--primario:hover { background: var(--az-solido-2); border-color: var(--az-solido-2); color: #fff; }
+
+/* Los del admin de fábrica */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  padding: 9px 16px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.button.default, input[type=submit].default, .submit-row input.default { font-weight: 600; }
+.button:not(.default), input[type=submit]:not(.default), a.button:not(.default) {
+  background: none;
+  border-color: var(--line-ctl);
+  color: var(--tx-2);
+}
+.button:not(.default):hover, input[type=submit]:not(.default):hover, a.button:not(.default):hover {
+  background: var(--bg-card-2);
+  color: var(--tx);
+}
+
+/* ==========================================================================
+   Piezas del tablero
+   ========================================================================== */
+.bloque { margin-bottom: 32px; }
+.rotulo {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--tx-3);
+}
+
+.tarjeta {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 20px;
+}
+.tarjeta--lista { padding: 0; overflow: hidden; }
+
+/* --- Métricas --- */
+.metricas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.metrica {
+  display: block;
+  padding: 22px 16px;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  text-decoration: none;
+  transition: border-color .15s, background .15s;
+}
+.metrica:hover { border-color: var(--line-ctl); background: var(--bg-card-2); }
+.metrica__valor {
+  display: block;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--tx);
+  font-variant-numeric: tabular-nums;
+}
+.metrica__signo { font-size: 22px; color: var(--tx-3); margin-inline-end: 1px; }
+.metrica__rotulo {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--tx-3);
+}
+
+/* --- Avisos: filas, no tarjetas. Se leen de un vistazo y se comparan. --- */
+.aviso {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  transition: background .15s;
+}
+.aviso:first-child { border-top: 0; }
+.aviso:hover { background: var(--bg-card-2); }
+.aviso__punto {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--tx-3);
+}
+.aviso__cuantos {
+  min-width: 34px;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--tx);
+  font-variant-numeric: tabular-nums;
+}
+.aviso__texto { flex: 1; min-width: 0; line-height: 1.35; }
+.aviso__texto b { display: block; font-size: 14px; font-weight: 600; color: var(--tx); }
+.aviso__texto small { display: block; margin-top: 2px; font-size: 12.5px; color: var(--tx-3); }
+.aviso__ir { font-size: 16px; color: var(--tx-3); }
+.aviso--mal .aviso__punto { background: var(--mal); }
+.aviso--mal .aviso__cuantos { color: var(--mal); }
+.aviso--ojo .aviso__punto { background: var(--ojo); }
+.aviso--ojo .aviso__cuantos { color: var(--ojo); }
+
+/* Sin problemas no hay color: la ausencia de color *es* el estado «todo bien».
+   Así, en una pantalla sana no hay ni un verde, y el primer rojo que aparezca
+   se ve al instante. */
+.vacio { display: flex; align-items: center; gap: 12px; color: var(--tx-2); }
+.vacio svg { font-size: 18px; color: var(--ok); }
+.vacio p { margin: 0; font-size: 14px; }
+
+.columnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.nota { margin: 0; font-size: 13px; color: var(--tx-3); line-height: 1.55; }
+
+.historial { margin: 0; padding: 0; list-style: none; }
+.historial__item {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+}
+.historial__item:first-child { border-top: 0; padding-top: 0; }
+.historial__item:last-child { padding-bottom: 0; }
+.historial__que { display: block; color: var(--tx); }
+.historial__que a { color: var(--tx); text-decoration: none; }
+.historial__que a:hover { color: var(--az-texto); }
+.historial__meta { display: block; margin-top: 1px; font-size: 11.5px; color: var(--tx-3); }
+
+.ayuda { margin: 0; padding: 0; list-style: none; }
+.ayuda li {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--tx-2);
+}
+.ayuda li:first-child { border-top: 0; padding-top: 0; }
+.ayuda li:last-child { padding-bottom: 0; }
+.ayuda b { color: var(--tx); font-weight: 600; }
+
+/* --- Filas simples (página de sección) --- */
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  border-top: 1px solid var(--line);
+}
+.fila:first-child { border-top: 0; }
+.fila:hover { background: var(--bg-card-2); }
+.fila__nombre {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  font-size: 14px;
+  color: var(--tx);
+  text-decoration: none;
+}
+.fila__nombre svg { font-size: 16px; color: var(--tx-3); }
+.fila__nombre--mudo { color: var(--tx-3); }
+.fila__accion {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--tx-3);
+  text-decoration: none;
+}
+.fila__accion:hover { color: var(--az-texto); }
+
+/* ==========================================================================
+   Módulos, listados y tablas
+   ========================================================================== */
+.module {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 0;
+}
+.module caption,
+.module > h2,
+.inline-group h2 {
+  background: none;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 20px;
+  font-family: var(--f-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--tx-3);
+}
+
+#changelist { gap: 24px; }
+#changelist-form .results {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow-x: auto;
+}
+#result_list { width: 100%; }
+#result_list thead th {
+  background: none;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 16px;
+}
+#result_list thead th,
+#result_list thead th a:link,
+#result_list thead th a:visited {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--tx-3);
+}
+#result_list tbody td,
+#result_list tbody th {
+  border-bottom: 1px solid var(--line);
+  padding: 13px 16px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+#result_list tbody tr:last-child td,
+#result_list tbody tr:last-child th { border-bottom: 0; }
+#result_list tbody tr { background: none; transition: background .15s; }
+#result_list tbody tr:hover { background: var(--bg-card-2); }
+#result_list tbody tr.selected { background: var(--az-tinte-3); }
+.row1, .row2 { background: none; }
+
+/* Buscador */
+#toolbar { background: none; border: 0; padding: 0 0 20px; }
 #toolbar form#changelist-search { display: flex; align-items: center; gap: 8px; }
 #toolbar #searchbar {
   flex: 1 1 auto;
-  max-width: 420px;
+  max-width: 380px;
+  height: 38px;
   margin: 0;
-  padding: 9px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--dc-line-hi);
-  background: rgba(4, 6, 12, .6);
+  padding: 0 14px;
+  border: 1px solid var(--line-ctl);
+  border-radius: var(--r-sm);
+  background: var(--bg-card);
+  color: var(--tx);
+  font-size: 14px;
 }
-#toolbar #changelist-search input[type="submit"] {
-  border-radius: 999px;
-  padding: 9px 18px;
-  margin: 0;
+#toolbar #changelist-search input[type="submit"] { margin: 0; height: 38px; }
+
+/* Acciones en lote */
+#changelist .actions {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 12px 16px;
+  color: var(--tx-2);
+  font-size: 13px;
 }
 
+/* Filtros. Django 5 los arma con <details>/<summary> y les pone una flecha
+   con `::before` del color de los enlaces: sobre esta paleta quedaba una
+   columna de flechitas azules, que era lo más llamativo de la pantalla. */
 #changelist-filter {
-  background: var(--dc-carta);
-  border: 1px solid var(--dc-line);
-  border-radius: var(--dc-r);
-  box-shadow: var(--dc-borde-luz);
+  flex: 0 0 230px;
+  align-self: flex-start;
+  margin: 0 0 0 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding-bottom: 6px;
 }
 #changelist-filter h2 {
   background: none;
-  border-bottom: 1px solid var(--dc-line);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 16px;
+  margin: 0;
   font-size: 11px;
+  font-weight: 600;
   letter-spacing: .14em;
-  color: var(--dc-muted-2);
+  text-transform: uppercase;
+  color: var(--tx-3);
 }
-#changelist-filter li.selected { border-left-color: var(--dc-blue-hi); }
-#changelist-filter a:hover { color: var(--dc-cyan); }
+#changelist-filter h3,
+#changelist-filter details summary {
+  padding: 14px 16px 8px;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--tx-3);
+}
+#changelist-filter details > summary::before {
+  color: var(--tx-3);
+  font-weight: 400;
+  margin-inline-end: 6px;
+}
+#changelist-filter ul {
+  margin: 0;
+  padding: 0 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+#changelist-filter ul:last-child { border-bottom: 0; }
+#changelist-filter li { list-style: none; margin: 0; padding: 0; }
+#changelist-filter li.selected {
+  border-inline-start: 0;
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+#changelist-filter li a {
+  display: block;
+  padding: 6px 8px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  color: var(--tx-2);
+  word-break: normal;
+}
+#changelist-filter li a:hover { background: var(--bg-card-2); color: var(--tx); }
+#changelist-filter li.selected a { background: var(--az-tinte); color: var(--az-texto); }
 
-.actions { background: rgba(10, 16, 32, .7); border: 1px solid var(--dc-line); border-radius: var(--dc-r-sm); }
+/* La lupa del buscador y el ojo de «mostrar recuentos» son imágenes de color
+   fijo del admin: se las apaga a gris como a las del widget de relacionados. */
+#changelist-search img,
+#changelist-filter img { filter: grayscale(1) brightness(1.7); }
+
+/* Paginación */
+.paginator {
+  border-top: 1px solid var(--line);
+  padding: 16px 0 0;
+  margin-top: 16px;
+  color: var(--tx-3);
+  font-size: 13px;
+}
+.paginator a:link, .paginator a:visited {
+  background: none;
+  border: 1px solid var(--line-ctl);
+  border-radius: var(--r-sm);
+  padding: 4px 10px;
+  color: var(--tx-2);
+}
+.paginator a:hover { background: var(--bg-card-2); color: var(--tx); }
+.paginator .this-page {
+  background: var(--az-tinte);
+  border: 1px solid var(--az-borde);
+  border-radius: var(--r-sm);
+  padding: 4px 10px;
+  color: var(--az-texto);
+  font-weight: 600;
+}
 
 /* ==========================================================================
    Formularios
    ========================================================================== */
+fieldset.module { margin-bottom: 20px; }
+.form-row {
+  border-bottom: 1px solid var(--line);
+  padding: 16px 20px;
+}
+.form-row:last-child { border-bottom: 0; }
+/* Las etiquetas de campo van en caja baja y no en versalitas: las versalitas
+   con tracking son para rótulos de dos palabras, y acá hay que leer «Precio
+   anterior» o «Compatibilidad» treinta veces por día. Las versalitas se
+   reservan para los rótulos de sección. */
+.aligned label {
+  color: var(--tx-2);
+  font-size: 13px;
+  font-weight: 500;
+  padding-top: 11px;
+}
+.form-row .description,
+fieldset .description {
+  color: var(--tx-3);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.45;
+  padding: 14px 20px 0;
+  margin: 0;
+}
 input[type=text], input[type=password], input[type=email], input[type=url],
 input[type=number], input[type=tel], textarea, select, .vTextField {
-  background: rgba(4, 6, 12, .6);
-  border: 1px solid var(--dc-line-hi);
-  border-radius: 9px;
-  color: var(--dc-text);
-  padding: 9px 11px;
-  transition: border-color .18s, box-shadow .18s;
+  background: var(--bg-card);
+  border: 1px solid var(--line-ctl);
+  border-radius: var(--r-sm);
+  color: var(--tx);
+  padding: 9px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color .15s, background .15s;
 }
 input:focus, textarea:focus, select:focus {
-  border-color: var(--dc-blue-hi);
-  box-shadow: 0 0 0 3px rgba(61, 139, 255, .16);
-  outline: none;
+  border-color: var(--az-texto);
+  background: var(--bg-card-2);
 }
-.help, .helptext, div.help { color: var(--dc-muted-2); font-size: 12.3px; line-height: 1.5; }
-fieldset.collapsed .form-row { display: none; }
-.form-row { border-bottom: 1px solid var(--dc-line); padding: 12px 16px; }
-label { color: var(--dc-muted); font-weight: 500; }
-.errorlist { color: var(--dc-mal); }
-.aligned label { padding-top: 10px; }
-
-/* ==========================================================================
-   Botones y herramientas
-   ========================================================================== */
-.button, input[type=submit], input[type=button], .submit-row input, a.button {
-  border-radius: 9px;
-  font-weight: 600;
-  letter-spacing: .01em;
-  border: 0;
-  transition: background .18s, transform .12s, box-shadow .18s;
-}
-.button:hover, input[type=submit]:hover { box-shadow: 0 10px 22px -14px rgba(10, 92, 255, .95); }
-.button:active, input[type=submit]:active { transform: translateY(1px); }
-.submit-row {
-  background: rgba(7, 11, 20, .9);
-  border: 1px solid var(--dc-line);
-  border-radius: var(--dc-r);
-  box-shadow: var(--dc-sombra);
-}
-.object-tools a {
-  border-radius: 999px;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  font-size: 11px;
-  transition: background .18s, transform .15s;
-}
-.object-tools a:hover { transform: translateY(-1px); }
-
-/* ==========================================================================
-   Mensajes y paginación
-   ========================================================================== */
-.paginator { border-top: 1px solid var(--dc-line); color: var(--dc-muted-2); padding-top: 12px; }
-.paginator a:link, .paginator a:visited { background: #1a2338; border-radius: 8px; color: var(--dc-text); padding: 3px 9px; }
-.paginator a:hover { background: var(--dc-blue); }
-.paginator .this-page { background: var(--dc-blue); border-radius: 8px; padding: 3px 9px; color: #fff; }
-ul.messagelist li {
-  border-radius: var(--dc-r-sm);
-  border: 1px solid var(--dc-line-hi);
-  color: var(--dc-text);
-  box-shadow: var(--dc-sombra);
-}
-
-/* ==========================================================================
-   El tablero
-
-   Aparece de abajo hacia arriba y escalonado: primero el saludo, después los
-   medidores, después cada ficha. Es medio segundo en total y le da al ojo un
-   orden de lectura antes de que se ponga a buscar.
-   ========================================================================== */
-@keyframes dc-entra {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
-}
-.dc-tablero > * { animation: dc-entra .5s var(--dc-ease) backwards; }
-.dc-tablero > :nth-child(2) { animation-delay: .06s; }
-.dc-tablero > :nth-child(3) { animation-delay: .12s; }
-.dc-tablero > :nth-child(4) { animation-delay: .18s; }
-.dc-tablero > :nth-child(5) { animation-delay: .24s; }
-
-/* --- Saludo ------------------------------------------------------------- */
-.dc-hola {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 22px;
-}
-.dc-hola__texto { min-width: 0; }
-.dc-hola__fecha {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 0 0 7px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--dc-muted-2);
-}
-.dc-hola__titulo {
-  margin: 0;
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .01em;
-  line-height: 1.02;
-  font-size: clamp(27px, 3.4vw, 40px);
-  color: var(--dc-text);
-}
-/* Sin `display:flex` acá: la frase lleva un número en negrita en el medio, y
-   el `gap` de una caja flexible le abriría un hueco a cada lado como si fuera
-   una palabra suelta. */
-.dc-hola__bajada { margin: 9px 0 0; font-size: 14px; color: var(--dc-muted); }
-.dc-hola__bajada b { color: var(--dc-text); font-weight: 700; }
-.dc-hola__bajada svg { vertical-align: -2px; margin-right: 6px; }
-.dc-hola__bajada--ok { color: var(--dc-ok); }
-.dc-hola__acciones { display: flex; gap: 9px; flex-wrap: wrap; }
-
-.dc-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 18px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  color: var(--dc-muted);
-  border: 1px solid var(--dc-line-hi);
-  background: rgba(10, 16, 32, .65);
-  transition: color .2s, border-color .2s, background .2s, transform .15s, box-shadow .2s;
-}
-.dc-btn:hover { color: var(--dc-text); border-color: var(--dc-blue-hi); transform: translateY(-2px); }
-.dc-btn--fuerte {
-  color: #fff;
-  border-color: transparent;
-  background: linear-gradient(135deg, var(--dc-blue), #0846c4);
-  box-shadow: 0 12px 26px -14px rgba(10, 92, 255, .95);
-}
-.dc-btn--fuerte:hover { color: #fff; filter: brightness(1.12); box-shadow: 0 16px 32px -14px rgba(10, 92, 255, 1); }
-
-/* --- Medidores ----------------------------------------------------------- */
-/* Los cuatro números del mes en un solo bloque, separados por hilos: se leen
-   como un grupo, que es lo que son. */
-.dc-medidores {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  margin-bottom: 30px;
-  border: 1px solid var(--dc-line);
-  border-radius: var(--dc-r);
-  background: var(--dc-carta);
-  box-shadow: var(--dc-sombra), var(--dc-borde-luz);
-  overflow: hidden;
-}
-.dc-medidor {
-  position: relative;
-  padding: 17px 19px;
-  text-decoration: none;
-  border-left: 1px solid var(--dc-line);
-  transition: background .2s;
-}
-.dc-medidor:first-child { border-left: 0; }
-.dc-medidor:hover { background: rgba(61, 139, 255, .07); }
-.dc-medidor::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--dc-blue-hi), var(--dc-cyan));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .35s var(--dc-ease);
-}
-.dc-medidor:hover::after { transform: scaleX(1); }
-.dc-medidor__ico { font-size: 15px; color: var(--dc-muted-2); margin-bottom: 9px; display: block; }
-.dc-medidor:hover .dc-medidor__ico { color: var(--dc-cyan); }
-.dc-medidor__valor {
-  display: block;
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 900;
-  font-size: 30px;
-  line-height: 1;
-  color: var(--dc-text);
-  font-variant-numeric: tabular-nums;
-}
-.dc-medidor__valor i { font-style: italic; font-size: 17px; color: var(--dc-muted-2); margin-right: 2px; }
-.dc-medidor__rotulo {
-  display: block;
-  margin-top: 6px;
-  font-size: 11.5px;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--dc-muted-2);
-}
-
-/* --- Títulos de sección -------------------------------------------------- */
-.dc-seccion { margin-bottom: 30px; }
-.dc-seccion__titulo,
-.dc-tarjeta__titulo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0 0 14px;
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  font-size: 13px;
-  color: var(--dc-muted);
-}
-.dc-seccion__titulo svg, .dc-tarjeta__titulo svg { font-size: 15px; color: var(--dc-blue-hi); }
-
-/* --- Fichas de alerta ----------------------------------------------------- */
-/* `auto-fill` y no `auto-fit`: con una sola alerta, `auto-fit` la estiraría a
-   lo ancho de la pantalla y un solo dato quedaría del tamaño de un cartel. */
-.dc-fichas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-  gap: 13px;
-}
-.dc-ficha {
-  --tono: var(--dc-muted-2);
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: start;
-  gap: 0 10px;
-  padding: 16px 17px 17px;
-  border-radius: var(--dc-r);
-  text-decoration: none;
-  border: 1px solid var(--dc-line);
-  background: var(--dc-carta);
-  box-shadow: var(--dc-borde-luz);
-  overflow: hidden;
-  animation: dc-entra .45s var(--dc-ease) backwards;
-  animation-delay: calc(.18s + var(--i, 0) * 60ms);
-  transition: transform .22s var(--dc-ease), border-color .22s, box-shadow .22s;
-}
-/* El testigo encendido arriba de cada ficha. */
-.dc-ficha::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 2px;
-  background: var(--tono);
-  opacity: .5;
-  transition: opacity .22s, box-shadow .22s;
-}
-.dc-ficha:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--tono) 45%, transparent);
-  box-shadow: 0 20px 38px -24px rgba(0, 0, 0, .95), var(--dc-borde-luz);
-}
-.dc-ficha:hover::before { opacity: 1; box-shadow: 0 0 14px var(--tono); }
-
-.dc-ficha__ico {
-  grid-column: 1;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  font-size: 15px;
-  color: var(--tono);
-  background: color-mix(in srgb, var(--tono) 13%, transparent);
-  border: 1px solid color-mix(in srgb, var(--tono) 22%, transparent);
-}
-.dc-ficha__ir {
-  grid-column: 2;
-  grid-row: 1;
-  font-size: 15px;
-  color: var(--dc-muted-2);
-  opacity: 0;
-  transform: translateX(-5px);
-  transition: opacity .22s, transform .22s;
-}
-.dc-ficha:hover .dc-ficha__ir { opacity: 1; transform: none; color: var(--tono); }
-.dc-ficha__numero {
-  grid-column: 1 / -1;
-  margin-top: 13px;
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 900;
-  font-size: 32px;
-  line-height: 1;
-  color: var(--tono);
-  font-variant-numeric: tabular-nums;
-}
-.dc-ficha__texto {
-  grid-column: 1 / -1;
-  margin-top: 5px;
-  font-size: 12.6px;
+.help, .helptext, div.help, .form-row div.help {
+  color: var(--tx-3);
+  font-size: 12.5px;
   line-height: 1.45;
-  color: var(--dc-muted);
 }
-.dc-ficha--mal    { --tono: var(--dc-mal); }
-.dc-ficha--ojo    { --tono: var(--dc-ojo); }
-.dc-ficha--azul   { --tono: var(--dc-blue-hi); }
-.dc-ficha--bien   { --tono: var(--dc-ok); }
-.dc-ficha--neutro { --tono: var(--dc-muted); }
+.errorlist { color: var(--mal); font-size: 12.5px; }
+.errornote, ul.errorlist li {
+  background: var(--message-error-bg);
+  border: 1px solid var(--mal);
+  border-radius: var(--r-sm);
+  color: var(--tx);
+  padding: 10px 14px;
+}
+.form-row.errors { border-inline-start: 2px solid var(--mal); }
+fieldset.collapsed .form-row { display: none; }
 
-/* --- Atajos --------------------------------------------------------------- */
-.dc-atajos {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
-  gap: 13px;
+.submit-row {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  margin: 0 0 20px;
+  gap: 8px;
 }
-.dc-atajo {
-  position: relative;
-  display: block;
-  padding: 16px 17px;
-  border-radius: var(--dc-r);
-  text-decoration: none;
-  border: 1px solid var(--dc-line);
-  background: rgba(10, 16, 32, .5);
-  transition: transform .2s var(--dc-ease), border-color .2s, background .2s;
-}
-.dc-atajo:hover { transform: translateY(-3px); border-color: var(--dc-line-hi); background: rgba(13, 21, 38, .8); }
-.dc-atajo__ico {
-  font-size: 19px;
-  color: var(--dc-muted-2);
-  margin-bottom: 11px;
-  display: block;
-  transition: color .2s, transform .2s;
-}
-.dc-atajo:hover .dc-atajo__ico { color: var(--dc-cyan); transform: translateX(2px); }
-.dc-atajo b { display: block; font-size: 14px; font-weight: 600; color: var(--dc-text); }
-.dc-atajo span { display: block; margin-top: 3px; font-size: 12.3px; color: var(--dc-muted-2); line-height: 1.45; }
+.submit-row a.deletelink { background: none; border: 1px solid var(--mal); color: var(--mal); }
+.submit-row a.deletelink:hover { background: #160b0d; }
 
-/* --- Cuerpo: secciones + costado ------------------------------------------ */
-.dc-cuerpo {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
-  gap: 24px;
-  align-items: start;
+/* Los iconos del widget de relacionados (lápiz, más, cruz, ojo) los emite
+   Django como <img> de colores fijos —verde chillón y azul— que no se pueden
+   recolorear por CSS. Se los pasa a gris para que no sean lo más llamativo de
+   un formulario. */
+.related-widget-wrapper-link img,
+.related-lookup img,
+a.related-lookup img {
+  filter: grayscale(1);
 }
-.dc-lado { display: grid; gap: 16px; }
+.related-widget-wrapper-link:hover img { filter: grayscale(1) brightness(1.5); }
 
-/* --- Tarjetas de las secciones -------------------------------------------- */
-/* `align-items: start` para que cada tarjeta mida lo que necesita. Sin esto la
-   grilla las estira a la altura de la más alta de su fila y las secciones
-   cortas quedan con un hueco al pie. */
-.dc-apps {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  align-items: start;
-  gap: 14px;
-}
-.dc-app {
-  border: 1px solid var(--dc-line);
-  border-radius: var(--dc-r);
-  background: var(--dc-carta);
-  box-shadow: var(--dc-sombra), var(--dc-borde-luz);
-  overflow: hidden;
-  animation: dc-entra .45s var(--dc-ease) backwards;
-  animation-delay: calc(.24s + var(--i, 0) * 60ms);
-}
-.dc-app__cab {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 15px;
-  background: rgba(61, 139, 255, .07);
-  border-bottom: 1px solid var(--dc-line);
-}
-.dc-app__ico { font-size: 16px; color: var(--dc-blue-hi); display: flex; }
-.dc-app__nombre { margin: 0; flex: 1; min-width: 0; }
-.dc-app__nombre a {
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  font-size: 13px;
-  color: var(--dc-text);
-  text-decoration: none;
-}
-.dc-app__nombre a:hover { color: var(--dc-cyan); }
-.dc-app__cuenta {
+.inline-group { border: 0; padding: 0; }
+.inline-related h3 {
+  background: none;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 20px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--dc-muted-2);
-  background: rgba(4, 6, 12, .55);
-  border: 1px solid var(--dc-line);
-  border-radius: 999px;
-  padding: 2px 9px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--tx-3);
 }
-.dc-app__lista { margin: 0; padding: 6px; list-style: none; }
+.add-row a { font-size: 13px; color: var(--az-texto); }
 
-.dc-fila {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: var(--dc-r-sm);
-  transition: background .15s;
+/* ==========================================================================
+   Mensajes
+   ========================================================================== */
+ul.messagelist { padding: 0; margin: 0 0 20px; }
+ul.messagelist li {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-inline-start: 2px solid var(--ok);
+  border-radius: var(--r-sm);
+  color: var(--tx);
+  padding: 12px 16px;
+  font-size: 13.5px;
+  background-image: none;
 }
-.dc-fila:hover { background: rgba(61, 139, 255, .08); }
-.dc-fila.es-actual { background: rgba(61, 139, 255, .13); }
-.dc-fila__nombre {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 11px;
-  font-size: 13.2px;
-  color: var(--dc-muted);
-  text-decoration: none;
-}
-.dc-fila:hover .dc-fila__nombre { color: var(--dc-text); }
-.dc-fila__nombre span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dc-fila__ico { font-size: 15px; color: var(--dc-muted-2); }
-.dc-fila:hover .dc-fila__ico { color: var(--dc-cyan); }
-.dc-fila__nombre--mudo { color: var(--dc-muted-2); }
-
-.dc-fila__acciones { display: flex; align-items: center; gap: 5px; padding-right: 7px; }
-.dc-mini {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--dc-muted-2);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color .16s, background .16s, border-color .16s;
-}
-.dc-mini:hover { color: var(--dc-text); background: rgba(61, 139, 255, .14); border-color: var(--dc-line-hi); }
-.dc-mini--mas svg { font-size: 12px; }
-.dc-mini--mas:hover { color: var(--dc-ok); border-color: rgba(61, 220, 132, .38); background: rgba(61, 220, 132, .1); }
-
-/* --- Tarjetas del costado -------------------------------------------------- */
-.dc-tarjeta {
-  padding: 16px 17px 17px;
-  border: 1px solid var(--dc-line);
-  border-radius: var(--dc-r);
-  background: var(--dc-carta);
-  box-shadow: var(--dc-sombra), var(--dc-borde-luz);
-}
-.dc-tarjeta__titulo { margin-bottom: 13px; }
-.dc-tarjeta__vacio { margin: 0; font-size: 12.6px; line-height: 1.55; color: var(--dc-muted-2); }
-
-.dc-historial { margin: 0; padding: 0; list-style: none; }
-.dc-historial__item {
-  position: relative;
-  padding: 0 0 15px 19px;
-  font-size: 13px;
-}
-.dc-historial__item::before {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 15px;
-  bottom: 0;
-  width: 1px;
-  background: var(--dc-line);
-}
-.dc-historial__item:last-child { padding-bottom: 0; }
-.dc-historial__item:last-child::before { display: none; }
-.dc-historial__punto {
-  position: absolute;
-  left: 0;
-  top: 5px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 2px solid var(--dc-ink);
-  background: var(--dc-muted-2);
-}
-.dc-historial__item--alta   .dc-historial__punto { background: var(--dc-ok); }
-.dc-historial__item--cambio .dc-historial__punto { background: var(--dc-blue-hi); }
-.dc-historial__item--baja   .dc-historial__punto { background: var(--dc-mal); }
-.dc-historial__que { display: block; color: var(--dc-text); line-height: 1.4; }
-.dc-historial__que a { color: var(--dc-text); text-decoration: none; }
-.dc-historial__que a:hover { color: var(--dc-cyan); }
-.dc-historial__meta { display: block; margin-top: 2px; font-size: 11.5px; color: var(--dc-muted-2); }
-
-.dc-tarjeta--nota { background: rgba(10, 16, 32, .5); }
-.dc-nota { margin: 0; padding-left: 17px; }
-.dc-nota li { margin-bottom: 9px; font-size: 12.5px; line-height: 1.55; color: var(--dc-muted-2); }
-.dc-nota li::marker { color: var(--dc-blue-hi); }
-.dc-nota li:last-child { margin-bottom: 0; }
-.dc-nota b { color: var(--dc-muted); font-weight: 600; }
-
-.dc-vacio { color: var(--dc-muted-2); font-size: 13.5px; }
+ul.messagelist li.warning { border-inline-start-color: var(--ojo); }
+ul.messagelist li.error { border-inline-start-color: var(--mal); }
 
 /* ==========================================================================
    Entrar
    ========================================================================== */
 body.login {
-  background:
-    radial-gradient(75% 60% at 50% 38%, #0a1327 0%, #04060c 72%);
+  background: var(--bg);
   display: grid;
   place-items: center;
   min-height: 100vh;
   padding: 32px 20px;
   margin: 0;
 }
-body.login #container { width: 100%; max-width: 408px; margin: 0; }
+body.login #container {
+  width: 100%;
+  max-width: 380px;
+  margin: 0;
+  /* base.css le pone `height:100%`, y estirado a toda la pantalla el centrado
+     vertical del `place-items` no tiene nada que centrar. */
+  height: auto;
+  min-width: 0;
+  background: none;
+  border: 0;
+}
+body.login #content { padding: 0; }
 
 .dc-volver {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 30px;
-  font-size: 11.5px;
+  margin-bottom: 32px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--dc-muted-2);
+  color: var(--tx-3);
   text-decoration: none;
-  transition: color .2s, gap .2s;
 }
-.dc-volver:hover { color: var(--dc-cyan); gap: 12px; }
+.dc-volver:hover { color: var(--tx-2); }
 
-.dc-entrar__logo { height: 34px; width: auto; margin-bottom: 26px; display: block; }
+.dc-entrar__logo { height: 26px; width: auto; margin-bottom: 28px; display: block; }
 .dc-entrar__titulo {
   margin: 0 0 8px;
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .005em;
-  line-height: 1.04;
-  font-size: 33px;
-  color: var(--dc-text);
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--tx);
 }
-.dc-entrar__bajada { margin: 0 0 30px; font-size: 14.5px; color: var(--dc-muted); line-height: 1.6; }
+.dc-entrar__bajada { margin: 0 0 28px; font-size: 14px; color: var(--tx-2); }
 
-.dc-campo { margin-bottom: 19px; }
+.dc-campo { margin-bottom: 16px; }
 .dc-campo > label {
   display: block;
-  margin-bottom: 9px;
+  margin-bottom: 8px;
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .15em;
+  font-weight: 600;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--dc-muted-2);
+  color: var(--tx-3);
 }
 .dc-campo input {
   width: 100%;
   box-sizing: border-box;
-  padding: 14px 15px;
+  padding: 12px 14px;
   font-size: 15px;
-  border-radius: 11px;
-  background: rgba(10, 16, 32, .78);
-  border: 1px solid var(--dc-line-hi);
-  color: var(--dc-text);
+  border-radius: var(--r-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--line-ctl);
+  color: var(--tx);
 }
-.dc-campo input::placeholder { color: #55627a; }
+.dc-campo input::placeholder { color: var(--tx-3); }
 
 .dc-clave { position: relative; }
-.dc-clave input { padding-right: 50px; }
+.dc-clave input { padding-right: 48px; }
 .dc-ojo {
   position: absolute;
-  right: 6px;
+  right: 5px;
   top: 50%;
   transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
   background: none;
   border: 0;
   cursor: pointer;
-  color: var(--dc-muted-2);
-  border-radius: 8px;
-  transition: color .2s, background .2s;
+  color: var(--tx-3);
+  border-radius: var(--r-sm);
 }
-.dc-ojo:hover { color: var(--dc-text); background: rgba(61, 139, 255, .12); }
-.dc-ojo svg { width: 19px; height: 19px; }
+.dc-ojo:hover { color: var(--tx); background: var(--bg-card-2); }
+.dc-ojo svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; }
 
 .dc-entrar__boton {
   width: 100%;
   margin-top: 8px;
-  padding: 15px;
+  padding: 13px;
   border: 0;
-  border-radius: 11px;
+  border-radius: var(--r-sm);
   cursor: pointer;
-  font-family: var(--dc-display);
-  font-style: italic;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: .1em;
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .10em;
   text-transform: uppercase;
   color: #fff;
-  background: linear-gradient(135deg, var(--dc-blue), #0846c4);
-  box-shadow: 0 10px 26px -12px rgba(10, 92, 255, .95);
-  transition: transform .15s, box-shadow .2s, filter .2s;
+  background: var(--az-solido);
+  transition: background .15s;
 }
-.dc-entrar__boton:hover { filter: brightness(1.12); box-shadow: 0 14px 32px -12px rgba(10, 92, 255, 1); }
-.dc-entrar__boton:active { transform: translateY(1px); }
+.dc-entrar__boton:hover { background: var(--az-solido-2); }
 
 .dc-entrar__error {
-  margin: 0 0 22px;
-  padding: 13px 15px;
-  border-radius: 11px;
-  border: 1px solid rgba(255, 122, 143, .42);
-  background: rgba(75, 22, 32, .42);
-  color: #ffc2cc;
-  font-size: 13.8px;
-  line-height: 1.55;
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--mal);
+  background: var(--message-error-bg);
+  color: var(--tx);
+  font-size: 13.5px;
+  line-height: 1.5;
 }
 
 .dc-entrar__pie {
-  margin: 30px 0 0;
-  padding-top: 22px;
-  border-top: 1px solid var(--dc-line);
+  margin: 28px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
   font-size: 13px;
-  color: var(--dc-muted-2);
+  color: var(--tx-3);
   text-align: center;
 }
-.dc-entrar__pie a { color: var(--dc-blue-hi); font-weight: 600; text-decoration: none; }
-.dc-entrar__pie a:hover { color: var(--dc-cyan); }
+.dc-entrar__pie a { color: var(--az-texto); font-weight: 500; text-decoration: none; }
 
 /* ==========================================================================
    Pantallas angostas
+
+   Debajo de 900px el rail deja de ser una columna y pasa a ser una barra
+   horizontal arriba: un rail fijo de 252px sobre una pantalla de 600 se come
+   casi la mitad del ancho.
    ========================================================================== */
-@media (max-width: 1100px) {
-  .dc-cuerpo { grid-template-columns: minmax(0, 1fr); }
-}
+@media (max-width: 900px) {
+  #container { padding-inline-start: 0; }
 
-/* De acá para abajo responsive.css —que carga después que esta hoja— apila el
-   encabezado en columna, y como base.css le deja `align-items: center`, el
-   logotipo termina centrado y la barra de usuario debajo. En una tablet sobra
-   ancho para las dos cosas en la misma línea, así que se vuelve a la fila; los
-   selectores llevan `body` adelante solo para ganarle en especificidad.
-
-   El encabezado también deja de ser fijo: si llegara a partirse en dos
-   renglones se comería demasiada pantalla, y la barra lateral —que se pega
-   justo debajo de él— dejaría de calzar. */
-@media (max-width: 1024px) {
-  body #header {
+  .rail {
     position: static;
+    width: auto;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px clamp(16px, 3vw, 34px);
+    gap: 8px;
+    padding: 10px 16px;
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--line);
+    overflow: visible;
   }
-  #nav-sidebar.sticky, .toggle-nav-sidebar.sticky { top: 0; max-height: 100vh; }
-  body #branding, body #site-name { margin: 0; }
-  body #user-tools { text-align: left; }
+  .rail__marca { padding: 0; border: 0; margin-inline-end: auto; }
+  .rail__leyenda { display: none; }
+  .rail__nav {
+    order: 3;
+    flex: 1 0 100%;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 4px 0 2px;
+  }
+  .rail__item { height: 36px; border-inline-start: 0; border-bottom: 2px solid transparent; flex: none; }
+  .rail__item.es-actual { border-bottom-color: var(--az-borde); }
+  .rail__corte { display: none; }
+  /* En el pie sólo quedan los iconos: tres etiquetas de texto en una pantalla
+     de 420px empujaban la navegación fuera de vista. */
+  .rail__pie { display: flex; align-items: center; gap: 4px; border: 0; padding: 0; }
+  .rail__yo { padding: 0; margin-inline-end: 4px; }
+  .rail__quien { display: none; }
+  .rail__enlace,
+  .rail__salir button { width: 34px; justify-content: center; padding: 0; }
+  /* Se esconde recortando y no con `display:none`: así el texto sigue en el
+     árbol de accesibilidad y el botón conserva su nombre para un lector de
+     pantalla. */
+  .rail__enlace span,
+  .rail__salir button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .skip-to-content-link:focus { inset-inline-start: 0; }
+  #content { padding: 24px 16px 48px; }
+  .object-tools { float: none; margin: 0 0 20px; }
+  #content > h1 { margin-bottom: 16px; }
+  .pagina__titulo, #content > h1 { font-size: 24px; }
+  .pagina__acciones { width: 100%; }
+  .boton { flex: 1; justify-content: center; }
 }
 
-@media (max-width: 767px) {
-  body #header { gap: 10px; }
-  body #user-tools { flex-wrap: wrap; gap: 7px; }
-  .dc-yo { padding-left: 0; margin-left: 0; border-left: 0; }
-  .dc-hola { align-items: flex-start; }
-  .dc-hola__acciones { width: 100%; }
-  .dc-btn { flex: 1; justify-content: center; }
-  .dc-medidor { border-left: 0; border-top: 1px solid var(--dc-line); }
-  .dc-medidor:first-child { border-top: 0; }
-  .dc-entrar__titulo { font-size: 28px; }
-}
-
-/* A quien pidió menos movimiento, se le da menos movimiento. */
 @media (prefers-reduced-motion: reduce) {
-  .dc-tablero > *, .dc-ficha, .dc-app { animation: none; }
-  .dc-aviso svg { animation: none; opacity: 1; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
