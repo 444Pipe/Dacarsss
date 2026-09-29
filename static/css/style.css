@@ -460,11 +460,28 @@ svg.marca{fill:currentColor; stroke:none}
    .card p lleva margin:0, así que sin esta regla los dos quedan pegados. */
 .card p + p{margin-top:10px}
 
+/* Tarjeta con foto del servicio: la imagen sangra hasta los bordes y se
+   funde por abajo con el degradado propio de la tarjeta */
+.card--foto{padding-top:0}
+.card__foto{position:relative; margin:0 -28px 22px; overflow:hidden}
+.card__foto img{display:block; width:100%; height:150px; object-fit:cover;
+                transition:transform .5s var(--ease)}
+.card__foto::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(8,12,22,0) 42%, rgba(14,21,38,.5) 78%, rgba(14,21,38,.94));
+}
+.card--foto:hover .card__foto img{transform:scale(1.06)}
+/* Sobre la foto el numeral necesita más presencia que sobre el fondo liso */
+.card--foto .card__n{color:rgba(178,205,255,.34); text-shadow:0 2px 16px rgba(4,8,16,.85)}
+
 /* La portada mantiene SIEMPRE 2 columnas: se compacta la tarjeta en móvil */
 @media (max-width:640px){
   .cards:not(.cards--3){gap:12px}
   .cards:not(.cards--3) > .card:last-child:nth-child(odd){width:calc(50% - 6px)}
   .cards:not(.cards--3) > .card{padding:22px 16px 20px}
+  .cards:not(.cards--3) > .card--foto{padding-top:0}
+  .cards:not(.cards--3) > .card .card__foto{margin:0 -16px 14px}
+  .cards:not(.cards--3) > .card .card__foto img{height:96px}
   .cards:not(.cards--3) > .card .card__n{top:14px; right:14px; font-size:30px}
   .cards:not(.cards--3) > .card .card__ico{width:42px; height:42px; margin-bottom:14px; border-radius:10px}
   .cards:not(.cards--3) > .card .card__ico svg{width:21px; height:21px}
@@ -476,6 +493,9 @@ svg.marca{fill:currentColor; stroke:none}
   .cards:not(.cards--3){gap:10px}
   .cards:not(.cards--3) > .card:last-child:nth-child(odd){width:calc(50% - 5px)}
   .cards:not(.cards--3) > .card{padding:18px 13px 16px}
+  .cards:not(.cards--3) > .card--foto{padding-top:0}
+  .cards:not(.cards--3) > .card .card__foto{margin:0 -13px 12px}
+  .cards:not(.cards--3) > .card .card__foto img{height:84px}
   .cards:not(.cards--3) > .card .card__n{font-size:24px; top:11px; right:11px}
   .cards:not(.cards--3) > .card h3{font-size:15px}
   .cards:not(.cards--3) > .card p{font-size:12.4px}
