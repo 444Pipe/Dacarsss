@@ -49,7 +49,11 @@ class Categorias(Sitemap):
     priority = 0.6
 
     def items(self):
-        return Categoria.objects.filter(activa=True)
+        # Solo las categorías con algo publicado. Una categoría vacía en el
+        # sitemap es una invitación a Google a una página sin productos, y la
+        # lee como contenido pobre (soft 404). Cuando le carguen el primer
+        # producto, entra sola.
+        return Categoria.objects.filter(activa=True, productos__activo=True).distinct()
 
     def lastmod(self, obj):
         return obj.actualizado

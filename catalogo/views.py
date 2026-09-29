@@ -125,9 +125,12 @@ def _listado(request, categoria=None):
             # contenido duplicado. El canonical siempre apunta a la página
             # limpia de la categoría (o del catálogo).
             "canonical": categoria.get_absolute_url() if categoria else "/catalogo/",
+            # Un listado sin productos tampoco se indexa: Google lo trata
+            # como página vacía (soft 404) y le baja la confianza al sitio.
+            # El día que la categoría tenga su primer producto, vuelve sola.
             "robots": (
                 "noindex, follow"
-                if filtrando
+                if filtrando or not lista
                 else "index, follow, max-snippet:-1, max-image-preview:large"
             ),
             "seccion": "catalogo",

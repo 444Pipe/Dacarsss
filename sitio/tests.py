@@ -217,6 +217,29 @@ class InvariantesDeSeo(TestCase):
                     self.assertIn("Service", tipos)
                     self.assertIn("BreadcrumbList", tipos)
 
+    def test_cada_video_lleva_lo_que_google_exige(self):
+        # Google exige name, thumbnailUrl y uploadDate en cada VideoObject.
+        # Sin uno de los tres, Search Console marca el video como «no válido»
+        # y la página entera aparece «indexada, pero con problemas».
+        def videos(nodo):
+            if isinstance(nodo, dict):
+                if nodo.get("@type") == "VideoObject":
+                    yield nodo
+                for v in nodo.values():
+                    yield from videos(v)
+            elif isinstance(nodo, list):
+                for v in nodo:
+                    yield from videos(v)
+
+        for ruta, html in self.html.items():
+            for bloque in re.findall(
+                r'<script type="application/ld\+json">(.*?)</script>', html, re.S
+            ):
+                for video in videos(json.loads(bloque)):
+                    with self.subTest(ruta=ruta, video=video.get("name")):
+                        for campo in ("name", "thumbnailUrl", "uploadDate"):
+                            self.assertIn(campo, video, "falta " + campo)
+
     def test_open_graph_completo(self):
         for ruta, html in self.html.items():
             with self.subTest(ruta=ruta):

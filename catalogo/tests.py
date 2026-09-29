@@ -145,6 +145,27 @@ class Categorias(Base):
         self.assertIn("Iluminación", nombres)
         self.assertNotIn("Polarizados", nombres)
 
+    def test_una_categoria_vacia_no_va_al_sitemap(self):
+        # Una página sin productos es contenido pobre para Google (soft 404):
+        # no se le invita con el sitemap ni se deja indexar hasta que tenga
+        # su primer producto.
+        vacia = Categoria.objects.create(nombre="Polarizados")
+        xml = self.client.get("/sitemap.xml").content.decode()
+        self.assertIn(self.categoria.get_absolute_url(), xml)
+        self.assertNotIn(vacia.get_absolute_url(), xml)
+
+    def test_una_categoria_vacia_no_se_indexa(self):
+        vacia = Categoria.objects.create(nombre="Polarizados")
+        r = self.client.get(vacia.get_absolute_url())
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.context["robots"], "noindex, follow")
+        # Con productos, la misma página vuelve a indexarse sola.
+        con_algo = self.client.get(self.categoria.get_absolute_url())
+        self.assertEqual(
+            con_algo.context["robots"],
+            "index, follow, max-snippet:-1, max-image-preview:large",
+        )
+
     def test_la_entrada_muestra_las_categorias_en_grande(self):
         otra = Categoria.objects.create(nombre="Pitos y alarmas")
         Producto.objects.create(nombre="Pito caracol", categoria=otra)
