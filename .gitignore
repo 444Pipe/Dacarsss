@@ -19,3 +19,8 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Datos del negocio que no van al repo publico: el Excel del inventario
+# trae costos de compra, y una cotizacion es de un cliente.
+/*.xlsx
+/*.pdf

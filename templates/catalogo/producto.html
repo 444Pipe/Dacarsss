@@ -1,10 +1,10 @@
 {% extends "tienda/base.html" %}{% load dacars %}
 
 {% block jsonld %}
-{% comment %} El Product solo sale cuando hay precio. Google exige `offers` con
-   precio para leerlo, y un Product a cotizar sin oferta le aparece a Search
-   Console como error en cada ficha. Las migas salen siempre. {% endcomment %}
-{% if not producto.a_cotizar %}
+{% comment %} El Product solo sale cuando hay precio Y foto. Google exige
+   `offers` con precio e `image` para leerlo: sin cualquiera de los dos, cada
+   ficha le aparece a Search Console como error. Las migas salen siempre. {% endcomment %}
+{% if not producto.a_cotizar and producto.imagen_principal %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -105,7 +105,7 @@
     <ul class="ficha__plus">
       {% if producto.instalacion %}<li><b>Instalación en el taller</b> Lo dejamos puesto y funcionando en nuestro taller de Villavicencio.</li>{% endif %}
       <li><b>Asesoría antes de comprar</b> Te decimos si es el adecuado para tu vehículo antes de que pagues.</li>
-      <li><b>En el local</b> {{ negocio.direccion }}, {{ negocio.ciudad }}.</li>
+      <li><b>Envíos a toda Colombia</b> Te lo mandamos por transportadora, o lo recoges en {{ negocio.direccion }}, {{ negocio.ciudad }}.</li>
     </ul>
     {% else %}
     <p class="ficha__precio">
@@ -167,6 +167,7 @@
 
     <p style="margin:16px 0 0; font-size:13.4px; color:var(--muted-2); line-height:1.6">
       Sin pago en línea: dejas el pedido y lo terminamos por WhatsApp.
+      Envíos a toda Colombia, o lo recoges en el local.
       {% if producto.instalacion %} La instalación se cotiza aparte según el vehículo.{% endif %}
     </p>
     {% endif %}

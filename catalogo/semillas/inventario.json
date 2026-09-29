@@ -1,0 +1,2827 @@
+{
+ "categorias": [
+  {
+   "nombre": "Tapetes",
+   "descripcion": "Tapetes termoformados 5D, 3D y de goma por modelo: Hilux, Fortuner, Prado, Frontier, Sportage y más. Cubren completo y no se corren. Envíos a toda Colombia.",
+   "servicio": "lujos-y-accesorios-villavicencio",
+   "orden": 25
+  },
+  {
+   "nombre": "Carpas y cubiertas",
+   "descripcion": "Carpas planas, duraliner y cubiertas de platón para camioneta. Instalación en el taller de Villavicencio y envíos a toda Colombia.",
+   "servicio": "accesorios-4x4-villavicencio",
+   "orden": 22
+  }
+ ],
+ "productos": [
+  {
+   "codigo": "ACC02-006",
+   "nombre": "Yc RCA cable 0,30",
+   "slug": "yc-rca-cable-0-30",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Yc RCA cable 0,30 | DACARS",
+   "seo_descripcion": "Compra Yc RCA cable 0,30 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCYCRCA-CABL",
+    "precio": 35700,
+    "stock": 3
+   }
+  },
+  {
+   "codigo": "ACC02-016",
+   "nombre": "Espiral Toyota Prado original 2010/2017",
+   "slug": "espiral-toyota-prado-original-2010-2017",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Espiral Toyota Prado original 2010/2017 | DACARS",
+   "seo_descripcion": "Compra Espiral Toyota Prado original 2010/2017 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Prado",
+   "variante": {
+    "sku": "ACCACESPI06",
+    "precio": 380000,
+    "stock": 6
+   }
+  },
+  {
+   "codigo": "ACC02-017",
+   "nombre": "Espiral Toyota Prado 2018",
+   "slug": "espiral-toyota-prado-2018",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Espiral Toyota Prado 2018 | DACARS",
+   "seo_descripcion": "Compra Espiral Toyota Prado 2018 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Prado",
+   "variante": {
+    "sku": "ACCACESPI07",
+    "precio": 380000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ACC02-023",
+   "nombre": "Mandos de timon Toyota Fortuner 2012 /16",
+   "slug": "mandos-de-timon-toyota-fortuner-2012-16",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Mandos de timon Toyota Fortuner 2012 /16 | DACARS",
+   "seo_descripcion": "Compra Mandos de timon Toyota Fortuner 2012 /16 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Fortuner",
+   "variante": {
+    "sku": "ACCACMAND06",
+    "precio": 399999,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ACC02-025",
+   "nombre": "T01 tiro de arrastre - Toyota Prado 150 5 ptas / 4 runner 2009-2022",
+   "slug": "t01-tiro-de-arrastre-toyota-prado-150-5-ptas-4-runner-2009-2022",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "T01 tiro de arrastre - Toyota Prado 150 5 ptas / 4 runner 2009-2022",
+   "seo_descripcion": "Compra T01 tiro de arrastre - Toyota Prado 150 5 ptas / 4 runner 2009-2022 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Prado",
+   "variante": {
+    "sku": "ACCTO1TYPR",
+    "precio": 1089000,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ACC02-026",
+   "nombre": "T02 tro arrastre - Toyota Fortuner Revo tuberia cuadra 2016-2025",
+   "slug": "t02-tro-arrastre-toyota-fortuner-revo-tuberia-cuadra-2016-2025",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "T02 tro arrastre - Toyota Fortuner Revo tuberia cuadra 2016-2025",
+   "seo_descripcion": "Compra T02 tro arrastre - Toyota Fortuner Revo tuberia cuadra 2016-2025 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Fortuner, Revo",
+   "variante": {
+    "sku": "ACCTO2TYFOR",
+    "precio": 1089000,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ACC02-027",
+   "nombre": "T06 ttiro arrastre Toyota Hilux Revo / clase 3 desde 2016",
+   "slug": "t06-ttiro-arrastre-toyota-hilux-revo-clase-3-desde-2016",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "T06 ttiro arrastre Toyota Hilux Revo / clase 3 desde 2016 | DACARS",
+   "seo_descripcion": "Compra T06 ttiro arrastre Toyota Hilux Revo / clase 3 desde 2016 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux, Revo",
+   "variante": {
+    "sku": "ACCTO6TYHILX",
+    "precio": 1089000,
+    "stock": 2
+   }
+  },
+  {
+   "codigo": "ACC02-036",
+   "nombre": "Malla j.l 10\"",
+   "slug": "malla-j-l-10",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Malla j.l 10\" | DACARS",
+   "seo_descripcion": "Compra Malla j.l 10\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCMAJ.L10¨",
+    "precio": 267750,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ACC02-039",
+   "nombre": "Plumilla aero oem Toyota 16",
+   "slug": "plumilla-aero-oem-toyota-16",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aero oem Toyota 16 | DACARS",
+   "seo_descripcion": "Compra Plumilla aero oem Toyota 16 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota",
+   "variante": {
+    "sku": "ACCPLUMPYT-HB-16",
+    "precio": 45000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ACC02-041",
+   "nombre": "Plumilla aero oem Toyota 20",
+   "slug": "plumilla-aero-oem-toyota-20",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aero oem Toyota 20 | DACARS",
+   "seo_descripcion": "Compra Plumilla aero oem Toyota 20 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota",
+   "variante": {
+    "sku": "ACCPLUMPYT-HB-20",
+    "precio": 45000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ACC02-042",
+   "nombre": "Plumilla metallic 13\" cod",
+   "slug": "plumilla-metallic-13-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 13\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 13\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMT13¨",
+    "precio": 27850,
+    "stock": 5
+   }
+  },
+  {
+   "codigo": "ACC02-043",
+   "nombre": "Plumilla metallic 16\" cod",
+   "slug": "plumilla-metallic-16-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 16\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 16\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMT16¨",
+    "precio": 27850,
+    "stock": 5
+   }
+  },
+  {
+   "codigo": "ACC02-044",
+   "nombre": "Plumilla metallic 18\" cod",
+   "slug": "plumilla-metallic-18-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 18\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 18\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMT18¨",
+    "precio": 29000,
+    "stock": 8
+   }
+  },
+  {
+   "codigo": "ACC02-045",
+   "nombre": "Plumilla metallic 20\" cod",
+   "slug": "plumilla-metallic-20-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 20\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 20\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMT20¨",
+    "precio": 32500,
+    "stock": 6
+   }
+  },
+  {
+   "codigo": "ACC02-046",
+   "nombre": "Plumilla metallic 22\" cod",
+   "slug": "plumilla-metallic-22-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 22\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 22\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMT22¨",
+    "precio": 37149,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ACC02-047",
+   "nombre": "Plumilla metallic 24\" cod",
+   "slug": "plumilla-metallic-24-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 24\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 24\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMT24¨",
+    "precio": 39500,
+    "stock": 8
+   }
+  },
+  {
+   "codigo": "ACC02-048",
+   "nombre": "Plumilla metallic 26\" cod",
+   "slug": "plumilla-metallic-26-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 26\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 26\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMT26¨",
+    "precio": 41800,
+    "stock": 10
+   }
+  },
+  {
+   "codigo": "ACC02-049",
+   "nombre": "Plumilla delujo 16\" cod",
+   "slug": "plumilla-delujo-16-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla delujo 16\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla delujo 16\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMDEL16¨",
+    "precio": 59200,
+    "stock": 8
+   }
+  },
+  {
+   "codigo": "ACC02-050",
+   "nombre": "Plumilla delujo 18\" cod",
+   "slug": "plumilla-delujo-18-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla delujo 18\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla delujo 18\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMDEL18¨",
+    "precio": 59200,
+    "stock": 8
+   }
+  },
+  {
+   "codigo": "ACC02-051",
+   "nombre": "Plumilla delujo 20\" cod",
+   "slug": "plumilla-delujo-20-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla delujo 20\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla delujo 20\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMDEL20¨",
+    "precio": 61500,
+    "stock": 8
+   }
+  },
+  {
+   "codigo": "ACC02-052",
+   "nombre": "Plumilla de lujo 22\" cod",
+   "slug": "plumilla-de-lujo-22-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla de lujo 22\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla de lujo 22\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMDEL22¨",
+    "precio": 65000,
+    "stock": 9
+   }
+  },
+  {
+   "codigo": "ACC02-053",
+   "nombre": "Plumilla delujo 24\" cod",
+   "slug": "plumilla-delujo-24-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla delujo 24\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla delujo 24\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMDEL24¨",
+    "precio": 75450,
+    "stock": 8
+   }
+  },
+  {
+   "codigo": "ACC02-054",
+   "nombre": "Plumilla delujo 14\" cod",
+   "slug": "plumilla-delujo-14-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla delujo 14\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla delujo 14\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMDEL14¨",
+    "precio": 59200,
+    "stock": 6
+   }
+  },
+  {
+   "codigo": "ACC02-055",
+   "nombre": "Plumilla aeromaster extreme 14\"",
+   "slug": "plumilla-aeromaster-extreme-14",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aeromaster extreme 14\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aeromaster extreme 14\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMAEROEX14¨",
+    "precio": 30200,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ACC02-056",
+   "nombre": "Plumilla aeromaster extreme 16\"",
+   "slug": "plumilla-aeromaster-extreme-16",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aeromaster extreme 16\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aeromaster extreme 16\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMAEROEX16¨",
+    "precio": 30200,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ACC02-057",
+   "nombre": "Plumilla aeromaster extreme 18\"",
+   "slug": "plumilla-aeromaster-extreme-18",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aeromaster extreme 18\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aeromaster extreme 18\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMAEROEX18¨",
+    "precio": 30200,
+    "stock": 5
+   }
+  },
+  {
+   "codigo": "ACC02-058",
+   "nombre": "Plumilla aeromaster extreme 20\"",
+   "slug": "plumilla-aeromaster-extreme-20",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aeromaster extreme 20\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aeromaster extreme 20\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCPLUMAEROEX20¨",
+    "precio": 32500,
+    "stock": 2
+   }
+  },
+  {
+   "codigo": "ACC02-064",
+   "nombre": "Juego manijas interna Prado",
+   "slug": "juego-manijas-interna-prado",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Juego manijas interna Prado | DACARS",
+   "seo_descripcion": "Compra Juego manijas interna Prado en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Prado",
+   "variante": {
+    "sku": "ACCJGMJINTP",
+    "precio": 105000,
+    "stock": 3
+   }
+  },
+  {
+   "codigo": "ACC02-072",
+   "nombre": "Cadena armored chain loick",
+   "slug": "cadena-armored-chain-loick",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Cadena armored chain loick | DACARS",
+   "seo_descripcion": "Compra Cadena armored chain loick en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACC-CADARMCHLO",
+    "precio": 464100,
+    "stock": 6
+   }
+  },
+  {
+   "codigo": "ACC02-074",
+   "nombre": "Silenciador alarma de cinturon",
+   "slug": "silenciador-alarma-de-cinturon",
+   "categoria": "Pitos y alarmas",
+   "seo_titulo": "Silenciador alarma de cinturon | DACARS",
+   "seo_descripcion": "Compra Silenciador alarma de cinturon en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ACCSILALCINTY",
+    "precio": 12350,
+    "stock": 11
+   }
+  },
+  {
+   "codigo": "ACC02-098",
+   "nombre": "Plumilla aero oem Toyota 26 (PYT-HB-26)",
+   "slug": "plumilla-aero-oem-toyota-26-pyt-hb-26",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aero oem Toyota 26 (PYT-HB-26) | DACARS",
+   "seo_descripcion": "Compra Plumilla aero oem Toyota 26 (PYT-HB-26) en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota",
+   "variante": {
+    "sku": "ACCPYT-HB-26",
+    "precio": 42000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ACC02-107",
+   "nombre": "Base exploradora capo Toyota 4RUNNER 5TA gen",
+   "slug": "base-exploradora-capo-toyota-4runner-5ta-gen",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base exploradora capo Toyota 4RUNNER 5TA gen | DACARS",
+   "seo_descripcion": "Compra Base exploradora capo Toyota 4RUNNER 5TA gen en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-111",
+   "nombre": "Timon de segunda Hilux",
+   "slug": "timon-de-segunda-hilux",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Timon de segunda Hilux | DACARS",
+   "seo_descripcion": "Compra Timon de segunda Hilux en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "ACC02-112",
+   "nombre": "Plumilla trasera reamaster 14\"",
+   "slug": "plumilla-trasera-reamaster-14",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla trasera reamaster 14\" | DACARS",
+   "seo_descripcion": "Compra Plumilla trasera reamaster 14\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-116",
+   "nombre": "Gaia timón (Mazda 2-3-6) patas",
+   "slug": "gaia-timon-mazda-2-3-6-patas",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Gaia timón (Mazda 2-3-6) patas | DACARS",
+   "seo_descripcion": "Compra Gaia timón (Mazda 2-3-6) patas en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Mazda"
+  },
+  {
+   "codigo": "ACC02-117",
+   "nombre": "Srx cromada (13X2.05CM)(HILUX, Toyota, Revo)",
+   "slug": "srx-cromada-13x2-05cm-hilux-toyota-revo",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Srx cromada (13X2.05CM)(HILUX, Toyota, Revo) | DACARS",
+   "seo_descripcion": "Compra Srx cromada (13X2.05CM)(HILUX, Toyota, Revo) en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux, Revo"
+  },
+  {
+   "codigo": "ACC02-120",
+   "nombre": "Modulo radio Jeep",
+   "slug": "modulo-radio-jeep",
+   "categoria": "Multimedia y CarPlay",
+   "seo_titulo": "Modulo radio Jeep | DACARS",
+   "seo_descripcion": "Compra Modulo radio Jeep en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Jeep"
+  },
+  {
+   "codigo": "ACC02-143",
+   "nombre": "Copa rin Toyota txl",
+   "slug": "copa-rin-toyota-txl",
+   "categoria": "Llantas y rines",
+   "seo_titulo": "Copa rin Toyota txl | DACARS",
+   "seo_descripcion": "Compra Copa rin Toyota txl en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-153",
+   "nombre": "Barra techo universal",
+   "slug": "barra-techo-universal",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Barra techo universal | DACARS",
+   "seo_descripcion": "Compra Barra techo universal en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-156",
+   "nombre": "Estribos Jeep Wrangler jl 19- 23 4 puertas",
+   "slug": "estribos-jeep-wrangler-jl-19-23-4-puertas",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Estribos Jeep Wrangler jl 19- 23 4 puertas | DACARS",
+   "seo_descripcion": "Compra Estribos Jeep Wrangler jl 19- 23 4 puertas en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Jeep, Wrangler"
+  },
+  {
+   "codigo": "ACC02-170",
+   "nombre": "Control encendido electronico ty Hilux 2021",
+   "slug": "control-encendido-electronico-ty-hilux-2021",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Control encendido electronico ty Hilux 2021 | DACARS",
+   "seo_descripcion": "Compra Control encendido electronico ty Hilux 2021 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "ACC02-172",
+   "nombre": "Hilux cromo de Revo (2017 lateral y platon)",
+   "slug": "hilux-cromo-de-revo-2017-lateral-y-platon",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Hilux cromo de Revo (2017 lateral y platon) | DACARS",
+   "seo_descripcion": "Compra Hilux cromo de Revo (2017 lateral y platon) en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Revo"
+  },
+  {
+   "codigo": "ACC02-173",
+   "nombre": "Kit emblemas Toyota Hilux Revo (Toyota X1 - Hilux X3)",
+   "slug": "kit-emblemas-toyota-hilux-revo-toyota-x1-hilux-x3",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Kit emblemas Toyota Hilux Revo (Toyota X1 - Hilux X3) | DACARS",
+   "seo_descripcion": "Compra Kit emblemas Toyota Hilux Revo (Toyota X1 - Hilux X3) en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux, Revo"
+  },
+  {
+   "codigo": "ACC02-175",
+   "nombre": "Pito negra Loyta",
+   "slug": "pito-negra-loyta",
+   "categoria": "Pitos y alarmas",
+   "seo_titulo": "Pito negra Loyta | DACARS",
+   "seo_descripcion": "Compra Pito negra Loyta en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Loyta"
+  },
+  {
+   "codigo": "ACC02-176",
+   "nombre": "Hyt-acc-toy conector-corneta o pito para Toyota (218)",
+   "slug": "hyt-acc-toy-conector-corneta-o-pito-para-toyota-218",
+   "categoria": "Pitos y alarmas",
+   "seo_titulo": "Hyt-acc-toy conector-corneta o pito para Toyota (218) | DACARS",
+   "seo_descripcion": "Compra Hyt-acc-toy conector-corneta o pito para Toyota (218) en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-187",
+   "nombre": "Gato capo Toyota LC250 2024+",
+   "slug": "gato-capo-toyota-lc250-2024",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Gato capo Toyota LC250 2024+ | DACARS",
+   "seo_descripcion": "Compra Gato capo Toyota LC250 2024+ en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-191",
+   "nombre": "Base magnetica para antena de senal starlink",
+   "slug": "base-magnetica-para-antena-de-senal-starlink",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base magnetica para antena de senal starlink | DACARS",
+   "seo_descripcion": "Compra Base magnetica para antena de senal starlink en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-217",
+   "nombre": "Tiro arrastre Suzuki Jimny 2019-2025",
+   "slug": "tiro-arrastre-suzuki-jimny-2019-2025",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Tiro arrastre Suzuki Jimny 2019-2025 | DACARS",
+   "seo_descripcion": "Compra Tiro arrastre Suzuki Jimny 2019-2025 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Jimny, Suzuki"
+  },
+  {
+   "codigo": "ACC02-219",
+   "nombre": "Barra de techo Hilux Revo",
+   "slug": "barra-de-techo-hilux-revo",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Barra de techo Hilux Revo | DACARS",
+   "seo_descripcion": "Compra Barra de techo Hilux Revo en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Revo"
+  },
+  {
+   "codigo": "ACC02-237",
+   "nombre": "Gatos electricos traseros Fortuner 17-24",
+   "slug": "gatos-electricos-traseros-fortuner-17-24",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Gatos electricos traseros Fortuner 17-24 | DACARS",
+   "seo_descripcion": "Compra Gatos electricos traseros Fortuner 17-24 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Fortuner"
+  },
+  {
+   "codigo": "ACC02-239",
+   "nombre": "Apliques internos tx",
+   "slug": "apliques-internos-tx",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Apliques internos tx | DACARS",
+   "seo_descripcion": "Compra Apliques internos tx en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-245",
+   "nombre": "Resorte tapa combustible",
+   "slug": "resorte-tapa-combustible",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Resorte tapa combustible | DACARS",
+   "seo_descripcion": "Compra Resorte tapa combustible en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-246",
+   "nombre": "Guaya apertura tanque",
+   "slug": "guaya-apertura-tanque",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Guaya apertura tanque | DACARS",
+   "seo_descripcion": "Compra Guaya apertura tanque en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-273",
+   "nombre": "Conector USB auto 12 voltios",
+   "slug": "conector-usb-auto-12-voltios",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Conector USB auto 12 voltios | DACARS",
+   "seo_descripcion": "Compra Conector USB auto 12 voltios en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-281",
+   "nombre": "Pito de disco negro 70MM caja X2",
+   "slug": "pito-de-disco-negro-70mm-caja-x2",
+   "categoria": "Pitos y alarmas",
+   "seo_titulo": "Pito de disco negro 70MM caja X2 | DACARS",
+   "seo_descripcion": "Compra Pito de disco negro 70MM caja X2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-305",
+   "nombre": "Fortuner negro mate letra suelta capot",
+   "slug": "fortuner-negro-mate-letra-suelta-capot",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Fortuner negro mate letra suelta capot | DACARS",
+   "seo_descripcion": "Compra Fortuner negro mate letra suelta capot en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Fortuner"
+  },
+  {
+   "codigo": "ACC02-306",
+   "nombre": "RCA 1 mt",
+   "slug": "rca-1-mt",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "RCA 1 mt | DACARS",
+   "seo_descripcion": "Compra RCA 1 mt en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-307",
+   "nombre": "Logo Toyota copa rin",
+   "slug": "logo-toyota-copa-rin",
+   "categoria": "Llantas y rines",
+   "seo_titulo": "Logo Toyota copa rin | DACARS",
+   "seo_descripcion": "Compra Logo Toyota copa rin en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-311",
+   "nombre": "Tiro de arrastre Ranger xl 2024",
+   "slug": "tiro-de-arrastre-ranger-xl-2024",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Tiro de arrastre Ranger xl 2024 | DACARS",
+   "seo_descripcion": "Compra Tiro de arrastre Ranger xl 2024 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ranger"
+  },
+  {
+   "codigo": "ACC02-313",
+   "nombre": "Plumilla metallic 14\" cod",
+   "slug": "plumilla-metallic-14-cod",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla metallic 14\" cod | DACARS",
+   "seo_descripcion": "Compra Plumilla metallic 14\" cod en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-320",
+   "nombre": "Timon Toyota tipo GR carbono forjado",
+   "slug": "timon-toyota-tipo-gr-carbono-forjado",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Timon Toyota tipo GR carbono forjado | DACARS",
+   "seo_descripcion": "Compra Timon Toyota tipo GR carbono forjado en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-321",
+   "nombre": "Timon Toyota tipo GR sport cuero",
+   "slug": "timon-toyota-tipo-gr-sport-cuero",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Timon Toyota tipo GR sport cuero | DACARS",
+   "seo_descripcion": "Compra Timon Toyota tipo GR sport cuero en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-323",
+   "nombre": "Persiana Toyota Fortuner 17-20 trd brillante",
+   "slug": "persiana-toyota-fortuner-17-20-trd-brillante",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Persiana Toyota Fortuner 17-20 trd brillante | DACARS",
+   "seo_descripcion": "Compra Persiana Toyota Fortuner 17-20 trd brillante en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Fortuner"
+  },
+  {
+   "codigo": "ACC02-326",
+   "nombre": "Moldura parabrisas e",
+   "slug": "moldura-parabrisas-e",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Moldura parabrisas e | DACARS",
+   "seo_descripcion": "Compra Moldura parabrisas e en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-334",
+   "nombre": "Seguro trailer incluye 2 llaves TL-1171",
+   "slug": "seguro-trailer-incluye-2-llaves-tl-1171",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Seguro trailer incluye 2 llaves TL-1171 | DACARS",
+   "seo_descripcion": "Compra Seguro trailer incluye 2 llaves TL-1171 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-347",
+   "nombre": "Pito de caracol negro caja x 2",
+   "slug": "pito-de-caracol-negro-caja-x-2",
+   "categoria": "Pitos y alarmas",
+   "seo_titulo": "Pito de caracol negro caja x 2 | DACARS",
+   "seo_descripcion": "Compra Pito de caracol negro caja x 2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-348",
+   "nombre": "Consola rio 2017",
+   "slug": "consola-rio-2017",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Consola rio 2017 | DACARS",
+   "seo_descripcion": "Compra Consola rio 2017 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-352",
+   "nombre": "Separador 1.5\" pcd 6X139.7-106",
+   "slug": "separador-1-5-pcd-6x139-7-106",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Separador 1.5\" pcd 6X139.7-106 | DACARS",
+   "seo_descripcion": "Compra Separador 1.5\" pcd 6X139.7-106 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-357",
+   "nombre": "Bola 2\" para legueta defender",
+   "slug": "bola-2-para-legueta-defender",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bola 2\" para legueta defender | DACARS",
+   "seo_descripcion": "Compra Bola 2\" para legueta defender en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-382",
+   "nombre": "Sello guardafango del izq 53867-0K060",
+   "slug": "sello-guardafango-del-izq-53867-0k060",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Sello guardafango del izq 53867-0K060 | DACARS",
+   "seo_descripcion": "Compra Sello guardafango del izq 53867-0K060 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-388",
+   "nombre": "Act Toyota 10-23 tipo GR madera",
+   "slug": "act-toyota-10-23-tipo-gr-madera",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Act Toyota 10-23 tipo GR madera | DACARS",
+   "seo_descripcion": "Compra Act Toyota 10-23 tipo GR madera en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-389",
+   "nombre": "Timon Toyota LC250 carbono linea roja",
+   "slug": "timon-toyota-lc250-carbono-linea-roja",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Timon Toyota LC250 carbono linea roja | DACARS",
+   "seo_descripcion": "Compra Timon Toyota LC250 carbono linea roja en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-390",
+   "nombre": "Cubierta recl asiento trasero d",
+   "slug": "cubierta-recl-asiento-trasero-d",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Cubierta recl asiento trasero d | DACARS",
+   "seo_descripcion": "Compra Cubierta recl asiento trasero d en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-392",
+   "nombre": "Gancho guar porta N1",
+   "slug": "gancho-guar-porta-n1",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Gancho guar porta N1 | DACARS",
+   "seo_descripcion": "Compra Gancho guar porta N1 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-400",
+   "nombre": "Broche ampliacion",
+   "slug": "broche-ampliacion",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Broche ampliacion | DACARS",
+   "seo_descripcion": "Compra Broche ampliacion en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-403",
+   "nombre": "Sello riel techo delantero",
+   "slug": "sello-riel-techo-delantero",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Sello riel techo delantero | DACARS",
+   "seo_descripcion": "Compra Sello riel techo delantero en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-405",
+   "nombre": "Sello riel lado techo",
+   "slug": "sello-riel-lado-techo",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Sello riel lado techo | DACARS",
+   "seo_descripcion": "Compra Sello riel lado techo en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-406",
+   "nombre": "Juego copas rin burbuja",
+   "slug": "juego-copas-rin-burbuja",
+   "categoria": "Llantas y rines",
+   "seo_titulo": "Juego copas rin burbuja | DACARS",
+   "seo_descripcion": "Compra Juego copas rin burbuja en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-407",
+   "nombre": "Emblema Toyota land cruiser baul",
+   "slug": "emblema-toyota-land-cruiser-baul",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Emblema Toyota land cruiser baul | DACARS",
+   "seo_descripcion": "Compra Emblema Toyota land cruiser baul en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-410",
+   "nombre": "Paneles de interruptores",
+   "slug": "paneles-de-interruptores",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Paneles de interruptores | DACARS",
+   "seo_descripcion": "Compra Paneles de interruptores en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-413",
+   "nombre": "Maleta AVM universal negro",
+   "slug": "maleta-avm-universal-negro",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Maleta AVM universal negro | DACARS",
+   "seo_descripcion": "Compra Maleta AVM universal negro en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "AVM"
+  },
+  {
+   "codigo": "ACC02-415",
+   "nombre": "Asistencias Aeroklas capo Hilux 17-26",
+   "slug": "asistencias-aeroklas-capo-hilux-17-26",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Asistencias Aeroklas capo Hilux 17-26 | DACARS",
+   "seo_descripcion": "Compra Asistencias Aeroklas capo Hilux 17-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Aeroklas",
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "ACC02-416",
+   "nombre": "Asistencias Aeroklas puerta trasera Hilux 17-26",
+   "slug": "asistencias-aeroklas-puerta-trasera-hilux-17-26",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Asistencias Aeroklas puerta trasera Hilux 17-26 | DACARS",
+   "seo_descripcion": "Compra Asistencias Aeroklas puerta trasera Hilux 17-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Aeroklas",
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "ACC02-417",
+   "nombre": "Plumilla aerodeluxe 16\"",
+   "slug": "plumilla-aerodeluxe-16",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aerodeluxe 16\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aerodeluxe 16\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-419",
+   "nombre": "Plumilla aerodeluxe 20\"",
+   "slug": "plumilla-aerodeluxe-20",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aerodeluxe 20\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aerodeluxe 20\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-420",
+   "nombre": "Plumilla aerodeluxe 22\"",
+   "slug": "plumilla-aerodeluxe-22",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aerodeluxe 22\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aerodeluxe 22\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-421",
+   "nombre": "Plumilla aerodeluxe 24\"",
+   "slug": "plumilla-aerodeluxe-24",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aerodeluxe 24\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aerodeluxe 24\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-422",
+   "nombre": "Plumilla aerodeluxe 26\"",
+   "slug": "plumilla-aerodeluxe-26",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Plumilla aerodeluxe 26\" | DACARS",
+   "seo_descripcion": "Compra Plumilla aerodeluxe 26\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-429",
+   "nombre": "Valvula para sensor",
+   "slug": "valvula-para-sensor",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Valvula para sensor | DACARS",
+   "seo_descripcion": "Compra Valvula para sensor en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-433",
+   "nombre": "Pomo GR design Prado 10-17",
+   "slug": "pomo-gr-design-prado-10-17",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Pomo GR design Prado 10-17 | DACARS",
+   "seo_descripcion": "Compra Pomo GR design Prado 10-17 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Prado"
+  },
+  {
+   "codigo": "ACC02-434",
+   "nombre": "Pomo GR design Hilux 17-26",
+   "slug": "pomo-gr-design-hilux-17-26",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Pomo GR design Hilux 17-26 | DACARS",
+   "seo_descripcion": "Compra Pomo GR design Hilux 17-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "ACC02-435",
+   "nombre": "Emblemas GR metalicos importados",
+   "slug": "emblemas-gr-metalicos-importados",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Emblemas GR metalicos importados | DACARS",
+   "seo_descripcion": "Compra Emblemas GR metalicos importados en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-436",
+   "nombre": "Tuercas de seguridad vector 12X1.50 Toyota",
+   "slug": "tuercas-de-seguridad-vector-12x1-50-toyota",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Tuercas de seguridad vector 12X1.50 Toyota | DACARS",
+   "seo_descripcion": "Compra Tuercas de seguridad vector 12X1.50 Toyota en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-437",
+   "nombre": "Tuercas de seguridad vector 12X1.50 conica",
+   "slug": "tuercas-de-seguridad-vector-12x1-50-conica",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Tuercas de seguridad vector 12X1.50 conica | DACARS",
+   "seo_descripcion": "Compra Tuercas de seguridad vector 12X1.50 conica en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-438",
+   "nombre": "Llaveros cuero design GR",
+   "slug": "llaveros-cuero-design-gr",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Llaveros cuero design GR | DACARS",
+   "seo_descripcion": "Compra Llaveros cuero design GR en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-439",
+   "nombre": "Tuercas de seguridad toppfit 12X1.50 Toyota",
+   "slug": "tuercas-de-seguridad-toppfit-12x1-50-toyota",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Tuercas de seguridad toppfit 12X1.50 Toyota | DACARS",
+   "seo_descripcion": "Compra Tuercas de seguridad toppfit 12X1.50 Toyota en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-440",
+   "nombre": "Tuercas de seguridad toppfit 12X1.50 conica",
+   "slug": "tuercas-de-seguridad-toppfit-12x1-50-conica",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Tuercas de seguridad toppfit 12X1.50 conica | DACARS",
+   "seo_descripcion": "Compra Tuercas de seguridad toppfit 12X1.50 conica en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-443",
+   "nombre": "Camara domo AHD 1080 universal",
+   "slug": "camara-domo-ahd-1080-universal",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Camara domo AHD 1080 universal | DACARS",
+   "seo_descripcion": "Compra Camara domo AHD 1080 universal en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-447",
+   "nombre": "Camara CM010 Hanex",
+   "slug": "camara-cm010-hanex",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Camara CM010 Hanex | DACARS",
+   "seo_descripcion": "Compra Camara CM010 Hanex en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Hanex"
+  },
+  {
+   "codigo": "ACC02-448",
+   "nombre": "Modulo adaptador car play inalambrico",
+   "slug": "modulo-adaptador-car-play-inalambrico",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Modulo adaptador car play inalambrico | DACARS",
+   "seo_descripcion": "Compra Modulo adaptador car play inalambrico en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-450",
+   "nombre": "Tiro de arrastre isuzu-max exportacio modelo 2023-2024",
+   "slug": "tiro-de-arrastre-isuzu-max-exportacio-modelo-2023-2024",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Tiro de arrastre isuzu-max exportacio modelo 2023-2024 | DACARS",
+   "seo_descripcion": "Compra Tiro de arrastre isuzu-max exportacio modelo 2023-2024 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-456",
+   "nombre": "Timon Toyota 09-24 cuero sport paddle",
+   "slug": "timon-toyota-09-24-cuero-sport-paddle",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Timon Toyota 09-24 cuero sport paddle | DACARS",
+   "seo_descripcion": "Compra Timon Toyota 09-24 cuero sport paddle en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-459",
+   "nombre": "Base persiana ty Hilux r 21 barra LED 30 KITX2",
+   "slug": "base-persiana-ty-hilux-r-21-barra-led-30-kitx2",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base persiana ty Hilux r 21 barra LED 30 KITX2 | DACARS",
+   "seo_descripcion": "Compra Base persiana ty Hilux r 21 barra LED 30 KITX2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "ACC02-460",
+   "nombre": "Base capo fd F150 21 on JUEGOX2",
+   "slug": "base-capo-fd-f150-21-on-juegox2",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base capo fd F150 21 on JUEGOX2 | DACARS",
+   "seo_descripcion": "Compra Base capo fd F150 21 on JUEGOX2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-461",
+   "nombre": "Base capo fd Ranger 19-22 JUEGOX2",
+   "slug": "base-capo-fd-ranger-19-22-juegox2",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base capo fd Ranger 19-22 JUEGOX2 | DACARS",
+   "seo_descripcion": "Compra Base capo fd Ranger 19-22 JUEGOX2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ranger"
+  },
+  {
+   "codigo": "ACC02-462",
+   "nombre": "Base capo ns np 300 21 JUEGOX2",
+   "slug": "base-capo-ns-np-300-21-juegox2",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base capo ns np 300 21 JUEGOX2 | DACARS",
+   "seo_descripcion": "Compra Base capo ns np 300 21 JUEGOX2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-463",
+   "nombre": "Base capo hilux-fortuner Revo JUEGOX2",
+   "slug": "base-capo-hilux-fortuner-revo-juegox2",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base capo hilux-fortuner Revo JUEGOX2 | DACARS",
+   "seo_descripcion": "Compra Base capo hilux-fortuner Revo JUEGOX2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Fortuner, Revo"
+  },
+  {
+   "codigo": "ACC02-464",
+   "nombre": "Base capo hilux-fortuner Vigo JUEGOX2",
+   "slug": "base-capo-hilux-fortuner-vigo-juegox2",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Base capo hilux-fortuner Vigo JUEGOX2 | DACARS",
+   "seo_descripcion": "Compra Base capo hilux-fortuner Vigo JUEGOX2 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Fortuner, Vigo"
+  },
+  {
+   "codigo": "ACC02-465",
+   "nombre": "Placa para winche",
+   "slug": "placa-para-winche",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Placa para winche | DACARS",
+   "seo_descripcion": "Compra Placa para winche en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-466",
+   "nombre": "Medio bomper ty 4 runner 5TA",
+   "slug": "medio-bomper-ty-4-runner-5ta",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Medio bomper ty 4 runner 5TA | DACARS",
+   "seo_descripcion": "Compra Medio bomper ty 4 runner 5TA en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-467",
+   "nombre": "Protector ty Hilux Fortuner Revo on P1",
+   "slug": "protector-ty-hilux-fortuner-revo-on-p1",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Protector ty Hilux Fortuner Revo on P1 | DACARS",
+   "seo_descripcion": "Compra Protector ty Hilux Fortuner Revo on P1 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Fortuner, Revo"
+  },
+  {
+   "codigo": "ACC02-468",
+   "nombre": "Protector ty 4RUNNER 5TA 13-24 P1 motor boken",
+   "slug": "protector-ty-4runner-5ta-13-24-p1-motor-boken",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Protector ty 4RUNNER 5TA 13-24 P1 motor boken | DACARS",
+   "seo_descripcion": "Compra Protector ty 4RUNNER 5TA 13-24 P1 motor boken en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-469",
+   "nombre": "Estribo Ford Ranger 13-23 Raptor",
+   "slug": "estribo-ford-ranger-13-23-raptor",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Estribo Ford Ranger 13-23 Raptor | DACARS",
+   "seo_descripcion": "Compra Estribo Ford Ranger 13-23 Raptor en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ford, Ranger, Raptor"
+  },
+  {
+   "codigo": "ACC02-472",
+   "nombre": "Guardabarros trasero derecho",
+   "slug": "guardabarros-trasero-derecho",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Guardabarros trasero derecho | DACARS",
+   "seo_descripcion": "Compra Guardabarros trasero derecho en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-472-1",
+   "nombre": "Guardabarros delantero derecho",
+   "slug": "guardabarros-delantero-derecho",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Guardabarros delantero derecho | DACARS",
+   "seo_descripcion": "Compra Guardabarros delantero derecho en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-473",
+   "nombre": "Guardabarros trasero izquierdo",
+   "slug": "guardabarros-trasero-izquierdo",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Guardabarros trasero izquierdo | DACARS",
+   "seo_descripcion": "Compra Guardabarros trasero izquierdo en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-473-1",
+   "nombre": "Guardabarros delantero o izquierdo",
+   "slug": "guardabarros-delantero-o-izquierdo",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Guardabarros delantero o izquierdo | DACARS",
+   "seo_descripcion": "Compra Guardabarros delantero o izquierdo en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-486",
+   "nombre": "Bateria Moura 36-750 LB1 45AH 210X175X175MM 18 meses ME45FD",
+   "slug": "bateria-moura-36-750-lb1-45ah-210x175x175mm-18-meses-me45fd",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bateria Moura 36-750 LB1 45AH 210X175X175MM 18 meses ME45FD | DACARS",
+   "seo_descripcion": "Compra Bateria Moura 36-750 LB1 45AH 210X175X175MM 18 meses ME45FD en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Moura"
+  },
+  {
+   "codigo": "ACC02-487",
+   "nombre": "Bateria Moura 47-950 L2 alta 60AH 246X175X190MM 18 meses ME60AD",
+   "slug": "bateria-moura-47-950-l2-alta-60ah-246x175x190mm-18-meses-me60ad",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bateria Moura 47-950 L2 alta 60AH 246X175X190MM 18 meses ME60AD",
+   "seo_descripcion": "Compra Bateria Moura 47-950 L2 alta 60AH 246X175X190MM 18 meses ME60AD en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Moura"
+  },
+  {
+   "codigo": "ACC02-488",
+   "nombre": "Bateria Moura 48-1100 alta L3 70AH 210X175X190MM 18 meses ME70LD",
+   "slug": "bateria-moura-48-1100-alta-l3-70ah-210x175x190mm-18-meses-me70ld",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bateria Moura 48-1100 alta L3 70AH 210X175X190MM 18 meses ME70LD",
+   "seo_descripcion": "Compra Bateria Moura 48-1100 alta L3 70AH 210X175X190MM 18 meses ME70LD en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Moura"
+  },
+  {
+   "codigo": "ACC02-489",
+   "nombre": "Bateria Moura 27-1250 90AH 306X172X230MM 15 meses ME90TD",
+   "slug": "bateria-moura-27-1250-90ah-306x172x230mm-15-meses-me90td",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bateria Moura 27-1250 90AH 306X172X230MM 15 meses ME90TD | DACARS",
+   "seo_descripcion": "Compra Bateria Moura 27-1250 90AH 306X172X230MM 15 meses ME90TD en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Moura"
+  },
+  {
+   "codigo": "ACC02-490",
+   "nombre": "Bateria Moura 55 efb 60AH 19 cm x 17.5 cm x 24.2CM",
+   "slug": "bateria-moura-55-efb-60ah-19-cm-x-17-5-cm-x-24-2cm",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bateria Moura 55 efb 60AH 19 cm x 17.5 cm x 24.2CM | DACARS",
+   "seo_descripcion": "Compra Bateria Moura 55 efb 60AH 19 cm x 17.5 cm x 24.2CM en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Moura"
+  },
+  {
+   "codigo": "ACC02-492",
+   "nombre": "Gato para trailer doble rueda",
+   "slug": "gato-para-trailer-doble-rueda",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Gato para trailer doble rueda | DACARS",
+   "seo_descripcion": "Compra Gato para trailer doble rueda en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-494",
+   "nombre": "Kit actualizacion interior Prado 10 a 24 vxl",
+   "slug": "kit-actualizacion-interior-prado-10-a-24-vxl",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Kit actualizacion interior Prado 10 a 24 vxl | DACARS",
+   "seo_descripcion": "Compra Kit actualizacion interior Prado 10 a 24 vxl en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Prado"
+  },
+  {
+   "codigo": "ACC02-495",
+   "nombre": "Bumper cromado Toyota Hilux 2017-2025",
+   "slug": "bumper-cromado-toyota-hilux-2017-2025",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bumper cromado Toyota Hilux 2017-2025 | DACARS",
+   "seo_descripcion": "Compra Bumper cromado Toyota Hilux 2017-2025 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ACC02-496",
+   "nombre": "Juego de protectores de platon Hilux 17-24",
+   "slug": "juego-de-protectores-de-platon-hilux-17-24",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Juego de protectores de platon Hilux 17-24 | DACARS",
+   "seo_descripcion": "Compra Juego de protectores de platon Hilux 17-24 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "ACC02-497",
+   "nombre": "Switche control box",
+   "slug": "switche-control-box",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Switche control box | DACARS",
+   "seo_descripcion": "Compra Switche control box en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-498",
+   "nombre": "Timon Toyota tipo GR sport beige",
+   "slug": "timon-toyota-tipo-gr-sport-beige",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Timon Toyota tipo GR sport beige | DACARS",
+   "seo_descripcion": "Compra Timon Toyota tipo GR sport beige en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ACC02-499",
+   "nombre": "Inversor 400W",
+   "slug": "inversor-400w",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Inversor 400W | DACARS",
+   "seo_descripcion": "Compra Inversor 400W en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-500",
+   "nombre": "Portamoto grande (soporta 120 kilos max) ancho 17CM tiro arrastre",
+   "slug": "portamoto-grande-soporta-120-kilos-max-ancho-17cm-tiro-arrastre",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Portamoto grande (soporta 120 kilos max) ancho 17CM tiro arrastre",
+   "seo_descripcion": "Compra Portamoto grande (soporta 120 kilos max) ancho 17CM tiro arrastre en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ACC02-501",
+   "nombre": "Bateria Moura 24-1200 80AH 260X173X225MM 18 meses ME80RD",
+   "slug": "bateria-moura-24-1200-80ah-260x173x225mm-18-meses-me80rd",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bateria Moura 24-1200 80AH 260X173X225MM 18 meses ME80RD | DACARS",
+   "seo_descripcion": "Compra Bateria Moura 24-1200 80AH 260X173X225MM 18 meses ME80RD en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Moura"
+  },
+  {
+   "codigo": "ACC02-502",
+   "nombre": "Bateria fiamm agm L3 70AH 276X175X190MM 24 meses",
+   "slug": "bateria-fiamm-agm-l3-70ah-276x175x190mm-24-meses",
+   "categoria": "Lujos y accesorios",
+   "seo_titulo": "Bateria fiamm agm L3 70AH 276X175X190MM 24 meses | DACARS",
+   "seo_descripcion": "Compra Bateria fiamm agm L3 70AH 276X175X190MM 24 meses en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ARO12-001",
+   "nombre": "JCM aromas 25ML",
+   "slug": "jcm-aromas-25ml",
+   "categoria": "Detailing",
+   "seo_titulo": "JCM aromas 25ML | DACARS",
+   "seo_descripcion": "Compra JCM aromas 25ML en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false,
+   "marca": "JCM"
+  },
+  {
+   "codigo": "ARO12-002",
+   "nombre": "JCM silicona cremosa",
+   "slug": "jcm-silicona-cremosa",
+   "categoria": "Detailing",
+   "seo_titulo": "JCM silicona cremosa | DACARS",
+   "seo_descripcion": "Compra JCM silicona cremosa en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false,
+   "marca": "JCM"
+  },
+  {
+   "codigo": "ARO12-004",
+   "nombre": "Limpiador de interiores en espuma",
+   "slug": "limpiador-de-interiores-en-espuma",
+   "categoria": "Detailing",
+   "seo_titulo": "Limpiador de interiores en espuma | DACARS",
+   "seo_descripcion": "Compra Limpiador de interiores en espuma en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false
+  },
+  {
+   "codigo": "ARO12-005",
+   "nombre": "Silicona en spray",
+   "slug": "silicona-en-spray",
+   "categoria": "Detailing",
+   "seo_titulo": "Silicona en spray | DACARS",
+   "seo_descripcion": "Compra Silicona en spray en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false
+  },
+  {
+   "codigo": "ARO12-006",
+   "nombre": "Quick fresh biocida",
+   "slug": "quick-fresh-biocida",
+   "categoria": "Detailing",
+   "seo_titulo": "Quick fresh biocida | DACARS",
+   "seo_descripcion": "Compra Quick fresh biocida en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false
+  },
+  {
+   "codigo": "ARO12-007",
+   "nombre": "Liquido antiempañante",
+   "slug": "liquido-antiempanante",
+   "categoria": "Detailing",
+   "seo_titulo": "Liquido antiempañante | DACARS",
+   "seo_descripcion": "Compra Liquido antiempañante en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false
+  },
+  {
+   "codigo": "ARO12-008",
+   "nombre": "Ambientador BO-21",
+   "slug": "ambientador-bo-21",
+   "categoria": "Detailing",
+   "seo_titulo": "Ambientador BO-21 | DACARS",
+   "seo_descripcion": "Compra Ambientador BO-21 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false
+  },
+  {
+   "codigo": "ARO12-009",
+   "nombre": "Carblok aroma",
+   "slug": "carblok-aroma",
+   "categoria": "Detailing",
+   "seo_titulo": "Carblok aroma | DACARS",
+   "seo_descripcion": "Compra Carblok aroma en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false
+  },
+  {
+   "codigo": "ARO12-010",
+   "nombre": "Ambientador BO-35",
+   "slug": "ambientador-bo-35",
+   "categoria": "Detailing",
+   "seo_titulo": "Ambientador BO-35 | DACARS",
+   "seo_descripcion": "Compra Ambientador BO-35 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": false
+  },
+  {
+   "codigo": "CARP03-008",
+   "nombre": "Carpa en lona flex Ford Ranger xlt/xl/raptor 2024-2025",
+   "slug": "carpa-en-lona-flex-ford-ranger-xlt-xl-raptor-2024-2025",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Carpa en lona flex Ford Ranger xlt/xl/raptor 2024-2025 | DACARS",
+   "seo_descripcion": "Compra Carpa en lona flex Ford Ranger xlt/xl/raptor 2024-2025 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ford, Ranger, Raptor"
+  },
+  {
+   "codigo": "CARP03-013",
+   "nombre": "Carpa rígida manual Ford range r xl xls xlt 2023 pro xrc m",
+   "slug": "carpa-rigida-manual-ford-range-r-xl-xls-xlt-2023-pro-xrc-m",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Carpa rígida manual Ford range r xl xls xlt 2023 pro xrc m | DACARS",
+   "seo_descripcion": "Compra Carpa rígida manual Ford range r xl xls xlt 2023 pro xrc m en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ford"
+  },
+  {
+   "codigo": "CARP03-014",
+   "nombre": "Carpa rígida manual Toyota hilu x Revo 2017 pr o xrc m",
+   "slug": "carpa-rigida-manual-toyota-hilu-x-revo-2017-pr-o-xrc-m",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Carpa rígida manual Toyota hilu x Revo 2017 pr o xrc m | DACARS",
+   "seo_descripcion": "Compra Carpa rígida manual Toyota hilu x Revo 2017 pr o xrc m en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Revo"
+  },
+  {
+   "codigo": "CARP03-015",
+   "nombre": "Carpa enrolable Ford Ranger xl xl s xlt 2023 pro xrc s",
+   "slug": "carpa-enrolable-ford-ranger-xl-xl-s-xlt-2023-pro-xrc-s",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Carpa enrolable Ford Ranger xl xl s xlt 2023 pro xrc s | DACARS",
+   "seo_descripcion": "Compra Carpa enrolable Ford Ranger xl xl s xlt 2023 pro xrc s en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ford, Ranger"
+  },
+  {
+   "codigo": "CARP03-016",
+   "nombre": "Carpa enrollable Volkswagen Amarok 2010 pro xrcs",
+   "slug": "carpa-enrollable-volkswagen-amarok-2010-pro-xrcs",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Carpa enrollable Volkswagen Amarok 2010 pro xrcs | DACARS",
+   "seo_descripcion": "Compra Carpa enrollable Volkswagen Amarok 2010 pro xrcs en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Volkswagen, Amarok"
+  },
+  {
+   "codigo": "ILU04-001",
+   "nombre": "DRL Toyota Hilux 21-23 brillante luz tracera",
+   "slug": "drl-toyota-hilux-21-23-brillante-luz-tracera",
+   "categoria": "Iluminación",
+   "seo_titulo": "DRL Toyota Hilux 21-23 brillante luz tracera | DACARS",
+   "seo_descripcion": "Compra DRL Toyota Hilux 21-23 brillante luz tracera en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux",
+   "variante": {
+    "sku": "ILUACVA354",
+    "precio": 750000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ILU04-002",
+   "nombre": "Tragaluz Toyota Prado 10-23 tipo a",
+   "slug": "tragaluz-toyota-prado-10-23-tipo-a",
+   "categoria": "Iluminación",
+   "seo_titulo": "Tragaluz Toyota Prado 10-23 tipo a | DACARS",
+   "seo_descripcion": "Compra Tragaluz Toyota Prado 10-23 tipo a en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Prado",
+   "variante": {
+    "sku": "ILUACVA052",
+    "precio": 450000,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ILU04-003",
+   "nombre": "Bombillo SC 30.000 lumenes H7",
+   "slug": "bombillo-sc-30-000-lumenes-h7",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 30.000 lumenes H7 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 30.000 lumenes H7 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUB-SC30-H7",
+    "precio": 630000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ILU04-004",
+   "nombre": "Bombillo SC 30.000 lumenes 9005",
+   "slug": "bombillo-sc-30-000-lumenes-9005",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 30.000 lumenes 9005 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 30.000 lumenes 9005 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUB-SC30-9005",
+    "precio": 630000,
+    "stock": 5
+   }
+  },
+  {
+   "codigo": "ILU04-006",
+   "nombre": "Bombillo SC 20.000 lumenes H3",
+   "slug": "bombillo-sc-20-000-lumenes-h3",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 20.000 lumenes H3 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 20.000 lumenes H3 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUB-SC20-H3",
+    "precio": 490000,
+    "stock": 2
+   }
+  },
+  {
+   "codigo": "ILU04-018",
+   "nombre": "Bombillo 158 12V 5W ambar",
+   "slug": "bombillo-158-12v-5w-ambar",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo 158 12V 5W ambar | DACARS",
+   "seo_descripcion": "Compra Bombillo 158 12V 5W ambar en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILU158-12V-5WAM",
+    "precio": 10000,
+    "stock": 8
+   }
+  },
+  {
+   "codigo": "ILU04-019",
+   "nombre": "Bombillo H4 P43 12V 60/55W standar",
+   "slug": "bombillo-h4-p43-12v-60-55w-standar",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo H4 P43 12V 60/55W standar | DACARS",
+   "seo_descripcion": "Compra Bombillo H4 P43 12V 60/55W standar en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUH4P43-12V-60/55W",
+    "precio": 20000,
+    "stock": 17
+   }
+  },
+  {
+   "codigo": "ILU04-020",
+   "nombre": "Bombillo H7 12V 55W standar",
+   "slug": "bombillo-h7-12v-55w-standar",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo H7 12V 55W standar | DACARS",
+   "seo_descripcion": "Compra Bombillo H7 12V 55W standar en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUH7-12V-55WSTAN",
+    "precio": 30000,
+    "stock": 9
+   }
+  },
+  {
+   "codigo": "ILU04-021",
+   "nombre": "Bombillo H11 55W 12V standard curvo",
+   "slug": "bombillo-h11-55w-12v-standard-curvo",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo H11 55W 12V standard curvo | DACARS",
+   "seo_descripcion": "Compra Bombillo H11 55W 12V standard curvo en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUH11-55W-12VSTAN",
+    "precio": 57999,
+    "stock": 7
+   }
+  },
+  {
+   "codigo": "ILU04-022",
+   "nombre": "Bombillo H8 12V 35W standard",
+   "slug": "bombillo-h8-12v-35w-standard",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo H8 12V 35W standard | DACARS",
+   "seo_descripcion": "Compra Bombillo H8 12V 35W standard en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUH8-12V-35WSTAN",
+    "precio": 65000,
+    "stock": 9
+   }
+  },
+  {
+   "codigo": "ILU04-023",
+   "nombre": "Bombillo 1141 12V 21W",
+   "slug": "bombillo-1141-12v-21w",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo 1141 12V 21W | DACARS",
+   "seo_descripcion": "Compra Bombillo 1141 12V 21W en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILU1141-12V-21W",
+    "precio": 8000,
+    "stock": 50
+   }
+  },
+  {
+   "codigo": "ILU04-024",
+   "nombre": "Bombillo 1141 12V 21W ambar-m/nuevo-pin c",
+   "slug": "bombillo-1141-12v-21w-ambar-m-nuevo-pin-c",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo 1141 12V 21W ambar-m/nuevo-pin c | DACARS",
+   "seo_descripcion": "Compra Bombillo 1141 12V 21W ambar-m/nuevo-pin c en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILU1141-12V-21WAMBR",
+    "precio": 12000,
+    "stock": 6
+   }
+  },
+  {
+   "codigo": "ILU04-025",
+   "nombre": "Bombillo 1034 12V 21/5 w",
+   "slug": "bombillo-1034-12v-21-5-w",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo 1034 12V 21/5 w | DACARS",
+   "seo_descripcion": "Compra Bombillo 1034 12V 21/5 w en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILU1034-12V-12/5W",
+    "precio": 8000,
+    "stock": 31
+   }
+  },
+  {
+   "codigo": "ILU04-026",
+   "nombre": "Bombillo HB3 55W 12V Osram 9005 Sylvania",
+   "slug": "bombillo-hb3-55w-12v-osram-9005-sylvania",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo HB3 55W 12V Osram 9005 Sylvania | DACARS",
+   "seo_descripcion": "Compra Bombillo HB3 55W 12V Osram 9005 Sylvania en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Osram",
+   "variante": {
+    "sku": "ILUHB3-55W-12VOSR",
+    "precio": 38000,
+    "stock": 6
+   }
+  },
+  {
+   "codigo": "ILU04-027",
+   "nombre": "Bombillos exploradoras HB4 12V 51W",
+   "slug": "bombillos-exploradoras-hb4-12v-51w",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillos exploradoras HB4 12V 51W | DACARS",
+   "seo_descripcion": "Compra Bombillos exploradoras HB4 12V 51W en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILU12V-51W-BOM-EXPL",
+    "precio": 38000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ILU04-028",
+   "nombre": "Faro LED 5 pulgadas SC-5 48W Osram (filtros)",
+   "slug": "faro-led-5-pulgadas-sc-5-48w-osram-filtros",
+   "categoria": "Iluminación",
+   "seo_titulo": "Faro LED 5 pulgadas SC-5 48W Osram (filtros) | DACARS",
+   "seo_descripcion": "Compra Faro LED 5 pulgadas SC-5 48W Osram (filtros) en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Osram",
+   "variante": {
+    "sku": "ILULIF-SC5-ULTRASPOT",
+    "precio": 1640000,
+    "stock": 4
+   }
+  },
+  {
+   "codigo": "ILU04-033",
+   "nombre": "Tragaluz Toyota Fortuner 16-23",
+   "slug": "tragaluz-toyota-fortuner-16-23",
+   "categoria": "Iluminación",
+   "seo_titulo": "Tragaluz Toyota Fortuner 16-23 | DACARS",
+   "seo_descripcion": "Compra Tragaluz Toyota Fortuner 16-23 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Fortuner",
+   "variante": {
+    "sku": "ILUACDRL38TRAGTY16-23",
+    "precio": 360000,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ILU04-036",
+   "nombre": "Iluminación LED RGB universal",
+   "slug": "iluminacion-led-rgb-universal",
+   "categoria": "Iluminación",
+   "seo_titulo": "Iluminación LED RGB universal | DACARS",
+   "seo_descripcion": "Compra Iluminación LED RGB universal en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUACVA380LED",
+    "precio": 267750,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "ILU04-038",
+   "nombre": "Bombillo SC 30.000 lumenes H4",
+   "slug": "bombillo-sc-30-000-lumenes-h4",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 30.000 lumenes H4 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 30.000 lumenes H4 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUB-SC30-H4",
+    "precio": 315000,
+    "stock": 2
+   }
+  },
+  {
+   "codigo": "ILU04-039",
+   "nombre": "Bombillo SC 30.000 lumenes H11",
+   "slug": "bombillo-sc-30-000-lumenes-h11",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 30.000 lumenes H11 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 30.000 lumenes H11 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUB-SC30-H11",
+    "precio": 652500,
+    "stock": 0
+   }
+  },
+  {
+   "codigo": "ILU04-043",
+   "nombre": "Bombillo SC 11.000 lumenes hr",
+   "slug": "bombillo-sc-11-000-lumenes-hr",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 11.000 lumenes hr | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 11.000 lumenes hr en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUB-SC11-H3",
+    "precio": 262200,
+    "stock": 2
+   }
+  },
+  {
+   "codigo": "ILU04-048",
+   "nombre": "Bombillo LED tipo 158 W5W 12V 1 w",
+   "slug": "bombillo-led-tipo-158-w5w-12v-1-w",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo LED tipo 158 W5W 12V 1 w | DACARS",
+   "seo_descripcion": "Compra Bombillo LED tipo 158 W5W 12V 1 w en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILULED158W5W",
+    "precio": 35000,
+    "stock": 19
+   }
+  },
+  {
+   "codigo": "ILU04-049",
+   "nombre": "Bombillo 3157 27/7W",
+   "slug": "bombillo-3157-27-7w",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo 3157 27/7W | DACARS",
+   "seo_descripcion": "Compra Bombillo 3157 27/7W en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUBO3157",
+    "precio": 9000,
+    "stock": 2
+   }
+  },
+  {
+   "codigo": "ILU04-053",
+   "nombre": "Bombillo T20A 12V 21 1 contacto",
+   "slug": "bombillo-t20a-12v-21-1-contacto",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo T20A 12V 21 1 contacto | DACARS",
+   "seo_descripcion": "Compra Bombillo T20A 12V 21 1 contacto en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "ILUBOMT20A-HO-031NA",
+    "precio": 12500,
+    "stock": 15
+   }
+  },
+  {
+   "codigo": "ILU04-058",
+   "nombre": "Luz LED blanca 12V 31MM canbus X2 pcs",
+   "slug": "luz-led-blanca-12v-31mm-canbus-x2-pcs",
+   "categoria": "Iluminación",
+   "seo_titulo": "Luz LED blanca 12V 31MM canbus X2 pcs | DACARS",
+   "seo_descripcion": "Compra Luz LED blanca 12V 31MM canbus X2 pcs en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-060",
+   "nombre": "Luz LED trasera (repuesto)",
+   "slug": "luz-led-trasera-repuesto",
+   "categoria": "Iluminación",
+   "seo_titulo": "Luz LED trasera (repuesto) | DACARS",
+   "seo_descripcion": "Compra Luz LED trasera (repuesto) en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-061",
+   "nombre": "3ER stop Hilux Vigo",
+   "slug": "3er-stop-hilux-vigo",
+   "categoria": "Iluminación",
+   "seo_titulo": "3ER stop Hilux Vigo | DACARS",
+   "seo_descripcion": "Compra 3ER stop Hilux Vigo en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Vigo"
+  },
+  {
+   "codigo": "ILU04-062",
+   "nombre": "Bombillo H16 19W 12V Osram",
+   "slug": "bombillo-h16-19w-12v-osram",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo H16 19W 12V Osram | DACARS",
+   "seo_descripcion": "Compra Bombillo H16 19W 12V Osram en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Osram"
+  },
+  {
+   "codigo": "ILU04-063",
+   "nombre": "Bombillo T20-1 12V 21W ambar 1FILAMENTO",
+   "slug": "bombillo-t20-1-12v-21w-ambar-1filamento",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo T20-1 12V 21W ambar 1FILAMENTO | DACARS",
+   "seo_descripcion": "Compra Bombillo T20-1 12V 21W ambar 1FILAMENTO en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-064",
+   "nombre": "Bombillo Loyta LED 7515 blanco 12-24V 2,8W/0,4W",
+   "slug": "bombillo-loyta-led-7515-blanco-12-24v-2-8w-0-4w",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo Loyta LED 7515 blanco 12-24V 2,8W/0,4W | DACARS",
+   "seo_descripcion": "Compra Bombillo Loyta LED 7515 blanco 12-24V 2,8W/0,4W en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Loyta"
+  },
+  {
+   "codigo": "ILU04-070",
+   "nombre": "Bombillo SC 20.000 lumenes H7 B-SC20-H7",
+   "slug": "bombillo-sc-20-000-lumenes-h7-b-sc20-h7",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 20.000 lumenes H7 B-SC20-H7 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 20.000 lumenes H7 B-SC20-H7 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-075",
+   "nombre": "Bombillo SC 30.000 lumenes H3 B-SC30-H3",
+   "slug": "bombillo-sc-30-000-lumenes-h3-b-sc30-h3",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 30.000 lumenes H3 B-SC30-H3 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 30.000 lumenes H3 B-SC30-H3 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-089",
+   "nombre": "Farolas Toyota Prado LC250 2024 + LED",
+   "slug": "farolas-toyota-prado-lc250-2024-led",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farolas Toyota Prado LC250 2024 + LED | DACARS",
+   "seo_descripcion": "Compra Farolas Toyota Prado LC250 2024 + LED en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Prado"
+  },
+  {
+   "codigo": "ILU04-089-1",
+   "nombre": "Farola Toyota Prado LC250 2024 + LED izq",
+   "slug": "farola-toyota-prado-lc250-2024-led-izq",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola Toyota Prado LC250 2024 + LED izq | DACARS",
+   "seo_descripcion": "Compra Farola Toyota Prado LC250 2024 + LED izq en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Prado"
+  },
+  {
+   "codigo": "ILU04-092",
+   "nombre": "Faro LED SC 7PRO round DRL driving",
+   "slug": "faro-led-sc-7pro-round-drl-driving",
+   "categoria": "Iluminación",
+   "seo_titulo": "Faro LED SC 7PRO round DRL driving | DACARS",
+   "seo_descripcion": "Compra Faro LED SC 7PRO round DRL driving en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-102",
+   "nombre": "Stop Toyota Hilux /16IZQ",
+   "slug": "stop-toyota-hilux-16izq",
+   "categoria": "Iluminación",
+   "seo_titulo": "Stop Toyota Hilux /16IZQ | DACARS",
+   "seo_descripcion": "Compra Stop Toyota Hilux /16IZQ en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ILU04-103",
+   "nombre": "Stop Toyota Hilux /16DER",
+   "slug": "stop-toyota-hilux-16der",
+   "categoria": "Iluminación",
+   "seo_titulo": "Stop Toyota Hilux /16DER | DACARS",
+   "seo_descripcion": "Compra Stop Toyota Hilux /16DER en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ILU04-104",
+   "nombre": "STOPTOYVIGO/12/LH",
+   "slug": "stoptoyvigo-12-lh",
+   "categoria": "Iluminación",
+   "seo_titulo": "STOPTOYVIGO/12/LH | DACARS",
+   "seo_descripcion": "Compra STOPTOYVIGO/12/LH en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-108",
+   "nombre": "Bombillo SC 11.000 lumenes H4 B-SC11-H4",
+   "slug": "bombillo-sc-11-000-lumenes-h4-b-sc11-h4",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 11.000 lumenes H4 B-SC11-H4 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 11.000 lumenes H4 B-SC11-H4 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-115",
+   "nombre": "Stop Vigo",
+   "slug": "stop-vigo",
+   "categoria": "Iluminación",
+   "seo_titulo": "Stop Vigo | DACARS",
+   "seo_descripcion": "Compra Stop Vigo en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Vigo"
+  },
+  {
+   "codigo": "ILU04-115-1",
+   "nombre": "Farola Toyota Hilux 21-23 LED izq",
+   "slug": "farola-toyota-hilux-21-23-led-izq",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola Toyota Hilux 21-23 LED izq | DACARS",
+   "seo_descripcion": "Compra Farola Toyota Hilux 21-23 LED izq en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ILU04-122",
+   "nombre": "Farola Hilux VIGO-12",
+   "slug": "farola-hilux-vigo-12",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola Hilux VIGO-12 | DACARS",
+   "seo_descripcion": "Compra Farola Hilux VIGO-12 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Vigo"
+  },
+  {
+   "codigo": "ILU04-122-2",
+   "nombre": "Farola Hilux VIGO-12",
+   "slug": "farola-hilux-vigo-12-ilu04-122-2",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola Hilux VIGO-12 | DACARS",
+   "seo_descripcion": "Compra Farola Hilux VIGO-12 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux, Vigo"
+  },
+  {
+   "codigo": "ILU04-128",
+   "nombre": "Exploradora Renault Sandero",
+   "slug": "exploradora-renault-sandero",
+   "categoria": "Iluminación",
+   "seo_titulo": "Exploradora Renault Sandero | DACARS",
+   "seo_descripcion": "Compra Exploradora Renault Sandero en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Renault, Sandero"
+  },
+  {
+   "codigo": "ILU04-137",
+   "nombre": "Bombillo SC 11.000 lumenes 9006",
+   "slug": "bombillo-sc-11-000-lumenes-9006",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 11.000 lumenes 9006 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 11.000 lumenes 9006 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-138",
+   "nombre": "Exploradora LED antiniebla SC sfog oem para Toyota dual color 2\"",
+   "slug": "exploradora-led-antiniebla-sc-sfog-oem-para-toyota-dual-color-2",
+   "categoria": "Iluminación",
+   "seo_titulo": "Exploradora LED antiniebla SC sfog oem para Toyota dual color 2\"",
+   "seo_descripcion": "Compra Exploradora LED antiniebla SC sfog oem para Toyota dual color 2\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ILU04-139",
+   "nombre": "Luz trasera LED SC chase multifuncion 5 en 1",
+   "slug": "luz-trasera-led-sc-chase-multifuncion-5-en-1",
+   "categoria": "Iluminación",
+   "seo_titulo": "Luz trasera LED SC chase multifuncion 5 en 1 | DACARS",
+   "seo_descripcion": "Compra Luz trasera LED SC chase multifuncion 5 en 1 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-140",
+   "nombre": "Faro LED SC 3PRO square spot",
+   "slug": "faro-led-sc-3pro-square-spot",
+   "categoria": "Iluminación",
+   "seo_titulo": "Faro LED SC 3PRO square spot | DACARS",
+   "seo_descripcion": "Compra Faro LED SC 3PRO square spot en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-141",
+   "nombre": "Farola LED laser SC optix Toyota Prado J250 Osram jet black",
+   "slug": "farola-led-laser-sc-optix-toyota-prado-j250-osram-jet-black",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola LED laser SC optix Toyota Prado J250 Osram jet black | DACARS",
+   "seo_descripcion": "Compra Farola LED laser SC optix Toyota Prado J250 Osram jet black en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Osram",
+   "compatibilidad": "Toyota, Prado"
+  },
+  {
+   "codigo": "ILU04-141-1",
+   "nombre": "Farola LED laser SC optix toy Prado J250 Osram jet black izq",
+   "slug": "farola-led-laser-sc-optix-toy-prado-j250-osram-jet-black-izq",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola LED laser SC optix toy Prado J250 Osram jet black izq | DACARS",
+   "seo_descripcion": "Compra Farola LED laser SC optix toy Prado J250 Osram jet black izq en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Osram",
+   "compatibilidad": "Prado"
+  },
+  {
+   "codigo": "ILU04-152",
+   "nombre": "Bombillo 9005 C12",
+   "slug": "bombillo-9005-c12",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo 9005 C12 | DACARS",
+   "seo_descripcion": "Compra Bombillo 9005 C12 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-153",
+   "nombre": "Bombillo H8 H9 H11 C12",
+   "slug": "bombillo-h8-h9-h11-c12",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo H8 H9 H11 C12 | DACARS",
+   "seo_descripcion": "Compra Bombillo H8 H9 H11 C12 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-157",
+   "nombre": "Bombillo SC 30.000 lumenes 9006",
+   "slug": "bombillo-sc-30-000-lumenes-9006",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo SC 30.000 lumenes 9006 | DACARS",
+   "seo_descripcion": "Compra Bombillo SC 30.000 lumenes 9006 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-159",
+   "nombre": "Exploradora LED antiniebla SC sfog oem para Toyota dual color 3\"",
+   "slug": "exploradora-led-antiniebla-sc-sfog-oem-para-toyota-dual-color-3",
+   "categoria": "Iluminación",
+   "seo_titulo": "Exploradora LED antiniebla SC sfog oem para Toyota dual color 3\"",
+   "seo_descripcion": "Compra Exploradora LED antiniebla SC sfog oem para Toyota dual color 3\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "ILU04-160",
+   "nombre": "Farola land cruser FJ70 r",
+   "slug": "farola-land-cruser-fj70-r",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola land cruser FJ70 r | DACARS",
+   "seo_descripcion": "Compra Farola land cruser FJ70 r en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-161",
+   "nombre": "Farola land cruser FJ70 l",
+   "slug": "farola-land-cruser-fj70-l",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola land cruser FJ70 l | DACARS",
+   "seo_descripcion": "Compra Farola land cruser FJ70 l en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-162",
+   "nombre": "Faro LED SC 3PRO square fog",
+   "slug": "faro-led-sc-3pro-square-fog",
+   "categoria": "Iluminación",
+   "seo_titulo": "Faro LED SC 3PRO square fog | DACARS",
+   "seo_descripcion": "Compra Faro LED SC 3PRO square fog en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-163",
+   "nombre": "Tercer stop LED Toyota Hilux 17-26",
+   "slug": "tercer-stop-led-toyota-hilux-17-26",
+   "categoria": "Iluminación",
+   "seo_titulo": "Tercer stop LED Toyota Hilux 17-26 | DACARS",
+   "seo_descripcion": "Compra Tercer stop LED Toyota Hilux 17-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ILU04-164",
+   "nombre": "Tercer stop LED Toyota Hilux 06-16",
+   "slug": "tercer-stop-led-toyota-hilux-06-16",
+   "categoria": "Iluminación",
+   "seo_titulo": "Tercer stop LED Toyota Hilux 06-16 | DACARS",
+   "seo_descripcion": "Compra Tercer stop LED Toyota Hilux 06-16 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ILU04-165",
+   "nombre": "Tercer stop LED Toyota Hilux logo GR 17-26",
+   "slug": "tercer-stop-led-toyota-hilux-logo-gr-17-26",
+   "categoria": "Iluminación",
+   "seo_titulo": "Tercer stop LED Toyota Hilux logo GR 17-26 | DACARS",
+   "seo_descripcion": "Compra Tercer stop LED Toyota Hilux logo GR 17-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ILU04-166",
+   "nombre": "Bombillo LED XT65 H4 blanco",
+   "slug": "bombillo-led-xt65-h4-blanco",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo LED XT65 H4 blanco | DACARS",
+   "seo_descripcion": "Compra Bombillo LED XT65 H4 blanco en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-167",
+   "nombre": "Bombillo LED XT65 H11 blanco",
+   "slug": "bombillo-led-xt65-h11-blanco",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo LED XT65 H11 blanco | DACARS",
+   "seo_descripcion": "Compra Bombillo LED XT65 H11 blanco en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-168",
+   "nombre": "Bombillo LED XT65 9005 blanco",
+   "slug": "bombillo-led-xt65-9005-blanco",
+   "categoria": "Iluminación",
+   "seo_titulo": "Bombillo LED XT65 9005 blanco | DACARS",
+   "seo_descripcion": "Compra Bombillo LED XT65 9005 blanco en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-169",
+   "nombre": "Farola LED SC M7 universal 90W 7 pulgadas",
+   "slug": "farola-led-sc-m7-universal-90w-7-pulgadas",
+   "categoria": "Iluminación",
+   "seo_titulo": "Farola LED SC M7 universal 90W 7 pulgadas | DACARS",
+   "seo_descripcion": "Compra Farola LED SC M7 universal 90W 7 pulgadas en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-170",
+   "nombre": "Rele aux 4 patas con soporte universal 12 40A",
+   "slug": "rele-aux-4-patas-con-soporte-universal-12-40a",
+   "categoria": "Iluminación",
+   "seo_titulo": "Rele aux 4 patas con soporte universal 12 40A | DACARS",
+   "seo_descripcion": "Compra Rele aux 4 patas con soporte universal 12 40A en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-171",
+   "nombre": "Rele aux 5 patas con soporte universal 12V 30 40A tipo b",
+   "slug": "rele-aux-5-patas-con-soporte-universal-12v-30-40a-tipo-b",
+   "categoria": "Iluminación",
+   "seo_titulo": "Rele aux 5 patas con soporte universal 12V 30 40A tipo b | DACARS",
+   "seo_descripcion": "Compra Rele aux 5 patas con soporte universal 12V 30 40A tipo b en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "ILU04-173",
+   "nombre": "12V 27W Osram Sylvania",
+   "slug": "12v-27w-osram-sylvania",
+   "categoria": "Iluminación",
+   "seo_titulo": "12V 27W Osram Sylvania | DACARS",
+   "seo_descripcion": "Compra 12V 27W Osram Sylvania en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Osram"
+  },
+  {
+   "codigo": "ILU04-175",
+   "nombre": "Stop Toyota Hilux 16-20 T.23 led-der",
+   "slug": "stop-toyota-hilux-16-20-t-23-led-der",
+   "categoria": "Iluminación",
+   "seo_titulo": "Stop Toyota Hilux 16-20 T.23 led-der | DACARS",
+   "seo_descripcion": "Compra Stop Toyota Hilux 16-20 T.23 led-der en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "ILU04-175-1",
+   "nombre": "Stop Toyota Hilux 16-20 T.23 led-izq",
+   "slug": "stop-toyota-hilux-16-20-t-23-led-izq",
+   "categoria": "Iluminación",
+   "seo_titulo": "Stop Toyota Hilux 16-20 T.23 led-izq | DACARS",
+   "seo_descripcion": "Compra Stop Toyota Hilux 16-20 T.23 led-izq en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "LLANO05-022",
+   "nombre": "Rin 17 8.0 AO3210 ET+25 6X139.7 106.1",
+   "slug": "rin-17-8-0-ao3210-et-25-6x139-7-106-1",
+   "categoria": "Llantas y rines",
+   "seo_titulo": "Rin 17 8.0 AO3210 ET+25 6X139.7 106.1 | DACARS",
+   "seo_descripcion": "Compra Rin 17 8.0 AO3210 ET+25 6X139.7 106.1 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SEG11-009",
+   "nombre": "Switch para auto ft- 60769",
+   "slug": "switch-para-auto-ft-60769",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Switch para auto ft- 60769 | DACARS",
+   "seo_descripcion": "Compra Switch para auto ft- 60769 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SEG11-011",
+   "nombre": "Tury bloqueo de puerta platon con mando original Toyota Hilux",
+   "slug": "tury-bloqueo-de-puerta-platon-con-mando-original-toyota-hilux",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Tury bloqueo de puerta platon con mando original Toyota Hilux | DACARS",
+   "seo_descripcion": "Compra Tury bloqueo de puerta platon con mando original Toyota Hilux en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota, Hilux"
+  },
+  {
+   "codigo": "SEG11-012",
+   "nombre": "Alarma canbus plug y play RAV4/ HYBRID7COROLLA / 4RUNNER/PRAD/FJ/LC200+18",
+   "slug": "alarma-canbus-plug-y-play-rav4-hybrid7corolla-4runner-prad-fj-lc200-18",
+   "categoria": "Pitos y alarmas",
+   "seo_titulo": "Alarma canbus plug y play RAV4/ HYBRID7COROLLA / 4RUNNER/PRAD/FJ/LC200",
+   "seo_descripcion": "Compra Alarma canbus plug y play RAV4/ HYBRID7COROLLA / 4RUNNER/PRAD/FJ/LC200+18 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SEG11-020",
+   "nombre": "Sensores punto ciego Prado 2024+ LC250",
+   "slug": "sensores-punto-ciego-prado-2024-lc250",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Sensores punto ciego Prado 2024+ LC250 | DACARS",
+   "seo_descripcion": "Compra Sensores punto ciego Prado 2024+ LC250 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Prado"
+  },
+  {
+   "codigo": "SEG11-28",
+   "nombre": "Switche exploradora 61758",
+   "slug": "switche-exploradora-61758",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Switche exploradora 61758 | DACARS",
+   "seo_descripcion": "Compra Switche exploradora 61758 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SEG11-30",
+   "nombre": "Sensor aproximacion oem 6NM-2WP",
+   "slug": "sensor-aproximacion-oem-6nm-2wp",
+   "categoria": "Seguridad y parqueo",
+   "seo_titulo": "Sensor aproximacion oem 6NM-2WP | DACARS",
+   "seo_descripcion": "Compra Sensor aproximacion oem 6NM-2WP en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SON10-001",
+   "nombre": "Radio pioner DMHG225",
+   "slug": "radio-pioner-dmhg225",
+   "categoria": "Multimedia y CarPlay",
+   "seo_titulo": "Radio pioner DMHG225 | DACARS",
+   "seo_descripcion": "Compra Radio pioner DMHG225 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "SODMHG225",
+    "precio": 1035300,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "SON10-002",
+   "nombre": "Radio pioner dmh-a 245 bt",
+   "slug": "radio-pioner-dmh-a-245-bt",
+   "categoria": "Multimedia y CarPlay",
+   "seo_titulo": "Radio pioner dmh-a 245 bt | DACARS",
+   "seo_descripcion": "Compra Radio pioner dmh-a 245 bt en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "SODMHA245",
+    "precio": 1249500,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "SON10-013",
+   "nombre": "Componente de audision APK165",
+   "slug": "componente-de-audision-apk165",
+   "categoria": "Sonido",
+   "seo_titulo": "Componente de audision APK165 | DACARS",
+   "seo_descripcion": "Compra Componente de audision APK165 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "SOCOMPAPK165",
+    "precio": 1178100,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "SON10-014",
+   "nombre": "Parlante de audicion APX6.5",
+   "slug": "parlante-de-audicion-apx6-5",
+   "categoria": "Sonido",
+   "seo_titulo": "Parlante de audicion APX6.5 | DACARS",
+   "seo_descripcion": "Compra Parlante de audicion APX6.5 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "SOPARAPX6.5",
+    "precio": 678300,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "SON10-015",
+   "nombre": "Componente audicion APK690",
+   "slug": "componente-audicion-apk690",
+   "categoria": "Sonido",
+   "seo_titulo": "Componente audicion APK690 | DACARS",
+   "seo_descripcion": "Compra Componente audicion APK690 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "SOCOMPAPK690",
+    "precio": 1320900,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "SON10-019",
+   "nombre": "Parlante DCX 130 5\"",
+   "slug": "parlante-dcx-130-5",
+   "categoria": "Sonido",
+   "seo_titulo": "Parlante DCX 130 5\" | DACARS",
+   "seo_descripcion": "Compra Parlante DCX 130 5\" en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "SOPARDCX130-5¨",
+    "precio": 374850,
+    "stock": 2
+   }
+  },
+  {
+   "codigo": "SON10-025",
+   "nombre": "Amplificador dsp j.l audio 88",
+   "slug": "amplificador-dsp-j-l-audio-88",
+   "categoria": "Sonido",
+   "seo_titulo": "Amplificador dsp j.l audio 88 | DACARS",
+   "seo_descripcion": "Compra Amplificador dsp j.l audio 88 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "SOAMPLIDSPJ.L",
+    "precio": 4444650,
+    "stock": 1
+   }
+  },
+  {
+   "codigo": "SON10-046",
+   "nombre": "Radio pioner dmh - ap 6650 bt",
+   "slug": "radio-pioner-dmh-ap-6650-bt",
+   "categoria": "Multimedia y CarPlay",
+   "seo_titulo": "Radio pioner dmh - ap 6650 bt | DACARS",
+   "seo_descripcion": "Compra Radio pioner dmh - ap 6650 bt en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SON10-052",
+   "nombre": "Inversor HTL-8",
+   "slug": "inversor-htl-8",
+   "categoria": "Sonido",
+   "seo_titulo": "Inversor HTL-8 | DACARS",
+   "seo_descripcion": "Compra Inversor HTL-8 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SON10-067",
+   "nombre": "Bajo APBX10 A52",
+   "slug": "bajo-apbx10-a52",
+   "categoria": "Sonido",
+   "seo_titulo": "Bajo APBX10 A52 | DACARS",
+   "seo_descripcion": "Compra Bajo APBX10 A52 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SON10-072",
+   "nombre": "Componente audision APK 163",
+   "slug": "componente-audision-apk-163",
+   "categoria": "Sonido",
+   "seo_titulo": "Componente audision APK 163 | DACARS",
+   "seo_descripcion": "Compra Componente audision APK 163 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SON10-073",
+   "nombre": "Parlante PRM-C652",
+   "slug": "parlante-prm-c652",
+   "categoria": "Sonido",
+   "seo_titulo": "Parlante PRM-C652 | DACARS",
+   "seo_descripcion": "Compra Parlante PRM-C652 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "SON10-086",
+   "nombre": "Bajo Kicker C10",
+   "slug": "bajo-kicker-c10",
+   "categoria": "Sonido",
+   "seo_titulo": "Bajo Kicker C10 | DACARS",
+   "seo_descripcion": "Compra Bajo Kicker C10 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Kicker"
+  },
+  {
+   "codigo": "SON10-108",
+   "nombre": "Parlante de 8\" de 2VIAS Hertz",
+   "slug": "parlante-de-8-de-2vias-hertz",
+   "categoria": "Sonido",
+   "seo_titulo": "Parlante de 8\" de 2VIAS Hertz | DACARS",
+   "seo_descripcion": "Compra Parlante de 8\" de 2VIAS Hertz en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "Hertz"
+  },
+  {
+   "codigo": "TAP01-005",
+   "nombre": "Tapetes 5D Prado 2010 - 2024",
+   "slug": "tapetes-5d-prado-2010-2024",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapetes 5D Prado 2010 - 2024 | DACARS",
+   "seo_descripcion": "Compra Tapetes 5D Prado 2010 - 2024 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Prado",
+   "variante": {
+    "sku": "TAP5DPR2010-2024",
+    "precio": 1151350,
+    "stock": 3
+   }
+  },
+  {
+   "codigo": "TAP01-006",
+   "nombre": "Tapete defender serie D-M",
+   "slug": "tapete-defender-serie-d-m",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete defender serie D-M | DACARS",
+   "seo_descripcion": "Compra Tapete defender serie D-M en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "variante": {
+    "sku": "TAPDEFSERD-M",
+    "precio": 151750,
+    "stock": 5
+   }
+  },
+  {
+   "codigo": "TAP01-018",
+   "nombre": "Tapete 5D Hilux 2017-2024",
+   "slug": "tapete-5d-hilux-2017-2024",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete 5D Hilux 2017-2024 | DACARS",
+   "seo_descripcion": "Compra Tapete 5D Hilux 2017-2024 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux",
+   "variante": {
+    "sku": "TAP5DHILU2017",
+    "precio": 758650,
+    "stock": 5
+   }
+  },
+  {
+   "codigo": "TAP01-028",
+   "nombre": "Juego tapete 5D Fortuner 17-24",
+   "slug": "juego-tapete-5d-fortuner-17-24",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego tapete 5D Fortuner 17-24 | DACARS",
+   "seo_descripcion": "Compra Juego tapete 5D Fortuner 17-24 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Fortuner"
+  },
+  {
+   "codigo": "TAP01-029",
+   "nombre": "Juego tapetes 5D Prado LC250 25-26",
+   "slug": "juego-tapetes-5d-prado-lc250-25-26",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego tapetes 5D Prado LC250 25-26 | DACARS",
+   "seo_descripcion": "Compra Juego tapetes 5D Prado LC250 25-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Prado"
+  },
+  {
+   "codigo": "TAP01-030",
+   "nombre": "Tapete 5D Ranger 24-25",
+   "slug": "tapete-5d-ranger-24-25",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete 5D Ranger 24-25 | DACARS",
+   "seo_descripcion": "Compra Tapete 5D Ranger 24-25 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ranger"
+  },
+  {
+   "codigo": "TAP01-031",
+   "nombre": "Tapete 5D Colorado 18-25",
+   "slug": "tapete-5d-colorado-18-25",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete 5D Colorado 18-25 | DACARS",
+   "seo_descripcion": "Compra Tapete 5D Colorado 18-25 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Colorado"
+  },
+  {
+   "codigo": "TAP01-032",
+   "nombre": "Juego de tapete 5D Fortuner beige 2006-2016",
+   "slug": "juego-de-tapete-5d-fortuner-beige-2006-2016",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego de tapete 5D Fortuner beige 2006-2016 | DACARS",
+   "seo_descripcion": "Compra Juego de tapete 5D Fortuner beige 2006-2016 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Fortuner"
+  },
+  {
+   "codigo": "TAP01-033",
+   "nombre": "Tapete 5D Hilux 2017-2017 2 ptas",
+   "slug": "tapete-5d-hilux-2017-2017-2-ptas",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete 5D Hilux 2017-2017 2 ptas | DACARS",
+   "seo_descripcion": "Compra Tapete 5D Hilux 2017-2017 2 ptas en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "TAP01-034",
+   "nombre": "Tapete 5D LC-70 mod 2010-2017 2 ptas",
+   "slug": "tapete-5d-lc-70-mod-2010-2017-2-ptas",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete 5D LC-70 mod 2010-2017 2 ptas | DACARS",
+   "seo_descripcion": "Compra Tapete 5D LC-70 mod 2010-2017 2 ptas en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Land Cruiser"
+  },
+  {
+   "codigo": "TAP01-035",
+   "nombre": "Tapetes 5D land cruiser 4.5 3 filas",
+   "slug": "tapetes-5d-land-cruiser-4-5-3-filas",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapetes 5D land cruiser 4.5 3 filas | DACARS",
+   "seo_descripcion": "Compra Tapetes 5D land cruiser 4.5 3 filas en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "TAP01-038",
+   "nombre": "Tapa duraliner Hilux 17-25",
+   "slug": "tapa-duraliner-hilux-17-25",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Tapa duraliner Hilux 17-25 | DACARS",
+   "seo_descripcion": "Compra Tapa duraliner Hilux 17-25 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "TAP01-041",
+   "nombre": "Juego de tapete 5D termoformado CX-30",
+   "slug": "juego-de-tapete-5d-termoformado-cx-30",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego de tapete 5D termoformado CX-30 | DACARS",
+   "seo_descripcion": "Compra Juego de tapete 5D termoformado CX-30 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "TAP01-043",
+   "nombre": "Juego de tapete 5D termoformado CX-5 18-24",
+   "slug": "juego-de-tapete-5d-termoformado-cx-5-18-24",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego de tapete 5D termoformado CX-5 18-24 | DACARS",
+   "seo_descripcion": "Compra Juego de tapete 5D termoformado CX-5 18-24 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "TAP01-046",
+   "nombre": "Tapete 5D Kia Sportage 2017-2022",
+   "slug": "tapete-5d-kia-sportage-2017-2022",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete 5D Kia Sportage 2017-2022 | DACARS",
+   "seo_descripcion": "Compra Tapete 5D Kia Sportage 2017-2022 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Kia, Sportage"
+  },
+  {
+   "codigo": "TAP01-048",
+   "nombre": "Juego de tapetes 5D Mazda 2 hibrido 16-17",
+   "slug": "juego-de-tapetes-5d-mazda-2-hibrido-16-17",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego de tapetes 5D Mazda 2 hibrido 16-17 | DACARS",
+   "seo_descripcion": "Compra Juego de tapetes 5D Mazda 2 hibrido 16-17 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Mazda"
+  },
+  {
+   "codigo": "TAP01-049",
+   "nombre": "Juego de tapetes 5D tesla model",
+   "slug": "juego-de-tapetes-5d-tesla-model",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego de tapetes 5D tesla model | DACARS",
+   "seo_descripcion": "Compra Juego de tapetes 5D tesla model en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "TAP01-050",
+   "nombre": "Tapetes 5DLC-300 beige 22-26",
+   "slug": "tapetes-5dlc-300-beige-22-26",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapetes 5DLC-300 beige 22-26 | DACARS",
+   "seo_descripcion": "Compra Tapetes 5DLC-300 beige 22-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "TAP01-051",
+   "nombre": "Tapetes 5DLC-200 beige 2010-21",
+   "slug": "tapetes-5dlc-200-beige-2010-21",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapetes 5DLC-200 beige 2010-21 | DACARS",
+   "seo_descripcion": "Compra Tapetes 5DLC-200 beige 2010-21 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true
+  },
+  {
+   "codigo": "TAP01-052",
+   "nombre": "Tapete 5D LC-300 2022-2026",
+   "slug": "tapete-5d-lc-300-2022-2026",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapete 5D LC-300 2022-2026 | DACARS",
+   "seo_descripcion": "Compra Tapete 5D LC-300 2022-2026 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Land Cruiser"
+  },
+  {
+   "codigo": "TAP01-053",
+   "nombre": "Juego tapetes 5D Toyota 4 runner",
+   "slug": "juego-tapetes-5d-toyota-4-runner",
+   "categoria": "Tapetes",
+   "seo_titulo": "Juego tapetes 5D Toyota 4 runner | DACARS",
+   "seo_descripcion": "Compra Juego tapetes 5D Toyota 4 runner en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Toyota"
+  },
+  {
+   "codigo": "TAP01-054",
+   "nombre": "Tapetes 5D Corolla cross 20-26",
+   "slug": "tapetes-5d-corolla-cross-20-26",
+   "categoria": "Tapetes",
+   "seo_titulo": "Tapetes 5D Corolla cross 20-26 | DACARS",
+   "seo_descripcion": "Compra Tapetes 5D Corolla cross 20-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Corolla"
+  },
+  {
+   "codigo": "TAP01-055",
+   "nombre": "Duraliner Ford Ranger 24-26",
+   "slug": "duraliner-ford-ranger-24-26",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Duraliner Ford Ranger 24-26 | DACARS",
+   "seo_descripcion": "Compra Duraliner Ford Ranger 24-26 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Ford, Ranger"
+  },
+  {
+   "codigo": "TAP01-53",
+   "nombre": "Tapa duraliner Hilux 2006-2016",
+   "slug": "tapa-duraliner-hilux-2006-2016",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Tapa duraliner Hilux 2006-2016 | DACARS",
+   "seo_descripcion": "Compra Tapa duraliner Hilux 2006-2016 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Hilux"
+  },
+  {
+   "codigo": "TAP01-54",
+   "nombre": "Duraliner platon Nissan NP-300 15-21",
+   "slug": "duraliner-platon-nissan-np-300-15-21",
+   "categoria": "Carpas y cubiertas",
+   "seo_titulo": "Duraliner platon Nissan NP-300 15-21 | DACARS",
+   "seo_descripcion": "Compra Duraliner platon Nissan NP-300 15-21 en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "compatibilidad": "Nissan"
+  },
+  {
+   "codigo": "TAP01-55",
+   "nombre": "AVM delantero/trasero completo universal negro",
+   "slug": "avm-delantero-trasero-completo-universal-negro",
+   "categoria": "Tapetes",
+   "seo_titulo": "AVM delantero/trasero completo universal negro | DACARS",
+   "seo_descripcion": "Compra AVM delantero/trasero completo universal negro en DACARS Villavicencio. Envíos a toda Colombia y asesoría por WhatsApp.",
+   "instalacion": true,
+   "marca": "AVM",
+   "variante": {
+    "sku": "ACCAVMDEL/TRA",
+    "precio": 330700,
+    "stock": 5
+   }
+  }
+ ]
+}

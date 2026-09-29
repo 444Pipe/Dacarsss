@@ -92,12 +92,22 @@ class QueSePublica(Base):
         self.assertContains(r, "IP67")
 
     def test_la_ficha_lleva_su_json_ld_de_producto(self):
+        ImagenProducto.objects.create(producto=self.producto, imagen="p/barra.webp")
         html = self.client.get(self.producto.get_absolute_url()).content.decode()
         self.assertIn('"@type": "Product"', html)
         self.assertIn('"priceCurrency": "COP"', html)
         self.assertIn("schema.org/InStock", html)
 
+    def test_sin_foto_no_hay_product_en_el_json_ld(self):
+        # Google exige image en el Product: sin foto, cada ficha saldría como
+        # error en Search Console. La página se indexa igual; el resultado
+        # enriquecido espera a la foto.
+        html = self.client.get(self.producto.get_absolute_url()).content.decode()
+        self.assertNotIn('"@type": "Product"', html)
+        self.assertIn('"@type": "BreadcrumbList"', html)
+
     def test_un_agotado_se_marca_como_tal_en_el_json_ld(self):
+        ImagenProducto.objects.create(producto=self.producto, imagen="p/barra.webp")
         self.variante.stock = 0
         self.variante.save()
         html = self.client.get(self.producto.get_absolute_url()).content.decode()
@@ -235,6 +245,101 @@ class EnlaceConElSitio(Base):
         xml = self.client.get("/sitemap.xml").content.decode()
         self.assertIn(self.producto.get_absolute_url(), xml)
         self.assertIn(self.categoria.get_absolute_url(), xml)
+
+
+class FeedGoogle(Base):
+    """El feed de Google Merchant Center: /feed-productos.xml."""
+
+    def setUp(self):
+        super().setUp()
+        ImagenProducto.objects.create(producto=self.producto, imagen="p/barra.webp")
+
+    def feed(self):
+        r = self.client.get("/feed-productos.xml")
+        self.assertEqual(r.status_code, 200)
+        return r.content.decode()
+
+    def test_el_producto_con_precio_y_foto_sale_en_el_feed(self):
+        xml = self.feed()
+        self.assertIn("<g:id>" + self.variante.sku + "</g:id>", xml)
+        self.assertIn("<g:price>480000 COP</g:price>", xml)
+        self.assertIn("in_stock", xml)
+        self.assertIn(self.producto.get_absolute_url(), xml)
+        # Que parsee: un feed roto es un feed que Google rechaza entero.
+        import xml.etree.ElementTree as ET
+        ET.fromstring(xml)
+
+    def test_sin_foto_no_entra(self):
+        # Google exige imagen por producto: sin foto el item invalidaría el
+        # feed. Queda afuera y entra solo cuando le carguen una.
+        ImagenProducto.objects.all().delete()
+        self.assertNotIn(self.variante.sku, self.feed())
+
+    def test_a_cotizar_no_entra(self):
+        snorkel = Producto.objects.create(nombre="Snorkel Safari", categoria=self.categoria)
+        ImagenProducto.objects.create(producto=snorkel, imagen="p/snorkel.webp")
+        self.assertNotIn("Snorkel Safari", self.feed())
+
+    def test_agotado_sale_como_out_of_stock(self):
+        self.variante.stock = 0
+        self.variante.save()
+        self.assertIn("out_of_stock", self.feed())
+
+    def test_la_rebaja_sale_como_sale_price(self):
+        self.variante.precio_antes = 600000
+        self.variante.save()
+        xml = self.feed()
+        self.assertIn("<g:price>600000 COP</g:price>", xml)
+        self.assertIn("<g:sale_price>480000 COP</g:sale_price>", xml)
+
+
+class InventarioMasivo(TestCase):
+    """El comando que carga el inventario del comercio (semillas/inventario.json)."""
+
+    def setUp(self):
+        self.datos = json.loads((SEMILLAS / "inventario.json").read_text(encoding="utf-8"))
+
+    def cargar(self, *args):
+        call_command("inventario_masivo", *args, stdout=io.StringIO())
+
+    def test_la_semilla_esta_sana(self):
+        productos = self.datos["productos"]
+        slugs = [p["slug"] for p in productos]
+        self.assertEqual(len(slugs), len(set(slugs)))
+        skus = [p["variante"]["sku"] for p in productos if p.get("variante")]
+        self.assertEqual(len(skus), len(set(skus)))
+        for p in productos:
+            self.assertLessEqual(len(p["seo_titulo"]), 70, p["slug"])
+            self.assertLessEqual(len(p["seo_descripcion"]), 160, p["slug"])
+            if p.get("variante"):
+                self.assertGreater(p["variante"]["precio"], 0, p["slug"])
+                # El costo de compra no puede estar acá: el repo es público.
+                self.assertNotIn("costo", p["variante"], p["slug"])
+
+    def test_carga_los_productos_con_sus_variantes(self):
+        self.cargar()
+        productos = self.datos["productos"]
+        self.assertEqual(Producto.objects.count(), len(productos))
+        con_precio = [p for p in productos if p.get("variante")]
+        self.assertEqual(Variante.objects.count(), len(con_precio))
+        # Los que tienen precio se venden con carrito; el resto, a cotizar.
+        self.assertEqual(
+            Producto.objects.publicados().count(), len(productos)
+        )
+
+    def test_correrlo_dos_veces_no_duplica(self):
+        self.cargar()
+        antes = (Producto.objects.count(), Variante.objects.count())
+        self.cargar()
+        self.assertEqual(antes, (Producto.objects.count(), Variante.objects.count()))
+
+    def test_si_falta_no_toca_una_base_ya_sembrada(self):
+        self.cargar()
+        Producto.objects.first().delete()
+        antes = Producto.objects.count()
+        self.cargar("--si-falta")
+        # El producto borrado a propósito no reaparece.
+        self.assertEqual(Producto.objects.count(), antes)
 
 
 class CatalogoInicial(TestCase):

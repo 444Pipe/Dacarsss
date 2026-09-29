@@ -1,11 +1,16 @@
 """Las vistas públicas del catálogo."""
 
+from xml.etree import ElementTree as ET
+
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.cache import cache_control
 
 from catalogo.models import Categoria, Marca, Producto
-from sitio.templatetags.dacars import whatsapp_cotizar
+from sitio.templatetags.dacars import foto, whatsapp_cotizar
 
 POR_PAGINA = 24
 
@@ -107,8 +112,8 @@ def _listado(request, categoria=None):
     else:
         titulo = "Catálogo de lujos y accesorios | DACARS Villavicencio"
         descripcion = (
-            "Iluminación LED, CarPlay inalámbrico, cámaras de reversa y más para "
-            "tu carro en Villavicencio. Míralos instalados y cotiza por WhatsApp."
+            "Iluminación LED, tapetes, sonido, cámaras y más para tu carro. "
+            "Precios al día, envíos a toda Colombia e instalación en Villavicencio."
         )
 
     categorias = _categorias_con_productos(categoria)
@@ -167,6 +172,76 @@ def lista(request):
 def categoria(request, slug):
     cat = get_object_or_404(Categoria, slug=slug, activa=True)
     return _listado(request, categoria=cat)
+
+
+GNS = "http://base.google.com/ns/1.0"
+
+
+@cache_control(max_age=3600)
+def feed_google(request):
+    """El feed de productos para Google Merchant Center.
+
+    Es lo que pone los productos en la pestaña Shopping y en los resultados
+    con precio y foto, gratis. Se registra una sola vez en Merchant Center
+    (Productos → Feeds → agregar feed programado con esta URL) y Google lo
+    relee solo.
+
+    Google exige precio e imagen por producto, así que solo entran los que
+    tienen variante con precio Y foto cargada. Un producto a cotizar o sin
+    foto queda afuera sin romper el feed: cargarle precio y foto desde el
+    panel lo mete solo en la próxima lectura.
+    """
+    sitio = settings.NEGOCIO["sitio"]
+    ET.register_namespace("g", GNS)
+    rss = ET.Element("rss", {"version": "2.0"})
+    canal = ET.SubElement(rss, "channel")
+    ET.SubElement(canal, "title").text = "DACARS — lujos y accesorios para vehículos"
+    ET.SubElement(canal, "link").text = sitio + "/catalogo/"
+    ET.SubElement(canal, "description").text = (
+        "Catálogo de DACARS Villavicencio. Envíos a toda Colombia."
+    )
+
+    def g(elemento, campo, texto):
+        ET.SubElement(elemento, "{%s}%s" % (GNS, campo)).text = texto
+
+    for producto in Producto.objects.publicados().con_todo():
+        principal = producto.imagen_principal
+        if not principal:
+            continue  # Google exige imagen: entra cuando tenga foto.
+        variantes = producto.variantes_activas
+        enlace = sitio + producto.get_absolute_url()
+        for variante in variantes:
+            item = ET.SubElement(canal, "item")
+            g(item, "id", variante.sku)
+            titulo = producto.nombre
+            if len(variantes) > 1 and variante.nombre:
+                titulo += " — " + variante.nombre
+            g(item, "title", titulo[:150])
+            g(item, "description", producto.descripcion_seo or producto.nombre)
+            g(item, "link", enlace)
+            g(item, "image_link", foto(principal.imagen, 1200))
+            extra = [i for i in producto.imagenes.all() if i.pk != principal.pk][:10]
+            for imagen in extra:
+                g(item, "additional_image_link", foto(imagen.imagen, 1200))
+            g(item, "availability", "out_of_stock" if variante.agotada else "in_stock")
+            # Para Google, price es el precio normal y sale_price la rebaja:
+            # al revés del modelo, donde `precio` ya es lo que se cobra.
+            if variante.precio_antes and variante.precio_antes > variante.precio:
+                g(item, "price", "{:.0f} COP".format(variante.precio_antes))
+                g(item, "sale_price", "{:.0f} COP".format(variante.precio))
+            else:
+                g(item, "price", "{:.0f} COP".format(variante.precio))
+            g(item, "condition", "new")
+            if producto.marca:
+                g(item, "brand", producto.marca.nombre)
+            # Sin códigos de barras cargados: se le dice a Google que no hay
+            # GTIN en vez de dejarlo esperando uno.
+            g(item, "identifier_exists", "no")
+            if len(variantes) > 1:
+                g(item, "item_group_id", producto.slug[:50])
+
+    xml = ET.tostring(rss, encoding="unicode", xml_declaration=True)
+    return HttpResponse(xml, content_type="application/xml; charset=utf-8")
 
 
 def producto(request, slug):

@@ -144,9 +144,10 @@ Un producto sin medidas que se quiera vender con carrito necesita una variante
 **Un producto sin variantes activas se publica «a cotizar».** En vez de precio y
 carrito, la tarjeta y la ficha muestran «Cotizar por WhatsApp», con un mensaje
 que ya lleva el nombre del producto y el enlace de su ficha, y deja empezada la
-frase «Mi vehículo es:». Es como sale hoy todo el catálogo: DACARS no publica
-precios porque dependen del vehículo y de la instalación (lo mismo que dicen las
-landings).
+frase «Mi vehículo es:». Los servicios y los productos cuyo precio depende del
+vehículo siguen saliendo así; desde septiembre de 2026 el resto del catálogo
+publica precio y se vende con carrito (decisión del comercio al pasar a
+e-commerce, con envíos a toda Colombia).
 
 El día que a un producto se le carga una variante con precio, pasa solo a
 venderse con carrito. No hay casilla que marcar.
@@ -158,6 +159,44 @@ Dos cosas cambian con un producto a cotizar:
   migas (`BreadcrumbList`) salen igual.
 - **No dice «agotado».** No tiene existencias cargadas, y decir agotado de algo
   que está en la vitrina sería mentir.
+
+### El inventario masivo
+
+Los ~260 productos del local salen del Excel del sistema contable del
+comercio. El flujo es en dos pasos, porque la base de producción no es
+alcanzable desde afuera:
+
+```
+python tools/inventario-a-semillas.py "ruta/al/inventario.xlsx"
+    Cruza las tres hojas del Excel (INVENTARIO NUEVO PROGRAMA es el
+    inventario real; las otras aportan precio y categoría), limpia los
+    nombres, genera título y descripción para Google por producto, y
+    escribe catalogo/semillas/inventario.json. Corre en la máquina de
+    trabajo; necesita openpyxl y el Excel local.
+
+python manage.py inventario_masivo --si-falta
+    Carga ese JSON en la base. Corre solo en el arranque del contenedor,
+    después de catalogo_inicial, y solo si ningún producto de la semilla
+    está ya en la base: lo borrado o editado desde el panel no se toca.
+```
+
+**El JSON no lleva costos de compra a propósito**: el repositorio es público
+y publicar costos es publicar los márgenes. Los costos se cargan desde el
+panel. El Excel tampoco se commitea (está en el `.gitignore`).
+
+### El feed de Google Shopping
+
+`/feed-productos.xml` es el feed para **Google Merchant Center**: lo que pone
+los productos en la pestaña Shopping y en los resultados con foto y precio,
+gratis. Se registra una vez (Merchant Center → Productos → Feeds → feed
+programado con esa URL) y Google lo relee solo.
+
+Google exige precio e imagen por producto, así que **solo entran los que
+tienen variante con precio y foto cargada**. Cargarle foto y precio a un
+producto desde el panel lo mete al feed en la próxima lectura, sin tocar
+código. Las rebajas salen como `sale_price` (para Google, `price` es el
+precio normal); sin códigos de barras cargados, el feed declara
+`identifier_exists no`.
 
 ### Fotos: el producto y el producto instalado
 

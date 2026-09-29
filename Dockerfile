@@ -48,7 +48,13 @@ EXPOSE 8080
 #                                plano: subir 40 fotos toma más que el minuto
 #                                del healthcheck, y el sitio no tiene por qué
 #                                esperar. Los productos aparecen al terminar.
+#   inventario_masivo            carga los ~260 productos del inventario del
+#     --si-falta                 comercio (semillas/inventario.json), solo si
+#                                ninguno está ya en la base. Corre después de
+#                                catalogo_inicial y en el mismo segundo plano,
+#                                para que los 19 curados (con foto) existan
+#                                antes y queden de primeros.
 #
-# Los tres últimos nunca terminan con error: una variable mal puesta no puede
+# Los últimos nunca terminan con error: una variable mal puesta no puede
 # impedir que el sitio levante.
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && (python manage.py catalogo_inicial --si-vacio &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && ((python manage.py catalogo_inicial --si-vacio; python manage.py inventario_masivo --si-falta) &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
