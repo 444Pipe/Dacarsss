@@ -333,6 +333,15 @@ class InventarioMasivo(TestCase):
         self.cargar()
         self.assertEqual(antes, (Producto.objects.count(), Variante.objects.count()))
 
+    def test_una_marca_escrita_distinto_no_tumba_la_carga(self):
+        # En producción ya existía «OSRAM» (de los curados) y la semilla dice
+        # «Osram»: mismo slug, otro nombre. Crear una segunda marca viola el
+        # UNIQUE del slug y la carga entera se deshacía. Se reusa por slug.
+        Marca.objects.create(nombre="OSRAM")
+        self.cargar()
+        self.assertEqual(Marca.objects.filter(slug="osram").count(), 1)
+        self.assertGreater(Producto.objects.count(), 200)
+
     def test_si_falta_no_toca_una_base_ya_sembrada(self):
         self.cargar()
         Producto.objects.first().delete()

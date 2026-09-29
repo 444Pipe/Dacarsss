@@ -26,6 +26,7 @@ import json
 
 from django.core.management.base import BaseCommand
 from django.db import DatabaseError, transaction
+from django.utils.text import slugify
 
 from catalogo.management.commands.catalogo_inicial import SEMILLAS
 from catalogo.models import Categoria, Marca, Producto, Variante
@@ -103,14 +104,12 @@ class Command(BaseCommand):
 
             nombre_cat = p["categoria"]
             if nombre_cat not in categorias:
-                categorias[nombre_cat], _ = Categoria.objects.get_or_create(
-                    nombre=nombre_cat
-                )
+                categorias[nombre_cat] = self._por_slug(Categoria, nombre_cat)
 
             marca = None
             if p.get("marca"):
                 if p["marca"] not in marcas:
-                    marcas[p["marca"]], _ = Marca.objects.get_or_create(nombre=p["marca"])
+                    marcas[p["marca"]] = self._por_slug(Marca, p["marca"])
                 marca = marcas[p["marca"]]
 
             producto = Producto.objects.create(
@@ -134,3 +133,14 @@ class Command(BaseCommand):
                 )
             creados += 1
         return creados
+
+    @staticmethod
+    def _por_slug(modelo, nombre):
+        """La marca o categoría existente aunque esté escrita distinto.
+
+        En la base ya hay «OSRAM» y la semilla dice «Osram»: buscar por
+        nombre crearía una segunda marca con el mismo slug, y el UNIQUE del
+        slug tumba la carga entera. Por el slug se encuentra la que sea.
+        """
+        existente = modelo.objects.filter(slug=slugify(nombre)[:70]).first()
+        return existente or modelo.objects.create(nombre=nombre)
