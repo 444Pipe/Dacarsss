@@ -54,7 +54,11 @@ EXPOSE 8080
 #                                catalogo_inicial y en el mismo segundo plano,
 #                                para que los 19 curados (con foto) existan
 #                                antes y queden de primeros.
+#   portadas_categorias          sube la portada de catalogo/portadas/ a cada
+#                                categoría que no tenga imagen propia. Corre al
+#                                final del mismo segundo plano, cuando ya
+#                                existen todas las categorías del inventario.
 #
 # Los últimos nunca terminan con error: una variable mal puesta no puede
 # impedir que el sitio levante.
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && ((python manage.py catalogo_inicial --si-vacio; python manage.py inventario_masivo --si-falta) &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && ((python manage.py catalogo_inicial --si-vacio; python manage.py inventario_masivo --si-falta; python manage.py portadas_categorias) &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
