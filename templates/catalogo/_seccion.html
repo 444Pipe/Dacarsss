@@ -8,7 +8,7 @@
 {% if productos %}
 <section class="sec sec--alt" id="productos">
   <div class="wrap">
-    <header class="sec__head">
+    <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>{{ etiqueta|default:"En el local" }}</p>
       <h2 class="sec__title chrome" data-reveal>{{ titulo|default:"Productos disponibles" }}</h2>
       <p class="sec__lead" data-reveal>
@@ -20,8 +20,8 @@
       {% for producto in productos %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
     </div>
 
-    <p class="sec__foot">
-      <a class="link" href="{{ ver_mas|default:'/catalogo/' }}">Ver todo el catálogo</a>
+    <p class="sec__foot sec__foot--c">
+      <a class="btn btn--primary" href="{{ ver_mas|default:'/catalogo/' }}">Ver todo el catálogo</a>
     </p>
   </div>
 </section>

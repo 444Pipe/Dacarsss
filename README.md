@@ -480,6 +480,20 @@ cambiar la marca completa = cambiar esas variables.
 | Titulares | Saira, itálica 800/900, mayúsculas, degradado navy → azul (`.chrome`) |
 | Cuerpo | Inter |
 
+La estructura de la portada es la de una tienda, tomada de referencia de
+autolujosmaicao.com y hecha más moderna: fila blanca con marca, buscador
+(manda a `/catalogo/?q=`), WhatsApp y carrito; debajo, la barra navy con el
+botón «Catálogo» que despliega las categorías con productos (llegan a todas
+las páginas por `sitio.context_processors.catalogo_menu`), los enlaces y el
+teléfono. Después, el hero como banner navy con el video, tres tiles de
+«Recomendados», la franja de confianza, las categorías en rejilla de cinco,
+los destacados, los servicios y el resto de secciones con el título
+centrado entre dos líneas. En el celular la barra solo muestra el buscador y
+los enlaces y las categorías pasan al cajón del menú. El pie va por columnas:
+contacto, catálogo, servicios y el sitio. Encabezado y pie son un solo parcial
+cada uno (`_encabezado.html`, `_pie.html`); la portada los incluye con
+`en_portada=True` para que los enlaces de sección sean anclas.
+
 El wordmark original es blanco con rayos azules y desaparece sobre blanco, así
 que el encabezado y la pantalla de carga usan
 [static/img/marca/wordmark-oscuro.png](static/img/marca/wordmark-oscuro.png):

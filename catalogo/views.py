@@ -30,8 +30,11 @@ ORDENES = {
 DIAS_NUEVO = 30
 
 
-def _categorias_con_productos(actual=None):
+def categorias_con_productos(actual=None):
     """Las categorías que tienen algo publicado, con su cuenta.
+
+    También alimenta el menú y el pie de todas las páginas (ver
+    sitio.context_processors.catalogo_menu).
 
     Una categoría vacía no sale en el selector: mandar a alguien a una
     página en blanco es peor que no ofrecerla. La que se está mirando se
@@ -74,7 +77,7 @@ def categorias_con_portada(actual=None):
     se consultan si a alguna categoría le falta la imagen propia: es la única
     razón para recorrerlos.
     """
-    categorias = _categorias_con_productos(actual)
+    categorias = categorias_con_productos(actual)
     if all(c.imagen for c in categorias):
         for c in categorias:
             c.portada = c.imagen
@@ -159,7 +162,7 @@ def _listado(request, categoria=None):
             "Precios al día, envíos a toda Colombia e instalación en Villavicencio."
         )
 
-    categorias = _categorias_con_productos(categoria)
+    categorias = categorias_con_productos(categoria)
     filtrando = bool(
         busqueda or marca or solo_disponibles or solo_con_precio or request.GET.get("pagina")
     )

@@ -751,13 +751,11 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero__bg" aria-hidden="true">
-    <span class="grid"></span>
-    <span class="glow glow--a"></span>
-    <span class="glow glow--b"></span>
-  </div>
-
-  <div class="wrap hero__grid">
+  <div class="wrap">
+  <div class="banner">
+    <span class="grid" aria-hidden="true"></span>
+    <span class="glow glow--a" aria-hidden="true"></span>
+  <div class="banner__in">
     <div class="hero__copy">
       <p class="eyebrow" data-reveal><span class="dot"></span> Villavicencio, Meta &middot; Envíos a toda Colombia</p>
 
@@ -829,15 +827,51 @@
       </div>
     </div>
   </div>
+  </div>
+  </div>
 </section>
 
-<!-- ============ MARQUEE ============ -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>Lujos<i>&#9670;</i>Accesorios 4x4<i>&#9670;</i>PPF<i>&#9670;</i>Detailing<i>&#9670;</i>Polarizados<i>&#9670;</i>Iluminación<i>&#9670;</i>Sonido<i>&#9670;</i>Llantas<i>&#9670;</i>PDR<i>&#9670;</i></span>
-    <span>Lujos<i>&#9670;</i>Accesorios 4x4<i>&#9670;</i>PPF<i>&#9670;</i>Detailing<i>&#9670;</i>Polarizados<i>&#9670;</i>Iluminación<i>&#9670;</i>Sonido<i>&#9670;</i>Llantas<i>&#9670;</i>PDR<i>&#9670;</i></span>
+<!-- ============ RECOMENDADOS ============ -->
+<section class="sec sec--tight" id="recomendados">
+  <div class="wrap">
+    <header class="sec__head sec__head--c">
+      <p class="tag" data-reveal>Lo del mes</p>
+      <h2 class="sec__title chrome" data-reveal>Recomendados</h2>
+    </header>
+    <div class="promos">
+      <a class="promo promo--a" href="/ppf-villavicencio" data-reveal>
+        <img src="{% static 'img/servicios/card-ppf-900.webp' %}"
+             srcset="{% static 'img/servicios/card-ppf-600.webp' %} 600w, {% static 'img/servicios/card-ppf-900.webp' %} 900w, {% static 'img/servicios/card-ppf-1200.webp' %} 1200w"
+             sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="800" alt="" loading="lazy" decoding="async">
+        <div class="promo__txt">
+          <small>Protección de pintura</small>
+          <b>PPF: la capa que se lleva los golpes por ti</b>
+          <span class="promo__cta">Cotizar PPF &rarr;</span>
+        </div>
+      </a>
+      <a class="promo" href="{% if hay_catalogo %}/catalogo/iluminacion/{% else %}/iluminacion-para-carros-villavicencio{% endif %}" data-reveal>
+        <img src="{% static 'img/servicios/card-iluminacion-900.webp' %}"
+             srcset="{% static 'img/servicios/card-iluminacion-600.webp' %} 600w, {% static 'img/servicios/card-iluminacion-900.webp' %} 900w"
+             sizes="(min-width: 900px) 45vw, 100vw" width="900" height="600" alt="" loading="lazy" decoding="async">
+        <div class="promo__txt">
+          <small>Catálogo</small>
+          <b>Iluminación LED con precio y envío</b>
+          <span class="promo__cta">Ver productos &rarr;</span>
+        </div>
+      </a>
+      <a class="promo" href="/accesorios-4x4-villavicencio" data-reveal>
+        <img src="{% static 'img/servicios/card-accesorios-4x4-900.webp' %}"
+             srcset="{% static 'img/servicios/card-accesorios-4x4-600.webp' %} 600w, {% static 'img/servicios/card-accesorios-4x4-900.webp' %} 900w"
+             sizes="(min-width: 900px) 45vw, 100vw" width="900" height="600" alt="" loading="lazy" decoding="async">
+        <div class="promo__txt">
+          <small>Accesorios 4x4</small>
+          <b>Equipa tu camioneta para la trocha</b>
+          <span class="promo__cta">Ver accesorios &rarr;</span>
+        </div>
+      </a>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- ============ CONFIANZA ============ -->
 <section class="trust" aria-label="Por qué comprar en DACARS">
@@ -865,36 +899,27 @@
 <!-- ============ CATEGORÍAS ============ -->
 <section class="sec sec--tight" id="categorias">
   <div class="wrap">
-    <header class="sec__head sec__head--row">
-      <div>
-        <p class="tag" data-reveal>Catálogo</p>
-        <h2 class="sec__title chrome" data-reveal>Compra por categoría</h2>
-        <p class="sec__lead" data-reveal>{{ total_productos }} productos del local de Villavicencio, con envío a toda Colombia e instalación en el taller. Lo que no esté publicado, lo conseguimos.</p>
-      </div>
-      <a class="btn btn--ghost" href="{% url 'catalogo:lista' %}" data-reveal>Ver todo el catálogo</a>
+    <header class="sec__head sec__head--c">
+      <p class="tag" data-reveal>Catálogo</p>
+      <h2 class="sec__title chrome" data-reveal>Compra por categoría</h2>
+      <p class="sec__lead" data-reveal>{{ total_productos }} productos del local de Villavicencio, con envío a toda Colombia e instalación en el taller. Lo que no esté publicado, lo conseguimos.</p>
     </header>
 
-    <div class="scroller" data-reveal>
-      <button class="scroller__btn scroller__btn--prev" type="button" aria-label="Categorías anteriores" data-scroll="-1">
-        <svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg>
-      </button>
-      <nav class="rubros rubros--scroll" aria-label="Categorías del catálogo">
-        {% for c in categorias %}
-        <a class="rubro" href="{{ c.get_absolute_url }}">
-          <span class="rubro__foto">
-            {% if c.portada %}<img src="{{ c.portada|foto:440 }}" alt="{{ c.nombre }}" width="440" height="440" loading="lazy" decoding="async">{% endif %}
-          </span>
-          <span class="rubro__txt">
-            <span class="rubro__nom">{{ c.nombre }}</span>
-            <span class="rubro__n">{{ c.cuantos }} producto{{ c.cuantos|pluralize }}</span>
-          </span>
-        </a>
-        {% endfor %}
-      </nav>
-      <button class="scroller__btn scroller__btn--next" type="button" aria-label="Más categorías" data-scroll="1">
-        <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
-      </button>
-    </div>
+    <nav class="rubros rubros--home" aria-label="Categorías del catálogo" data-reveal>
+      {% for c in categorias %}
+      <a class="rubro" href="{{ c.get_absolute_url }}">
+        <span class="rubro__foto">
+          {% if c.portada %}<img src="{{ c.portada|foto:440 }}" alt="{{ c.nombre }}" width="440" height="440" loading="lazy" decoding="async">{% endif %}
+        </span>
+        <span class="rubro__txt">
+          <span class="rubro__nom">{{ c.nombre }}</span>
+          <span class="rubro__n">{{ c.cuantos }} producto{{ c.cuantos|pluralize }}</span>
+        </span>
+      </a>
+      {% endfor %}
+    </nav>
+
+    <p class="sec__foot sec__foot--c"><a class="btn btn--ghost" href="{% url 'catalogo:lista' %}">Ver todo el catálogo</a></p>
   </div>
 </section>
 {% endif %}
@@ -904,7 +929,7 @@
 <!-- ============ SERVICIOS ============ -->
 <section class="sec" id="servicios">
   <div class="wrap">
-    <header class="sec__head">
+    <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>01 &mdash; Servicios</p>
       <h2 class="sec__title chrome" data-reveal>Todo lo que tu vehículo necesita</h2>
       <p class="sec__lead" data-reveal>Doce especialidades que normalmente te obligan a recorrer media ciudad. Acá las resolvemos en el mismo taller, con la misma gente y una sola garantía de trabajo.</p>
@@ -1106,7 +1131,7 @@
 
     </div>
 
-    <p class="sec__foot" data-reveal>¿No ves lo que buscas? Escríbenos y te decimos de una si lo manejamos.
+    <p class="sec__foot sec__foot--c" data-reveal>¿No ves lo que buscas? Escríbenos y te decimos de una si lo manejamos.
       <a class="link" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20preguntar%20por%20un%20servicio." target="_blank" rel="noopener">Preguntar por WhatsApp &rarr;</a>
     </p>
   </div>
@@ -1151,7 +1176,7 @@
 <!-- ============ PROCESO ============ -->
 <section class="sec" id="proceso">
   <div class="wrap">
-    <header class="sec__head">
+    <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>03 &mdash; Cómo trabajamos</p>
       <h2 class="sec__title chrome" data-reveal>De la idea al carro listo</h2>
       <p class="sec__lead" data-reveal>Nada de sorpresas en la factura ni de &laquo;vuelva mañana&raquo;. Así se mueve cada trabajo que entra al taller.</p>
@@ -1185,7 +1210,7 @@
 <!-- ============ TRABAJOS ============ -->
 <section class="sec sec--alt" id="trabajos">
   <div class="wrap">
-    <header class="sec__head">
+    <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>04 &mdash; Trabajos</p>
       <h2 class="sec__title chrome" data-reveal>Lo que sale del taller</h2>
       <p class="sec__lead" data-reveal>Estos son trabajos reales que salieron del taller. Dale play a cualquiera y míralo completo, con audio.</p>
@@ -1332,7 +1357,7 @@
 <!-- ============ COBERTURA ============ -->
 <section class="sec" id="cobertura">
   <div class="wrap">
-    <header class="sec__head">
+    <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>07 &mdash; Cobertura</p>
       <h2 class="sec__title chrome" data-reveal>Dónde atendemos en Villavicencio y el Meta</h2>
       <p class="sec__lead" data-reveal>El taller queda en la <strong>Carrera 33 #24-60, Barrio San Francisco</strong>,
@@ -1396,7 +1421,7 @@
 <!-- ============ FAQ ============ -->
 <section class="sec sec--alt" id="faq">
   <div class="wrap">
-    <header class="sec__head">
+    <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>08 &mdash; Preguntas</p>
       <h2 class="sec__title chrome" data-reveal>Lo que más nos preguntan</h2>
     </header>
@@ -1433,7 +1458,7 @@
 <!-- ============ CONTACTO ============ -->
 <section class="sec" id="contacto">
   <div class="wrap">
-    <header class="sec__head">
+    <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>09 &mdash; Contacto</p>
       <h2 class="sec__title chrome" data-reveal>Cotiza tu proyecto</h2>
       <p class="sec__lead" data-reveal>Llena los datos y te abrimos el chat de WhatsApp con el mensaje listo. También puedes escribirnos directo o pasar por el taller.</p>
@@ -1496,6 +1521,16 @@
           <span><b>Facebook</b>Dacars Lujos Villavicencio</span>
         </a>
 
+        <div class="map__ir">
+          <a class="btn btn--ghost btn--sm" href="https://waze.com/ul?q=Carrera%2033%20%2324-60%20Barrio%20San%20Francisco%20Villavicencio%20Meta&amp;navigate=yes" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a8 8 0 0 0-8 8c0 2.3.9 4.2 2.4 5.6L5 21l4.2-1.4A8 8 0 1 0 12 3Z"/><circle cx="9.5" cy="10.5" r="1"/><circle cx="14.5" cy="10.5" r="1"/><path d="M9 14c1.6 1.4 4.4 1.4 6 0"/></svg>
+            Abrir en Waze
+          </a>
+          <a class="btn btn--ghost btn--sm" href="https://www.google.com/maps/search/?api=1&amp;query=Carrera+33+%2324-60+Barrio+San+Francisco+Villavicencio+Meta" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            Abrir en Google Maps
+          </a>
+        </div>
         <div class="map">
           <iframe
             title="Ubicación de DACARS en Villavicencio"

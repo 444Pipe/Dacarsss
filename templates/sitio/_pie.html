@@ -1,44 +1,52 @@
-{% load static dacars %}{# Generado por tools/migrar-a-django.py desde el sitio estático. A partir de acá se edita a mano: el script no se vuelve a correr. #}
-
+{% load static dacars %}{% comment %} El pie de todas las páginas, por columnas:
+   contacto, catálogo (las categorías con productos), servicios y el sitio.
+   `en_portada` cambia los enlaces de sección a anclas de la misma página. {% endcomment %}
+{% with pref=en_portada|yesno:",/" %}
 <footer class="foot">
   <div class="wrap foot__in">
     <div class="foot__brand">
       <img src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_420/v1789710033/dacars/logo-dacars-sm" alt="DACARS Villavicencio" width="420" height="306" loading="lazy">
-      <p>Especialistas en personalización de vehículos.<br>Carrera 33 #24-60, Barrio San Francisco<br>Villavicencio, Meta &mdash; Colombia.</p>
+      <p>Especialistas en personalización de vehículos.<br>{{ negocio.direccion }}<br>{{ negocio.ciudad }}, {{ negocio.departamento }} &mdash; Colombia.</p>
+      <a class="foot__tel" href="https://wa.me/{{ negocio.whatsapp }}" target="_blank" rel="noopener">
+        <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        {{ negocio.telefono_visible }}
+      </a>
+      <div class="foot__redes">
+        <a href="https://wa.me/{{ negocio.whatsapp }}" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+        <a href="{{ negocio.instagram }}" target="_blank" rel="noopener" aria-label="Instagram"><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0m0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324M12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8m6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881"/></svg></a>
+        <a href="{{ negocio.facebook }}" target="_blank" rel="noopener" aria-label="Facebook"><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073"/></svg></a>
+      </div>
     </div>
+
+    {% if hay_catalogo %}
+    <nav class="foot__col" aria-label="Catálogo">
+      <h4>Catálogo</h4>
+      <a href="{% url 'catalogo:lista' %}">Todo el catálogo</a>
+      {% for c in categorias_menu %}<a href="{{ c.get_absolute_url }}">{{ c.nombre }}</a>{% endfor %}
+    </nav>
+    {% endif %}
+
     <nav class="foot__col" aria-label="Servicios en Villavicencio">
       <h4>Servicios</h4>
-      <a href="/lujos-y-accesorios-villavicencio">Lujos y accesorios</a>
-      <a href="/accesorios-4x4-villavicencio">Accesorios 4x4</a>
-      <a href="/ppf-villavicencio">PPF</a>
-      <a href="/detailing-villavicencio">Detailing</a>
-      <a href="/polarizados-villavicencio">Polarizados</a>
-      <a href="/pdr-desabolladura-sin-pintura-villavicencio">PDR</a>
-      <a href="/latoneria-villavicencio">Latonería</a>
-      <a href="/pintura-automotriz-villavicencio">Pintura automotriz</a>
-      <a href="/kits-de-actualizacion-villavicencio">Kits de actualización</a>
+      {% for s, nombre in servicios %}<a href="/{{ s }}">{{ nombre }}</a>{% endfor %}
+      <a href="/{{ hub_meta }}">Cobertura en todo el Meta</a>
     </nav>
-    <nav class="foot__col" aria-label="Más servicios">
-      <h4>También</h4>
-      {% if hay_catalogo %}<a href="{% url 'catalogo:lista' %}">Catálogo de productos</a>{% endif %}
-      <a href="/iluminacion-para-carros-villavicencio">Iluminación</a>
-      <a href="/sonido-para-carros-villavicencio">Sonido</a>
-      <a href="/llantas-villavicencio">Llantas</a>
-      <a href="/personalizacion-de-vehiculos-meta">Cobertura en todo el Meta</a>
-      <a href="/#nosotros">Nosotros</a>
-      <a href="/#faq">Preguntas frecuentes</a>
+
+    <nav class="foot__col" aria-label="El sitio">
+      <h4>DACARS</h4>
+      <a href="{{ pref }}#nosotros">Nosotros</a>
+      <a href="{{ pref }}#trabajos">Trabajos</a>
+      <a href="{{ pref }}#proceso">Cómo trabajamos</a>
+      <a href="{{ pref }}#cobertura">Cobertura</a>
+      <a href="{{ pref }}#faq">Preguntas frecuentes</a>
+      <a href="{{ pref }}#contacto">Contacto</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrera+33+%2324-60+Barrio+San+Francisco+Villavicencio+Meta" target="_blank" rel="noopener">Cómo llegar</a>
     </nav>
-    <div class="foot__col">
-      <h4>Contacto</h4>
-      <a href="https://wa.me/573112629406" target="_blank" rel="noopener">WhatsApp +57 311 262 9406</a>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrera+33+%2324-60+Barrio+San+Francisco+Villavicencio+Meta" target="_blank" rel="noopener">Carrera 33 #24-60, Barrio San Francisco</a>
-      <a href="https://www.instagram.com/dacarslujosvillavicencio/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.facebook.com/Dacars.accesorios/" target="_blank" rel="noopener">Facebook</a>
-    </div>
   </div>
+
   <div class="wrap foot__bar">
-    <p>&copy; <span id="year">2026</span> DACARS VILLAVICENCIO S.A.S. &middot; NIT 901.798.060 &middot; Villavicencio, Meta.</p>
-    <p class="foot__made">Hecho en Villavicencio, Meta.</p>
+    <p>&copy; <span id="year">2026</span> {{ negocio.razon_social }} &middot; NIT {{ negocio.nit }} &middot; {{ negocio.ciudad }}, {{ negocio.departamento }}.</p>
+    <p class="foot__made">Envíos a toda Colombia &middot; Instalación en taller propio</p>
     <a class="foot__acceso" href="{% url 'admin:index' %}" rel="nofollow" title="Entrar al panel de administración">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="4" y="10.5" width="16" height="10" rx="2.2"/>
@@ -55,3 +63,4 @@
 </a>
 
 <script src="{% static 'js/app.js' %}" defer></script>
+{% endwith %}

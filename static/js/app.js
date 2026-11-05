@@ -63,6 +63,28 @@
     if (!pendiente) { pendiente = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
 
+  /* ---------- Mega menú del catálogo (barra navy) ---------- */
+  // En PC se abre al pasar el mouse (CSS); el clic lo deja fijo para el
+  // teclado y las pantallas táctiles. Se cierra al tocar afuera o con Esc.
+  var mega = document.getElementById('mega');
+  if (mega) {
+    var megaBtn = mega.querySelector('.mega__btn');
+    var cerrarMega = function () {
+      mega.classList.remove('is-open');
+      megaBtn.setAttribute('aria-expanded', 'false');
+    };
+    megaBtn.addEventListener('click', function () {
+      var abierto = mega.classList.toggle('is-open');
+      megaBtn.setAttribute('aria-expanded', String(abierto));
+    });
+    document.addEventListener('click', function (e) {
+      if (!mega.contains(e.target)) cerrarMega();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') cerrarMega();
+    });
+  }
+
   /* ---------- Menú móvil ---------- */
   var burger = document.getElementById('burger');
   var nav = document.getElementById('nav');

@@ -169,6 +169,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "sitio.context_processors.negocio",
                 "sitio.context_processors.paginas",
+                "sitio.context_processors.catalogo_menu",
                 "pedidos.context_processors.carrito",
             ],
         },
