@@ -167,6 +167,35 @@
     estado();
   });
 
+  /* ---------- Catálogo: filtros que se aplican solos ---------- */
+  // Con JS, cambiar una marca, una casilla o el orden manda el formulario;
+  // el botón «Aplicar» queda para quien navega sin JS (.js lo esconde).
+  document.documentElement.classList.add('js');
+  var filtros = document.getElementById('filtros');
+  if (filtros) {
+    var enviar = function () {
+      if (filtros.requestSubmit) filtros.requestSubmit(); else filtros.submit();
+    };
+    filtros.addEventListener('change', function (e) {
+      if (e.target.matches('select, input[type=checkbox]')) enviar();
+    });
+    // El selector de orden vive fuera del formulario (en la barra de la
+    // lista) y se asocia con form="filtros": su change no llega al form.
+    Array.prototype.forEach.call(document.querySelectorAll('[form="filtros"]'), function (el) {
+      el.addEventListener('change', enviar);
+    });
+  }
+
+  var abrirFiltros = document.getElementById('abrir-filtros');
+  var lado = document.getElementById('lado');
+  if (abrirFiltros && lado) {
+    abrirFiltros.addEventListener('click', function () {
+      var abierto = lado.classList.toggle('is-open');
+      abrirFiltros.setAttribute('aria-expanded', String(abierto));
+      if (abierto) lado.scrollIntoView({ behavior: sinMovimiento ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
   /* ---------- Enlace activo en la navegación ---------- */
   var sections = Array.prototype.slice.call(
     document.querySelectorAll('main section[id]')

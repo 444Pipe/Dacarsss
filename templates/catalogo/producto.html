@@ -70,7 +70,7 @@
           <img id="foto-grande" src="{{ principal.imagen|foto:1000 }}" alt="{{ principal.texto_alt }}" width="1000" height="1000">
           <span class="fotos__nota" id="foto-nota"{% if not principal.referencia %} hidden{% endif %}>Imagen de referencia</span>
         {% else %}
-          <span class="prod__sinfoto">Foto en camino</span>
+          <span class="prod__sinfoto fotos__sinfoto">{% include "catalogo/_ico_categoria.html" with slug=producto.categoria.slug %}<span>Foto en camino</span></span>
         {% endif %}
       {% endwith %}
     </div>
@@ -93,84 +93,95 @@
     <h1 class="ficha__titulo chrome">{{ producto.nombre }}</h1>
     {% if producto.resumen %}<p class="ficha__res">{{ producto.resumen }}</p>{% endif %}
 
+    {# La caja de compra: precio, medidas y botones. Fija al bajar en PC. #}
+    <div class="compra">
     {% if producto.a_cotizar %}
-    <div class="cotiza">
       <p class="cotiza__tit">Precio según tu vehículo</p>
       <p class="cotiza__txt">Escríbenos y te damos el precio del producto{% if producto.instalacion %} y de la instalación{% endif %},
       te confirmamos que lo tengamos en el local y te decimos si le sirve a tu carro.</p>
       <a class="btn btn--wa btn--block" href="{% whatsapp_cotizar producto %}" target="_blank" rel="noopener">{% include "catalogo/_ico_wa.html" %} Cotizar por WhatsApp</a>
       <p class="cotiza__tel">o llama al <a href="tel:+57{{ negocio.telefono_visible|cut:' ' }}">{{ negocio.telefono_visible }}</a></p>
+    {% else %}
+      <p class="ficha__precio">
+        <span class="precio precio--grande" id="precio-vivo">{{ producto.precio_desde|pesos }}</span>
+        <span class="precio__antes" id="antes-vivo" hidden></span>
+        <span class="precio__off" id="off-vivo" hidden></span>
+      </p>
+      <p id="stock-vivo" class="stockb {% if producto.agotado %}stockb--no{% elif producto.bajo_stock %}stockb--poco{% else %}stockb--hay{% endif %}">
+        {% if producto.agotado %}Agotado por ahora{% elif producto.bajo_stock %}Quedan pocas unidades{% else %}Disponible en el local{% endif %}
+      </p>
+
+      <form method="post" action="{% url 'pedidos:agregar' %}" id="form-compra">
+        {% csrf_token %}
+        <input type="hidden" name="volver" value="{{ request.path }}">
+
+        {% if variantes|length > 1 %}
+        <fieldset class="vars">
+          <legend>Elige la medida</legend>
+          {% for v in variantes %}
+          <label class="var">
+            <input type="radio" name="sku" value="{{ v.sku }}"
+                   data-precio="{{ v.precio|stringformat:'d' }}"
+                   data-antes="{{ v.precio_antes|default_if_none:0|stringformat:'d' }}"
+                   data-off="{{ v.descuento }}"
+                   data-disponible="{{ v.disponible }}"
+                   {% if v.agotada %}disabled{% endif %}
+                   {% if forloop.first and not v.agotada %}checked{% endif %}>
+            <span>{{ v.etiqueta }}<b>{% if v.agotada %}agotada{% else %}{{ v.disponible }} disponible{{ v.disponible|pluralize }}{% endif %}</b></span>
+          </label>
+          {% endfor %}
+        </fieldset>
+        {% else %}
+          {% with unica=variantes.0 %}
+          <input type="hidden" name="sku" value="{{ unica.sku }}"
+                 data-precio="{{ unica.precio|stringformat:'d' }}"
+                 data-antes="{{ unica.precio_antes|default_if_none:0|stringformat:'d' }}"
+                 data-off="{{ unica.descuento }}"
+                 data-disponible="{{ unica.disponible }}">
+          {% endwith %}
+        {% endif %}
+
+        {% if not producto.agotado %}
+        <div class="comprar">
+          <div class="cant">
+            <button type="button" data-paso="-1" aria-label="Quitar una unidad">&minus;</button>
+            <label class="skip" for="cantidad">Cantidad</label>
+            <input id="cantidad" name="cantidad" type="number" value="1" min="1" max="{{ producto.disponible_total }}" inputmode="numeric">
+            <button type="button" data-paso="1" aria-label="Agregar una unidad">+</button>
+          </div>
+          <button class="btn btn--primary" type="submit">Agregar al carrito</button>
+        </div>
+        <button class="btn btn--ghost btn--block compra__ya" type="submit" name="ir" value="carrito">Comprar ya</button>
+        {% else %}
+        <div class="comprar">
+          <a class="btn btn--wa btn--block" href="{% whatsapp_producto producto %}" target="_blank" rel="noopener">Preguntar cuándo llega</a>
+        </div>
+        {% endif %}
+      </form>
+
+      <p class="compra__nota">
+        Sin pago en línea: dejas el pedido y lo terminamos por WhatsApp.
+        {% if producto.instalacion %}La instalación se cotiza aparte según el vehículo.{% endif %}
+      </p>
+    {% endif %}
     </div>
 
-    <ul class="ficha__plus">
-      {% if producto.instalacion %}<li><b>Instalación en el taller</b> Lo dejamos puesto y funcionando en nuestro taller de Villavicencio.</li>{% endif %}
-      <li><b>Asesoría antes de comprar</b> Te decimos si es el adecuado para tu vehículo antes de que pagues.</li>
-      <li><b>Envíos a toda Colombia</b> Te lo mandamos por transportadora, o lo recoges en {{ negocio.direccion }}, {{ negocio.ciudad }}.</li>
+    <ul class="ficha__trust">
+      <li>
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg></i>
+        <div><b>Envíos a toda Colombia</b><span>Por transportadora, o lo recoges en {{ negocio.direccion }}, {{ negocio.ciudad }}.</span></div>
+      </li>
+      {% if producto.instalacion %}
+      <li>
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2-.5-.5-2z"/></svg></i>
+        <div><b>Instalación en el taller</b><span>Lo dejamos puesto y funcionando en nuestro taller de Villavicencio.</span></div>
+      </li>
+      {% endif %}
+      <li>
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6 4.5 5.4v5.9c0 4.7 3.2 8.4 7.5 10.1 4.3-1.7 7.5-5.4 7.5-10.1V5.4Z"/><path d="M9 12.2l2.2 2.2L15.4 10"/></svg></i>
+        <div><b>Asesoría antes de comprar</b><span>Te decimos si es el adecuado para tu vehículo antes de que pagues.</span></div>
+      </li>
     </ul>
-    {% else %}
-    <p class="ficha__precio">
-      <span class="precio precio--grande" id="precio-vivo">{{ producto.precio_desde|pesos }}</span>
-      <span class="precio__antes" id="antes-vivo" hidden></span>
-      <span class="precio__off" id="off-vivo" hidden></span>
-    </p>
-    <p id="stock-vivo" class="stockb {% if producto.agotado %}stockb--no{% elif producto.bajo_stock %}stockb--poco{% else %}stockb--hay{% endif %}">
-      {% if producto.agotado %}Agotado por ahora{% elif producto.bajo_stock %}Quedan pocas unidades{% else %}Disponible en el local{% endif %}
-    </p>
-
-    <form method="post" action="{% url 'pedidos:agregar' %}" id="form-compra">
-      {% csrf_token %}
-      <input type="hidden" name="volver" value="{{ request.path }}">
-
-      {% if variantes|length > 1 %}
-      <fieldset class="vars" style="margin-top:22px">
-        <legend>Elige la medida</legend>
-        {% for v in variantes %}
-        <label class="var">
-          <input type="radio" name="sku" value="{{ v.sku }}"
-                 data-precio="{{ v.precio|stringformat:'d' }}"
-                 data-antes="{{ v.precio_antes|default_if_none:0|stringformat:'d' }}"
-                 data-off="{{ v.descuento }}"
-                 data-disponible="{{ v.disponible }}"
-                 {% if v.agotada %}disabled{% endif %}
-                 {% if forloop.first and not v.agotada %}checked{% endif %}>
-          <span>{{ v.etiqueta }}<b>{% if v.agotada %}agotada{% else %}{{ v.disponible }} disponible{{ v.disponible|pluralize }}{% endif %}</b></span>
-        </label>
-        {% endfor %}
-      </fieldset>
-      {% else %}
-        {% with unica=variantes.0 %}
-        <input type="hidden" name="sku" value="{{ unica.sku }}"
-               data-precio="{{ unica.precio|stringformat:'d' }}"
-               data-antes="{{ unica.precio_antes|default_if_none:0|stringformat:'d' }}"
-               data-off="{{ unica.descuento }}"
-               data-disponible="{{ unica.disponible }}">
-        {% endwith %}
-      {% endif %}
-
-      {% if not producto.agotado %}
-      <div class="comprar">
-        <div class="cant">
-          <button type="button" data-paso="-1" aria-label="Quitar una unidad">&minus;</button>
-          <label class="skip" for="cantidad">Cantidad</label>
-          <input id="cantidad" name="cantidad" type="number" value="1" min="1" max="{{ producto.disponible_total }}" inputmode="numeric">
-          <button type="button" data-paso="1" aria-label="Agregar una unidad">+</button>
-        </div>
-        <button class="btn btn--primary" type="submit">Agregar al carrito</button>
-        <button class="btn btn--ghost" type="submit" name="ir" value="carrito">Comprar ya</button>
-      </div>
-      {% else %}
-      <div class="comprar">
-        <a class="btn btn--wa" href="{% whatsapp_producto producto %}" target="_blank" rel="noopener">Preguntar cuándo llega</a>
-      </div>
-      {% endif %}
-    </form>
-
-    <p style="margin:16px 0 0; font-size:13.4px; color:var(--muted-2); line-height:1.6">
-      Sin pago en línea: dejas el pedido y lo terminamos por WhatsApp.
-      Envíos a toda Colombia, o lo recoges en el local.
-      {% if producto.instalacion %} La instalación se cotiza aparte según el vehículo.{% endif %}
-    </p>
-    {% endif %}
 
     {% if producto.compatibilidad %}
     <div class="ficha__sep"></div>

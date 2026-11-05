@@ -163,6 +163,25 @@ Dos cosas cambian con un producto a cotizar:
 - **No dice «agotado».** No tiene existencias cargadas, y decir agotado de algo
   que está en la vitrina sería mentir.
 
+### El listado
+
+Desde noviembre de 2026 el catálogo se ve como una tienda: una columna de
+filtros a la izquierda (búsqueda, categorías con su cuenta, marca, «solo con
+precio publicado» y «solo lo que hay») y la grilla de productos a la derecha,
+con el orden arriba (recomendados, nuevos, precio en los dos sentidos, nombre).
+En el celular la columna se pliega detrás del botón «Filtros» y las categorías
+quedan en una fila de chips. La entrada del catálogo muestra además las 10
+categorías con su portada; la página de una categoría lleva la portada como
+banner y el enlace a su servicio.
+
+Cada tarjeta vende sola: un producto con una sola medida se agrega al carrito
+desde el listado; con varias, manda a la ficha a elegirla; a cotizar, abre
+WhatsApp. Las etiquetas «Nuevo» (cargado hace menos de 30 días), «-X%» (cuando
+hay `precio_antes`) y «Agotado» salen solas. Un producto sin foto muestra el
+icono de su categoría ([templates/catalogo/_ico_categoria.html](templates/catalogo/_ico_categoria.html))
+en vez de un recuadro gris: con 196 de los 262 importados sin foto, ese
+recuadro era la cara del catálogo.
+
 ### El inventario masivo
 
 Los ~260 productos del local salen del Excel del sistema contable del

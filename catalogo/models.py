@@ -284,6 +284,11 @@ class Producto(models.Model):
         return any(v.bajo_stock for v in self.variantes_activas)
 
     @property
+    def descuento(self):
+        """El mayor descuento entre las medidas, para la etiqueta de la tarjeta."""
+        return max((v.descuento for v in self.variantes_activas), default=0)
+
+    @property
     def titulo_seo(self):
         return self.seo_titulo or (self.nombre + " en Villavicencio | DACARS")[:70]
 

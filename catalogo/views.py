@@ -1,5 +1,6 @@
 """Las vistas públicas del catálogo."""
 
+from datetime import timedelta
 from xml.etree import ElementTree as ET
 
 from django.conf import settings
@@ -7,6 +8,7 @@ from django.core.paginator import Paginator
 from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
 from django.views.decorators.cache import cache_control
 
 from catalogo.models import Categoria, Marca, Producto
@@ -18,7 +20,14 @@ ORDENES = {
     "relevancia": ("-destacado", "orden", "nombre"),
     "nuevos": ("-creado",),
     "nombre": ("nombre",),
+    # Por precio se ordena en Python, en _listado: el precio sale de las
+    # variantes y no es una columna del producto.
+    "precio": ("-destacado", "orden", "nombre"),
+    "precio-desc": ("-destacado", "orden", "nombre"),
 }
+
+# Un producto cargado hace menos de esto lleva la etiqueta «Nuevo».
+DIAS_NUEVO = 30
 
 
 def _categorias_con_productos(actual=None):
@@ -97,9 +106,14 @@ def _listado(request, categoria=None):
     # "Solo lo que hay" filtra por disponible real, no por el stock bruto:
     # lo reservado por otro pedido no está disponible aunque siga en el local.
     solo_disponibles = request.GET.get("hay") == "1"
+    # «Solo con precio» deja afuera los productos a cotizar: para quien
+    # quiere comprar ya, sin escribir.
+    solo_con_precio = request.GET.get("precio") == "1"
 
     orden = request.GET.get("orden", "relevancia")
-    productos = productos.order_by(*ORDENES.get(orden, ORDENES["relevancia"]))
+    if orden not in ORDENES:
+        orden = "relevancia"
+    productos = productos.order_by(*ORDENES[orden])
 
     lista = list(productos)
     # "Solo lo que hay" y el orden por precio no dicen nada mientras todo el
@@ -108,6 +122,20 @@ def _listado(request, categoria=None):
     hay_vendibles = any(not p.a_cotizar for p in lista)
     if solo_disponibles:
         lista = [p for p in lista if not p.agotado]
+    if solo_con_precio:
+        lista = [p for p in lista if not p.a_cotizar]
+
+    if orden in ("precio", "precio-desc"):
+        # Los que no tienen precio van al final en los dos sentidos: ordenar
+        # por un precio que no existe no significa nada.
+        con = [p for p in lista if p.precio_desde is not None]
+        sin = [p for p in lista if p.precio_desde is None]
+        con.sort(key=lambda p: p.precio_desde, reverse=(orden == "precio-desc"))
+        lista = con + sin
+
+    limite = timezone.now() - timedelta(days=DIAS_NUEVO)
+    for p in lista:
+        p.es_nuevo = p.creado >= limite
 
     paginas = Paginator(lista, POR_PAGINA)
     pagina = paginas.get_page(request.GET.get("pagina"))
@@ -132,7 +160,9 @@ def _listado(request, categoria=None):
         )
 
     categorias = _categorias_con_productos(categoria)
-    filtrando = bool(busqueda or marca or solo_disponibles or request.GET.get("pagina"))
+    filtrando = bool(
+        busqueda or marca or solo_disponibles or solo_con_precio or request.GET.get("pagina")
+    )
 
     return render(
         request,
@@ -175,6 +205,8 @@ def _listado(request, categoria=None):
             "marca_activa": marca,
             "orden": orden,
             "solo_disponibles": solo_disponibles,
+            "solo_con_precio": solo_con_precio,
+            "filtrando": filtrando,
             "filtros": filtros.urlencode(),
         },
     )
