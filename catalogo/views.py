@@ -258,6 +258,11 @@ def feed_google(request):
         principal = producto.imagen_principal
         if not principal:
             continue  # Google exige imagen: entra cuando tenga foto.
+        if principal.referencia:
+            # Google pide la foto del producto real. Una imagen de referencia
+            # (generada) sirve para la ficha, no para Shopping: el producto
+            # entra al feed cuando tenga una foto propia.
+            continue
         variantes = producto.variantes_activas
         enlace = sitio + producto.get_absolute_url()
         for variante in variantes:

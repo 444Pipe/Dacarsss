@@ -58,7 +58,11 @@ EXPOSE 8080
 #                                categoría que no tenga imagen propia. Corre al
 #                                final del mismo segundo plano, cuando ya
 #                                existen todas las categorías del inventario.
+#   fotos_referencia             sube la imagen de referencia (generada) de
+#                                catalogo/fotos-referencia/ a cada producto
+#                                que no tenga foto propia. Nunca pisa una
+#                                foto cargada desde el panel.
 #
 # Los últimos nunca terminan con error: una variable mal puesta no puede
 # impedir que el sitio levante.
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && ((python manage.py catalogo_inicial --si-vacio; python manage.py inventario_masivo --si-falta; python manage.py portadas_categorias) &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && ((python manage.py catalogo_inicial --si-vacio; python manage.py inventario_masivo --si-falta; python manage.py portadas_categorias; python manage.py fotos_referencia) &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]

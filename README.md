@@ -522,6 +522,17 @@ logos ni caras. Las portadas son cuadradas de 840 px; las tarjetas, 3:2 en 600,
 900 y 1200 px de ancho. Las fotos de producto del catálogo siguen siendo las
 reales del local, sobre su fondo de estudio oscuro.
 
+Los productos del inventario que no tienen foto pueden llevar una **imagen de
+referencia**: se investiga la referencia en la web, se genera una foto de
+estudio del producto (sin logos) y se guarda en
+[catalogo/fotos-referencia/](catalogo/fotos-referencia/) como `<slug>.webp`,
+cuadrada de 1200 px. `fotos_referencia` las carga en cada arranque con
+`referencia=True`, así la ficha dice «Imagen de referencia», y nunca pisa una
+foto cargada desde el panel. Esos productos **no entran al feed de Google
+Shopping** mientras su única foto sea de referencia: Google exige la foto del
+producto real. Costo medido en noviembre de 2026: 0,5 créditos por imagen en
+calidad media con GPT Image 2.6.
+
 `portadas_categorias` sube cada portada con una huella de su contenido en el
 nombre (`iluminacion-3f9a1c2b.webp`). Si el webp del repositorio cambia, la
 huella cambia y el siguiente arranque la vuelve a subir; si no, no toca nada. Una
