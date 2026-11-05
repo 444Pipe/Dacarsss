@@ -5,6 +5,7 @@
   'use strict';
 
   var WHATSAPP = '573112629406';
+  var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Pantalla de carga ---------- */
   (function () {
@@ -25,8 +26,7 @@
       if (t >= TOPE) { salir(); return; }
 
       if (document.readyState !== 'loading') {
-        // Solo cuentan las imágenes que bloquean la primera vista. Las lazy no:
-        // no cargan hasta que el visitante baje, y esperarlas sería esperar siempre.
+        // Solo cuentan las imágenes que bloquean la primera vista. Las lazy no.
         var imgs = document.images, faltan = 0;
         for (var i = 0; i < imgs.length; i++) {
           if (imgs[i].loading !== 'lazy' && !imgs[i].complete) faltan++;
@@ -43,13 +43,25 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  /* ---------- Header: sombra al hacer scroll ---------- */
+  /* ---------- Header: sombra al hacer scroll + barra de progreso ---------- */
   var head = document.getElementById('head');
+  var progress = document.getElementById('progress');
+  var pendiente = false;
+
   function onScroll() {
     if (head) head.classList.toggle('is-stuck', window.scrollY > 12);
+    if (progress) {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      progress.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    }
+    pendiente = false;
   }
   onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', function () {
+    if (!pendiente) { pendiente = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
 
   /* ---------- Menú móvil ---------- */
   var burger = document.getElementById('burger');
@@ -102,6 +114,59 @@
     revealables.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- Contadores: las cifras del hero suben al entrar ---------- */
+  function contar(el) {
+    var fin = parseInt(el.getAttribute('data-count'), 10);
+    if (isNaN(fin)) return;
+    if (sinMovimiento || !window.requestAnimationFrame) { el.textContent = fin; return; }
+    var inicio = null, dur = 1400;
+    function paso(t) {
+      if (!inicio) inicio = t;
+      var k = Math.min((t - inicio) / dur, 1);
+      var e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(fin * e);
+      if (k < 1) requestAnimationFrame(paso);
+    }
+    requestAnimationFrame(paso);
+  }
+
+  var contadores = document.querySelectorAll('[data-count]');
+  if (contadores.length) {
+    if ('IntersectionObserver' in window) {
+      var ioc = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          contar(en.target);
+          ioc.unobserve(en.target);
+        });
+      }, { threshold: 0.4 });
+      contadores.forEach(function (el) { ioc.observe(el); });
+    } else {
+      contadores.forEach(contar);
+    }
+  }
+
+  /* ---------- Carrusel de categorías (flechas) ---------- */
+  document.querySelectorAll('.scroller').forEach(function (sc) {
+    var pista = sc.querySelector('.rubros--scroll');
+    var prev = sc.querySelector('[data-scroll="-1"]');
+    var next = sc.querySelector('[data-scroll="1"]');
+    if (!pista || !prev || !next) return;
+
+    function estado() {
+      prev.disabled = pista.scrollLeft <= 4;
+      next.disabled = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 4;
+    }
+    function mover(dir) {
+      pista.scrollBy({ left: dir * pista.clientWidth * 0.8, behavior: sinMovimiento ? 'auto' : 'smooth' });
+    }
+    prev.addEventListener('click', function () { mover(-1); });
+    next.addEventListener('click', function () { mover(1); });
+    pista.addEventListener('scroll', estado, { passive: true });
+    window.addEventListener('resize', estado);
+    estado();
+  });
+
   /* ---------- Enlace activo en la navegación ---------- */
   var sections = Array.prototype.slice.call(
     document.querySelectorAll('main section[id]')
@@ -123,14 +188,6 @@
 
     sections.forEach(function (s) { spy.observe(s); });
   }
-
-  /* ---------- Galería: si no hay foto aún, deja el panel de marca ---------- */
-  document.querySelectorAll('.gal__i img').forEach(function (img) {
-    function fail() { img.closest('.gal__i').classList.add('no-img'); }
-    img.addEventListener('error', fail);
-    // Imágenes ya fallidas antes de registrar el listener
-    if (img.complete && img.naturalWidth === 0) fail();
-  });
 
   /* ---------- Formulario → WhatsApp ---------- */
   var form = document.getElementById('form');
@@ -193,27 +250,26 @@
     });
   }
 
-  /* ---------- Fondo de video del hero ---------- */
+  /* ---------- Video del hero ---------- */
   var hero = document.getElementById('heroVideo');
 
   if (hero) {
-    var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var conexion = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     var ahorroDatos = !!(conexion && (conexion.saveData ||
                        /^(slow-2g|2g)$/.test(conexion.effectiveType || '')));
-    var vertical = window.matchMedia('(max-width: 860px)').matches;
+    // La ventana del hero es 3:4 hasta 600 px y 4:3 de ahí en adelante
+    // (ver .hero__frame en style.css): el video sigue la misma frontera.
+    var vertical = window.matchMedia('(max-width: 600px)').matches;
 
-    // Las URLs viven en la plantilla, junto a las del video: con una copia
-    // aqui, un poster roto hay que arreglarlo en dos sitios y se escapa uno.
+    // Las URLs viven en la plantilla, junto a las del video.
     var poster = vertical ? hero.dataset.posterAlto : hero.dataset.posterAncho;
     if (poster) { hero.poster = poster; }
 
     // Enciende el fondo pase lo que pase: si el video no llega, el poster
-    // tiene que quedar visible igual. Nunca dejar el hero en negro.
+    // tiene que quedar visible igual.
     var encender = function () { hero.classList.add('is-on'); };
 
     if (sinMovimiento || ahorroDatos) {
-      // Queda el poster: ni se descarga el video.
       encender();
     } else {
       hero.src = vertical ? hero.dataset.srcAlto : hero.dataset.srcAncho;
@@ -221,7 +277,6 @@
 
       hero.addEventListener('loadeddata', encender);
       hero.addEventListener('error', encender);
-      // Red lenta: a los 2,5 s se muestra el poster sin esperar más
       setTimeout(encender, 2500);
 
       var reproducir = function () {
@@ -236,10 +291,7 @@
       var arranque = reproducir();
       if (arranque) {
         arranque.catch(function () {
-          // Autoplay bloqueado (p. ej. modo de bajo consumo en iOS): se queda el
-          // poster y se reintenta en cuanto el visitante toque la página.
           encender();
-
           var reintento = function () {
             silencioso();
             ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
@@ -288,13 +340,11 @@
       video.controls = true;
       video.muted = false;
       video.play().catch(function () {
-        // Si el navegador no deja reproducir con sonido, al menos que se vea.
         video.muted = true;
         video.play().catch(function () {});
       });
     });
 
-    // Clic sobre el video: pausa / reanuda
     video.addEventListener('click', function () {
       if (video.paused) { video.play().catch(function () {}); }
       else { video.pause(); }

@@ -54,10 +54,13 @@ templates/
   pedidos/          Carrito, checkout y confirmación
   admin/            base_site (marca), login (entrada) y el tablero
 
-static/css/style.css      El sistema de diseño (sin cambios desde el sitio viejo)
+static/css/style.css      El sistema de diseño: tema claro (blanco, azul y navy)
 static/css/catalogo.css   Solo lo nuevo. Las landings no lo descargan
 static/css/panel.css      La marca aplicada al admin de Django
-static/js/app.js          Menú, reveals, video, formulario → WhatsApp
+static/js/app.js          Menú, reveals, contadores, carrusel, video, formulario → WhatsApp
+static/img/marca/         El wordmark en navy, para el encabezado blanco
+static/img/servicios/     Fotos de las tarjetas de servicios y de las intros
+catalogo/portadas/        Una portada cuadrada por categoría (ver portadas_categorias)
 
 tools/            Lo que sigue sirviendo
   fotos-catalogo.py     Foto del mostrador -> foto de estudio del catálogo
@@ -440,23 +443,56 @@ python tools/subir-cloudinary.py   # sube statics/ y actualiza el inventario
 
 ## Identidad visual
 
-Sin cambios respecto del sitio anterior. Todo son variables CSS en `:root` dentro
-de [static/css/style.css](static/css/style.css); cambiar la marca completa =
-cambiar esas variables.
+Desde noviembre de 2026 el sitio es **claro**: fondo blanco de tienda, azul
+eléctrico como acento y navy para los bloques oscuros (barra superior, pie y
+cierres de las landings). Antes era negro azulado con cromo; el cambio se pidió
+para que el sitio se viera comercial y no «de taller de noche». Todo son
+variables CSS en `:root` dentro de [static/css/style.css](static/css/style.css);
+cambiar la marca completa = cambiar esas variables.
 
 | Elemento | Valor |
 |---|---|
-| Fondo base | `#04060c` → `#071020` |
+| Fondo base | `#ffffff`, secciones alternas `#f5f7fb` |
+| Navy (texto fuerte y bloques oscuros) | `#0b1630` |
 | Azul de marca | `#0a5cff` |
-| Azul claro | `#3d8bff` |
-| Cian neón | `#00c8ff` |
-| Texto | `#e9eef8` / secundario `#93a0b8` |
-| Titulares | Saira, itálica 800/900, mayúsculas |
+| Azul claro | `#2f7bff` |
+| Cian | `#00b4ea` |
+| Texto | `#0f1a33` / secundario `#55627f` |
+| Titulares | Saira, itálica 800/900, mayúsculas, degradado navy → azul (`.chrome`) |
 | Cuerpo | Inter |
+
+El wordmark original es blanco con rayos azules y desaparece sobre blanco, así
+que el encabezado y la pantalla de carga usan
+[static/img/marca/wordmark-oscuro.png](static/img/marca/wordmark-oscuro.png):
+las mismas letras recoloreadas a navy con Pillow (solo cambian los píxeles poco
+saturados; los rayos quedan). El pie, que sigue siendo navy, usa el original.
+
+Lo «dinámico» vive en [static/js/app.js](static/js/app.js): barra de progreso de
+lectura, contadores que suben al entrar en pantalla (`data-count`), carrusel de
+categorías con flechas (`.scroller`), reveals escalonados (`data-reveal`, con las
+variantes `left`, `right` y `zoom`) y el video del hero en una ventana con
+tarjetas flotantes. Todo respeta `prefers-reduced-motion`.
 
 [static/css/catalogo.css](static/css/catalogo.css) usa esas mismas variables y no
 redefine ninguna. Lo cargan solo las páginas del catálogo, y las landings solo si
-hay productos que mostrar.
+hay productos que mostrar. Las tarjetas de categoría (`.rubro`) están en
+`style.css` porque la portada también las muestra.
+
+### Las imágenes generadas
+
+Las portadas de las 10 categorías ([catalogo/portadas/](catalogo/portadas/)) y las
+fotos de las 12 tarjetas de servicios de la portada
+(`static/img/servicios/card-*`) se generaron con GPT Image 2.6 a través del
+conector de Higgsfield, en noviembre de 2026, con un brief común: producto o
+escena sobre estudio blanco / taller claro, luz de día, acento azul, sin texto ni
+logos ni caras. Las portadas son cuadradas de 840 px; las tarjetas, 3:2 en 600,
+900 y 1200 px de ancho. Las fotos de producto del catálogo siguen siendo las
+reales del local, sobre su fondo de estudio oscuro.
+
+`portadas_categorias` sube cada portada con una huella de su contenido en el
+nombre (`iluminacion-3f9a1c2b.webp`). Si el webp del repositorio cambia, la
+huella cambia y el siguiente arranque la vuelve a subir; si no, no toca nada. Una
+imagen cargada a mano desde el panel no se pisa salvo con `--forzar`.
 
 ---
 

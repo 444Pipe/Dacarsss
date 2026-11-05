@@ -7,7 +7,7 @@
 <!-- Pantalla de carga: en línea a propósito, para que pinte antes que nada -->
 <style>
 #carga{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;
-  background:radial-gradient(75% 60% at 50% 45%,#0a1327 0%,#04060c 72%);
+  background:radial-gradient(75% 60% at 50% 45%,#ffffff 0%,#eef2f9 72%);
   transition:opacity .55s ease,visibility .55s ease}
 #carga.se-va{opacity:0;visibility:hidden;pointer-events:none}
 #carga.se-va .carga__in{transform:scale(1.07);transition:transform .55s cubic-bezier(.4,0,1,1)}
@@ -23,7 +23,7 @@
 /* El wordmark aparece una vez y se queda */
 .carga__marca img{height:44px;width:auto;opacity:0;
   animation:cargaEntra .6s cubic-bezier(.22,.61,.36,1) .05s forwards;
-  filter:drop-shadow(0 0 24px rgba(10,92,255,.45))}
+  filter:drop-shadow(0 0 24px rgba(10,92,255,.22))}
 @keyframes cargaEntra{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
 
 /* Los cuatro rayos entran desde fuera y convergen, como en el logotipo */
@@ -46,7 +46,7 @@
 /* Destello en los puntos donde los rayos se juntan */
 .carga__chispa{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;
   margin-top:-6.5px;opacity:0;
-  background:radial-gradient(circle,#fff 0%,#7fe3ff 32%,rgba(0,200,255,0) 70%);
+  background:radial-gradient(circle,#0a5cff 0%,#7fe3ff 40%,rgba(0,200,255,0) 70%);
   box-shadow:0 0 22px 6px rgba(0,200,255,.6);
   animation:cargaChispa 2.4s ease-out infinite}
 .carga__chispa--i{left:16.8%}
@@ -66,7 +66,7 @@
   background:linear-gradient(100deg,transparent 46%,rgba(255,255,255,.95) 48.5%,
     rgba(180,230,255,.98) 50%,rgba(0,200,255,.75) 51.5%,transparent 54%);
   background-size:250% 100%;background-repeat:no-repeat;
-  -webkit-mask-image:url(https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark);mask-image:url(https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark);
+  -webkit-mask-image:url({% static 'img/marca/wordmark-oscuro.png' %});mask-image:url({% static 'img/marca/wordmark-oscuro.png' %});
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
   -webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:auto 44px;mask-size:auto 44px;
@@ -104,7 +104,7 @@
       <i class="carga__rayo carga__rayo--a"></i><i class="carga__rayo carga__rayo--b"></i>
       <i class="carga__rayo carga__rayo--c"></i><i class="carga__rayo carga__rayo--d"></i>
       <span class="carga__chispa carga__chispa--i"></span><span class="carga__chispa carga__chispa--d"></span>
-      <img src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="" width="600" height="117" fetchpriority="high">
+      <img src="{% static 'img/marca/wordmark-oscuro.png' %}" alt="" width="600" height="117" fetchpriority="high">
       <span class="carga__brillo"></span>
     </div>
   </div>

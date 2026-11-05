@@ -31,7 +31,7 @@
         <p class="linea__nom"><a href="{{ l.producto.get_absolute_url }}">{{ l.producto.nombre }}</a></p>
         <p class="linea__meta">
           {% if l.variante.nombre %}{{ l.variante.nombre }} · {% endif %}{{ l.precio|pesos }} c/u
-          {% if l.variante.bajo_stock %} · <span style="color:#ffb74d">quedan {{ l.variante.disponible }}</span>{% endif %}
+          {% if l.variante.bajo_stock %} · <span style="color:#c77c00">quedan {{ l.variante.disponible }}</span>{% endif %}
         </p>
       </div>
 

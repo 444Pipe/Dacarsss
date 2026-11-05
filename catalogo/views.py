@@ -58,6 +58,21 @@ def _portadas(categorias, productos):
     return categorias
 
 
+def categorias_con_portada(actual=None):
+    """Las categorías con productos, cada una con su portada y su cuenta.
+
+    Para la portada del sitio y la entrada del catálogo. Los productos solo
+    se consultan si a alguna categoría le falta la imagen propia: es la única
+    razón para recorrerlos.
+    """
+    categorias = _categorias_con_productos(actual)
+    if all(c.imagen for c in categorias):
+        for c in categorias:
+            c.portada = c.imagen
+        return categorias
+    return _portadas(categorias, list(Producto.objects.publicados().con_todo()))
+
+
 def _listado(request, categoria=None):
     productos = Producto.objects.publicados().con_todo()
     if categoria:
@@ -148,7 +163,7 @@ def _listado(request, categoria=None):
             # Las tarjetas grandes de categoría solo en la entrada del
             # catálogo: con un filtro puesto, lo que se busca son productos.
             "portadas": (
-                _portadas(categorias, lista)
+                categorias_con_portada()
                 if not (categoria or filtrando) and len(categorias) > 1
                 else []
             ),

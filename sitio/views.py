@@ -6,19 +6,31 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_control
 
 from catalogo.models import Categoria, Producto
+from catalogo.views import categorias_con_portada
 from sitio.paginas import HUB_META, SLUGS
 
 
 def portada(request):
     # El catálogo asoma en la portada: si el comercio carga productos, la
     # página de inicio los muestra sin que nadie tenga que tocar una plantilla.
+    #
+    # Los destacados van primero por el orden del modelo (-destacado); si no
+    # hay suficientes marcados, completan los que tengan foto. Una franja de
+    # productos sin foto no vende nada.
+    publicados = Producto.objects.publicados()
     destacados = list(
-        Producto.objects.publicados().con_todo().filter(destacado=True)[:4]
+        publicados.con_todo().filter(imagenes__isnull=False).distinct()[:8]
     )
+    hay_catalogo = _hay_catalogo()
     return render(
         request,
         "sitio/index.html",
-        {"destacados": destacados, "hay_catalogo": _hay_catalogo()},
+        {
+            "destacados": destacados,
+            "hay_catalogo": hay_catalogo,
+            "categorias": categorias_con_portada() if hay_catalogo else [],
+            "total_productos": publicados.count(),
+        },
     )
 
 
