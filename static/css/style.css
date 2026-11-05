@@ -303,7 +303,7 @@ svg.marca{fill:currentColor; stroke:none}
 .hero__title{
   margin:0 0 20px;
   font-family:var(--f-display); font-style:italic; font-weight:900;
-  font-size:clamp(32px, 4.8vw, 58px); line-height:.98;
+  font-size:clamp(30px, 4.1vw, 50px); line-height:1;
   letter-spacing:-.02em; text-transform:uppercase; color:var(--ink);
 }
 .hero__accent{font-style:italic; color:var(--blue)}
