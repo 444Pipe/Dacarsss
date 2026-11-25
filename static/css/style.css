@@ -1226,14 +1226,24 @@ body{font-size:15px; line-height:1.65}
 .carros__tit--sec{font-size:clamp(22px,2.4vw,28px); margin-bottom:18px}
 .carros__lead{margin:0; max-width:60ch; font-size:15.5px; color:var(--muted); line-height:1.6}
 .carros{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:clamp(14px,2vw,26px)}
-.carros--portada{grid-template-columns:repeat(auto-fit,minmax(240px,340px)); justify-content:center}
 .carro{display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-radius:6px;
   overflow:hidden; color:inherit; transition:border-color .2s, box-shadow .2s, transform .2s}
 .carro:hover{border-color:var(--line-hi); box-shadow:0 10px 26px rgba(0,0,0,.08); transform:translateY(-2px)}
 .carro__foto{position:relative; display:block; aspect-ratio:4/5; overflow:hidden; background:var(--bg-3)}
-.carro__foto img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease)}
+.carro__foto img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .6s var(--ease), opacity .9s ease}
+/* Con rotación de fotos (portada): las capas se cruzan por opacidad. Solo
+   aplica cuando el script ya marcó una capa como visible. */
+.carro__foto--rota img:not(.is-on):not(.is-prev){opacity:0}
+.carro__foto--rota img.is-on{z-index:1}
+.carro__foto--rota img.entra{animation:carroEntra 1.1s var(--ease) both}
+@keyframes carroEntra{from{opacity:0; transform:scale(1.14) translateX(5%)}}
+.carro__barras,.carro__sello{z-index:2}
+.carro__barras{position:absolute; left:10px; right:10px; bottom:10px; display:flex; gap:4px}
+.carro__barras i{flex:1; height:3px; border-radius:2px; background:rgba(255,255,255,.45); transition:background .4s}
+.carro__barras i.is-on{background:#fff}
 .carro:hover .carro__foto img{transform:scale(1.04)}
-.carro__sello{position:absolute; left:12px; top:12px; padding:5px 12px; border-radius:4px; background:#fff;
+.carro__sello{position:absolute; z-index:2; left:12px; top:12px; padding:5px 12px; border-radius:4px; background:#fff;
   color:var(--ink); font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em}
 .carro__sello--vendido{background:var(--oscuro); color:#fff}
 .carro--vendido .carro__foto img{filter:grayscale(1); opacity:.75}
@@ -1241,17 +1251,40 @@ body{font-size:15px; line-height:1.65}
 .carro__nom{font-family:var(--f-display); font-weight:700; font-size:18px; line-height:1.2; color:var(--ink)}
 .carro__datos{font-size:13.5px; color:var(--muted)}
 .carro__precio{margin-top:4px; font-size:16px; font-weight:700; color:var(--blue)}
+/* La banda de la portada: tarjetas en fila, centradas si caben todas. */
+.banda--carros .carro{flex:0 0 clamp(250px,24vw,340px); scroll-snap-align:start; border-color:transparent}
+.banda--carros .carro:hover{border-color:transparent; box-shadow:none}
+.carr__pista--centro{justify-content:safe center}
+.banda__pie{margin:clamp(20px,2.6vw,32px) 0 0; text-align:center}
+.banda .btn--ghost{background:transparent; border-color:#fff; color:#fff}
+.banda .btn--ghost:hover{background:#fff; color:var(--ink); border-color:#fff}
+@media (max-width:700px){ .banda--carros .carro{flex-basis:72vw} }
 .carros__vacio{padding:clamp(28px,5vw,60px) 0; display:grid; gap:16px; justify-items:start; color:var(--muted)}
 .carros__vacio p{margin:0; max-width:52ch}
 
 .vficha{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:clamp(24px,4vw,56px);
   align-items:start; padding-top:14px}
 .vficha__fotos{min-width:0}
-.vfotos__grande{position:relative; aspect-ratio:4/5; max-height:78vh; width:100%; background:var(--oscuro);
-  overflow:hidden; border-radius:6px}
-.vfotos__grande img{width:100%; height:100%; object-fit:contain; display:block}
-.vfotos__grande--vacia{display:grid; place-items:center; background:var(--bg-3); color:var(--muted); font-size:14px}
-.vfotos__flecha{position:absolute; top:50%; translate:0 -50%; width:44px; height:44px; padding:0; border:0;
+/* La caja tiene la proporción de las fotos (3:4, celular en vertical) y la
+   foto la llena entera: sin franjas a los lados. En pantallas bajas se angosta
+   la caja en vez de recortar la altura, para no deformar esa proporción. */
+.vfotos__grande{position:relative; aspect-ratio:3/4; width:min(100%, 58.5vh); min-width:min(100%, 300px);
+  margin-inline:auto; background:var(--bg-3); overflow:hidden; border-radius:6px; touch-action:pan-y}
+.vfotos__grande img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+/* El cambio de foto: la que sale se va hacia un lado y la nueva entra desde
+   el otro con un leve acercamiento. --dir vale 1 (siguiente) o -1 (anterior). */
+.vfotos__grande img.sale{animation:vfotoSale .5s var(--ease) both}
+.vfotos__grande img.entra{animation:vfotoEntra .6s var(--ease) both}
+@keyframes vfotoSale{to{opacity:0; transform:translateX(calc(var(--dir,1) * -22%)) scale(.96)}}
+@keyframes vfotoEntra{from{opacity:0; transform:translateX(calc(var(--dir,1) * 28%)) scale(1.08)}}
+.vfotos__cuenta b{display:inline-block}
+.vfotos__cuenta b.salta{animation:vfotoSalta .35s var(--ease)}
+@keyframes vfotoSalta{from{opacity:0; transform:translateY(60%)}}
+@media (prefers-reduced-motion: reduce){
+  .vfotos__grande img.sale,.vfotos__grande img.entra,.vfotos__cuenta b.salta,.carro__foto--rota img.entra{animation:none}
+}
+.vfotos__grande--vacia{display:grid; place-items:center; color:var(--muted); font-size:14px}
+.vfotos__flecha{position:absolute; z-index:2; top:50%; translate:0 -50%; width:44px; height:44px; padding:0; border:0;
   border-radius:50%; background:rgba(255,255,255,.92); color:var(--ink); cursor:pointer; display:grid;
   place-items:center; transition:background .2s}
 .vfotos__flecha:hover{background:#fff}
@@ -1259,11 +1292,13 @@ body{font-size:15px; line-height:1.65}
   stroke-linecap:round; stroke-linejoin:round}
 .vfotos__flecha--ant{left:12px}
 .vfotos__flecha--sig{right:12px}
-.vfotos__cuenta{position:absolute; right:12px; bottom:12px; padding:4px 10px; border-radius:999px;
+.vfotos__cuenta{position:absolute; z-index:2; right:12px; bottom:12px; padding:4px 10px; border-radius:999px;
   background:rgba(0,0,0,.6); color:#fff; font-size:12.5px}
 .vfotos__tiras{display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding-bottom:6px; scrollbar-width:thin}
-.vfotos__tiras button{flex:0 0 auto; width:64px; height:80px; padding:0; overflow:hidden; cursor:pointer;
-  border:2px solid transparent; border-radius:4px; background:var(--bg-3); opacity:.7; transition:opacity .2s, border-color .2s}
+.vfotos__tiras button{flex:0 0 auto; width:63px; height:84px; padding:0; overflow:hidden; cursor:pointer;
+  border:2px solid transparent; border-radius:4px; background:var(--bg-3); opacity:.7;
+  transition:opacity .25s, border-color .25s, transform .25s var(--ease)}
+.vfotos__tiras button[aria-current=true]{transform:translateY(-3px)}
 .vfotos__tiras button:hover{opacity:1}
 .vfotos__tiras button[aria-current=true]{opacity:1; border-color:var(--blue)}
 .vfotos__tiras img{width:100%; height:100%; object-fit:cover; display:block}
@@ -1278,11 +1313,10 @@ body{font-size:15px; line-height:1.65}
 .votros{margin-top:clamp(40px,6vw,72px)}
 @media (max-width:860px){
   .vficha{grid-template-columns:minmax(0,1fr)}
-  .vfotos__grande{max-height:none}
+  .vfotos__grande{width:100%}
 }
 @media (max-width:520px){
   .carros{grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
-  .carros--portada{grid-template-columns:repeat(2,minmax(0,1fr))}
   .carro__info{padding:10px 11px 12px}
   .carro__nom{font-size:15.5px}
   .carro__datos{font-size:12.5px}

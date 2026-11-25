@@ -150,6 +150,82 @@
           "alt": "Tablero de instrumentos"
         }
       ]
+    },
+    {
+      "slug": "mercedes-benz-a-200",
+      "marca": "Mercedes-Benz",
+      "modelo": "A 200",
+      "version": "",
+      "anio": null,
+      "kilometraje": null,
+      "precio": null,
+      "transmision": "automatica",
+      "traccion": "",
+      "color": "Plata",
+      "resumen": "Mercedes-Benz A 200 plateado, automático, con techo panorámico y asientos deportivos. En venta en Villavicencio.",
+      "caracteristicas": [
+        "Caja automática",
+        "Techo panorámico",
+        "Asientos deportivos",
+        "Timón multifunción",
+        "Pantalla multimedia",
+        "Rines negros"
+      ],
+      "orden": 3,
+      "fotos": [
+        {
+          "archivo": "mercedes-benz-a-200-01.webp",
+          "alt": "Vista frontal tres cuartos"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-02.webp",
+          "alt": "Frente"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-03.webp",
+          "alt": "Frente desde el otro lado"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-04.webp",
+          "alt": "Lateral"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-05.webp",
+          "alt": "Vista trasera tres cuartos"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-06.webp",
+          "alt": "Parte trasera"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-07.webp",
+          "alt": "Trasera desde el otro lado"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-08.webp",
+          "alt": "Rin y llanta"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-09.webp",
+          "alt": "Puesto del conductor"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-10.webp",
+          "alt": "Timón y tablero"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-11.webp",
+          "alt": "Cabina y techo panorámico"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-12.webp",
+          "alt": "Asientos delanteros"
+        },
+        {
+          "archivo": "mercedes-benz-a-200-13.webp",
+          "alt": "Asientos traseros"
+        }
+      ]
     }
   ]
 }

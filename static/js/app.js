@@ -174,6 +174,77 @@
     estado();
   });
 
+  /* ---------- Carros en venta: cada tarjeta va pasando sus fotos ----------
+     Las fotos extra llegan en data-fotos y no se descargan hasta que la
+     tarjeta entra en pantalla. Cada foto se precarga antes de mostrarse,
+     así el cruce nunca deja ver un recuadro vacío. */
+  var rotativas = document.querySelectorAll('.carro[data-fotos]');
+  if (rotativas.length && !sinMovimiento) {
+    rotativas.forEach(function (tarjeta, orden) {
+      var caja = tarjeta.querySelector('.carro__foto');
+      var primera = caja && caja.querySelector('img');
+      var urls = tarjeta.dataset.fotos.split('|').filter(Boolean);
+      if (!primera || !urls.length) return;
+
+      var capas = [primera];
+      var barras = document.createElement('span');
+      barras.className = 'carro__barras';
+      barras.setAttribute('aria-hidden', 'true');
+      for (var n = 0; n <= urls.length; n++) barras.appendChild(document.createElement('i'));
+      caja.appendChild(barras);
+      primera.classList.add('is-on');
+      caja.classList.add('carro__foto--rota');
+      barras.children[0].classList.add('is-on');
+
+      var actual = 0, reloj = null, visible = false, encima = false;
+
+      function mostrar(i) {
+        // La foto que sale se queda debajo, opaca, mientras la nueva aparece
+        // encima: si las dos se desvanecieran a la vez se vería el fondo.
+        capas.forEach(function (c) { if (c) c.classList.remove('is-prev', 'entra'); });
+        capas[actual].classList.remove('is-on');
+        capas[actual].classList.add('is-prev');
+        barras.children[actual].classList.remove('is-on');
+        actual = i;
+        capas[actual].classList.add('is-on', 'entra');
+        barras.children[actual].classList.add('is-on');
+      }
+      function siguiente() {
+        var i = (actual + 1) % (urls.length + 1);
+        if (capas[i]) return mostrar(i);
+        var img = new Image();
+        img.alt = '';
+        img.decoding = 'async';
+        img.onload = function () {
+          caja.insertBefore(img, barras);
+          capas[i] = img;
+          // Dos cuadros de espera: sin ellos la foto nueva aparece de golpe.
+          requestAnimationFrame(function () { requestAnimationFrame(function () { mostrar(i); }); });
+        };
+        img.src = urls[i - 1];
+      }
+      function ajustar() {
+        var debe = visible && !encima && !document.hidden;
+        if (debe && !reloj) reloj = setInterval(siguiente, 3200);
+        if (!debe && reloj) { clearInterval(reloj); reloj = null; }
+      }
+      tarjeta.addEventListener('mouseenter', function () { encima = true; ajustar(); });
+      tarjeta.addEventListener('mouseleave', function () { encima = false; ajustar(); });
+      document.addEventListener('visibilitychange', ajustar);
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entradas) {
+          visible = entradas[0].isIntersecting;
+          // Desfase entre tarjetas: que no cambien todas al mismo tiempo.
+          if (visible && !reloj) setTimeout(ajustar, orden * 1100); else ajustar();
+        }, { threshold: 0.35 }).observe(tarjeta);
+      } else {
+        visible = true;
+        ajustar();
+      }
+    });
+  }
+
   /* ---------- Menú móvil ---------- */
   var burger = document.getElementById('burger');
   var nav = document.getElementById('nav');

@@ -851,17 +851,23 @@
 {% endif %}
 
 {% if carros_venta %}
-<!-- ============ CARROS EN VENTA ============ -->
-<section class="sec sec--tight sec--alt" id="carros-en-venta" aria-labelledby="carros-tit">
-  <div class="wrap wrap--ancho">
-    <header class="carros__head carros__head--c">
-      <h2 class="carros__tit" id="carros-tit">Carros en venta</h2>
-      <p class="carros__lead">También vendemos carros. Estos están en el local, listos para que los veas.</p>
+<!-- ============ CARROS EN VENTA (banda) ============
+     Se arma sola con los carros publicados en el panel. Cada tarjeta va
+     pasando las fotos de su carro (js/app.js) y la fila se recorre con las
+     flechas, igual que las bandas de servicios y categorías. -->
+<section class="banda banda--carros" id="carros-en-venta" aria-labelledby="carros-tit">
+  <div class="carr">
+    <header class="banda__head">
+      <h2 class="banda__tit" id="carros-tit">Carros en venta</h2>
+      <div class="banda__flechas">
+        <button class="carr__flecha" type="button" data-dir="-1" aria-label="Anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+        <button class="carr__flecha" type="button" data-dir="1" aria-label="Siguientes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+      </div>
     </header>
-    <div class="carros carros--portada">
-      {% for carro in carros_venta %}{% include "vehiculos/_tarjeta.html" %}{% endfor %}
+    <div class="carr__pista carr__pista--centro">
+      {% for carro in carros_venta %}{% include "vehiculos/_tarjeta.html" with rotar=True %}{% endfor %}
     </div>
-    <p class="sec__foot sec__foot--c"><a class="btn btn--ghost" href="{% url 'vehiculos:lista' %}">Ver todos los carros</a></p>
+    <p class="banda__pie"><a class="btn btn--ghost" href="{% url 'vehiculos:lista' %}">Ver todos los carros</a></p>
   </div>
 </section>
 {% endif %}

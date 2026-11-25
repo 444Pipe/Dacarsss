@@ -1,6 +1,8 @@
 {% load dacars %}{% comment %} La tarjeta de un carro en venta. La usan la lista, la ficha («Otros carros»)
-   y el bloque de la portada. Toda la tarjeta es un enlace a la ficha. {% endcomment %}
-<a class="carro{% if carro.vendido %} carro--vendido{% endif %}" href="{{ carro.get_absolute_url }}">
+   y el bloque de la portada. Toda la tarjeta es un enlace a la ficha.
+   Con `rotar`, lleva en data-fotos las fotos siguientes para que js/app.js
+   las vaya pasando; sin JavaScript queda la portada fija. {% endcomment %}
+<a class="carro{% if carro.vendido %} carro--vendido{% endif %}" href="{{ carro.get_absolute_url }}"{% if rotar and carro.fotos.all|length > 1 %} data-fotos="{% for f in carro.fotos.all|slice:"1:6" %}{{ f.imagen|foto:700 }}{% if not forloop.last %}|{% endif %}{% endfor %}"{% endif %}>
   <span class="carro__foto">
     {% with principal=carro.foto_principal %}
       {% if principal %}<img src="{{ principal.imagen|foto:700 }}" alt="{{ principal.texto_alt }}" width="700" height="875" loading="lazy" decoding="async">{% endif %}
