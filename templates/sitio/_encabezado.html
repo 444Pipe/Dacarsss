@@ -50,6 +50,7 @@
         {% endfor %}<a href="/{{ hub_meta }}">Cobertura en el Meta</a>
       </div>
     </div>
+    {% if hay_vehiculos %}<a href="{% url 'vehiculos:lista' %}"{% if carros or carro %} class="is-active"{% endif %}>Carros en venta</a>{% endif %}
     <a class="nav__solo-movil" href="{{ pref }}#trabajos">Trabajos</a>
     <a class="nav__solo-movil" href="{{ pref }}#contacto">Contacto</a>
     <a class="btn btn--wa nav__cta" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20servicio." target="_blank" rel="noopener">Cotizar por WhatsApp</a>

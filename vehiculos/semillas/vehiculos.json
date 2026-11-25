@@ -1,0 +1,155 @@
+{
+  "vehiculos": [
+    {
+      "slug": "nissan-frontier-le-4x4",
+      "marca": "Nissan",
+      "modelo": "Frontier",
+      "version": "LE 4x4",
+      "anio": null,
+      "kilometraje": 170377,
+      "precio": null,
+      "transmision": "automatica",
+      "traccion": "4x4",
+      "color": "Blanco",
+      "resumen": "Nissan Frontier LE 4x4 blanca, automática, doble cabina con cojinería en cuero. En venta en Villavicencio.",
+      "caracteristicas": [
+        "Doble cabina",
+        "Caja automática",
+        "Tracción 4x4",
+        "Cojinería en cuero",
+        "Pantalla multimedia",
+        "Salidas de aire para la segunda fila",
+        "Estribos laterales",
+        "Platón con protector"
+      ],
+      "orden": 1,
+      "fotos": [
+        {
+          "archivo": "nissan-frontier-le-4x4-01.webp",
+          "alt": "Vista frontal tres cuartos"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-02.webp",
+          "alt": "Frente"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-03.webp",
+          "alt": "Frente desde el otro lado"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-04.webp",
+          "alt": "Lateral"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-05.webp",
+          "alt": "Parte trasera"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-06.webp",
+          "alt": "Platón"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-07.webp",
+          "alt": "Rin y llanta"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-08.webp",
+          "alt": "Tablero y consola"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-09.webp",
+          "alt": "Puesto del conductor"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-10.webp",
+          "alt": "Asientos traseros"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-11.webp",
+          "alt": "Salidas de aire traseras"
+        },
+        {
+          "archivo": "nissan-frontier-le-4x4-12.webp",
+          "alt": "Kilometraje: 170.377 km"
+        }
+      ]
+    },
+    {
+      "slug": "toyota-prado-txl-2017",
+      "marca": "Toyota",
+      "modelo": "Prado",
+      "version": "TX.L",
+      "anio": 2017,
+      "kilometraje": null,
+      "precio": null,
+      "transmision": "automatica",
+      "traccion": "",
+      "color": "Plata",
+      "resumen": "Toyota Prado TX.L 2017 plateada, automática, con techo corredizo y cojinería en cuero. En venta en Villavicencio.",
+      "caracteristicas": [
+        "Caja automática",
+        "Techo corredizo",
+        "Cojinería en cuero",
+        "Asientos delanteros eléctricos",
+        "Pantalla multimedia",
+        "Climatizador para la segunda fila",
+        "Estribos laterales"
+      ],
+      "orden": 2,
+      "fotos": [
+        {
+          "archivo": "toyota-prado-txl-2017-01.webp",
+          "alt": "Vista frontal tres cuartos"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-02.webp",
+          "alt": "Frente"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-03.webp",
+          "alt": "Frente desde el otro lado"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-04.webp",
+          "alt": "Vista trasera tres cuartos"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-05.webp",
+          "alt": "Parte trasera"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-06.webp",
+          "alt": "Rin y llanta"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-07.webp",
+          "alt": "Puesto del conductor"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-08.webp",
+          "alt": "Asiento del conductor"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-09.webp",
+          "alt": "Asientos delanteros"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-10.webp",
+          "alt": "Tablero y techo corredizo"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-11.webp",
+          "alt": "Asientos traseros"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-12.webp",
+          "alt": "Climatizador trasero"
+        },
+        {
+          "archivo": "toyota-prado-txl-2017-13.webp",
+          "alt": "Tablero de instrumentos"
+        }
+      ]
+    }
+  ]
+}

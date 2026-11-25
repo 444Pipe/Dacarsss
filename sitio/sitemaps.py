@@ -11,6 +11,7 @@ from django.urls import reverse
 
 from catalogo.models import Categoria, Producto
 from sitio.paginas import HUB_META, SLUGS
+from vehiculos.models import Vehiculo
 
 
 class Paginas(Sitemap):
@@ -72,7 +73,26 @@ class Productos(Sitemap):
         return obj.actualizado
 
 
+class Vehiculos(Sitemap):
+    """Los carros en venta y su lista. La lista solo entra si hay alguno."""
+
+    protocol = "https"
+    changefreq = "weekly"
+    priority = 0.7
+
+    def items(self):
+        carros = list(Vehiculo.objects.publicados())
+        return (["lista"] + carros) if carros else []
+
+    def location(self, item):
+        return reverse("vehiculos:lista") if item == "lista" else item.get_absolute_url()
+
+    def lastmod(self, item):
+        return None if item == "lista" else item.actualizado
+
+
 SITEMAPS = {
+    "vehiculos": Vehiculos,
     "paginas": Paginas,
     "catalogo": Catalogo,
     "categorias": Categorias,

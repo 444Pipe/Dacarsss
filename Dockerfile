@@ -64,7 +64,10 @@ EXPOSE 8080
 #                                foto cargada desde el panel.
 #   refrescar_fotos              vuelve a subir las fotos del catálogo inicial
 #                                que cambiaron en el repositorio (fondo blanco).
+#   vehiculos_iniciales          crea los carros en venta de vehiculos/semillas/
+#                                que todavía no existan, con sus fotos. Lo que se
+#                                edite después en el panel no se pisa.
 #
 # Los últimos nunca terminan con error: una variable mal puesta no puede
 # impedir que el sitio levante.
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && ((python manage.py catalogo_inicial --si-vacio; python manage.py inventario_masivo --si-falta; python manage.py portadas_categorias; python manage.py fotos_referencia; python manage.py refrescar_fotos) &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py categorias_iniciales --si-vacio && python manage.py crear_admin && ((python manage.py catalogo_inicial --si-vacio; python manage.py inventario_masivo --si-falta; python manage.py portadas_categorias; python manage.py fotos_referencia; python manage.py refrescar_fotos; python manage.py vehiculos_iniciales) &) && exec gunicorn dacars.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 3 --threads 2 --timeout 60 --access-logfile - --error-logfile -"]

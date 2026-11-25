@@ -1,0 +1,38 @@
+{% extends "tienda/base.html" %}{% load dacars %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ negocio.sitio }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Carros en venta", "item": "{{ negocio.sitio }}{% url 'vehiculos:lista' %}" }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block tienda %}
+<ol class="migas">
+  <li><a href="/">Inicio</a></li>
+  <li>Carros en venta</li>
+</ol>
+
+<header class="carros__head">
+  <h1 class="carros__tit">Carros en venta</h1>
+  <p class="carros__lead">Carros y camionetas que tenemos en venta en el local de Villavicencio.
+  Pasa a verlos o escríbenos por WhatsApp y te contamos todo.</p>
+</header>
+
+{% if carros %}
+<div class="carros">
+  {% for carro in carros %}{% include "vehiculos/_tarjeta.html" %}{% endfor %}
+</div>
+{% else %}
+<div class="carros__vacio">
+  <p>En este momento no tenemos carros publicados. Escríbenos y te avisamos cuando llegue uno.</p>
+  <a class="btn btn--wa" href="{% whatsapp 'Hola DACARS, quiero saber qué carros tienen en venta.' %}" target="_blank" rel="noopener">{% include "catalogo/_ico_wa.html" %} Preguntar por WhatsApp</a>
+</div>
+{% endif %}
+{% endblock %}

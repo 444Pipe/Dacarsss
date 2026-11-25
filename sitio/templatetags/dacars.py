@@ -95,6 +95,15 @@ def whatsapp_producto(producto, variante=None):
 
 
 @register.simple_tag
+def whatsapp_vehiculo(carro):
+    """El botón de un carro en venta: nombra el carro y lleva el enlace de su ficha."""
+    texto = "Hola DACARS, me interesa el {} que tienen en venta.\n{}{}\n\n¿Me dan más información?".format(
+        carro.nombre, settings.NEGOCIO["sitio"], carro.get_absolute_url()
+    )
+    return "https://wa.me/{}?text={}".format(settings.NEGOCIO["whatsapp"], quote(texto))
+
+
+@register.simple_tag
 def whatsapp_cotizar(producto):
     """El botón de los productos a cotizar.
 

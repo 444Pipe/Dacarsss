@@ -27,6 +27,7 @@ ICONOS_MODELO = {
     "pedido": "recibo",
     "itempedido": "recibo",
     "movimiento": "flechas",
+    "vehiculo": "camion",
     "user": "persona",
     "group": "personas",
 }
@@ -49,6 +50,7 @@ ORDEN_MENU = [
     "variante",
     "pedido",
     "movimiento",
+    "vehiculo",
     "categoria",
     "marca",
     "user",

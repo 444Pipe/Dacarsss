@@ -1,0 +1,134 @@
+{% extends "tienda/base.html" %}{% load dacars %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ negocio.sitio }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Carros en venta", "item": "{{ negocio.sitio }}{% url 'vehiculos:lista' %}" },
+    { "@type": "ListItem", "position": 3, "name": {{ carro.nombre|json_txt }}, "item": "{{ negocio.sitio }}{{ carro.get_absolute_url }}" }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block tienda %}
+<ol class="migas">
+  <li><a href="/">Inicio</a></li>
+  <li><a href="{% url 'vehiculos:lista' %}">Carros en venta</a></li>
+  <li>{{ carro.nombre }}</li>
+</ol>
+
+<div class="vficha">
+  {# --- Fotos --- #}
+  <div class="vficha__fotos">
+    {% if fotos %}
+    <div class="vfotos__grande">
+      <img id="vfoto-grande" src="{{ fotos.0.imagen|foto:1400 }}" alt="{{ fotos.0.texto_alt }}" width="1200" height="1500">
+      {% if fotos|length > 1 %}
+      <button class="vfotos__flecha vfotos__flecha--ant" type="button" data-paso="-1" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+      <button class="vfotos__flecha vfotos__flecha--sig" type="button" data-paso="1" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+      <span class="vfotos__cuenta"><b id="vfoto-n">1</b> / {{ fotos|length }}</span>
+      {% endif %}
+    </div>
+    {% if fotos|length > 1 %}
+    <div class="vfotos__tiras" role="group" aria-label="Más fotos">
+      {% for f in fotos %}
+      <button type="button" data-grande="{{ f.imagen|foto:1400 }}" data-alt="{{ f.texto_alt }}" aria-label="Foto {{ forloop.counter }}{% if f.alt %}: {{ f.alt }}{% endif %}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+        <img src="{{ f.imagen|foto:200 }}" alt="" width="160" height="200" loading="lazy" decoding="async">
+      </button>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="vfotos__grande vfotos__grande--vacia"><span>Fotos en camino</span></div>
+    {% endif %}
+  </div>
+
+  {# --- Datos y contacto --- #}
+  <div class="vficha__info">
+    <p class="tag">Carro en venta{% if carro.vendido %} · Vendido{% elif carro.reservado %} · Reservado{% endif %}</p>
+    <h1 class="ficha__titulo">{{ carro.nombre }}</h1>
+    {% if carro.resumen %}<p class="ficha__res">{{ carro.resumen }}</p>{% endif %}
+
+    <p class="vficha__precio">
+      {% if carro.vendido %}<span class="precio precio--grande">Vendido</span>
+      {% elif carro.precio %}<span class="precio precio--grande">{{ carro.precio|pesos }}</span>{% if carro.negociable %} <span class="vficha__neg">Negociable</span>{% endif %}
+      {% else %}<span class="precio precio--grande">Consultar precio</span>{% endif %}
+    </p>
+
+    {% if carro.vendido %}
+    <p class="cotiza__txt">Este carro ya se vendió. Mira los que tenemos disponibles o escríbenos y te ayudamos a encontrar uno parecido.</p>
+    <a class="btn btn--primary btn--block" href="{% url 'vehiculos:lista' %}">Ver carros disponibles</a>
+    {% else %}
+    <a class="btn btn--wa btn--block" href="{% whatsapp_vehiculo carro %}" target="_blank" rel="noopener">{% include "catalogo/_ico_wa.html" %} Preguntar por este carro</a>
+    <p class="cotiza__tel">o llama al <a href="tel:+57{{ negocio.telefono_visible|cut:' ' }}">{{ negocio.telefono_visible }}</a></p>
+    {% endif %}
+
+    {% if carro.datos %}
+    <div class="ficha__sep"></div>
+    <dl class="vdatos">
+      {% for rotulo, valor in carro.datos %}<div><dt>{{ rotulo }}</dt><dd>{{ valor }}</dd></div>
+      {% endfor %}
+    </dl>
+    {% endif %}
+
+    {% if carro.lista_caracteristicas %}
+    <div class="ficha__sep"></div>
+    <h2 class="ficha__h3">Equipamiento</h2>
+    <ul class="ficha__lista">
+      {% for c in carro.lista_caracteristicas %}<li>{{ c }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if carro.parrafos %}
+    <div class="ficha__sep"></div>
+    <div class="ficha__texto">{% for p in carro.parrafos %}<p>{{ p }}</p>{% endfor %}</div>
+    {% endif %}
+
+    <div class="ficha__sep"></div>
+    <p class="vficha__nota">Puedes verlo en el local: {{ negocio.direccion }}, {{ negocio.ciudad }}.
+    El equipamiento se describe según las fotos; confírmalo con nosotros antes de venir.</p>
+  </div>
+</div>
+
+{% if otros %}
+<section class="votros">
+  <h2 class="carros__tit carros__tit--sec">Otros carros en venta</h2>
+  <div class="carros">
+    {% for carro in otros %}{% include "vehiculos/_tarjeta.html" %}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if fotos|length > 1 %}
+<script>
+/* Galería: miniaturas, flechas y teclado. Sin dependencias. */
+(function(){
+  var grande=document.getElementById('vfoto-grande'), cuenta=document.getElementById('vfoto-n');
+  var tiras=[].slice.call(document.querySelectorAll('.vfotos__tiras button'));
+  if(!grande||!tiras.length) return;
+  var actual=0;
+  function ir(i){
+    actual=(i+tiras.length)%tiras.length;
+    var b=tiras[actual];
+    grande.src=b.getAttribute('data-grande'); grande.alt=b.getAttribute('data-alt');
+    tiras.forEach(function(t,n){ t.setAttribute('aria-current', n===actual?'true':'false'); });
+    if(cuenta) cuenta.textContent=actual+1;
+    b.scrollIntoView({block:'nearest', inline:'nearest'});
+  }
+  tiras.forEach(function(b,n){ b.addEventListener('click',function(){ ir(n); }); });
+  [].forEach.call(document.querySelectorAll('.vfotos__flecha'),function(f){
+    f.addEventListener('click',function(){ ir(actual+parseInt(f.getAttribute('data-paso'),10)); });
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if(e.key==='ArrowRight') ir(actual+1);
+    if(e.key==='ArrowLeft') ir(actual-1);
+  });
+})();
+</script>
+{% endif %}
+{% endblock %}

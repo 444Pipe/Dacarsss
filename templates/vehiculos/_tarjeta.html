@@ -1,0 +1,16 @@
+{% load dacars %}{% comment %} La tarjeta de un carro en venta. La usan la lista, la ficha («Otros carros»)
+   y el bloque de la portada. Toda la tarjeta es un enlace a la ficha. {% endcomment %}
+<a class="carro{% if carro.vendido %} carro--vendido{% endif %}" href="{{ carro.get_absolute_url }}">
+  <span class="carro__foto">
+    {% with principal=carro.foto_principal %}
+      {% if principal %}<img src="{{ principal.imagen|foto:700 }}" alt="{{ principal.texto_alt }}" width="700" height="875" loading="lazy" decoding="async">{% endif %}
+    {% endwith %}
+    {% if carro.vendido %}<span class="carro__sello carro__sello--vendido">Vendido</span>
+    {% elif carro.reservado %}<span class="carro__sello">Reservado</span>{% endif %}
+  </span>
+  <span class="carro__info">
+    <b class="carro__nom">{{ carro.nombre }}</b>
+    {% if carro.datos_cortos %}<span class="carro__datos">{{ carro.datos_cortos|join:" · " }}</span>{% endif %}
+    <span class="carro__precio">{% if carro.precio %}{{ carro.precio|pesos }}{% else %}Consultar precio{% endif %}</span>
+  </span>
+</a>

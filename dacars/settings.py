@@ -138,6 +138,7 @@ INSTALLED_APPS = [
     "catalogo",
     "inventario",
     "pedidos",
+    "vehiculos",
 ]
 
 MIDDLEWARE = [
@@ -171,6 +172,7 @@ TEMPLATES = [
                 "sitio.context_processors.paginas",
                 "sitio.context_processors.catalogo_menu",
                 "pedidos.context_processors.carrito",
+                "vehiculos.views.menu",
             ],
         },
     },

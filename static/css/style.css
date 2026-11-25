@@ -1214,6 +1214,82 @@ body{font-size:15px; line-height:1.65}
 }
 
 /* =========================================================
+   CARROS EN VENTA: tarjetas (portada, lista) y ficha con galería
+   Las fotos llegan del celular, en vertical: por eso la tarjeta es 4:5
+   y la foto grande de la ficha no se recorta (contain sobre negro).
+   ========================================================= */
+.carros__head{margin:0 0 clamp(18px,2.6vw,30px)}
+.carros__head--c{text-align:center}
+.carros__head--c .carros__lead{margin-inline:auto}
+.carros__tit{margin:0 0 8px; font-family:var(--f-display); font-weight:700; font-size:clamp(26px,3vw,36px);
+  line-height:1.1; color:var(--ink)}
+.carros__tit--sec{font-size:clamp(22px,2.4vw,28px); margin-bottom:18px}
+.carros__lead{margin:0; max-width:60ch; font-size:15.5px; color:var(--muted); line-height:1.6}
+.carros{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:clamp(14px,2vw,26px)}
+.carros--portada{grid-template-columns:repeat(auto-fit,minmax(240px,340px)); justify-content:center}
+.carro{display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-radius:6px;
+  overflow:hidden; color:inherit; transition:border-color .2s, box-shadow .2s, transform .2s}
+.carro:hover{border-color:var(--line-hi); box-shadow:0 10px 26px rgba(0,0,0,.08); transform:translateY(-2px)}
+.carro__foto{position:relative; display:block; aspect-ratio:4/5; overflow:hidden; background:var(--bg-3)}
+.carro__foto img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease)}
+.carro:hover .carro__foto img{transform:scale(1.04)}
+.carro__sello{position:absolute; left:12px; top:12px; padding:5px 12px; border-radius:4px; background:#fff;
+  color:var(--ink); font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em}
+.carro__sello--vendido{background:var(--oscuro); color:#fff}
+.carro--vendido .carro__foto img{filter:grayscale(1); opacity:.75}
+.carro__info{display:grid; gap:4px; padding:14px 16px 16px}
+.carro__nom{font-family:var(--f-display); font-weight:700; font-size:18px; line-height:1.2; color:var(--ink)}
+.carro__datos{font-size:13.5px; color:var(--muted)}
+.carro__precio{margin-top:4px; font-size:16px; font-weight:700; color:var(--blue)}
+.carros__vacio{padding:clamp(28px,5vw,60px) 0; display:grid; gap:16px; justify-items:start; color:var(--muted)}
+.carros__vacio p{margin:0; max-width:52ch}
+
+.vficha{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:clamp(24px,4vw,56px);
+  align-items:start; padding-top:14px}
+.vficha__fotos{min-width:0}
+.vfotos__grande{position:relative; aspect-ratio:4/5; max-height:78vh; width:100%; background:var(--oscuro);
+  overflow:hidden; border-radius:6px}
+.vfotos__grande img{width:100%; height:100%; object-fit:contain; display:block}
+.vfotos__grande--vacia{display:grid; place-items:center; background:var(--bg-3); color:var(--muted); font-size:14px}
+.vfotos__flecha{position:absolute; top:50%; translate:0 -50%; width:44px; height:44px; padding:0; border:0;
+  border-radius:50%; background:rgba(255,255,255,.92); color:var(--ink); cursor:pointer; display:grid;
+  place-items:center; transition:background .2s}
+.vfotos__flecha:hover{background:#fff}
+.vfotos__flecha svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2;
+  stroke-linecap:round; stroke-linejoin:round}
+.vfotos__flecha--ant{left:12px}
+.vfotos__flecha--sig{right:12px}
+.vfotos__cuenta{position:absolute; right:12px; bottom:12px; padding:4px 10px; border-radius:999px;
+  background:rgba(0,0,0,.6); color:#fff; font-size:12.5px}
+.vfotos__tiras{display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding-bottom:6px; scrollbar-width:thin}
+.vfotos__tiras button{flex:0 0 auto; width:64px; height:80px; padding:0; overflow:hidden; cursor:pointer;
+  border:2px solid transparent; border-radius:4px; background:var(--bg-3); opacity:.7; transition:opacity .2s, border-color .2s}
+.vfotos__tiras button:hover{opacity:1}
+.vfotos__tiras button[aria-current=true]{opacity:1; border-color:var(--blue)}
+.vfotos__tiras img{width:100%; height:100%; object-fit:cover; display:block}
+.vficha__info .tag{margin-bottom:6px}
+.vficha__precio{display:flex; align-items:baseline; flex-wrap:wrap; gap:10px; margin:0 0 16px}
+.vficha__neg{font-size:13.5px; color:var(--muted)}
+.vdatos{margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 20px}
+.vdatos div{min-width:0}
+.vdatos dt{font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted-2)}
+.vdatos dd{margin:2px 0 0; font-size:16px; font-weight:600; color:var(--ink)}
+.vficha__nota{margin:0; font-size:13.5px; color:var(--muted); line-height:1.6}
+.votros{margin-top:clamp(40px,6vw,72px)}
+@media (max-width:860px){
+  .vficha{grid-template-columns:minmax(0,1fr)}
+  .vfotos__grande{max-height:none}
+}
+@media (max-width:520px){
+  .carros{grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+  .carros--portada{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .carro__info{padding:10px 11px 12px}
+  .carro__nom{font-size:15.5px}
+  .carro__datos{font-size:12.5px}
+  .carro__precio{font-size:14.5px}
+}
+
+/* =========================================================
    RECOMENDADOS: lista numerada + foto grande
    ========================================================= */
 .recom{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.07fr); gap:clamp(24px,5vw,90px); align-items:start}

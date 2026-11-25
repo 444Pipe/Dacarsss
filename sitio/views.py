@@ -8,6 +8,7 @@ from django.views.decorators.cache import cache_control
 from catalogo.models import Categoria, Producto
 from catalogo.views import categorias_con_portada
 from sitio.paginas import HUB_META, SLUGS
+from vehiculos.views import en_vitrina
 
 
 # Qué categorías alimentan cada bloque de «Recomendados» de la portada.
@@ -61,6 +62,7 @@ def portada(request):
             "hay_catalogo": hay_catalogo,
             "categorias": categorias_con_portada() if hay_catalogo else [],
             "total_productos": publicados.count(),
+            "carros_venta": [c for c in en_vitrina() if not c.vendido][:4],
         },
     )
 

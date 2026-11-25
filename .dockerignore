@@ -22,3 +22,6 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
+
+# Fotos originales de los carros en venta (las del sitio van en vehiculos/semillas/).
+carros_venta/

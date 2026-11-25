@@ -24,3 +24,7 @@ venv/
 # trae costos de compra, y una cotizacion es de un cliente.
 /*.xlsx
 /*.pdf
+
+# Fotos originales de los carros en venta, como llegan por WhatsApp.
+# Las que usa el sitio ya están optimizadas en vehiculos/semillas/fotos/.
+carros_venta/
