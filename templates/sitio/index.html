@@ -749,185 +749,243 @@
 {% block encabezado %}{% include "sitio/_encabezado_home.html" %}{% endblock %}
 {% block contenido %}<main id="inicio">
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap">
-  <div class="banner">
-    <span class="grid" aria-hidden="true"></span>
-    <span class="glow glow--a" aria-hidden="true"></span>
-  <div class="banner__in">
-    <div class="hero__copy">
-      <p class="eyebrow" data-reveal><span class="dot"></span> Villavicencio, Meta &middot; Envíos a toda Colombia</p>
-
-      <h1 class="hero__title" data-reveal>
-        Lujos, accesorios<br>
-        y <em class="hero__accent">personalización</em><br>
-        de vehículos en Villavicencio
-      </h1>
-
-      <p class="hero__lead" data-reveal>
-        Catálogo con precio y envío a todo el país, y un taller propio para instalarlo todo:
-        <strong>PPF</strong>, polarizados, detailing, iluminación, sonido y accesorios 4x4.
-        Un solo lugar y una sola garantía.
-      </p>
-
-      <div class="hero__cta" data-reveal>
-        {% if hay_catalogo %}
-        <a class="btn btn--primary" href="{% url 'catalogo:lista' %}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          Ver catálogo
-        </a>
-        {% else %}
-        <a class="btn btn--primary" href="#servicios">Ver servicios</a>
-        {% endif %}
-        <a class="btn btn--wa" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20veh%C3%ADculo." target="_blank" rel="noopener">
-          <svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          Cotizar por WhatsApp
-        </a>
-      </div>
-
-      <ul class="hero__stats" data-reveal>
-        {% if total_productos %}<li><b><span data-count="{{ total_productos }}">0</span></b><span>productos en el catálogo del local</span></li>{% endif %}
-        <li><b><span data-count="12">0</span></b><span>especialidades bajo un mismo techo</span></li>
-        <li><b><span data-count="100">0</span><em>%</em></b><span>de Colombia con envío por transportadora</span></li>
-        <li><b>4x4</b><span>equipamiento para trocha y carretera</span></li>
-      </ul>
-    </div>
-
-    <div class="hero__media" data-reveal="right">
-      <div class="hero__frame">
-        <!-- El video lo enciende js/app.js: elige el horizontal o el vertical según
-             la pantalla y no lo descarga si el visitante pidió menos movimiento o
-             ahorro de datos. Los posters también los toma de aquí. -->
-        {% comment %} El vertical es el 3x4 porque es el que está en Cloudinary. El
-           9x16 que deja tools/generar-video.py en statics/video/ nunca se subió.
-           Si algún día se sube, se cambian aquí data-src-alto y data-poster-alto,
-           y el preload del <head>, con la versión que deje tools/cloudinary-map.json. {% endcomment %}
-        <video class="hero__video" id="heroVideo"
-               poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9"
-               data-src-ancho="https://res.cloudinary.com/a0e9tgif/video/upload/v1789711358/dacars/video/hero-16x9.mp4"
-               data-src-alto="https://res.cloudinary.com/a0e9tgif/video/upload/v1789711360/dacars/video/hero-3x4.mp4"
-               data-poster-ancho="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9"
-               data-poster-alto="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/v1789711362/dacars/video/hero-poster-3x4"
-               autoplay muted loop playsinline preload="none" disablepictureinpicture></video>
-        <span class="hero__veil" aria-hidden="true"></span>
-      </div>
-
-      <div class="hero__badge hero__badge--a" aria-hidden="true">
-        <i><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg></i>
-        <span>Envíos a toda Colombia<small>Por transportadora, o lo recoges en el local</small></span>
-      </div>
-      <div class="hero__badge hero__badge--b" aria-hidden="true">
-        <i><svg viewBox="0 0 24 24"><path d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2-.5-.5-2z"/></svg></i>
-        <span>Instalación en taller propio<small>Cra. 33 #24-60, Barrio San Francisco</small></span>
-      </div>
-      <div class="hero__badge hero__badge--c" aria-hidden="true">
-        <i><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></i>
-        <span>Asesoría por WhatsApp</span>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-</section>
-
-<!-- ============ RECOMENDADOS ============ -->
-<section class="sec sec--tight" id="recomendados">
-  <div class="wrap">
-    <header class="sec__head sec__head--c">
-      <p class="tag" data-reveal>Lo del mes</p>
-      <h2 class="sec__title chrome" data-reveal>Recomendados</h2>
-    </header>
-    <div class="promos">
-      <a class="promo promo--a" href="/ppf-villavicencio" data-reveal>
-        <img src="{% static 'img/servicios/card-ppf-900.webp' %}"
-             srcset="{% static 'img/servicios/card-ppf-600.webp' %} 600w, {% static 'img/servicios/card-ppf-900.webp' %} 900w, {% static 'img/servicios/card-ppf-1200.webp' %} 1200w"
-             sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="800" alt="" loading="lazy" decoding="async">
-        <div class="promo__txt">
-          <small>Protección de pintura</small>
-          <b>PPF: la capa que se lleva los golpes por ti</b>
-          <span class="promo__cta">Cotizar PPF &rarr;</span>
+<!-- ============ SLIDER ============ -->
+<section class="slider" id="slider" aria-roledescription="carrusel" aria-label="Destacados de DACARS">
+  <div class="slider__pista" id="slider-pista">
+    <article class="slide slide--video">
+      <!-- El video lo enciende js/app.js: elige el horizontal o el vertical según
+           la pantalla y no lo descarga si el visitante pidió menos movimiento o
+           ahorro de datos. Los posters también los toma de aquí. -->
+      <video class="hero__video" id="heroVideo"
+             poster="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9"
+             data-src-ancho="https://res.cloudinary.com/a0e9tgif/video/upload/v1789711358/dacars/video/hero-16x9.mp4"
+             data-src-alto="https://res.cloudinary.com/a0e9tgif/video/upload/v1789711360/dacars/video/hero-3x4.mp4"
+             data-poster-ancho="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_1280/v1789711361/dacars/video/hero-poster-16x9"
+             data-poster-alto="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_720/v1789711362/dacars/video/hero-poster-3x4"
+             autoplay muted loop playsinline preload="none" disablepictureinpicture></video>
+      <span class="slide__velo" aria-hidden="true"></span>
+      <div class="slide__txt">
+        <img class="slide__logo" src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="" width="600" height="117">
+        <h1 class="slide__tit">Lujos, accesorios y personalización de vehículos en Villavicencio</h1>
+        <p class="slide__sub">Catálogo con envío a toda Colombia y taller propio para instalarlo todo.</p>
+        <div class="slide__btns">
+          {% if hay_catalogo %}<a class="slide__btn" href="{% url 'catalogo:lista' %}">Comprar ahora</a>{% else %}<a class="slide__btn" href="#servicios">Ver servicios</a>{% endif %}
+          <a class="slide__btn slide__btn--wa" href="https://wa.me/573112629406?text=Hola%20DACARS%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20veh%C3%ADculo." target="_blank" rel="noopener"><svg class="marca" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Cotizar</a>
         </div>
-      </a>
-      <a class="promo" href="{% if hay_catalogo %}/catalogo/iluminacion/{% else %}/iluminacion-para-carros-villavicencio{% endif %}" data-reveal>
-        <img src="{% static 'img/servicios/card-iluminacion-900.webp' %}"
-             srcset="{% static 'img/servicios/card-iluminacion-600.webp' %} 600w, {% static 'img/servicios/card-iluminacion-900.webp' %} 900w"
-             sizes="(min-width: 900px) 45vw, 100vw" width="900" height="600" alt="" loading="lazy" decoding="async">
-        <div class="promo__txt">
-          <small>Catálogo</small>
-          <b>Iluminación LED con precio y envío</b>
-          <span class="promo__cta">Ver productos &rarr;</span>
-        </div>
-      </a>
-      <a class="promo" href="/accesorios-4x4-villavicencio" data-reveal>
-        <img src="{% static 'img/servicios/card-accesorios-4x4-900.webp' %}"
-             srcset="{% static 'img/servicios/card-accesorios-4x4-600.webp' %} 600w, {% static 'img/servicios/card-accesorios-4x4-900.webp' %} 900w"
-             sizes="(min-width: 900px) 45vw, 100vw" width="900" height="600" alt="" loading="lazy" decoding="async">
-        <div class="promo__txt">
-          <small>Accesorios 4x4</small>
-          <b>Equipa tu camioneta para la trocha</b>
-          <span class="promo__cta">Ver accesorios &rarr;</span>
-        </div>
-      </a>
-    </div>
+      </div>
+    </article>
+    <article class="slide">
+      <img class="slide__img" src="{% static 'img/portada/hero-iluminacion.webp' %}" alt="" width="1024" height="688" loading="lazy" decoding="async">
+      <div class="slide__txt">
+        <img class="slide__logo" src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="" width="600" height="117">
+        <p class="slide__tit">Ilumina como nunca</p>
+        <p class="slide__sub">Bombillos LED, barras y exploradoras con envío a toda Colombia.</p>
+        <a class="slide__btn" href="{% if hay_catalogo %}/catalogo/iluminacion/{% else %}/iluminacion-para-carros-villavicencio{% endif %}">Comprar ahora</a>
+      </div>
+    </article>
+    <article class="slide">
+      <img class="slide__img" src="{% static 'img/portada/hero-4x4.webp' %}" alt="" width="1024" height="688" loading="lazy" decoding="async">
+      <div class="slide__txt">
+        <img class="slide__logo" src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="" width="600" height="117">
+        <p class="slide__tit">Equipa tu camioneta</p>
+        <p class="slide__sub">Snorkel, bumpers, winches y carpas instalados en nuestro taller.</p>
+        <a class="slide__btn" href="/accesorios-4x4-villavicencio">Ver accesorios 4x4</a>
+      </div>
+    </article>
+    <article class="slide">
+      <img class="slide__img" src="{% static 'img/portada/hero-detailing.webp' %}" alt="" width="1024" height="688" loading="lazy" decoding="async">
+      <div class="slide__txt">
+        <img class="slide__logo" src="https://res.cloudinary.com/a0e9tgif/image/upload/f_auto,q_auto,c_limit,w_600/v1789710035/dacars/logo-wordmark" alt="" width="600" height="117">
+        <p class="slide__tit">Brilla como nuevo</p>
+        <p class="slide__sub">Productos de detailing y servicio de pulido, sellado y PPF.</p>
+        <a class="slide__btn" href="/detailing-villavicencio">Ver detailing</a>
+      </div>
+    </article>
   </div>
+  <button class="slider__flecha slider__flecha--prev" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
+  <button class="slider__flecha slider__flecha--next" type="button" aria-label="Siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8"/></svg></button>
+  <div class="slider__puntos" id="slider-puntos" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 </section>
 
 <!-- ============ CONFIANZA ============ -->
 <section class="trust" aria-label="Por qué comprar en DACARS">
   <div class="wrap trust__in">
-    <div class="trust__i" data-reveal>
+    <div class="trust__i">
       <i class="trust__ico"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg></i>
-      <div><b>Envíos a toda Colombia</b><span>Por transportadora, o lo recoges en el local de Villavicencio.</span></div>
+      <div><b>Envíos a toda Colombia</b><span>Por transportadora o recoges en el local.</span></div>
     </div>
-    <div class="trust__i" data-reveal>
+    <div class="trust__i">
       <i class="trust__ico"><svg viewBox="0 0 24 24"><path d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2-.5-.5-2z"/></svg></i>
-      <div><b>Instalación en taller propio</b><span>Lo compras y te lo dejamos puesto y funcionando.</span></div>
+      <div><b>Instalación en taller propio</b><span>Lo compras y te lo dejamos funcionando.</span></div>
     </div>
-    <div class="trust__i" data-reveal>
+    <div class="trust__i">
       <i class="trust__ico"><svg viewBox="0 0 24 24"><path d="M12 2.6 4.5 5.4v5.9c0 4.7 3.2 8.4 7.5 10.1 4.3-1.7 7.5-5.4 7.5-10.1V5.4Z"/><path d="M9 12.2l2.2 2.2L15.4 10"/></svg></i>
-      <div><b>Garantía en lo instalado</b><span>Respondemos por el producto y por el montaje.</span></div>
+      <div><b>Garantía en lo instalado</b><span>Respondemos por el producto y el montaje.</span></div>
     </div>
-    <div class="trust__i" data-reveal>
+    <div class="trust__i">
       <i class="trust__ico"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v10H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg></i>
-      <div><b>Asesoría por WhatsApp</b><span>Te decimos qué le sirve a tu carro antes de que pagues.</span></div>
+      <div><b>Asesoría por WhatsApp</b><span>Te decimos qué le sirve a tu carro.</span></div>
     </div>
   </div>
 </section>
 
-{% if categorias %}
-<!-- ============ CATEGORÍAS ============ -->
-<section class="sec sec--tight" id="categorias">
-  <div class="wrap">
-    <header class="sec__head sec__head--c">
-      <p class="tag" data-reveal>Catálogo</p>
-      <h2 class="sec__title chrome" data-reveal>Compra por categoría</h2>
-      <p class="sec__lead" data-reveal>{{ total_productos }} productos del local de Villavicencio, con envío a toda Colombia e instalación en el taller. Lo que no esté publicado, lo conseguimos.</p>
-    </header>
-
-    <nav class="rubros rubros--home" aria-label="Categorías del catálogo" data-reveal>
-      {% for c in categorias %}
-      <a class="rubro" href="{{ c.get_absolute_url }}">
-        <span class="rubro__foto">
-          {% if c.portada %}<img src="{{ c.portada|foto:440 }}" alt="{{ c.nombre }}" width="440" height="440" loading="lazy" decoding="async">{% endif %}
-        </span>
-        <span class="rubro__txt">
-          <span class="rubro__nom">{{ c.nombre }}</span>
-          <span class="rubro__n">{{ c.cuantos }} producto{{ c.cuantos|pluralize }}</span>
-        </span>
-      </a>
-      {% endfor %}
-    </nav>
-
-    <p class="sec__foot sec__foot--c"><a class="btn btn--ghost" href="{% url 'catalogo:lista' %}">Ver todo el catálogo</a></p>
+{% if destacados %}
+<!-- ============ TOP VENTAS ============ -->
+<section class="sec sec--tight" id="top-ventas">
+  <div class="wrap wrap--ancho">
+    <div class="pestanas" role="tablist">
+      <button class="pestana is-active" type="button" role="tab" aria-selected="true" data-panel="p-top">Top ventas</button>
+      {% if novedades %}<button class="pestana" type="button" role="tab" aria-selected="false" data-panel="p-nuevo">Recién llegados</button>{% endif %}
+    </div>
+    <div class="prods prods--6" id="p-top" role="tabpanel">
+      {% for producto in destacados %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
+    </div>
+    {% if novedades %}
+    <div class="prods prods--6" id="p-nuevo" role="tabpanel" hidden>
+      {% for producto in novedades %}{% include "catalogo/_tarjeta.html" %}{% endfor %}
+    </div>
+    {% endif %}
+    <p class="sec__foot sec__foot--c"><a class="btn btn--ghost" href="{% url 'catalogo:lista' %}">Ver más</a></p>
   </div>
 </section>
 {% endif %}
 
-{% include "catalogo/_seccion.html" with productos=destacados etiqueta="Destacados" titulo="Lo más pedido del local" bajada="Iluminación LED, CarPlay inalámbrico, cámaras y más. Precio a la vista, envío a toda Colombia y, si quieres, instalado en el taller." ver_mas="/catalogo/" %}
+<!-- ============ SERVICIOS (banda) ============ -->
+<section class="banda" id="servicios">
+  <div class="carr">
+    <header class="banda__head">
+      <h2 class="banda__tit">Servicios</h2>
+      <div class="banda__flechas">
+        <button class="carr__flecha" type="button" data-dir="-1" aria-label="Anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+        <button class="carr__flecha" type="button" data-dir="1" aria-label="Siguientes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+      </div>
+    </header>
+    <div class="carr__pista">
+        <a class="mosaico" href="/ppf-villavicencio">
+          <img src="{% static 'img/servicios/card-ppf-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">PPF</span>
+        </a>
+        <a class="mosaico" href="/polarizados-villavicencio">
+          <img src="{% static 'img/servicios/card-polarizados-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Polarizado</span>
+        </a>
+        <a class="mosaico" href="/detailing-villavicencio">
+          <img src="{% static 'img/servicios/card-detailing-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Detailing</span>
+        </a>
+        <a class="mosaico" href="/accesorios-4x4-villavicencio">
+          <img src="{% static 'img/servicios/card-accesorios-4x4-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Accesorios 4x4</span>
+        </a>
+        <a class="mosaico" href="/lujos-y-accesorios-villavicencio">
+          <img src="{% static 'img/servicios/card-lujos-y-accesorios-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Lujos</span>
+        </a>
+        <a class="mosaico" href="/iluminacion-para-carros-villavicencio">
+          <img src="{% static 'img/servicios/card-iluminacion-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Iluminación</span>
+        </a>
+        <a class="mosaico" href="/sonido-para-carros-villavicencio">
+          <img src="{% static 'img/servicios/card-sonido-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Sonido</span>
+        </a>
+        <a class="mosaico" href="/llantas-villavicencio">
+          <img src="{% static 'img/servicios/card-llantas-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Llantas</span>
+        </a>
+        <a class="mosaico" href="/pintura-automotriz-villavicencio">
+          <img src="{% static 'img/servicios/card-pintura-automotriz-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Pintura</span>
+        </a>
+        <a class="mosaico" href="/latoneria-villavicencio">
+          <img src="{% static 'img/servicios/card-latoneria-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Latonería</span>
+        </a>
+        <a class="mosaico" href="/pdr-desabolladura-sin-pintura-villavicencio">
+          <img src="{% static 'img/servicios/card-pdr-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">PDR</span>
+        </a>
+        <a class="mosaico" href="/kits-de-actualizacion-villavicencio">
+          <img src="{% static 'img/servicios/card-kits-de-actualizacion-900.webp' %}" alt="" width="900" height="600" loading="lazy" decoding="async">
+          <span class="mosaico__chip">Kits de actualización</span>
+        </a>
+    </div>
+  </div>
+</section>
 
-<!-- ============ SERVICIOS ============ -->
-<section class="sec" id="servicios">
+{% if recom_exterior %}
+<section class="sec sec--tight">
+  <div class="wrap recom">
+    <div class="recom__lista">
+      <h2 class="recom__tit">Recomendados exterior</h2>
+      <ol>
+        {% for producto in recom_exterior %}
+        <li>
+          <span class="recom__n">{{ forloop.counter }}</span>
+          {% with principal=producto.imagen_principal %}<img src="{{ principal.imagen|foto:200 }}" alt="" width="200" height="200" loading="lazy" decoding="async">{% endwith %}
+          <a class="recom__nom" href="{{ producto.get_absolute_url }}">{{ producto.nombre }}</a>
+          <span class="recom__precio">{% if producto.a_cotizar %}A cotizar{% else %}{{ producto.precio_desde|pesos }}{% endif %}</span>
+        </li>
+        {% endfor %}
+      </ol>
+      <a class="btn btn--primary btn--block" href="{% whatsapp 'Hola DACARS, quiero cotizar los accesorios recomendados de exterior para mi vehículo.' %}" target="_blank" rel="noopener">Cotizar estos accesorios por WhatsApp</a>
+    </div>
+    <figure class="recom__foto">
+      <img src="{% static 'img/servicios/card-accesorios-4x4-1200.webp' %}" alt="Camioneta equipada con accesorios 4x4" width="1024" height="1024" loading="lazy" decoding="async">
+    </figure>
+  </div>
+</section>
+{% endif %}
+
+{% if recom_interior %}
+<section class="sec sec--tight">
+  <div class="wrap recom">
+    <div class="recom__lista">
+      <h2 class="recom__tit">Recomendados interior</h2>
+      <ol>
+        {% for producto in recom_interior %}
+        <li>
+          <span class="recom__n">{{ forloop.counter }}</span>
+          {% with principal=producto.imagen_principal %}<img src="{{ principal.imagen|foto:200 }}" alt="" width="200" height="200" loading="lazy" decoding="async">{% endwith %}
+          <a class="recom__nom" href="{{ producto.get_absolute_url }}">{{ producto.nombre }}</a>
+          <span class="recom__precio">{% if producto.a_cotizar %}A cotizar{% else %}{{ producto.precio_desde|pesos }}{% endif %}</span>
+        </li>
+        {% endfor %}
+      </ol>
+      <a class="btn btn--primary btn--block" href="{% whatsapp 'Hola DACARS, quiero cotizar los accesorios recomendados de interior para mi vehículo.' %}" target="_blank" rel="noopener">Cotizar estos accesorios por WhatsApp</a>
+    </div>
+    <figure class="recom__foto">
+      <img src="{% static 'img/portada/recom-interior.webp' %}" alt="Interior de una camioneta con pantalla y tapetes a medida" width="1024" height="1024" loading="lazy" decoding="async">
+    </figure>
+  </div>
+</section>
+{% endif %}
+
+{% if categorias %}
+<!-- ============ ACCESORIOS Y LUJOS (banda) ============ -->
+<section class="banda" id="categorias">
+  <div class="carr">
+    <header class="banda__head">
+      <h2 class="banda__tit">Accesorios y lujos</h2>
+      <div class="banda__flechas">
+        <button class="carr__flecha" type="button" data-dir="-1" aria-label="Anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+        <button class="carr__flecha" type="button" data-dir="1" aria-label="Siguientes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+      </div>
+    </header>
+    <div class="carr__pista">
+      {% for c in categorias %}
+        <a class="mosaico mosaico--cat" href="{{ c.get_absolute_url }}">
+          {% if c.portada %}<img src="{{ c.portada|foto:640 }}" alt="" width="640" height="640" loading="lazy" decoding="async">{% endif %}
+          <span class="mosaico__chip">{{ c.nombre }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ============ SERVICIOS (detalle) ============ -->
+<section class="sec" id="especialidades">
   <div class="wrap">
     <header class="sec__head sec__head--c">
       <p class="tag" data-reveal>01 &mdash; Servicios</p>
@@ -935,7 +993,7 @@
       <p class="sec__lead" data-reveal>Doce especialidades que normalmente te obligan a recorrer media ciudad. Acá las resolvemos en el mismo taller, con la misma gente y una sola garantía de trabajo.</p>
     </header>
 
-    <div class="cards">
+    <div class="cards cards--txt">
 
       <article class="card card--foto" data-reveal>
         <figure class="card__foto">

@@ -66,6 +66,7 @@
 {# --- Filtros a la izquierda, productos a la derecha --------------------- #}
 <div class="tienda" id="productos">
   <aside class="lado" id="lado">
+    <p class="lado__filtros">Filtros</p>
     <form class="filtros" id="filtros" method="get"
           action="{% if categoria %}{{ categoria.get_absolute_url }}{% else %}{% url 'catalogo:lista' %}{% endif %}">
       <div class="lado__grupo lado__grupo--buscar">

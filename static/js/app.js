@@ -85,6 +85,95 @@
     });
   }
 
+  /* ---------- Buscador desplegable del encabezado ---------- */
+  var abrirBuscar = document.getElementById('abrir-buscar');
+  var panelBuscar = document.getElementById('buscar-panel');
+  if (abrirBuscar && panelBuscar) {
+    abrirBuscar.addEventListener('click', function () {
+      var abierto = panelBuscar.hidden;
+      panelBuscar.hidden = !abierto;
+      abrirBuscar.setAttribute('aria-expanded', String(abierto));
+      if (abierto) panelBuscar.querySelector('input').focus();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panelBuscar.hidden) {
+        panelBuscar.hidden = true;
+        abrirBuscar.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  /* ---------- Slider de la portada ---------- */
+  // La pista es un contenedor con scroll-snap: el dedo la mueve sola en el
+  // celular. Acá solo van las flechas, los puntos y el avance automático.
+  var pistaSlider = document.getElementById('slider-pista');
+  if (pistaSlider) {
+    var slider = document.getElementById('slider');
+    var puntos = Array.prototype.slice.call(document.querySelectorAll('#slider-puntos i'));
+    var total = pistaSlider.children.length;
+    var actual = function () { return Math.round(pistaSlider.scrollLeft / pistaSlider.clientWidth); };
+    var irA = function (n) {
+      n = (n + total) % total;
+      pistaSlider.scrollTo({ left: n * pistaSlider.clientWidth, behavior: sinMovimiento ? 'auto' : 'smooth' });
+    };
+    var pintarPuntos = function () {
+      var a = actual();
+      puntos.forEach(function (p, i) { p.classList.toggle('is-active', i === a); });
+    };
+    slider.querySelector('.slider__flecha--prev').addEventListener('click', function () { irA(actual() - 1); });
+    slider.querySelector('.slider__flecha--next').addEventListener('click', function () { irA(actual() + 1); });
+    pistaSlider.addEventListener('scroll', pintarPuntos, { passive: true });
+    pintarPuntos();
+    if (!sinMovimiento) {
+      var pausado = false;
+      ['mouseenter', 'focusin', 'touchstart'].forEach(function (ev) {
+        slider.addEventListener(ev, function () { pausado = true; }, { passive: true });
+      });
+      ['mouseleave', 'focusout'].forEach(function (ev) {
+        slider.addEventListener(ev, function () { pausado = false; });
+      });
+      setInterval(function () {
+        if (!pausado && !document.hidden) irA(actual() + 1);
+      }, 6500);
+    }
+  }
+
+  /* ---------- Pestañas de la grilla («Top ventas») ---------- */
+  var pestanas = Array.prototype.slice.call(document.querySelectorAll('.pestana'));
+  pestanas.forEach(function (boton) {
+    boton.addEventListener('click', function () {
+      pestanas.forEach(function (b) {
+        var activa = b === boton;
+        b.classList.toggle('is-active', activa);
+        b.setAttribute('aria-selected', String(activa));
+        var panel = document.getElementById(b.dataset.panel);
+        if (panel) panel.hidden = !activa;
+      });
+    });
+  });
+
+  /* ---------- Carruseles de las bandas (servicios, categorías) ---------- */
+  document.querySelectorAll('.carr').forEach(function (carr) {
+    var pista = carr.querySelector('.carr__pista');
+    var flechas = carr.querySelectorAll('.carr__flecha');
+    if (!pista || !flechas.length) return;
+    var estado = function () {
+      flechas.forEach(function (f) {
+        f.disabled = f.dataset.dir === '-1'
+          ? pista.scrollLeft <= 4
+          : pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 4;
+      });
+    };
+    flechas.forEach(function (f) {
+      f.addEventListener('click', function () {
+        pista.scrollBy({ left: parseInt(f.dataset.dir, 10) * pista.clientWidth * 0.8, behavior: sinMovimiento ? 'auto' : 'smooth' });
+      });
+    });
+    pista.addEventListener('scroll', estado, { passive: true });
+    window.addEventListener('resize', estado);
+    estado();
+  });
+
   /* ---------- Menú móvil ---------- */
   var burger = document.getElementById('burger');
   var nav = document.getElementById('nav');
@@ -112,7 +201,7 @@
     });
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 940) closeNav();
+      if (window.innerWidth > 1100) closeNav();
     });
   }
 

@@ -149,9 +149,9 @@
             <input id="cantidad" name="cantidad" type="number" value="1" min="1" max="{{ producto.disponible_total }}" inputmode="numeric">
             <button type="button" data-paso="1" aria-label="Agregar una unidad">+</button>
           </div>
-          <button class="btn btn--primary" type="submit">Agregar al carrito</button>
+          <button class="btn btn--ghost" type="submit">Agregar al carrito</button>
         </div>
-        <button class="btn btn--ghost btn--block compra__ya" type="submit" name="ir" value="carrito">Comprar ya</button>
+        <button class="btn btn--primary btn--block compra__ya" type="submit" name="ir" value="carrito">Comprar ahora</button>
         {% else %}
         <div class="comprar">
           <a class="btn btn--wa btn--block" href="{% whatsapp_producto producto %}" target="_blank" rel="noopener">Preguntar cuándo llega</a>

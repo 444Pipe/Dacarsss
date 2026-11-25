@@ -462,6 +462,32 @@ python tools/subir-cloudinary.py   # sube statics/ y actualiza el inventario
 
 ## Identidad visual
 
+> **Vigente desde el 25 de noviembre de 2026: tema de tienda plano.** El dueño
+> pidió que el sitio se viera comercial tomando de referencia
+> lujoseltrapiche.com. Lo que sigue más abajo describe el tema claro anterior
+> (noviembre 5) y vale solo como historia; manda este recuadro.
+>
+> - **Colores:** blanco, negro `#111` y azul rey sólido `#0018a8`. Sin sombras
+>   ni degradados; esquinas de 4 px.
+> - **Tipografía:** Rajdhani (titulares, nombres de producto) y Open Sans.
+> - **Encabezado:** lupa a la izquierda (despliega el buscador), marca al
+>   centro, WhatsApp y carrito a la derecha; debajo, la fila de categorías con
+>   el desplegable «Servicios». En el celular, cajón.
+> - **Portada:** slider negro a todo lo ancho (video del taller + tres
+>   banners en `static/img/portada/`), franja de confianza, grilla «Top
+>   ventas / Recién llegados» de seis columnas, banda azul «Servicios» con
+>   carrusel de fotos y etiqueta blanca, «Recomendados exterior / interior»
+>   (lista numerada + foto), banda azul «Accesorios y lujos» con las
+>   categorías, y después el contenido de siempre en tarjetas planas.
+> - **Catálogo:** banda gris con el título en azul, «Filtros» sin caja y
+>   tarjetas sin marco: foto sobre gris muy claro, categoría, nombre y precio
+>   en azul.
+> - **Fotos reales sobre blanco:** las 31 fotos del catálogo inicial se
+>   recortaron de nuevo (rembg, BiRefNet) y se pusieron sobre blanco.
+>   `refrescar_fotos` las reemplaza en la base en el siguiente arranque.
+> - En `static/css/style.css` y `catalogo.css`, la sección final «TEMA PLANO»
+>   es la que manda sobre las reglas anteriores.
+
 Desde noviembre de 2026 el sitio es **claro**: fondo blanco de tienda, azul
 eléctrico como acento y navy para los bloques oscuros (barra superior, pie y
 cierres de las landings). Antes era negro azulado con cromo; el cambio se pidió

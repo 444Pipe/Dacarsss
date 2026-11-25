@@ -10,23 +10,54 @@ from catalogo.views import categorias_con_portada
 from sitio.paginas import HUB_META, SLUGS
 
 
+# Qué categorías alimentan cada bloque de «Recomendados» de la portada.
+RECOM_EXTERIOR = ["carpas-y-cubiertas", "iluminacion", "lujos-y-accesorios", "llantas-y-rines", "pitos-y-alarmas"]
+RECOM_INTERIOR = ["multimedia-y-carplay", "seguridad-y-parqueo", "tapetes", "sonido", "detailing"]
+
+
+def _recomendados(con_foto, slugs, cuantos=4):
+    """Hasta `cuantos` productos con foto, uno por categoría mientras se pueda.
+
+    Recorrer por categoría en vez de tomar los primeros evita que el bloque
+    salga con cuatro bombillos seguidos.
+    """
+    por_categoria = {}
+    for p in con_foto:
+        por_categoria.setdefault(p.categoria.slug, []).append(p)
+    elegidos = []
+    ronda = 0
+    while len(elegidos) < cuantos:
+        antes = len(elegidos)
+        for slug in slugs:
+            lista = por_categoria.get(slug, [])
+            if ronda < len(lista) and len(elegidos) < cuantos:
+                elegidos.append(lista[ronda])
+        if len(elegidos) == antes:
+            break
+        ronda += 1
+    return elegidos
+
+
 def portada(request):
     # El catálogo asoma en la portada: si el comercio carga productos, la
     # página de inicio los muestra sin que nadie tenga que tocar una plantilla.
     #
-    # Los destacados van primero por el orden del modelo (-destacado); si no
-    # hay suficientes marcados, completan los que tengan foto. Una franja de
-    # productos sin foto no vende nada.
+    # Todo lo que la portada muestra de productos lleva foto: una grilla de
+    # recuadros vacíos no vende nada. Los destacados van primero por el orden
+    # del modelo (-destacado).
     publicados = Producto.objects.publicados()
-    destacados = list(
-        publicados.con_todo().filter(imagenes__isnull=False).distinct()[:8]
-    )
+    con_foto = list(publicados.con_todo().filter(imagenes__isnull=False).distinct())
+    destacados = con_foto[:12]
+    novedades = sorted(con_foto, key=lambda p: p.creado, reverse=True)[:12]
     hay_catalogo = _hay_catalogo()
     return render(
         request,
         "sitio/index.html",
         {
             "destacados": destacados,
+            "novedades": novedades if novedades != destacados else [],
+            "recom_exterior": _recomendados(con_foto, RECOM_EXTERIOR),
+            "recom_interior": _recomendados(con_foto, RECOM_INTERIOR),
             "hay_catalogo": hay_catalogo,
             "categorias": categorias_con_portada() if hay_catalogo else [],
             "total_productos": publicados.count(),
