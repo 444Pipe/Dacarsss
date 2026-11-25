@@ -1271,7 +1271,7 @@ body{font-size:15px; line-height:1.65}
 .layers li:first-child{background:var(--blue-soft)}
 .checks li > span{background:var(--blue); box-shadow:none}
 
-.nos__mark{border-radius:4px; box-shadow:none; background:var(--blue)}
+.nos__mark{border-radius:4px; box-shadow:none; background:var(--oscuro)}
 .nos__mark img{filter:none}
 .clip__media{border-radius:4px; box-shadow:none; border:0}
 .clip:hover .clip__media{transform:none; box-shadow:none}
