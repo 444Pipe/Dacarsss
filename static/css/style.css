@@ -1195,6 +1195,24 @@ body{font-size:15px; line-height:1.65}
 }
 
 /* =========================================================
+   MARCAS: fila de logos de proveedores
+   Todos los archivos comparten lienzo (480x240, fondo transparente),
+   así que basta fijar el ancho de la celda para que queden parejos.
+   ========================================================= */
+.marcas{padding:clamp(30px,4vw,52px) 0; background:#fff; border-top:1px solid var(--line)}
+.marcas__tit{margin:0 0 clamp(18px,2.4vw,30px); text-align:center; font-family:var(--f-display); font-weight:700;
+  font-size:clamp(22px,2.6vw,30px); color:var(--ink)}
+.marcas__lista{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; justify-content:center;
+  gap:clamp(10px,1.4vw,18px)}
+.marcas__lista li{flex:0 1 clamp(140px,12.4vw,196px); display:grid; place-items:center; padding:6px 12px;
+  border:1px solid var(--line); border-radius:6px; background:#fff; transition:border-color .2s, box-shadow .2s}
+.marcas__lista li:hover{border-color:var(--line-hi); box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.marcas__lista img{display:block; width:100%; height:auto}
+@media (max-width:520px){
+  .marcas__lista li{flex-basis:calc(50% - 6px); padding:4px 10px}
+}
+
+/* =========================================================
    RECOMENDADOS: lista numerada + foto grande
    ========================================================= */
 .recom{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.07fr); gap:clamp(24px,5vw,90px); align-items:start}
