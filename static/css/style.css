@@ -28,6 +28,7 @@
   --blue-hi:    #0018a8;
   --blue-deep:  #000f7a;
   --blue-soft:  rgba(0,24,168,.07);
+  --oscuro:     #0d0d0d;   /* fondo de bandas, cierre y pie */
   --cyan:       #2b4bff;
   --wa:         #25d366;
   --wa-deep:    #1aa84f;
@@ -1163,9 +1164,9 @@ body{font-size:15px; line-height:1.65}
 .pestana.is-active{font-size:clamp(26px,3vw,36px); color:var(--ink); border-bottom-color:var(--ink)}
 
 /* =========================================================
-   BANDAS AZULES CON CARRUSEL (servicios, categorías)
+   BANDAS OSCURAS CON CARRUSEL (servicios, categorías)
    ========================================================= */
-.banda{background:var(--blue); color:#fff; padding:clamp(28px,3.4vw,44px) 0 clamp(28px,3.4vw,44px)}
+.banda{background:var(--oscuro); color:#fff; padding:clamp(28px,3.4vw,44px) 0 clamp(28px,3.4vw,44px)}
 .banda__head{position:relative; display:flex; align-items:center; justify-content:center;
   padding:0 clamp(14px,2vw,28px); margin-bottom:clamp(20px,2.6vw,34px); min-height:46px}
 .banda__tit{margin:0; font-family:var(--f-display); font-weight:700; font-size:clamp(26px,3vw,36px);
@@ -1174,7 +1175,7 @@ body{font-size:15px; line-height:1.65}
 .carr__flecha{width:46px; height:46px; padding:0; border-radius:50%; border:1px solid rgba(255,255,255,.85);
   background:transparent; color:#fff; cursor:pointer; display:grid; place-items:center; transition:background .2s, color .2s, opacity .2s}
 .carr__flecha svg{width:16px; height:16px; stroke-width:2}
-.carr__flecha:hover{background:#fff; color:var(--blue)}
+.carr__flecha:hover{background:#fff; color:var(--oscuro)}
 .carr__flecha[disabled]{opacity:.35; cursor:default; background:transparent; color:#fff}
 .carr__pista{display:flex; gap:clamp(12px,2vw,30px); overflow-x:auto; scroll-snap-type:x mandatory;
   padding:0 clamp(14px,2vw,28px); scroll-padding-left:clamp(14px,2vw,28px); scrollbar-width:none}
@@ -1226,7 +1227,7 @@ body{font-size:15px; line-height:1.65}
 .recom__nom{font-family:var(--f-display); font-weight:700; font-size:15.5px; line-height:1.35; color:var(--ink)}
 .recom__nom:hover{color:var(--blue)}
 .recom__precio{font-size:14.5px; color:var(--ink-2); white-space:nowrap}
-.recom__foto{margin:0; aspect-ratio:1/1; overflow:hidden; background:var(--blue)}
+.recom__foto{margin:0; aspect-ratio:1/1; overflow:hidden; background:var(--oscuro)}
 .recom__foto img{width:100%; height:100%; object-fit:cover}
 @media (max-width:860px){
   .recom{grid-template-columns:1fr}
@@ -1298,29 +1299,29 @@ body{font-size:15px; line-height:1.65}
 .shero__title .chrome{color:var(--blue)}
 .shero__sub{font-weight:700; color:var(--ink)}
 .otro b{font-size:19px; font-weight:700; text-transform:none}
-.cierre{background:var(--blue)}
+.cierre{background:var(--oscuro)}
 .cierre h2{font-weight:700}
 .cierre .chrome{background:none; color:#fff; -webkit-text-fill-color:currentColor}
-.cierre p{color:#e3e6f7}
-.cierre .btn--primary{background:#fff; color:var(--blue); border-color:#fff}
-.cierre .btn--primary:hover{background:var(--ink); color:#fff; border-color:var(--ink)}
+.cierre p{color:#dcdcdc}
+.cierre .btn--primary{background:#fff; color:var(--ink); border-color:#fff}
+.cierre .btn--primary:hover{background:var(--blue); color:#fff; border-color:var(--blue)}
 .cierre .btn--ghost{background:transparent; border-color:#fff; color:#fff}
-.cierre .btn--ghost:hover{background:#fff; color:var(--blue)}
+.cierre .btn--ghost:hover{background:#fff; color:var(--ink)}
 
 /* =========================================================
-   PIE: azul sólido
+   PIE: negro sólido
    ========================================================= */
-.foot{background:var(--blue); color:#fff}
+.foot{background:var(--oscuro); color:#fff}
 .foot__brand img{filter:none}
-.foot__brand p{color:#e3e6f7}
+.foot__brand p{color:#dcdcdc}
 .foot__col h4{font-size:15px; font-weight:700; letter-spacing:0; text-transform:none; color:#fff}
-.foot__col a{color:#e3e6f7; font-size:14.5px}
+.foot__col a{color:#dcdcdc; font-size:14.5px}
 .foot__col a:hover{color:#fff; padding-left:0; text-decoration:underline}
 .foot__tel{font-size:22px; font-weight:700}
 .foot__tel svg{color:#fff}
 .foot__bar{border-top-color:rgba(255,255,255,.2)}
-.foot__bar p,.foot__made{color:#d5d9f2}
-.foot__acceso{color:#d5d9f2}
+.foot__bar p,.foot__made{color:#c4c4c4}
+.foot__acceso{color:#c4c4c4}
 
 .wa{background:var(--wa); box-shadow:0 8px 22px -10px rgba(0,0,0,.45); font-family:var(--f-body);
   font-size:14px; font-weight:700; letter-spacing:0; text-transform:none}
